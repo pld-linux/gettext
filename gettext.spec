@@ -8,7 +8,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.40
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -16,6 +16,7 @@ Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-dml.patch
 Patch3:		%{name}-aclocal.patch
+Obsoletes:	gettext-base
 BuildRequires:	automake
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	libtool >= 1.4
