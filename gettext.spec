@@ -1,3 +1,4 @@
+# _without_xemacs (--without xemacs)
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
@@ -19,6 +20,7 @@ BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
 BuildRequires:	texinfo
+%{?!_without_xemacs:BuildRequires:	xemacs}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -71,6 +73,20 @@ Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
 lokalizacji (internationalizacji) programów.
 
+%package -n xemacs-po-mode-pkg
+Summary:	Xemacs PO-mode
+Summary(pl):	Tryb PO dla Xemacsa
+Group:		Applications/Editors/Emacs
+Group(de):	Applikationen/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	xemacs
+
+%description -n xemacs-po-mode-pkg
+Emacs PO-mode.
+
+%description -l pl -n xemacs-po-mode-pkg
+Tryb edycji PO dla emacsa.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -84,10 +100,13 @@ aclocal -I m4
 autoconf
 automake -a -c
 %configure \
-	--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode \
+	%{?!_without_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
 	--without-included-gettext 
 %{__make}
+
+%{?!_without_xemacs:cd misc}
+%{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -122,3 +141,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_aclocaldir}/*
 %{_datadir}/gettext
 %{_mandir}/man3/*
+
+%{?!_without_xemacs:%files -n xemacs-po-mode-pkg}
+%{?!_without_xemacs:%defattr(644,root,root,755)}
+%{?!_without_xemacs:%dir %{_datadir}/xemacs-packages/lisp/po-mode}
+%{?!_without_xemacs:%{_datadir}/xemacs-packages/lisp/po-mode/*.elc}
