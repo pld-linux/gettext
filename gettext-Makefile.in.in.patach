@@ -1,15 +1,6 @@
 diff -Nru gettext-0.10.35/po/Makefile.in.in gettext-0.10.35.new/po/Makefile.in.in
 --- gettext-0.10.35/po/Makefile.in.in	Wed Apr 29 03:53:09 1998
 +++ gettext-0.10.35.new/po/Makefile.in.in	Fri Apr  9 20:51:20 1999
-@@ -47,7 +47,7 @@
- POFILES = @POFILES@
- GMOFILES = @GMOFILES@
- DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(PACKAGE).pot \
--stamp-cat-id $(POFILES) $(GMOFILES) $(SOURCES)
-+stamp-cat-id $(POFILES) $(SOURCES)
- 
- POTFILES = \
- 
 @@ -111,9 +111,9 @@
  install-data-no: all
  install-data-yes: all
