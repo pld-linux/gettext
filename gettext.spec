@@ -18,7 +18,7 @@ Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.12.1
 Release:	0.1
-License:	GPL
+License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 # Source0-md5:	5d4bddd300072315e668247e5b7d5bdb
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -27,7 +27,7 @@ Patch1:		%{name}-aclocal.patch
 Patch2:		%{name}-killkillkill.patch
 Patch3:		%{name}-pl.po-update.patch
 Patch4:		%{name}-no_docs.patch
-BuildRequires:	autoconf >= 2.52
+BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1.7.5
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
 %{?_with_gcj:BuildRequires:	gcj < 3.0.4}
@@ -115,7 +115,9 @@ Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
+License:	GPL
 Group:		Development/Tools
+Requires(post,postun):	/sbin/ldconfig
 Requires:	%{name} = %{version}
 Requires:	autoconf >= 2.50
 Requires:	iconv
@@ -130,21 +132,36 @@ Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
 lokalizacji (internationalizacji) programów.
 
+%package java
+Summary:	Runtime classes for Java programs internationalization
+Summary(pl):	Klasy do uruchamiania umiêdzynarodowionych programów w Javie
+License:	LGPL
+Group:		Development/Languages/Java
+Requires:	%{name} = %{version}
+
+%description java
+Runtime classes for Java programs internationalization.
+
+%description java -l pl
+Klasy do uruchamiania umiêdzynarodowionych programów w Javie.
+
 %package java-devel
-Summary:	Classes for Java programs internationalization
-Summary(pl):	Klasy do umiêdzynarodowiania programów w Javie
+Summary:	Development classes for Java programs internationalization
+Summary(pl):	Klasy do umiêdzynarodowiania programów w Javie dla programistów
+License:	GPL
 Group:		Development/Tools
 Requires:	%{name}-devel = %{version}
 
 %description java-devel
-Classes for Java programs internationalization.
+Development classes for Java programs internationalization.
 
 %description java-devel -l pl
-Klasy do umiêdzynarodowiania programów w Javie.
+Klasy do umiêdzynarodowiania programów w Javie dla programistów.
 
 %package static
 Summary:	Static gettext utility libraries
 Summary(pl):	Statyczne biblioteki narzêdziowe gettext
+License:	GPL
 Group:		Development/Libraries
 
 %description static
@@ -160,6 +177,7 @@ Summary:	Xemacs PO-mode
 Summary(es):	Facilita la edición de archivos PO (internacionalización) con emacs
 Summary(pl):	Tryb PO dla Xemacsa
 Summary(pt_BR):	Facilita a edição de arquivos PO (internacionalização) com o emacs
+License:	GPL
 Group:		Applications/Editors/Emacs
 Requires:	xemacs
 
@@ -183,6 +201,7 @@ para a documentação de uso, a qual não é incluída aqui.
 %package autopoint
 Summary:	gettextize replacement
 Summary(pl):	Zamiennik gettextize
+License:	GPL
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
 Requires:	cvs
@@ -204,7 +223,7 @@ wersji.
 
 %prep
 %setup -q
-#%%patch0 -p1  - needs update
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 #%%patch3 -p1  - needs update
@@ -247,11 +266,9 @@ install -d $RPM_BUILD_ROOT/bin
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
-# static libs are removed in install-exec-clean
-install gettext-tools/lib/.libs/lib*.a gettext-tools/src/.libs/lib*.a $RPM_BUILD_ROOT%{_libdir}
-
-# needed by uintmax.m4 (maybe automake is too old?)
-#install m4/ulonglong.m4 $RPM_BUILD_ROOT%{_aclocaldir}
+# these static libs are removed in install-exec-clean
+install gettext-tools/lib/.libs/libgettextlib.a \
+	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
 # not supported by glibc 2.3.1
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@boldquot,en@quot}
@@ -263,9 +280,11 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@boldquot,en@quot}
 rm -rf $RPM_BUILD_ROOT
 
 %post devel
+/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun devel
+/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files -f %{name}-runtime.lang
@@ -273,23 +292,28 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /bin/*
 %{_mandir}/man1/gettext.1*
 %{_mandir}/man1/ngettext.1*
+%dir %{_datadir}/gettext
 
 %files devel -f %{name}-tools.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README* THANKS
+%doc AUTHORS ChangeLog NEWS README THANKS
 %attr(755,root,root) %{_bindir}/*
-%exclude  %{_bindir}/autopoint
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%exclude %{_bindir}/autopoint
+%attr(755,root,root) %{_libdir}/libgettext*.so
+%{_libdir}/libgettext*.la
+# not used by gettext tools themselves
+%attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
+# to be separated (C++)
+%attr(755,root,root) %{_libdir}/libasprintf.so.*.*.*
+%{_libdir}/libasprintf.la
 %attr(755,root,root) %{_libdir}/gettext
-%{_infodir}/*info*
+%{_infodir}/gettext*.info*
 %{_aclocaldir}/*
-%dir %{_datadir}/gettext
 %{_datadir}/gettext/ABOUT-NLS
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
 %{_datadir}/gettext/gettext.h
 %dir %{_datadir}/gettext/intl
-%{_datadir}/gettext/intl/[^c]*
+%{_datadir}/gettext/intl/[!c]*
 %attr(755,root,root) %{_datadir}/gettext/intl/config.charset
 %{_datadir}/gettext/msgunfmt.tcl
 %attr(755,root,root) %{_datadir}/gettext/mkinstalldirs
@@ -315,16 +339,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %if %{build_java}
+%files java
+%defattr(644,root,root,755)
+%{_datadir}/gettext/libintl.jar
+
 %files java-devel
 %defattr(644,root,root,755)
-%doc intl-java/javadoc2
+%doc gettext-runtime/intl-java/javadoc2
 %{_datadir}/gettext/gettext.jar
-%{_datadir}/gettext/libintl.jar
 %endif
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libgettext*.a
+# to be separated (C++)
+%{_libdir}/libasprintf.a
 
 %if %{?_without_xemacs:0}%{?!_without_xemacs:1}
 %files -n xemacs-po-mode-pkg

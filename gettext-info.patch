@@ -1,27 +1,56 @@
-diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
---- gettext-0.11.2.orig/doc/gettext.texi	Mon Apr 22 20:26:53 2002
-+++ gettext-0.11.2/doc/gettext.texi	Thu May 16 19:53:42 2002
-@@ -31,13 +31,13 @@
+--- gettext-0.12.1/gettext-tools/doc/gettext.texi.orig	2003-05-05 11:09:21.000000000 +0200
++++ gettext-0.12.1/gettext-tools/doc/gettext.texi	2003-06-07 20:17:27.000000000 +0200
+@@ -31,28 +31,28 @@
  
  @include version.texi
  
 -@dircategory GNU Gettext Utilities
 +@dircategory Programming tools:
  @direntry
--* Gettext: (gettext).                           GNU gettext utilities.
--* gettextize: (gettext)gettextize Invocation.   Prepare a package for gettext.
--* msgfmt: (gettext)msgfmt Invocation.           Make MO files out of PO files.
--* msgmerge: (gettext)msgmerge Invocation.       Update two PO files into one.
--* xgettext: (gettext)xgettext Invocation.       Extract strings into a PO file.
-+* Gettext: (gettext).			GNU gettext utilities.
-+* gettextize: (gettext)gettextize.	Prepare a package for gettext.
-+* msgfmt: (gettext)msgfmt.		Make MO files out of PO files.
-+* msgmerge: (gettext)msgmerge.		Update two PO files into one.
-+* xgettext: (gettext)xgettext.		Extract strings into a PO file.
+-* gettext: (gettext).                          GNU gettext utilities.
+-* autopoint: (gettext)autopoint Invocation.    Copy gettext infrastructure.
+-* gettextize: (gettext)gettextize Invocation.  Prepare a package for gettext.
+-* msgattrib: (gettext)msgattrib Invocation.    Select part of a PO file.
+-* msgcat: (gettext)msgcat Invocation.          Combine several PO files.
+-* msgcmp: (gettext)msgcmp Invocation.          Compare a PO file and template.
+-* msgcomm: (gettext)msgcomm Invocation.        Match two PO files.
+-* msgconv: (gettext)msgconv Invocation.        Convert PO file to encoding.
+-* msgen: (gettext)msgen Invocation.            Create an English PO file.
+-* msgexec: (gettext)msgexec Invocation.        Process a PO file.
+-* msgfilter: (gettext)msgfilter Invocation.    Pipe a PO file through a filter.
+-* msgfmt: (gettext)msgfmt Invocation.          Make MO files out of PO files.
+-* msggrep: (gettext)msggrep Invocation.        Select part of a PO file.
+-* msginit: (gettext)msginit Invocation.        Create a fresh PO file.
+-* msgmerge: (gettext)msgmerge Invocation.      Update a PO file from template.
+-* msgunfmt: (gettext)msgunfmt Invocation.      Uncompile MO file into PO file.
+-* msguniq: (gettext)msguniq Invocation.        Unify duplicates for PO file.
+-* xgettext: (gettext)xgettext Invocation.      Extract strings into a PO file.
+-* ISO639: (gettext)Language Codes.             ISO 639 language codes.
+-* ISO3166: (gettext)Country Codes.             ISO 3166 country codes.
++* gettext: (gettext).			GNU gettext utilities
++* autopoint: (gettext)autopoint.	Copy gettext infrastructure
++* gettextize: (gettext)gettextize.	Prepare a package for gettext
++* msgattrib: (gettext)msgattrib.	Select part of a PO file
++* msgcat: (gettext)msgcat.		Combine several PO files
++* msgcmp: (gettext)msgcmp.		Compare a PO file and template
++* msgcomm: (gettext)msgcomm.		Match two PO files
++* msgconv: (gettext)msgconv.		Convert PO file to encoding
++* msgen: (gettext)msgen.		Create an English PO file
++* msgexec: (gettext)msgexec.		Process a PO file
++* msgfilter: (gettext)msgfilter.	Pipe a PO file through a filter
++* msgfmt: (gettext)msgfmt.		Make MO files out of PO files
++* msggrep: (gettext)msggrep.		Select part of a PO file
++* msginit: (gettext)msginit.		Create a fresh PO file
++* msgmerge: (gettext)msgmerge.		Update a PO file from template
++* msgunfmt: (gettext)msgunfmt.		Uncompile MO file into PO file
++* msguniq: (gettext)msguniq.		Unify duplicates for PO file
++* xgettext: (gettext)xgettext.		Extract strings into a PO file
++* ISO639: (gettext)Language Codes.	ISO 639 language codes
++* ISO3166: (gettext)Country Codes.	ISO 3166 country codes
  @end direntry
  
  @ifinfo
-@@ -156,16 +156,16 @@
+@@ -175,16 +175,16 @@
  
  Making the PO Template File
  
@@ -41,7 +70,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  * Translated Entries::          Translated Entries
  * Fuzzy Entries::               Fuzzy Entries
  * Untranslated Entries::        Untranslated Entries
-@@ -184,21 +184,21 @@
+@@ -203,22 +203,22 @@
  
  Manipulating PO Files
  
@@ -65,6 +94,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
 +* msgattrib::                   Invoking the @code{msgattrib} Program
 +* msgen::                       Invoking the @code{msgen} Program
 +* msgexec::                     Invoking the @code{msgexec} Program
+ * libgettextpo::                Writing your own programs that process PO files
  
  Producing Binary MO Files
  
@@ -75,7 +105,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  * MO Files::                    The Format of GNU MO Files
  
  The User's View
-@@ -261,7 +261,7 @@
+@@ -282,7 +282,7 @@
  
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
@@ -83,17 +113,26 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
 +* gettextize::                  Invoking the @code{gettextize} Program
  * Adjusting Files::             Files You Must Create or Alter
  * autoconf macros::             Autoconf macros for use in @file{configure.in}
+ * CVS Issues::                  Integrating with CVS
+@@ -313,7 +313,7 @@
  
-@@ -809,7 +809,7 @@
+ * Distributed CVS::             Avoiding version mismatch in distributed development
+ * Files under CVS::             Files to put under CVS version control
+-* autopoint Invocation::        Invoking the @code{autopoint} Program
++* autopoint::                   Invoking the @code{autopoint} Program
+ 
+ Other Programming Languages
+ 
+@@ -856,7 +856,7 @@
  exactly where in C sources each string is used.  All translations
- are set to empty.  The letter @kbd{t} in @file{.pot} marks this as
+ are set to empty.  The letter @code{t} in @file{.pot} marks this as
  a Template PO file, not yet oriented towards any particular language.
 -@xref{xgettext Invocation}, for more details about how one calls the
 +@xref{xgettext}, for more details about how one calls the
  @code{xgettext} program.  If you are @emph{really} lazy, you might
  be interested at working a lot more right away, and preparing the
  whole distribution setup (@pxref{Maintainers}).  By doing so, you
-@@ -886,7 +886,7 @@
+@@ -933,7 +933,7 @@
  which are no longer used in the program sources (@pxref{Obsolete
  Entries}).  It finally discovers new strings and inserts them in
  the resulting PO file as untranslated entries (@pxref{Untranslated
@@ -102,7 +141,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  @code{msgmerge} really does.
  
  Whatever route or means taken, the goal is to obtain an updated
-@@ -910,8 +910,8 @@
+@@ -957,8 +957,8 @@
  Once the PO file is complete and dependable, the @code{msgfmt} program
  is used for turning the PO file into a machine-oriented format, which
  may yield efficient retrieval of translations by the programs of the
@@ -113,25 +152,25 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  for the @code{msgfmt} program.
  
  Finally, the modified and marked C sources are compiled and linked
-@@ -1078,7 +1078,7 @@
+@@ -1138,7 +1138,7 @@
  
- In case the @kbd{c-format} flag is given for a string the @code{msgfmt}
+ In case the @code{c-format} flag is given for a string the @code{msgfmt}
  does some more tests to check to validity of the translation.
--@xref{msgfmt Invocation}.
-+@xref{msgfmt}.
+-@xref{msgfmt Invocation}, @ref{c-format Flag} and @ref{c-format}.
++@xref{msgfmt}, @ref{c-format Flag} and @ref{c-format}.
  
- @end table
+ @item python-format
+ @kwindex python-format@r{ flag}
+@@ -2344,7 +2344,7 @@
  
-@@ -2208,7 +2208,7 @@
- 
- If a string is marked with @kbd{c-format} and this is not correct the
+ If a string is marked with @code{c-format} and this is not correct the
  user can find out who is responsible for the decision.  See
--@ref{xgettext Invocation} to see how the @kbd{--debug} option can be
-+@ref{xgettext} to see how the @kbd{--debug} option can be
+-@ref{xgettext Invocation} to see how the @code{--debug} option can be
++@ref{xgettext} to see how the @code{--debug} option can be
  used for solving this problem.
  
- @node Special cases,  , c-format, Sources
-@@ -2240,7 +2240,7 @@
+ @node Special cases, Names, c-format Flag, Sources
+@@ -2376,7 +2376,7 @@
  While it is no problem to mark the string @code{"a default message"} it
  is not possible to mark the string initializers for @code{messages}.
  What is to be done?  We have to fulfill two tasks.  First we have to mark the
@@ -140,7 +179,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  can find them, and second we have to translate the string at runtime
  before printing them.
  
-@@ -2270,8 +2270,7 @@
+@@ -2406,8 +2406,7 @@
  
  Please convince yourself that the string which is written by
  @code{fputs} is translated in any case.  How to get @code{xgettext} know
@@ -150,7 +189,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  
  The above is of course not the only solution.  You could also come along
  with the following one:
-@@ -2315,10 +2314,10 @@
+@@ -2529,10 +2528,10 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -163,7 +202,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  @section Invoking the @code{xgettext} Program
  
  @include xgettext.texi
-@@ -2347,16 +2346,16 @@
+@@ -2561,16 +2560,16 @@
  the header entry of this file.
  
  @menu
@@ -183,7 +222,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  @section Filling in the Header Entry
  @cindex header entry of a PO file
  
-@@ -2507,7 +2506,7 @@
+@@ -2745,7 +2744,7 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -192,7 +231,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  * Translated Entries::          Translated Entries
  * Fuzzy Entries::               Fuzzy Entries
  * Untranslated Entries::        Untranslated Entries
-@@ -2520,12 +2519,12 @@
+@@ -2758,12 +2757,12 @@
  * Compendium::                  Using Translation Compendia
  @end menu
  
@@ -207,8 +246,8 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  @section Translated Entries
  @cindex translated entries
  
-@@ -3563,64 +3562,64 @@
- catalogs.  It copies each message's msgid to its msgstr.
+@@ -3805,70 +3804,70 @@
+ write other specialized programs that process PO files.
  
  @menu
 -* msgcat Invocation::           Invoking the @code{msgcat} Program
@@ -231,6 +270,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
 +* msgattrib::                   Invoking the @code{msgattrib} Program
 +* msgen::                       Invoking the @code{msgen} Program
 +* msgexec::                     Invoking the @code{msgexec} Program
+ * libgettextpo::                Writing your own programs that process PO files
  @end menu
  
 -@node msgcat Invocation, msgconv Invocation, Manipulating, Manipulating
@@ -287,12 +327,18 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  
  @include msgen.texi
  
--@node msgexec Invocation,  , msgen Invocation, Manipulating
-+@node msgexec,  , msgen, Manipulating
+-@node msgexec Invocation, libgettextpo, msgen Invocation, Manipulating
++@node msgexec, libgettextpo, msgen, Manipulating
  @section Invoking the @code{msgexec} Program
  
  @include msgexec.texi
-@@ -3631,22 +3630,22 @@
+ 
+-@node libgettextpo,  , msgexec Invocation, Manipulating
++@node libgettextpo,  , msgexec, Manipulating
+ @section Writing your own programs that process PO files
+ 
+ For the tasks for which a combination of @samp{msgattrib}, @samp{msgcat} etc.
+@@ -4002,22 +4001,22 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -320,7 +366,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  @section The Format of GNU MO Files
  @cindex MO file's format
  @cindex file format, @file{.mo}
-@@ -5531,7 +5530,7 @@
+@@ -6014,7 +6013,7 @@
  @menu
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
@@ -328,8 +374,8 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
 +* gettextize::                  Invoking the @code{gettextize} Program
  * Adjusting Files::             Files You Must Create or Alter
  * autoconf macros::             Autoconf macros for use in @file{configure.in}
- @end menu
-@@ -5562,7 +5561,7 @@
+ * CVS Issues::                  Integrating with CVS
+@@ -6046,7 +6045,7 @@
  described in the remaining of this chapter.  Some maintainers might
  use this as an opportunity to unflatten their package structure.
  
@@ -338,7 +384,7 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
  @section Prerequisite Works
  @cindex converting a package to use @code{gettext}
  @cindex migration from earlier versions of @code{gettext}
-@@ -5647,7 +5646,7 @@
+@@ -6131,12 +6130,12 @@
  a maintainer, ever think there is a real problem with a team, please
  never try to @emph{solve} a team's problem on your own.
  
@@ -346,13 +392,59 @@ diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
 +@node gettextize, Adjusting Files, Prerequisites, Maintainers
  @section Invoking the @code{gettextize} Program
  
- Some files are consistently and identically needed in every package
-@@ -5768,7 +5767,7 @@
- directory needs its own @file{Makefile}, and it has been designed so
- it can be identical in all packages.
+ @include gettextize.texi
  
 -@node Adjusting Files, autoconf macros, gettextize Invocation, Maintainers
 +@node Adjusting Files, autoconf macros, gettextize, Maintainers
  @section Files You Must Create or Alter
  @cindex @code{gettext} files
  
+@@ -6911,7 +6910,7 @@
+ @menu
+ * Distributed CVS::             Avoiding version mismatch in distributed development
+ * Files under CVS::             Files to put under CVS version control
+-* autopoint Invocation::        Invoking the @code{autopoint} Program
++* autopoint::                   Invoking the @code{autopoint} Program
+ @end menu
+ 
+ @node Distributed CVS, Files under CVS, CVS Issues, CVS Issues
+@@ -6953,7 +6952,7 @@
+ undiscovered due to this constellation.
+ @end itemize
+ 
+-@node Files under CVS, autopoint Invocation, Distributed CVS, CVS Issues
++@node Files under CVS, autopoint, Distributed CVS, CVS Issues
+ @subsection Files to put under CVS version control
+ 
+ There are basically three ways to deal with generated files in the
+@@ -7020,7 +7019,7 @@
+ @code{autopoint} invocation will copy into the right place the
+ @code{gettext} infrastructure files that have been omitted from the CVS.
+ 
+-@node autopoint Invocation,  , Files under CVS, CVS Issues
++@node autopoint,  , Files under CVS, CVS Issues
+ @subsection Invoking the @code{autopoint} Program
+ 
+ @include autopoint.texi
+--- gettext-0.12.1/gettext-tools/doc/gettextize.texi.orig	2003-05-05 11:09:21.000000000 +0200
++++ gettext-0.12.1/gettext-tools/doc/gettextize.texi	2003-06-07 20:10:53.000000000 +0200
+@@ -177,4 +177,4 @@
+ of the GNU build system, in the sense that it should not be invoked
+ automatically, and not be invoked by someone who doesn't assume the
+ responsibilities of a package maintainer.  For the latter purpose, a
+-separate tool is provided, see @ref{autopoint Invocation}.
++separate tool is provided, see @ref{autopoint}.
+--- gettext-0.12.1/gettext-runtime/libasprintf/autosprintf.texi.orig	2003-02-24 11:42:59.000000000 +0100
++++ gettext-0.12.1/gettext-runtime/libasprintf/autosprintf.texi	2003-06-07 20:19:00.000000000 +0200
+@@ -15,9 +15,9 @@
+ @c %**end of header
+ @set VERSION 1.0
+ 
+-@dircategory GNU autosprintf
++@dircategory Libraries:
+ @direntry
+-* autosprintf: (autosprintf).              GNU autosprintf
++* autosprintf: (autosprintf).		GNU autosprintf
+ @end direntry
+ 
+ @ifinfo
