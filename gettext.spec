@@ -8,7 +8,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.40
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -142,6 +142,7 @@ install -d $RPM_BUILD_ROOT/bin
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/en@*quot
 
 gzip -9nf AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 
