@@ -299,10 +299,17 @@ cd autoconf-lib-link
 cd ../gettext-runtime
 %{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4 -I ../config/m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
-cd ../gettext-tools
+cd libasprintf
+%{__aclocal} -I ../m4 -I ../../config/m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd ../../gettext-tools
 %{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../config/m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 cd ..
 %configure \
