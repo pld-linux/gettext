@@ -56,6 +56,7 @@ uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
 
 %build
 autoconf
+LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared \
 	--with-included-gettext 
@@ -68,8 +69,6 @@ install -d $RPM_BUILD_ROOT/bin
 
 make install \
 	DESTDIR=$RPM_BUILD_ROOT 
-
-strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
 
