@@ -9,9 +9,12 @@ Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler SprachunterstЭtzung
 Summary(es):	Utilitarios para el programa de soporte a lenguas locales
 Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
+Summary(ja):	╔ч╔К╔а╔Й╔С╔╛╔К╔А╔ц╔╩║╪╔╦╓Рю╦ю╝╓╧╓К╓©╓А╓нGNU ╔И╔╓╔ж╔И╔Й/╔Ф║╪╔ф╔ё╔Й╔ф╔ё
 Summary(pl):	NarzЙdzia dla programСw ze wsparciem dla jЙzykСw narodowych
 Summary(pt_BR):	UtilitАrios para o programa de suporte de lМnguas locais
+Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
+Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
 Version:	0.11.5
 Release:	5
@@ -32,14 +35,21 @@ BuildRequires:	automake
 BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
-BuildRequires:  gettext-devel
+BuildRequires:	gettext-devel
 Obsoletes:	gettext-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The gettext library provides an easy to use library and tools for
-creating, using, and modifying natural language catalogs. It is a
-powerfull and simple method for internationalizing programs.
+The GNU gettext package provides a set of tools and documentation for
+producing multi-lingual messages in programs. Tools include a set of
+conventions about how programs should be written to support message
+catalogs, a directory and file naming organization for the message
+catalogs, a runtime library which supports the retrieval of translated
+messages, and stand-alone programs for handling the translatable and
+the already translated strings. Gettext provides an easy to use
+library and tools for creating, using, and modifying natural language
+catalogs and is a powerful and simple method for internationalizing
+programs.
 
 %description -l de
 Die gettext-Library enthДlt eine einfach anzuwendende Library und
@@ -59,6 +69,18 @@ utiliser pour manipuler, crИer, et modifier des catalogues de langage
 naturel. C'est une mИthode simple et puissante pour internationnaliser
 les programmes.
 
+%description -l ja
+GNU gettext
+╔я╔ц╔╠║╪╔╦╓о╔в╔М╔╟╔И╔ЮцФ╓г╔ч╔К╔а╔Й╔С╔╛╔К╔А╔ц╔╩║╪╔╦╓Рю╦ю╝╓╧╓К
+╓©╓А╓н╔д║╪╔К╓хй╦╫Я╓Р╤║╣К╓╧╓К║ё╔д║╪╔К╓о╔А╔ц╔╩║╪╔╦╔╚╔©╔М╔╟╓Р╔╣╔щ║╪╔х╓╧╓К╓©╓А╓к
+╔в╔М╔╟╔И╔Ю╓╛╓и╓н╓Х╓╕╓к╫Я╓╚╓Л╓К╓ы╓╜╓╚╓н©╫╓╥╧Г╓О╓╩╓х║╒╔А╔ц╔╩║╪╔╦╔╚╔©╔М╔╟╓н╓©╓А╓н
+╔г╔ё╔Л╔╞╔х╔Й╓х╔у╔║╔╓╔Кл╬╓нах©╔╡╫╓х║╒кщлУ╓╣╓Л╓©╔А╔ц╔╩║╪╔╦╓нкД╓А╧Г╓О╓╩╓Р
+╔╣╔щ║╪╔х╓╧╓К╓©╓А╓н╔И╔С╔©╔╓╔Ю╔И╔╓╔ж╔И╔Й╓х║╒кщлУ╡дг╫╓г╓╚╓д╓╧╓г╓ккщлУ╓╣╓Л╓©й╦╩ЗнС
+╓Р╪Х╓Й╟╥╓╕фхн╘╓╥╓©╔в╔М╔╟╔И╔Ю╓Р╢ч╓С╓г╓╓╓К║ёgettext
+╓о╢йц╠╓к╩х╓╗╓К╔И╔╓╔ж╔И╔Й
+╓х╪╚аЁ╦ю╦Л╓н╔╚╔©╔М╔╟╓Рю╦ю╝║╒╩хмя║╒╫╓ю╣╓╧╓К╔д║╪╔К╓х║╒╧Я╨щ╡╫╔в╔М╔╟╔И╔Ю
+╓н╓©╓А╓н╤╞но╓╚╓д╔╥╔С╔в╔К╓ййЩк║╓Р╤║╣К╓╧╓К║ё
+
 %description -l pl
 Pakiet gettext dostarcza narzЙdzi do tworzenia, u©ywania i modyfikacji
 katalogСw jЙzykСw narodowych. To jest prosta i wydajna metoda
@@ -70,11 +92,22 @@ ferramentas para criaГЦo, uso e modificaГЦo de catАlogos de linguagem
 natural. Ele И um poderoso e simples mИtodo de internacionalizaГЦo de
 programas.
 
+%description -l ru
+Пакет gettext содержит библиотеку и простые в использовании
+инструменты для создания, использования и модификации каталогов
+национальных языков. Это простой и мощный метод для
+интернационализации программ.
+
 %description -l tr
 gettext, yerel dil desteПinde kullanЩlan kataloglarЩ deПiЧtirebilmek
 iГin, kolayca kullanЩlabilen kitaplЩk ve araГlarЩ saПlar. Bu,
 programlarЩ uluslararasЩlaЧtЩrmak iГin sЩkГa baЧvurulan, kuvvetli bir
 yЖntemdir.
+
+%description -l uk
+Пакет gettext м╕стить б╕бл╕отеку та прост╕ у використанн╕ ╕нструменти
+для створення, використання та модиф╕кац╕╖ каталог╕в нац╕ональних мов.
+Це простий та потужний метод для ╕нтернац╕онал╕зац╕╖ програм.
 
 %package devel
 Summary:	Utilties for program national language support
