@@ -19,7 +19,6 @@ BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
 BuildRequires:	texinfo
-BuildRequires:	xemacs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -72,20 +71,6 @@ Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
 lokalizacji (internationalizacji) programów.
 
-%package -n xemacs-po-mode-pkg
-Summary:	Xemacs PO-mode
-Summary(pl):	Tryb PO dla Xemacsa
-Group:		Applications/Editors/Emacs
-Group(de):	Applikationen/Editors/Emacs
-Group(pl):	Aplikacje/Edytory/Emacs
-Requires:	xemacs
-
-%description -n xemacs-po-mode-pkg
-Emacs PO-mode.
-
-%description -l pl -n xemacs-po-mode-pkg
-Tryb edycji PO dla emacsa.
-
 %prep
 %setup -q
 %patch0 -p1
@@ -103,9 +88,6 @@ automake -a -c
 	--enable-nls \
 	--without-included-gettext 
 %{__make}
-
-cd misc
-EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -140,8 +122,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_aclocaldir}/*
 %{_datadir}/gettext
 %{_mandir}/man3/*
-
-%files -n xemacs-po-mode-pkg
-%defattr(644,root,root,755)
-%dir %{_datadir}/xemacs-packages/lisp/po-mode
-%{_datadir}/xemacs-packages/lisp/po-mode/*.elc
