@@ -62,7 +62,7 @@ les programmes.
 %description -l pl
 Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
-lokalizacji (internationalizacji) programów.
+lokalizacji (internacjonalizacji) programów.
 
 %description -l pt_BR
 A biblioteca gettext oferece uma biblioteca fácil de usar e
