@@ -23,7 +23,7 @@ Patch1:		%{name}-info.patch
 Patch2:		%{name}-aclocal.patch
 Patch3:		%{name}-killkillkill.patch
 Patch4:		%{name}-pl.po-update.patch
-Patch5:		%{name}-gettextize-fix.patch
+Patch5:		%{name}-%{name}ize-fix.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
@@ -155,7 +155,7 @@ Requires:	cvs
 
 %description autopoint
 The `autopoint' program copies standard gettext infrastructure files
-into a source package.  It extracts from a macro call of the form
+into a source package. It extracts from a macro call of the form
 `AM_GNU_GETTEXT_VERSION(VERSION)', found in the package's
 `configure.in' or `configure.ac' file, the gettext version used by the
 package, and copies the infrastructure files belonging to this version
@@ -190,7 +190,7 @@ rm -f m4/libtool.m4 aclocal.m4 missing
 %{__make}
 
 %{?!_without_xemacs:cd misc}
-%{?!_without_xemacs:EMACS=/usr/bin/xemacs ./elisp-comp ./po-mode.el}
+%{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}
 
 %install
 rm -rf $RPM_BUILD_ROOT
