@@ -19,9 +19,8 @@ Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
-Patch2:		%{name}-dml.patch
-Patch3:		%{name}-aclocal.patch
-Patch4:		%{name}-killkillkill.patch
+Patch2:		%{name}-aclocal.patch
+Patch3:		%{name}-killkillkill.patch
 Obsoletes:	gettext-base
 BuildRequires:	automake
 BuildRequires:	autoconf >= 2.52
@@ -147,9 +146,8 @@ para a documentação de uso, a qual não é incluída aqui.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#%patch2 -p1	needs to be updated!
+%patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
