@@ -64,7 +64,7 @@ The gettext library provides an easy to use library and tools for
 creating, using, and modifying natural language catalogs. It is a
 powerfull and simple method for internationalizing programs.
 
-%description -l pl devel
+%description devel -l pl
 Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
 lokalizacji (internationalizacji) programów.
@@ -78,7 +78,7 @@ Requires:	xemacs
 %description -n xemacs-po-mode-pkg
 Emacs PO-mode.
 
-%description -l pl -n xemacs-po-mode-pkg
+%description -n xemacs-po-mode-pkg -l pl
 Tryb edycji PO dla emacsa.
 
 %prep
@@ -98,7 +98,7 @@ automake -a -c
 %configure \
 	%{?!_without_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
-	--without-included-gettext 
+	--without-included-gettext
 %{__make}
 
 %{?!_without_xemacs:cd misc}
@@ -108,7 +108,7 @@ automake -a -c
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/bin
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT 
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
 
