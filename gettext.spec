@@ -16,12 +16,12 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.12
+Version:	0.12.1
 Release:	0.1
 License:	GPL
 Group:		Development/Tools
+# Source0-md5:	5d4bddd300072315e668247e5b7d5bdb
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	9c6e71b00c918f54731c5d92e7240085
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-aclocal.patch
 Patch2:		%{name}-killkillkill.patch
