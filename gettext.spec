@@ -1,18 +1,21 @@
-Summary:     Utilties for program national language support
-Summary(de): Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(fr): Utilitaires pour le support de la langue nationnalepar les programmes.
-Summary(pl): Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
-Summary(tr): Desteði için kitaplýk ve araçlar
-Name:        gettext
-Version:     0.10.35
-Release:     3
-Copyright:   GPL
-Group:       Development/Tools
-Source:      ftp://alpha.gnu.org/gnu/%{name}-%{version}.tar.gz
-Patch0:      gettext-jbj.patch
-Prereq:      /sbin/install-info
-Requires:    m4, automake
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:	Utilties for program national language support
+Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
+Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes.
+Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
+Summary(tr):	Desteði için kitaplýk ve araçlar
+Name:		gettext
+Version:	0.10.35
+Release:	9
+Copyright:	GPL
+Group:		Development/Tools
+Source:		ftp://alpha.gnu.org/gnu/%{name}-%{version}.tar.gz
+Patch0:		gettext-jbj.patch
+Patch1:		gettext-info.patch
+Patch2:		gettext-arm.patch
+Patch4:		gettext-Makefile.in.in.patach
+Prereq:		/sbin/install-info
+Requires:	m4, automake
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 The gettext library provides an easy to use library and tools for creating,
@@ -39,26 +42,16 @@ gettext, yerel dil desteðinde kullanýlan kataloglarý deðiþtirebilmek için,
 kolayca kullanýlabilen kitaplýk ve araçlarý saðlar. Bu, programlarý
 uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
 
-%package   -n emacs-po_mode
-Summary:     .po files emacs helper
-Summary(pl): Makra do emacsa uatwiaj±ce edycje plików .po
-Group:       Applications/Editors/Emacs
-Requires:    emacs
-
-%description -n emacs-po_mode
-Package contain extension for helping GNU gettext lovers to edit PO files
-under emacs.
-
-%description -l pl -n emacs-po_mode
-Pakiet ten zawiera rozszerzenia do emacsa pomagaj±ce w edytowaæ pliki .pl
-pod tym edytorem.
-
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch4 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
 	--enable-shared \
 	--with-included-gettext \
 	--prefix=/usr
@@ -69,12 +62,25 @@ rm -rf $RPM_BUILD_ROOT
 make install \
 	prefix=$RPM_BUILD_ROOT/usr
 
-gzip -9nf $RPM_BUILD_ROOT/usr/info/*
 strip $RPM_BUILD_ROOT/usr/bin/* || :
+
+gzip -9nf $RPM_BUILD_ROOT/usr/info/* \
+	ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
+
+%post
+/sbin/install-info /usr/info/gettext.info.gz /etc/info-dir
+
+%preun
+if [ "$1" = 0 ]; then
+	/sbin/install-info --delete /usr/info/gettext.info.gz /etc/info-dir
+fi
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644, root, root, 755)
-%doc ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
+%doc *.gz
 %attr(755, root, root) /usr/bin/*
 /usr/info/*info*.gz
 /usr/share/aclocal/*
@@ -91,21 +97,13 @@ strip $RPM_BUILD_ROOT/usr/bin/* || :
 %lang(sl) /usr/share/locale/sl/LC_MESSAGES/gettext.mo
 %lang(sv) /usr/share/locale/sv/LC_MESSAGES/gettext.mo
 
-%files -n emacs-po_mode
-%attr(644, root, root) /usr/share/emacs/site-lisp/*.elc
-
-%post
-/sbin/install-info /usr/info/gettext.info.gz /usr/info/dir
-
-%preun
-if [ "$1" = 0 ]; then
-    /sbin/install-info --delete /usr/info/gettext.info.gz /usr/info/dir
-fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %changelog
+* Mon Apr 12 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.10.35-9]
+- standarized {un}registering info pages (added gettext-info.patch),
+- removed emacs-po_mode subpackage (it would be beter add po mode macros
+  directly in [x]emacs packages).
+
 * Sat Sep 26 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
 - corrected pl translation.
 
