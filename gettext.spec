@@ -85,7 +85,7 @@ powerfull and simple method for internationalizing programs.
 cat m4/*.m4 >acinclude.m4
 aclocal
 libtoolize --copy --force
-automake
+automake -a -c
 autoconf
 %configure \
 	--enable-shared \
