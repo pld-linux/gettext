@@ -23,7 +23,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.14.1
-Release:	1
+Release:	2
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -124,7 +124,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 License:	GPL
 Group:		Development/Tools
 Requires(post,postun):	/sbin/ldconfig
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	autoconf >= 2.50
 Requires:	iconv
 
@@ -143,6 +143,7 @@ Summary:	Static gettext utility libraries
 Summary(pl):	Statyczne biblioteki narzêdziowe gettext
 License:	GPL
 Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 This package contains static versions of gettext utility libraries
@@ -173,7 +174,7 @@ Summary:	Header file and documentation for libasprintf
 Summary(pl):	Plik nag³ówkowy i dokumentacja dla libasprintf
 License:	LGPL
 Group:		Development/Libraries
-Requires:	libasprintf = %{version}
+Requires:	libasprintf = %{version}-%{release}
 
 %description -n libasprintf-devel
 Header file and documentation for libasprintf.
@@ -186,7 +187,7 @@ Summary:	Static libasprintf library
 Summary(pl):	Statyczna biblioteka libasprintf
 License:	LGPL
 Group:		Development/Libraries
-Requires:	libasprintf-devel = %{version}
+Requires:	libasprintf-devel = %{version}-%{release}
 
 %description -n libasprintf-static
 Static libasprintf library.
@@ -199,7 +200,7 @@ Summary:	Runtime classes for Java programs internationalization
 Summary(pl):	Klasy do uruchamiania umiêdzynarodowionych programów w Javie
 License:	LGPL
 Group:		Development/Languages/Java
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description java
 Runtime classes for Java programs internationalization.
@@ -212,7 +213,7 @@ Summary:	Development classes for Java programs internationalization
 Summary(pl):	Klasy do umiêdzynarodowiania programów w Javie dla programistów
 License:	GPL
 Group:		Development/Tools
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description java-devel
 Development classes for Java programs internationalization.
@@ -275,6 +276,12 @@ wersji.
 %patch1 -p1
 # patch2 not finished yet
 #%patch2 -p1
+
+%{__perl} -pi -e 's/ no / nb /' gettext-runtime/po/LINGUAS gettext-tools/po/LINGUAS
+mv -f gettext-runtime/po/{no,nb}.po
+mv -f gettext-runtime/po/{no,nb}.gmo
+mv -f gettext-tools/po/{no,nb}.po
+mv -f gettext-tools/po/{no,nb}.gmo
 
 %build
 # it's m4_included somewhere
