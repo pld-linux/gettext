@@ -1,9 +1,10 @@
 #
 # Conditional build:
 # _without_xemacs	without po-mode for xemacs
-# _without_java		without Java support (which requires gcj 3.x or javac)
-# _with_javac		use some javac instead of gcj 3.x
+# _with_gcj		with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
+# _with_javac		with Java support by some javac
 #
+%define _with_java	%{?_with_gcj:1}%{!?_with_gcj:%{?_with_javac:1}%{!?_with_javac:0}}
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(es):	Utilitarios para el programa de soporte a lenguas locales
@@ -25,8 +26,9 @@ Patch4:		%{name}-pl.po-update.patch
 Patch5:		%{name}-gettextize-fix.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-%{!?_without_java:%{!?_with_javac:BuildRequires: gcj >= 3.0}}
-%{!?_without_java:%{?_with_javac:BuildRequires: jdk >= 1.1}}
+%{?_with_gcj:BuildRequires:	gcj >= 3.0}
+%{?_with_gcj:BuildRequires:	gcj < 3.0.4}
+%{?_with_javac:BuildRequires:	jdk >= 1.1}
 BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
@@ -261,7 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/xgettext.1*
 %{_mandir}/man3/*
 
-%if %{?_without_java:0}%{?!_without_java:1}
+%if %{?_with_java:1}%{!?_with_java:0}
 %files java-devel
 %defattr(644,root,root,755)
 %doc intl-java/javadoc2
