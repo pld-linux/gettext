@@ -5,11 +5,12 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	15
-Copyright:	GPL
+Release:	18
+License:	GPL
 Group:		Development/Tools
+Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
-Source:		ftp://alpha.gnu.org/gnu/%{name}-%{version}.tar.gz
+Source0:	ftp.gnu.org:/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		gettext-jbj.patch
 Patch1:		gettext-info.patch
 Patch2:		gettext-arm.patch
@@ -20,13 +21,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The gettext library provides an easy to use library and tools for creating,
-using, and modifying natural language catalogs. It is a powerfull and simple
-method for internationalizing programs.
+using, and modifying natural language catalogs. It is a powerfull and
+simple method for internationalizing programs.
 
 %description -l de
-Die gettext-Library enthält eine einfach anzuwendende Library und Tools
-zum Erstellen, Verwenden und Ändern von natürlichsprachigen-Kataloge. Es ist
-ein einfaches und leistungsfähiges Verfahren zum Lokalisieren von Programmen.
+Die gettext-Library enthält eine einfach anzuwendende Library und Tools zum
+Erstellen, Verwenden und Ändern von natürlichsprachigen-Kataloge. Es ist
+ein einfaches und leistungsfähiges Verfahren zum Lokalisieren von
+Programmen.
 
 %description -l fr
 La librarie gettext fournit des outils et une librairie simple à utiliser
@@ -35,8 +37,8 @@ une méthode simple et puissante pour internationnaliser les programmes.
 
 %description -l pl
 Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
-katalogów jêzyków narodowych. To jest prosta i wydajna metoda
-lokalizacji (internationalizacji) programów.
+katalogów jêzyków narodowych. To jest prosta i wydajna metoda lokalizacji
+(internationalizacji) programów.
 
 %description -l tr
 gettext, yerel dil desteðinde kullanýlan kataloglarý deðiþtirebilmek için,
@@ -50,6 +52,7 @@ Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programm
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
+Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
 Requires:	m4
 Requires:	automake
@@ -58,8 +61,8 @@ Requires:	%{name} = %{version}
 
 %description devel
 The gettext library provides an easy to use library and tools for creating,
-using, and modifying natural language catalogs. It is a powerfull and simple
-method for internationalizing programs.
+using, and modifying natural language catalogs. It is a powerfull and
+simple method for internationalizing programs.
 
 %prep
 %setup -q
@@ -112,5 +115,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %{_infodir}/*info*
-%{_datadir}/aclocal/*
+%{_aclocaldir}/*
 %{_datadir}/gettext
