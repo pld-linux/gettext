@@ -5,7 +5,7 @@ Summary(pl): Biblioteka i narzêdziaand utilties for program national language su
 Summary(tr): Yerel dil desteði için kitaplýk ve araçlar
 Name:        gettext
 Version:     0.10.35
-Release:     1
+Release:     2
 Copyright:   GPL
 Group:       Development/Tools
 Source:      ftp://alpha.gnu.org/gnu/%{name}-%{version}.tar.gz
@@ -87,8 +87,7 @@ strip $RPM_BUILD_ROOT/usr/bin/* || :
 %lang(sv) /usr/share/locale/sv/LC_MESSAGES/gettext.mo
 
 %files -n emacs-po_mode
-/usr/share/emacs/site-lisp/*.elc
-
+%attr(644, root, root) /usr/share/emacs/site-lisp/*.elc
 
 %post
 /sbin/install-info /usr/info/gettext.info.gz /usr/info/dir
@@ -102,6 +101,10 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Aug 22 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.10.35-1]
+- added missing %attr in %files for emacs-po_mode.
+
 * Fri May 15 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.10.35-1]
 - %%{version} macro instead %%{PACKAGE_VERSION},
