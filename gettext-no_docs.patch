@@ -1,16 +1,19 @@
---- gettext-0.11.5/doc/Makefile.am~	Tue Apr 22 00:50:06 2003
-+++ gettext-0.11.5/doc/Makefile.am	Tue Apr 22 00:50:06 2003
-@@ -17,17 +17,8 @@
+diff -Nru gettext-0.12.orig/gettext-tools/doc/Makefile.am gettext-0.12/gettext-tools/doc/Makefile.am
+--- gettext-0.12.orig/gettext-tools/doc/Makefile.am	2003-04-14 15:39:49.000000000 +0200
++++ gettext-0.12/gettext-tools/doc/Makefile.am	2003-05-20 14:51:18.000000000 +0200
+@@ -17,19 +17,10 @@
  
  ## Process this file with automake to produce Makefile.in.
  
--docdir = $(prefix)/doc/@PACKAGE@
+-docdir = $(datadir)/doc/gettext
 -dvidir = $(docdir)
 -psdir = $(docdir)
 -pdfdir = $(docdir)
 -htmldir = $(docdir)
 -
  AUTOMAKE_OPTIONS = 1.2 gnits
+ EXTRA_DIST =
+ MOSTLYCLEANFILES =
  
 -SED = sed
 -RM = rm -f
@@ -18,11 +21,10 @@
  MAKEINFO = env LANG= LANGUAGE= @MAKEINFO@
  
  info_TEXINFOS = gettext.texi
-@@ -50,152 +41,3 @@
- 	rm -f $(srcdir)/iso-3166.texi
+@@ -55,150 +46,6 @@
  	mv iso-3166.tmp $(srcdir)/iso-3166.texi
  
--
+ 
 -# We distribute only the split HTML documentation.
 -# The user can generate the others, via
 -#   make gettext.ps
@@ -58,8 +60,8 @@
 -uninstall-dvi:
 -	$(RM) $(DESTDIR)$(dvidir)/gettext.dvi
 -
--# Temporary index files. automake doesn't remove them reliably by itself.
--MOSTLYCLEANFILES = \
+-# Temporary index files. automake removes only the predefined ones by itself.
+-MOSTLYCLEANFILES += \
 -  gettext.am gettext.ams \
 -  gettext.cp gettext.cps \
 -  gettext.ef gettext.efs \
@@ -67,10 +69,8 @@
 -  gettext.ev gettext.evs \
 -  gettext.fn gettext.fns \
 -  gettext.kw gettext.kws \
--  gettext.ky gettext.kys \
 -  gettext.op gettext.ops \
 -  gettext.pg gettext.pgs \
--  gettext.tp gettext.tps \
 -  gettext.vr gettext.vrs
 -
 -
@@ -169,5 +169,6 @@
 -	done
 -
 -
--# One more automake bug.
--installdirs: installdirs-local
+ # VMS support.
+ 
+ EXTRA_DIST += Makefile.vms
