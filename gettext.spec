@@ -121,7 +121,7 @@ para a documentação de uso, a qual não é incluída aqui.
 rm -f m4/libtool.m4 aclocal.m4 missing
 %{__libtoolize}
 #aclocal --acdir=m4 -I $(aclocal --print-ac-dir)
-aclocal -I m4
+%{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
 %configure \
