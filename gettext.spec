@@ -4,8 +4,8 @@ Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programm
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
-Version:	0.10.35
-Release:	32
+Version:	0.10.36
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Group(de):	Entwicklung/Werkzeuge
@@ -14,13 +14,8 @@ Group(pl):	Programowanie/Narzêdzia
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
-Patch2:		%{name}-arm.patch
-Patch4:		%{name}-Makefile.in.in.patach
-Patch5:		%{name}-DESTDIR.patch
-Patch6:		%{name}-hacks.patch
-Patch7:		%{name}-drepper.patch
-Patch8:		%{name}-dml.patch
-Patch9:		%{name}-oka-plus.patch
+Patch2:		%{name}-hacks.patch
+Patch3:		%{name}-dml.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
@@ -74,23 +69,19 @@ powerfull and simple method for internationalizing programs.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
+#%patch1 -p1
+#%patch2 -p1
+#%patch3 -p1
 
 %build
-cat m4/*.m4 >acinclude.m4
-aclocal
 libtoolize --copy --force
 automake -a -c
+aclocal -I m4
 autoconf
+# we don't want shared libintl library. --misiek
 %configure \
-	--enable-shared \
+	--disable-shared \
+	--enable-static \
 	--with-included-gettext 
 %{__make}
 
