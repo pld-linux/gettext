@@ -10,7 +10,7 @@ License:	GPL
 Group:		Development/Tools
 Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
-Source0:	ftp.gnu.org:/pub/gnu/gettext/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		gettext-jbj.patch
 Patch1:		gettext-info.patch
 Patch2:		gettext-arm.patch
