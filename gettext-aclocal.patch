@@ -1,22 +1,14 @@
---- gettext-0.11.2/configure.in.orig	Thu May 16 19:59:15 2002
-+++ gettext-0.11.2/configure.in	Thu May 16 20:02:24 2002
-@@ -40,6 +40,7 @@
+--- gettext-0.11.4/configure.in.orig	Thu May 16 19:59:15 2002
++++ gettext-0.11.4/configure.in	Thu May 16 20:02:24 2002
+@@ -10,7 +10,7 @@
+ AC_PROG_CC
+ AC_PROG_INSTALL
+ AC_PROG_YACC
+-gt_PROG_LEX
++gt_AM_PROG_LEX
  
- dnl Check for build configuration.
- AM_PROG_LIBTOOL
-+AM_PROG_LEX
- 
- AC_DEFINE(_GNU_SOURCE, 1, [Make sure we see all GNU extensions.])
- 
-@@ -58,7 +58,7 @@
- jm_AC_TYPE_UNSIGNED_LONG_LONG
- AC_TYPE_OFF_T
- AC_TYPE_SIZE_T
--AM_TYPE_PTRDIFF_T
-+AC_CHECK_TYPES(ptrdiff_t)
- jm_AC_TYPE_UINTMAX_T
- gt_TYPE_SSIZE_T
- AC_TYPE_PID_T
+ gt_GCJ
+ if test -n "$HAVE_GCJ"; then
 @@ -70,7 +70,6 @@
  strerror strtoul uname utime utimes])
  AC_REPLACE_FUNCS([memset stpcpy strcspn \
@@ -25,21 +17,11 @@
  if test $am_cv_func_working_getline != yes; then
    AC_CHECK_FUNCS(getdelim)
  fi
-@@ -135,7 +135,7 @@
-   AC_MSG_CHECKING([whether the C++ compiler ($CXX $CXXFLAGS $LDFLAGS) works])
-   AC_LANG_SAVE
-   AC_LANG_CPLUSPLUS
--  AC_TRY_COMPILER([int main(){return(0);}], ac_cv_prog_cxx_works, ac_cv_prog_cxx_cross)
-+  AC_TRY_COMPILE([],[int main(){return(0);}], ac_cv_prog_cxx_works, ac_cv_prog_cxx_cross)
-   AC_LANG_RESTORE
-   AC_MSG_RESULT($ac_cv_prog_cxx_works)
-   if test $ac_cv_prog_cxx_works = no; then
-@@ -158,17 +158,6 @@
+@@ -158,16 +158,6 @@
  
  EOF
  
--dnl These can be removed when we drop support for autoconf-2.13 and switch
--dnl to autoconf-2.52.
+-dnl These ought to go away some day.
 -changequote(,)dnl
 -LTLIBOBJS=`echo "$LIBOBJS" | sed 's/\.[^.]* /.lo /g;s/\.[^.]*$/.lo/'`
 -changequote([, ])dnl
@@ -96,3 +78,14 @@
  # Need @LTLIBINTL@ because many source files use gettext().
  # Need @LTLIBICONV@ because linebreak.c uses iconv().
  libgettextlib_la_LDFLAGS = \
+--- gettext-0.11.4/m4/flex.m4.orig	Wed Jan 16 13:19:34 2002
++++ gettext-0.11.4/m4/flex.m4	Sun Jul 28 23:25:51 2002
+@@ -8,7 +8,7 @@
+ 
+ # Check for flex.
+ 
+-AC_DEFUN([gt_PROG_LEX],
++AC_DEFUN([gt_AM_PROG_LEX],
+ [
+   dnl Don't use AC_PROG_LEX or AM_PROG_LEX; we insist on flex.
+   dnl Thus we don't need LEXLIB.
