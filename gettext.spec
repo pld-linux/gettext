@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	25
+Release:	32
 License:	GPL
 Group:		Development/Tools
 Group(de):	Entwicklung/Werkzeuge
@@ -20,6 +20,7 @@ Patch5:		%{name}-DESTDIR.patch
 Patch6:		%{name}-hacks.patch
 Patch7:		%{name}-drepper.patch
 Patch8:		%{name}-dml.patch
+Patch9:		%{name}-oka-plus.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
@@ -80,6 +81,7 @@ powerfull and simple method for internationalizing programs.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 cat m4/*.m4 >acinclude.m4
