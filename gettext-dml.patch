@@ -113,7 +113,7 @@ diff -ur gettext-0.10.35/src/xgettext.c gettext-0.10.35-dml/src/xgettext.c
 +		} else
 +			msgstr = "";
 +		message_variant_append(mp, MESSAGE_DOMAIN_DEFAULT, msgstr,
-+				       &pos);
++				       strlen(msgstr) + 1, &pos);
 +				       
 +		mp->is_c_format = no;
 +		mp->do_wrap = yes;	/* By default we wrap. Is it ok?  */
