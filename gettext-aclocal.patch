@@ -1,0 +1,11 @@
+--- gettext-0.10.36.orig/configure.in	Fri Mar 16 15:33:53 2001
++++ gettext-0.10.36/configure.in	Mon Apr  2 10:33:38 2001
+@@ -52,7 +52,7 @@
+ AC_CHECK_FUNCS([getcwd mblen memcpy strchr strerror uname])
+ AC_REPLACE_FUNCS([memmove memset stpcpy stpncpy strcspn \
+ strcasecmp strncasecmp strstr strtoul vasprintf])
+-AM_FUNC_GETLINE
++
+ if test $am_cv_func_working_getline != yes; then
+   AC_CHECK_FUNCS(getdelim)
+ fi

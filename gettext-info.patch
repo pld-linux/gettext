@@ -1,12 +1,12 @@
-diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
---- gettext-0.10.35/doc/gettext.texi	Fri May  1 07:53:32 1998
-+++ gettext-0.10.35.new/doc/gettext.texi	Fri Apr  9 18:09:45 1999
+diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
+--- gettext-0.10.36/doc/gettext.texi	Thu Mar 29 17:51:51 2001
++++ gettext-0.10.36.new/doc/gettext.texi	Wed Apr  4 01:11:29 2001
 @@ -7,13 +7,13 @@
  
  @include version.texi
  
 -@dircategory GNU Gettext Utilities
-+@dircategory GNU Gettext Utilities:
++@dircategory Programming tools:
  @direntry
 -* Gettext: (gettext).                           GNU gettext utilities.
 -* gettextize: (gettext)gettextize Invocation.   Prepare a package for gettext.
@@ -21,23 +21,21 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  @end direntry
  
  @ifinfo
-@@ -118,13 +118,13 @@
+@@ -120,11 +120,11 @@
  
- Making the Initial PO File
+ Making the PO Template File
  
 -* xgettext Invocation::         Invoking the @code{xgettext} Program
 +* xgettext::			Invoking the @code{xgettext} Program
- * C Sources Context::           C Sources Context
- * Compendium::                  Using Translation Compendiums
  
  Updating Existing PO Files
  
 -* msgmerge Invocation::         Invoking the @code{msgmerge} Program
 +* msgmerge::			Invoking the @code{msgmerge} Program
- * Translated Entries::
- * Fuzzy Entries::               Fuzzy translated Entries
+ * Translated Entries::          Translated Entries
+ * Fuzzy Entries::               Fuzzy Entries
  * Untranslated Entries::        Untranslated Entries
-@@ -135,7 +135,7 @@
+@@ -138,7 +138,7 @@
  
  Producing Binary MO Files
  
@@ -46,7 +44,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  * MO Files::                    The Format of GNU MO Files
  
  The User's View
-@@ -195,7 +195,7 @@
+@@ -201,7 +201,7 @@
  
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
@@ -55,7 +53,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  * Adjusting Files::             Files You Must Create or Alter
  
  Files You Must Create or Alter
-@@ -634,7 +634,7 @@
+@@ -649,7 +649,7 @@
  exactly where in C sources each string is used.  All translations
  are set to empty.  The letter @kbd{t} in @file{.pot} marks this as
  a Template PO file, not yet oriented towards any particular language.
@@ -64,7 +62,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  @code{xgettext} program.  If you are @emph{really} lazy, you might
  be interested at working a lot more right away, and preparing the
  whole distribution setup (@pxref{Maintainers}).  By doing so, you
-@@ -710,7 +710,7 @@
+@@ -725,7 +725,7 @@
  which are no longer used in the program sources (@pxref{Obsolete
  Entries}).  It finally discovers new strings and inserts them in
  the resulting PO file as untranslated entries (@pxref{Untranslated
@@ -73,7 +71,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  @code{msgmerge} really does.
  
  Whatever route or means taken, the goal is to obtain an updated
-@@ -736,9 +736,9 @@
+@@ -751,9 +751,9 @@
  Once the PO file is complete and dependable, the @code{msgfmt} program
  is used for turning the PO file into a machine-oriented format, which
  may yield efficient retrieval of translations by the programs of the
@@ -86,7 +84,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  
  Finally, the modified and marked C sources are compiled and linked
  with the GNU @code{gettext} library, usually through the operation of
-@@ -890,7 +890,7 @@
+@@ -908,7 +908,7 @@
  
  In case the @kbd{c-format} flag is given for a string the @code{msgfmt}
  does some more tests to check to validity of the translation.
@@ -95,26 +93,16 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  
  @end table
  
-@@ -1678,15 +1678,14 @@
- to use must contain the string @kbd{xgettext:no-c-format}.
+@@ -1726,7 +1726,7 @@
  
  If a string is marked with @kbd{c-format} and this is not correct the
--user can find out who is responsible for the decision.  @xref{xgettext
--Invocation} to see how the @kbd{--debug} option can be used for solving
--this problem.
-+user can find out who is responsible for the decision.  @xref{xgettext},
-+to see how the @kbd{--debug} option can be used for solving this problem.
+ user can find out who is responsible for the decision.  See
+-@ref{xgettext Invocation} to see how the @kbd{--debug} option can be
++@ref{xgettext} to see how the @kbd{--debug} option can be
+ used for solving this problem.
  
  @node Special cases,  , c-format, Sources
- @section Special Cases of Translatable Strings
- 
- The attentive reader might now point out that it is not always possible
--to mark translatable string with @code{gettext} or something like this.
-+to mark translatable string with @code{gettext}, or something like this.
- Consider the following case:
- 
- @example
-@@ -1710,7 +1709,7 @@
+@@ -1757,7 +1757,7 @@
  While it is no problem to mark the string @code{"a default message"} it
  is not possible to mark the string initializers for @code{messages}.
  What is to be done?  We have to fulfill two tasks.  First we have to mark the
@@ -123,7 +111,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  can find them, and second we have to translate the string at runtime
  before printing them.
  
-@@ -1740,8 +1739,7 @@
+@@ -1787,8 +1787,7 @@
  
  Please convince yourself that the string which is written by
  @code{fputs} is translated in any case.  How to get @code{xgettext} know
@@ -133,41 +121,30 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  
  The above is of course not the only solution.  You could also come along
  with the following one:
-@@ -1783,12 +1781,12 @@
+@@ -1833,10 +1832,10 @@
  @c FIXME: Rewrite.
  
  @menu
 -* xgettext Invocation::         Invoking the @code{xgettext} Program
 +* xgettext::			Invoking the @code{xgettext} Program
- * C Sources Context::           C Sources Context
- * Compendium::                  Using Translation Compendiums
  @end menu
  
--@node xgettext Invocation, C Sources Context, Initial, Initial
-+@node xgettext, C Sources Context, Initial, Initial
+-@node xgettext Invocation,  , Template, Template
++@node xgettext,  , Template, Template
  @section Invoking the @code{xgettext} Program
  
  @c FIXME: Rewrite.
-@@ -1915,7 +1913,7 @@
- cases, like strings in preprocessor macros, ANSI concatenation of
- adjacent strings, and escaped end of lines for continued strings.
- 
--@node C Sources Context, Compendium, xgettext Invocation, Initial
-+@node C Sources Context, Compendium, xgettext, Initial
- @section C Sources Context
- 
- PO mode is particularily powerful when used with PO files
-@@ -2040,7 +2038,7 @@
+@@ -2119,7 +2118,7 @@
  @c FIXME: Rewrite.
  
  @menu
 -* msgmerge Invocation::         Invoking the @code{msgmerge} Program
 +* msgmerge::			Invoking the @code{msgmerge} Program
- * Translated Entries::
- * Fuzzy Entries::
+ * Translated Entries::          Translated Entries
+ * Fuzzy Entries::               Fuzzy Entries
  * Untranslated Entries::        Untranslated Entries
-@@ -2050,7 +2048,7 @@
- * Auxiliary::                   Consulting Auxiliary PO Files
+@@ -2132,7 +2131,7 @@
+ * Compendium::                  Using Translation Compendiums
  @end menu
  
 -@node msgmerge Invocation, Translated Entries, Updating, Updating
@@ -175,7 +152,16 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  @section Invoking the @code{msgmerge} Program
  
  @c FIXME: Rewrite.
-@@ -2642,11 +2640,11 @@
+@@ -2156,7 +2155,7 @@
+ @c so marking the entry as obsolete, and giving the modified string with
+ @c an empty translation, that is, marking the entry as untranslated.
+ 
+-@node Translated Entries, Fuzzy Entries, msgmerge Invocation, Updating
++@node Translated Entries, Fuzzy Entries, msgmerge, Updating
+ @section Translated Entries
+ 
+ Each PO file entry for which the @code{msgstr} field has been filled with
+@@ -2874,11 +2873,11 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -189,7 +175,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  @section Invoking the @code{msgfmt} Program
  
  @c FIXME: Rewrite.
-@@ -2722,7 +2720,7 @@
+@@ -2954,7 +2953,7 @@
  If input file is @samp{-}, standard input is read.  If output file
  is @samp{-}, output is written to standard output.
  
@@ -198,16 +184,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  @section The Format of GNU MO Files
  
  The format of the generated MO files is best described by a picture,
-@@ -3078,7 +3076,7 @@
- method of normal file handling (open-use-close) and that it does not
- burden the programmer so many task, especially the unique key handling.
- Of course here is also a unique key needed, but this key is the
--message itself (how long or short it is).  @xref{Comparison} for a
-+message itself (how long or short it is).  @xref{Comparison}, for a
- more detailed comparison of the two methods.
- 
- The following section contains a rather detailed description of the
-@@ -4146,7 +4144,7 @@
+@@ -4752,7 +4751,7 @@
  @menu
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
@@ -216,16 +193,16 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  * Adjusting Files::             Files You Must Create or Alter
  @end menu
  
-@@ -4181,7 +4179,7 @@
- to flat distributions, we might add some notes about how to proceed
- in flat situations.
+@@ -4782,7 +4781,7 @@
+ described in the remaining of this chapter.  Some maintainers might
+ use this as an opportunity to unflatten their package structure.
  
 -@node Prerequisites, gettextize Invocation, Flat and Non-Flat, Maintainers
 +@node Prerequisites, gettextize, Flat and Non-Flat, Maintainers
  @section Prerequisite Works
  
  There are some works which are required for using GNU @code{gettext}
-@@ -4261,7 +4259,7 @@
+@@ -4862,7 +4861,7 @@
  a maintainer, ever think there is a real problem with a team, please
  never try to @emph{solve} a team's problem on your own.
  
@@ -234,7 +211,7 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
  @section Invoking the @code{gettextize} Program
  
  Some files are consistently and identically needed in every package
-@@ -4353,7 +4351,7 @@
+@@ -4954,7 +4953,7 @@
  directory needs its own @file{Makefile}, and it has been designed so
  it can be identical in all packages.
  
