@@ -87,19 +87,19 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %attr(755,root,root) /usr/bin/*
 %{_infodir}/*info*.gz
-/usr/share/aclocal/*
-/usr/share/gettext
-%lang(da) /usr/share/locale/da/LC_MESSAGES/gettext.mo
-%lang(de) /usr/share/locale/de/LC_MESSAGES/gettext.mo
-%lang(es) /usr/share/locale/es/LC_MESSAGES/gettext.mo
-%lang(fr) /usr/share/locale/fr/LC_MESSAGES/gettext.mo
-%lang(nl) /usr/share/locale/nl/LC_MESSAGES/gettext.mo
-%lang(no) /usr/share/locale/no*/LC_MESSAGES/gettext.mo
-%lang(ko) /usr/share/locale/ko/LC_MESSAGES/gettext.mo
-%lang(pl) /usr/share/locale/pl/LC_MESSAGES/gettext.mo
-%lang(pt) /usr/share/locale/pt/LC_MESSAGES/gettext.mo
-%lang(sl) /usr/share/locale/sl/LC_MESSAGES/gettext.mo
-%lang(sv) /usr/share/locale/sv/LC_MESSAGES/gettext.mo
+%{_datadir}/aclocal/*
+%{_datadir}/gettext
+%lang(da) %{_datadir}/locale/da/LC_MESSAGES/gettext.mo
+%lang(de) %{_datadir}/locale/de/LC_MESSAGES/gettext.mo
+%lang(es) %{_datadir}/locale/es/LC_MESSAGES/gettext.mo
+%lang(fr) %{_datadir}/locale/fr/LC_MESSAGES/gettext.mo
+%lang(nl) %{_datadir}/locale/nl/LC_MESSAGES/gettext.mo
+%lang(no) %{_datadir}/locale/no*/LC_MESSAGES/gettext.mo
+%lang(ko) %{_datadir}/locale/ko/LC_MESSAGES/gettext.mo
+%lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/gettext.mo
+%lang(pt) %{_datadir}/locale/pt/LC_MESSAGES/gettext.mo
+%lang(sl) %{_datadir}/locale/sl/LC_MESSAGES/gettext.mo
+%lang(sv) %{_datadir}/locale/sv/LC_MESSAGES/gettext.mo
 
 %changelog
 * Mon Apr 12 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
@@ -130,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
   redistribute this package later put this in your private .rpmrc). 
 - added making emacsc-po_mode subpackage with emac extension for editing .po
   files,
-- added %lang macros for /usr/share/locale/*/LC_MESSAGES/gettext.mo files,
+- added %lang macros for %{_datadir}/locale/*/LC_MESSAGES/gettext.mo files,
 - added %defattr macro in %files (require rpm >= 2.4.99).
 
 * Mon Apr 27 1998 Prospector System <bugs@redhat.com>
