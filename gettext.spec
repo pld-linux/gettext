@@ -5,18 +5,20 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	20
+Release:	24
 License:	GPL
 Group:		Development/Tools
+Group(de):	Entwicklung/Werkzeuge
 Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
-Patch0:		gettext-jbj.patch
-Patch1:		gettext-info.patch
-Patch2:		gettext-arm.patch
-Patch4:		gettext-Makefile.in.in.patach
-Patch5:		gettext-DESTDIR.patch
-Patch6:		gettext-hacks.patch
+Patch0:		%{name}-jbj.patch
+Patch1:		%{name}-info.patch
+Patch2:		%{name}-arm.patch
+Patch4:		%{name}-Makefile.in.in.patach
+Patch5:		%{name}-DESTDIR.patch
+Patch6:		%{name}-hacks.patch
+Patch7:		%{name}-drepper.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
@@ -57,6 +59,7 @@ Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programm
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
+Group(de):	Entwicklung/Werkzeuge
 Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
 Requires:	%{name} = %{version}
@@ -74,6 +77,7 @@ powerfull and simple method for internationalizing programs.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 cat m4/*.m4 >acinclude.m4
@@ -81,7 +85,6 @@ aclocal
 libtoolize --copy --force
 automake
 autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared \
 	--with-included-gettext 
@@ -95,9 +98,8 @@ install -d $RPM_BUILD_ROOT/bin
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
 
-gzip -9nf $RPM_BUILD_ROOT%{_infodir}/* \
-	ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
-	
+gzip -9nf AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
+
 %find_lang %{name}
 
 %post devel
