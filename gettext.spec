@@ -16,6 +16,7 @@ Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-dml.patch
 Patch3:		%{name}-aclocal.patch
+Patch4:		%{name}-acam.patch
 Obsoletes:	gettext-base
 BuildRequires:	automake
 BuildRequires:	autoconf >= 2.50
@@ -116,6 +117,7 @@ para a documentação de uso, a qual não é incluída aqui.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
