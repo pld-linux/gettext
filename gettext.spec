@@ -30,9 +30,9 @@ pour manipuler, créer, et modifier des catalogues de langage naturel. C'est
 une méthode simple et puissante pour internationnaliser les programmes.
 
 %description -l pl
-Pakiet gettext dostarcza narzêdzido tworzenia, u¿ywania i modyfikacji
+Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
-internationalizacji programów.
+lokalizacji (internationalizacji) programów.
 
 %description -l tr
 gettext, yerel dil desteðinde kullanýlan kataloglarý deðiþtirebilmek için,
