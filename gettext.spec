@@ -4,7 +4,7 @@
 # _with_gcj		with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
 # _with_javac		with Java support by some javac
 #
-%define _with_java	%{?_with_gcj:1}%{!?_with_gcj:%{?_with_javac:1}%{!?_with_javac:0}}
+%define build_java	%{?_with_gcj:1}%{!?_with_gcj:%{?_with_javac:1}%{!?_with_javac:0}}
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(es):	Utilitarios para el programa de soporte a lenguas locales
@@ -263,7 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/xgettext.1*
 %{_mandir}/man3/*
 
-%if %{?_with_java:1}%{!?_with_java:0}
+%if %{build_java}
 %files java-devel
 %defattr(644,root,root,755)
 %doc intl-java/javadoc2
