@@ -66,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 make install \
 	prefix=$RPM_BUILD_ROOT/usr
 
-strip $RPM_BUILD_ROOT/usr/bin/* || :
+strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/* \
 	ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
@@ -85,7 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.gz
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 %{_infodir}/*info*.gz
 %{_datadir}/aclocal/*
 %{_datadir}/gettext
