@@ -13,7 +13,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.11.5
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -21,7 +21,7 @@ Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-aclocal.patch
 Patch3:		%{name}-killkillkill.patch
-Obsoletes:	gettext-base
+Patch4:		%{name}-pl.po-update.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{!?_without_java:%{!?_with_javac:BuildRequires: gcj >= 3.0}}
@@ -29,6 +29,7 @@ BuildRequires:	automake
 BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
+Obsoletes:	gettext-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -170,6 +171,7 @@ wersji.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
@@ -184,7 +186,7 @@ rm -f m4/libtool.m4 aclocal.m4 missing
 %{__make}
 
 %{?!_without_xemacs:cd misc}
-%{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}
+%{?!_without_xemacs:EMACS=/usr/bin/xemacs ./elisp-comp ./po-mode.el}
 
 %install
 rm -rf $RPM_BUILD_ROOT
