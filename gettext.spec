@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	9
+Release:	10
 Copyright:	GPL
 Group:		Development/Tools
 Group(pl):	Programowanie/Narzêdzia
@@ -52,6 +52,7 @@ uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
 %patch4 -p1
 
 %build
+autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--enable-shared \
@@ -66,15 +67,15 @@ make install \
 
 strip $RPM_BUILD_ROOT/usr/bin/* || :
 
-gzip -9nf $RPM_BUILD_ROOT/usr/info/* \
+gzip -9nf $RPM_BUILD_ROOT/usr/share/info/* \
 	ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 
 %post
-/sbin/install-info /usr/info/gettext.info.gz /etc/info-dir
+/sbin/install-info /usr/share/info/gettext.info.gz /etc/info-dir
 
 %preun
 if [ "$1" = 0 ]; then
-	/sbin/install-info --delete /usr/info/gettext.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/share/info/gettext.info.gz /etc/info-dir
 fi
 
 %clean
@@ -84,7 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) /usr/bin/*
-/usr/info/*info*.gz
+/usr/share/info/*info*.gz
 /usr/share/aclocal/*
 /usr/share/gettext
 %lang(da) /usr/share/locale/da/LC_MESSAGES/gettext.mo
