@@ -13,11 +13,11 @@ diff -Nru gettext-0.10.35/doc/gettext.texi gettext-0.10.35.new/doc/gettext.texi
 -* msgfmt: (gettext)msgfmt Invocation.           Make MO files out of PO files.
 -* msgmerge: (gettext)msgmerge Invocation.       Update two PO files into one.
 -* xgettext: (gettext)xgettext Invocation.       Extract strings into a PO file.
-+* Gettext: (gettext)			GNU gettext utilities
-+* gettextize: (gettext)gettextize	Prepare a package for gettext
-+* msgfmt: (gettext)msgfmt		Make MO files out of PO files
-+* msgmerge: (gettext)msgmerge		Update two PO files into one
-+* xgettext: (gettext)xgettext		Extract strings into a PO file
++* Gettext: (gettext).			GNU gettext utilities
++* gettextize: (gettext)gettextize.	Prepare a package for gettext
++* msgfmt: (gettext)msgfmt.		Make MO files out of PO files
++* msgmerge: (gettext)msgmerge.		Update two PO files into one
++* xgettext: (gettext)xgettext.		Extract strings into a PO file
  @end direntry
  
  @ifinfo
