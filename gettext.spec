@@ -23,7 +23,7 @@ Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
 Version:	0.14.1
-Release:	2
+Release:	3
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -377,7 +377,11 @@ rm -rf $RPM_BUILD_ROOT
 # libgettextpo is for other programs, not used by gettext tools themselves
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
 %attr(755,root,root) %{_libdir}/preloadable_libintl.so
-%attr(755,root,root) %{_libdir}/gettext
+%dir %{_libdir}/gettext
+%attr(755,root,root) %{_libdir}/gettext/hostname
+%attr(755,root,root) %{_libdir}/gettext/project-id
+%attr(755,root,root) %{_libdir}/gettext/urlget
+%attr(755,root,root) %{_libdir}/gettext/user-email
 %{_includedir}/gettext-po.h
 %{_aclocaldir}/*
 %{_infodir}/gettext*.info*
@@ -441,6 +445,8 @@ rm -rf $RPM_BUILD_ROOT
 %files java-devel
 %defattr(644,root,root,755)
 %doc gettext-runtime/intl-java/javadoc2
+%attr(755,root,root) %{_libdir}/gettext/gnu.gettext.DumpResource
+%attr(755,root,root) %{_libdir}/gettext/gnu.gettext.GetURL
 %{_datadir}/gettext/gettext.jar
 %endif
 
