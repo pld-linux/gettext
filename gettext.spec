@@ -95,7 +95,7 @@ Requires:	xemacs
 %description -n xemacs-po-mode-pkg
 Emacs PO-mode.
 
-%description -n xemacs-po-mode -l es
+%description -n xemacs-po-mode-pkg -l es
 Este paquete suministra las herramientas para ayudar en la edición de
 archivos PO, como documentado en el manual del usuario del GNU
 gettext. Mira este manual para la documentación de uso, que no se
