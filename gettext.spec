@@ -207,6 +207,9 @@ install lib/.libs/lib*.a src/.libs/lib*.a $RPM_BUILD_ROOT%{_libdir}
 # needed by uintmax.m4 (maybe automake is too old?)
 install m4/ulonglong.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
+# not supported by glibc 2.3.1
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@boldquot,en@quot}
+
 %find_lang %{name}
 
 %clean
