@@ -12,8 +12,8 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
-Version:	0.11.4
-Release:	2
+Version:	0.11.5
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
