@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	19
+Release:	20
 License:	GPL
 Group:		Development/Tools
 Group(fr):	Development/Outils
@@ -75,6 +75,7 @@ powerfull and simple method for internationalizing programs.
 %patch6 -p1
 
 %build
+cat m4/*.m4 >acinclude.m4
 aclocal
 libtoolize --copy --force
 automake
