@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	18
+Release:	19
 License:	GPL
 Group:		Development/Tools
 Group(fr):	Development/Outils
@@ -17,6 +17,8 @@ Patch2:		gettext-arm.patch
 Patch4:		gettext-Makefile.in.in.patach
 Patch5:		gettext-DESTDIR.patch
 Patch6:		gettext-hacks.patch
+BuildRequires:	automake
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,9 +58,6 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
 Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
-Requires:	m4
-Requires:	automake
-Requires:	autoconf
 Requires:	%{name} = %{version}
 
 %description devel
