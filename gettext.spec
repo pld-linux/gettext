@@ -54,8 +54,7 @@ uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
 
 %build
 autoconf
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target_platform} \
+%configure \
 	--enable-shared \
 	--with-included-gettext \
 	--prefix=%{_prefix}
@@ -64,7 +63,8 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 make install \
-	prefix=$RPM_BUILD_ROOT%{_prefix}
+	DESTDIR=$RPM_BUILD_ROOT \
+	SUBDIRS="doc lib src po m4 misc"
 
 strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
