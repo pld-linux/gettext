@@ -1,5 +1,6 @@
 #
 # Conditional build:
+# _without_libasprintf	without libasprintf C++ library
 # _without_xemacs	without po-mode for xemacs
 # _with_gcj		with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
 # _with_javac		with Java support by some javac
@@ -32,7 +33,7 @@ BuildRequires:	automake >= 1.7.5
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
 %{?_with_gcj:BuildRequires:	gcj < 3.0.4}
 %{?_with_javac:BuildRequires:	jdk >= 1.1}
-BuildRequires:	libstdc++-devel
+%{!?_without_libasprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
