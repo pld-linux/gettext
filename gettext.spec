@@ -22,16 +22,15 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.14.1
-Release:	4
+Version:	0.14.2
+Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	78f4b862510beb2e5d43223dd610e77d
+# Source0-md5:	197a6ed4c86d60379a0acdc2633b9a64
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-no_docs.patch
-Patch3:		%{name}-tempfile.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7.5
@@ -277,7 +276,6 @@ wersji.
 %patch1 -p1
 # patch2 not finished yet
 #%patch2 -p1
-%patch3	-p1
 
 %{__perl} -pi -e 's/ no / nb /' gettext-runtime/po/LINGUAS gettext-tools/po/LINGUAS
 mv -f gettext-runtime/po/{no,nb}.po
