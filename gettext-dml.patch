@@ -96,7 +96,7 @@ diff -ur gettext-0.10.35/src/xgettext.c gettext-0.10.35-dml/src/xgettext.c
 +		static lex_pos_ty pos = { __FILE__, __LINE__ };
 +
 +		/* Allocate a new message and append the message to the list.  */
-+		mp = message_alloc(xstrdup(msgid));
++		mp = message_alloc(xstrdup(msgid), NULL);
 +		/* Do not free msgid.  */
 +		message_list_append(ctx->mlp, mp);
 +
