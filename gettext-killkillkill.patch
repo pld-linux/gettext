@@ -1,0 +1,14 @@
+diff -ruN gettext-0.11.5dupa/misc/gettextize.in gettext-0.11.5/misc/gettextize.in
+--- gettext-0.11.5dupa/misc/gettextize.in	Thu Aug 15 22:27:23 2002
++++ gettext-0.11.5/misc/gettextize.in	Thu Aug 15 22:29:31 2002
+@@ -965,10 +965,6 @@
+     5) count="five paragraphs";;
+     *) count="$count paragraphs";;
+   esac
+-  echo "Press Return to acknowledge the previous $count."
+-  # Read from /dev/tty, not stdin, so that gettextize cannot be abused by
+-  # non-interactive tools.
+-  read dummy < /dev/tty
+ fi
+ 
+ exit 0
