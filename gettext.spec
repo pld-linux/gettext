@@ -13,7 +13,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.11.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -21,6 +21,7 @@ Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-dml.patch
 Patch3:		%{name}-aclocal.patch
+Patch4:		%{name}-killkillkill.patch
 Obsoletes:	gettext-base
 BuildRequires:	automake
 BuildRequires:	autoconf >= 2.52
@@ -148,6 +149,7 @@ para a documentação de uso, a qual não é incluída aqui.
 %patch1 -p1
 #%patch2 -p1	needs to be updated!
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
@@ -174,6 +176,9 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
 # static libs are removed in install-exec-clean
 install lib/.libs/lib*.a src/.libs/lib*.a $RPM_BUILD_ROOT%{_libdir}
+
+# needed by uintmax.m4 (maybe automake is too old?)
+install m4/ulonglong.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
 %find_lang %{name}
 
