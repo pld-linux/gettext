@@ -12,6 +12,7 @@ Release:	4
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
+# Source0-md5:	6a17767b47ffb45b4866cec9fb0a39b0
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-aclocal.patch
