@@ -19,6 +19,7 @@ Patch5:		gettext-DESTDIR.patch
 Patch6:		gettext-hacks.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
