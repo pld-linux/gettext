@@ -8,6 +8,7 @@ Version:	0.10.35
 Release:	9
 Copyright:	GPL
 Group:		Development/Tools
+Group(pl):	Programowanie/Narzêdzia
 Source:		ftp://alpha.gnu.org/gnu/%{name}-%{version}.tar.gz
 Patch0:		gettext-jbj.patch
 Patch1:		gettext-info.patch
@@ -52,7 +53,7 @@ uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--enable-shared \
 	--with-included-gettext \
 	--prefix=/usr
