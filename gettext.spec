@@ -58,6 +58,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Requires:	autoconf >= 2.50
+Requires:	iconv
 
 %description devel
 The gettext library provides an easy to use library and tools for
