@@ -91,10 +91,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_infodir}/*info*.gz
 %{_datadir}/aclocal/*
 %{_datadir}/gettext
-
-%changelog
-* Tue May 25 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.10.35-10]
-- based on RH spec,
-- rewrited by PLD team,
-- pl translation by Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>.
