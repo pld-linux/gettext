@@ -70,6 +70,8 @@ strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/* \
 	ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
+	
+%find_lang %{name}
 
 %post
 /sbin/install-info %{_infodir}/gettext.info.gz /etc/info-dir
@@ -82,24 +84,13 @@ fi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %{_infodir}/*info*.gz
 %{_datadir}/aclocal/*
 %{_datadir}/gettext
-%lang(da) %{_datadir}/locale/da/LC_MESSAGES/gettext.mo
-%lang(de) %{_datadir}/locale/de/LC_MESSAGES/gettext.mo
-%lang(es) %{_datadir}/locale/es/LC_MESSAGES/gettext.mo
-%lang(fr) %{_datadir}/locale/fr/LC_MESSAGES/gettext.mo
-%lang(nl) %{_datadir}/locale/nl/LC_MESSAGES/gettext.mo
-%lang(no) %{_datadir}/locale/no*/LC_MESSAGES/gettext.mo
-%lang(ko) %{_datadir}/locale/ko/LC_MESSAGES/gettext.mo
-%lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/gettext.mo
-%lang(pt) %{_datadir}/locale/pt/LC_MESSAGES/gettext.mo
-%lang(sl) %{_datadir}/locale/sl/LC_MESSAGES/gettext.mo
-%lang(sv) %{_datadir}/locale/sv/LC_MESSAGES/gettext.mo
 
 %changelog
 * Mon Apr 12 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
