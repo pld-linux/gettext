@@ -16,8 +16,7 @@ Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-dml.patch
-Patch3:		%{name}-ac250.patch
-Patch4:		%{name}-aclocal.patch
+Patch3:		%{name}-aclocal.patch
 BuildRequires:	automake
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	libtool >= 1.4
@@ -95,11 +94,10 @@ Tryb edycji PO dla emacsa.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%patch3 -p1
-%patch4 -p1
+%patch3 -p1
 
 %build
-rm m4/libtool.m4 aclocal.m4
+rm -f m4/libtool.m4 aclocal.m4
 libtoolize --copy --force
 #aclocal --acdir=m4 -I $(aclocal --print-ac-dir)
 aclocal -I m4
@@ -126,14 +124,14 @@ gzip -9nf AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 
 %find_lang %{name}
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post devel
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun devel
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
