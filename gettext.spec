@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	11
+Release:	12
 Copyright:	GPL
 Group:		Development/Tools
 Group(pl):	Programowanie/Narzêdzia
@@ -15,10 +15,6 @@ Patch1:		gettext-info.patch
 Patch2:		gettext-arm.patch
 Patch4:		gettext-Makefile.in.in.patach
 Patch5:		gettext-DESTDIR.patch
-Prereq:		/sbin/install-info
-Requires:	m4
-Requires:	automake
-Requires:	autoconf
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -45,6 +41,25 @@ lokalizacji (internationalizacji) programów.
 gettext, yerel dil desteðinde kullanýlan kataloglarý deðiþtirebilmek için,
 kolayca kullanýlabilen kitaplýk ve araçlarý saðlar. Bu, programlarý
 uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
+
+%package devel
+Summary:	Utilties for program national language support
+Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
+Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes.
+Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
+Summary(tr):	Desteði için kitaplýk ve araçlar
+Group:		Development/Tools
+Group(pl):	Programowanie/Narzêdzia
+Prereq:		/sbin/install-info
+Requires:	m4
+Requires:	automake
+Requires:	autoconf
+Requires:	%{name} = %{version}
+
+%description devel
+The gettext library provides an easy to use library and tools for creating,
+using, and modifying natural language catalogs. It is a powerfull and simple
+method for internationalizing programs.
 
 %prep
 %setup -q
@@ -77,10 +92,10 @@ gzip -9nf $RPM_BUILD_ROOT%{_infodir}/* \
 	
 %find_lang %{name}
 
-%post
+%post devel
 /sbin/install-info %{_infodir}/gettext.info.gz /etc/info-dir
 
-%preun
+%preun devel
 if [ "$1" = 0 ]; then
 	/sbin/install-info --delete %{_infodir}/gettext.info.gz /etc/info-dir
 fi
@@ -90,9 +105,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) /bin/*
+
+%files devel
+%defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) /bin/*
 %{_infodir}/*info*.gz
 %{_datadir}/aclocal/*
 %{_datadir}/gettext
