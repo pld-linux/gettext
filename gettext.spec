@@ -21,7 +21,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.13
-Release:	0.1
+Release:	0.2
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -41,6 +41,7 @@ BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
+Conflicts:	intltool < 0.28
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
