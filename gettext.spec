@@ -1,14 +1,15 @@
-Summary:     Libraries and utilties for program national language support
-Summary(de): Libraries und Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(fr): Librairies et  utilitaires pour le support de la langue nationnalepar les programmes.
-Summary(pl): Biblioteka i narzêdziaand utilties for program national language suppor
-Summary(tr): Yerel dil desteði için kitaplýk ve araçlar
+Summary:     Utilties for program national language support
+Summary(de): Utilities zum Programmieren von nationaler Sprachunterstützung
+Summary(fr): Utilitaires pour le support de la langue nationnalepar les programmes.
+Summary(pl): Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
+Summary(tr): Desteði için kitaplýk ve araçlar
 Name:        gettext
 Version:     0.10.35
-Release:     2
+Release:     3
 Copyright:   GPL
 Group:       Development/Tools
 Source:      ftp://alpha.gnu.org/gnu/%{name}-%{version}.tar.gz
+Patch0:      gettext-jbj.patch
 Prereq:      /sbin/install-info
 Requires:    m4, automake
 Buildroot:   /tmp/%{name}-%{version}-root
@@ -29,9 +30,9 @@ pour manipuler, créer, et modifier des catalogues de langage naturel. C'est
 une méthode simple et puissante pour internationnaliser les programmes.
 
 %description -l pl
-The gettext library provides an easy to use library and tools for creating,
-using, and modifying natural language catalogs. It is a powerfull and simple
-method for internationalizing programs.
+Pakiet gettext dostarcza narzêdzido tworzenia, u¿ywania i modyfikacji
+katalogów jêzyków narodowych. To jest prosta i wydajna metoda
+internationalizacji programów.
 
 %description -l tr
 gettext, yerel dil desteðinde kullanýlan kataloglarý deðiþtirebilmek için,
@@ -43,6 +44,7 @@ Summary:     .po files emacs helper
 Summary(pl): Makra do emacsa uatwiaj±ce edycje plików .po
 Group:       Applications/Editors/Emacs
 Requires:    emacs
+
 %description -n emacs-po_mode
 Package contain extension for helping GNU gettext lovers to edit PO files
 under emacs.
@@ -53,18 +55,20 @@ pod tym edytorem.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" ./configure \
-	--with-gnu-gettext \
+	--enable-shared \
+	--with-included-gettext \
 	--prefix=/usr
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install \
-	prefix=$RPM_BUILD_ROOT/usr \
-	localedir=$RPM_BUILD_ROOT/usr/share/locale
+	prefix=$RPM_BUILD_ROOT/usr
+
 gzip -9nf $RPM_BUILD_ROOT/usr/info/*
 strip $RPM_BUILD_ROOT/usr/bin/* || :
 
@@ -73,13 +77,14 @@ strip $RPM_BUILD_ROOT/usr/bin/* || :
 %doc ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 %attr(755, root, root) /usr/bin/*
 /usr/info/*info*.gz
+/usr/share/aclocal/*
+/usr/share/gettext
 %lang(da) /usr/share/locale/da/LC_MESSAGES/gettext.mo
 %lang(de) /usr/share/locale/de/LC_MESSAGES/gettext.mo
 %lang(es) /usr/share/locale/es/LC_MESSAGES/gettext.mo
 %lang(fr) /usr/share/locale/fr/LC_MESSAGES/gettext.mo
 %lang(nl) /usr/share/locale/nl/LC_MESSAGES/gettext.mo
-%lang(no) /usr/share/locale/no/LC_MESSAGES/gettext.mo
-%lang(no) /usr/share/locale/no@nynorsk/LC_MESSAGES/gettext.mo
+%lang(no) /usr/share/locale/no*/LC_MESSAGES/gettext.mo
 %lang(ko) /usr/share/locale/ko/LC_MESSAGES/gettext.mo
 %lang(pl) /usr/share/locale/pl/LC_MESSAGES/gettext.mo
 %lang(pt) /usr/share/locale/pt/LC_MESSAGES/gettext.mo
@@ -101,6 +106,15 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Sep 26 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
+- corrected pl translation.
+
+* Sun Sep 13 1998 Cristian Gafton <gafton@redhat.com>
+- include the aclocal support files.
+
+* Fri Sep  3 1998 Bill Nottingham <notting@redhat.com>
+- remove devel package (functionality is in glibc).
+
 * Sat Aug 22 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.10.35-1]
 - added missing %attr in %files for emacs-po_mode.
