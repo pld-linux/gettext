@@ -14,7 +14,8 @@ Patch1:		gettext-info.patch
 Patch2:		gettext-arm.patch
 Patch4:		gettext-Makefile.in.in.patach
 Prereq:		/sbin/install-info
-Requires:	m4, automake
+Requires:	m4
+Requires:	automake
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -79,9 +80,9 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc *.gz
-%attr(755, root, root) /usr/bin/*
+%attr(755,root,root) /usr/bin/*
 /usr/info/*info*.gz
 /usr/share/aclocal/*
 /usr/share/gettext
