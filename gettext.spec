@@ -1,4 +1,9 @@
-# _without_xemacs (--without xemacs)
+#
+# Conditional build:
+# _without_xemacs	without po-mode for xemacs
+# _without_java		without Java support (which requires gcj 3.x or javac)
+# _with_javac		use some javac instead of gcj 3.x
+#
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(es):	Utilitarios para el programa de soporte a lenguas locales.
@@ -7,18 +12,20 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
-Version:	0.10.40
-Release:	4
+Version:	0.11.5
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-aclocal.patch
-Patch3:		%{name}-acam.patch
+Patch3:		%{name}-killkillkill.patch
 Obsoletes:	gettext-base
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	autoconf >= 2.50
+%{!?_without_java:%{!?_with_javac:BuildRequires: gcj >= 3.0}}
+%{!?_without_java:%{?_with_javac:BuildRequires: jdk >= 1.1}}
 BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
@@ -71,7 +78,7 @@ Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programm
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{version}
 Requires:	autoconf >= 2.50
 Requires:	iconv
 
@@ -84,6 +91,31 @@ powerfull and simple method for internationalizing programs.
 Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
 lokalizacji (internationalizacji) programów.
+
+%package java-devel
+Summary:	Classes for Java programs internationalization
+Summary(pl):	Klasy do umiêdzynarodowiania programów w Javie
+Group:		Development/Tools
+Requires:	%{name}-devel = %{version}
+
+%description java-devel
+Classes for Java programs internationalization.
+
+%description java-devel -l pl
+Klasy do umiêdzynarodowiania programów w Javie.
+
+%package static
+Summary:	Static gettext utility libraries
+Summary(pl):	Statyczne biblioteki narzêdziowe gettext
+Group:		Development/Libraries
+
+%description static
+This package contains static versions of gettext utility libraries
+(libgettextlib and libgettextsrc).
+
+%description static -l pl
+Ten pakiet zawiera statyczne wersje bibliotek narzêdziowych gettext
+(libgettextlib i libgettextsrc).
 
 %package -n xemacs-po-mode-pkg
 Summary:	Xemacs PO-mode
@@ -110,6 +142,28 @@ Este pacote provê as ferramentas para ajudar na edição de arquivos PO,
 como documentado no manual do usuário do GNU gettext. Veja este manual
 para a documentação de uso, a qual não é incluída aqui.
 
+%package autopoint
+Summary:	gettextize replacement
+Summary(pl):	Zamiennik gettextize
+Group:		Development/Tools
+Requires:	%{name}-devel >= 0.10.35
+Requires:	cvs
+
+%description autopoint
+The `autopoint' program copies standard gettext infrastructure files
+into a source package.  It extracts from a macro call of the form
+`AM_GNU_GETTEXT_VERSION(VERSION)', found in the package's
+`configure.in' or `configure.ac' file, the gettext version used by the
+package, and copies the infrastructure files belonging to this version
+into the package.
+
+%description autopoint -l pl
+Program autopoint kopiuje standardowe pliki infrastruktury gettexta do
+pakietu ¼ród³owego. Wyci±ga u¿yt± wersjê gettexta z wywo³ania makra w
+postaci AM_GNU_GETTEXT_VERSION(VERSION) w pliku configure.in lub
+configure.ac i kopiuje do pakietu pliki infrastruktury nale¿±ce do tej
+wersji.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -120,7 +174,6 @@ para a documentação de uso, a qual não é incluída aqui.
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
 %{__libtoolize}
-#aclocal --acdir=m4 -I $(aclocal --print-ac-dir)
 %{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
@@ -139,10 +192,13 @@ install -d $RPM_BUILD_ROOT/bin
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/en@*quot
+mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
-gzip -9nf AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
+# static libs are removed in install-exec-clean
+install lib/.libs/lib*.a src/.libs/lib*.a $RPM_BUILD_ROOT%{_libdir}
+
+# needed by uintmax.m4 (maybe automake is too old?)
+install m4/ulonglong.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
 %find_lang %{name}
 
@@ -158,17 +214,70 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) /bin/*
+%{_mandir}/man1/gettext.1*
+%{_mandir}/man1/ngettext.1*
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 %attr(755,root,root) %{_bindir}/*
+%exclude  %{_bindir}/autopoint
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/gettext
 %{_infodir}/*info*
 %{_aclocaldir}/*
-%{_datadir}/gettext
+%dir %{_datadir}/gettext
+%{_datadir}/gettext/ABOUT-NLS
+%attr(755,root,root) %{_datadir}/gettext/config.rpath
+%{_datadir}/gettext/gettext.h
+%dir %{_datadir}/gettext/intl
+%{_datadir}/gettext/intl/[^c]*
+%attr(755,root,root) %{_datadir}/gettext/intl/config.charset
+%{_datadir}/gettext/msgunfmt.tcl
+%attr(755,root,root) %{_datadir}/gettext/mkinstalldirs
+%{_datadir}/gettext/po
+%dir %{_datadir}/gettext/projects
+%{_datadir}/gettext/projects/index
+%attr(755,root,root) %{_datadir}/gettext/projects/team-address
+%dir %{_datadir}/gettext/projects/GNOME
+%{_datadir}/gettext/projects/GNOME/teams.*
+%attr(755,root,root) %{_datadir}/gettext/projects/GNOME/team-address
+%attr(755,root,root) %{_datadir}/gettext/projects/GNOME/trigger
+%dir %{_datadir}/gettext/projects/KDE
+%{_datadir}/gettext/projects/KDE/teams.*
+%attr(755,root,root) %{_datadir}/gettext/projects/KDE/team-address
+%attr(755,root,root) %{_datadir}/gettext/projects/KDE/trigger
+%dir %{_datadir}/gettext/projects/TP
+%{_datadir}/gettext/projects/TP/teams.*
+%attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
+%attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
+%{_mandir}/man1/autopoint.1*
+%{_mandir}/man1/gettextize.1*
+%{_mandir}/man1/msg*.1*
+%{_mandir}/man1/xgettext.1*
 %{_mandir}/man3/*
 
-%{?!_without_xemacs:%files -n xemacs-po-mode-pkg}
-%{?!_without_xemacs:%defattr(644,root,root,755)}
-%{?!_without_xemacs:%dir %{_datadir}/xemacs-packages/lisp/po-mode}
-%{?!_without_xemacs:%{_datadir}/xemacs-packages/lisp/po-mode/*.elc}
+%if %{?_without_java:0}%{?!_without_java:1}
+%files java-devel
+%defattr(644,root,root,755)
+%doc intl-java/javadoc2
+%{_datadir}/gettext/gettext.jar
+%{_datadir}/gettext/libintl.jar
+%endif
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
+
+%if %{?_without_xemacs:0}%{?!_without_xemacs:1}
+%files -n xemacs-po-mode-pkg
+%defattr(644,root,root,755)
+%dir %{_datadir}/xemacs-packages/lisp/po-mode
+%{_datadir}/xemacs-packages/lisp/po-mode/*.elc
+%endif
+
+%files autopoint
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/autopoint
+%{_datadir}/gettext/archive.tar.gz
