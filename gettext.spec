@@ -68,15 +68,15 @@ make install \
 
 strip $RPM_BUILD_ROOT/usr/bin/* || :
 
-gzip -9nf $RPM_BUILD_ROOT/usr/share/info/* \
+gzip -9nf $RPM_BUILD_ROOT%{_infodir}/* \
 	ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 
 %post
-/sbin/install-info /usr/share/info/gettext.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/gettext.info.gz /etc/info-dir
 
 %preun
 if [ "$1" = 0 ]; then
-	/sbin/install-info --delete /usr/share/info/gettext.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/gettext.info.gz /etc/info-dir
 fi
 
 %clean
@@ -86,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) /usr/bin/*
-/usr/share/info/*info*.gz
+%{_infodir}/*info*.gz
 /usr/share/aclocal/*
 /usr/share/gettext
 %lang(da) /usr/share/locale/da/LC_MESSAGES/gettext.mo
