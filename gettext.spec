@@ -20,16 +20,17 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.13
-Release:	0.2
+Version:	0.13.1
+Release:	0.1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	318e266ca3a5d26946ce3684db5bf2cf
+# Source0-md5:	b3477289185e7781527345c14a4565de
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
-Patch3:		%{name}-no_docs.patch
+Patch3:		%{name}-am18.patch
+Patch4:		%{name}-no_docs.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1.7.5
@@ -273,8 +274,9 @@ wersji.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-# patch3 not finished yet
-#%patch3 -p1
+%patch3 -p1
+# patch4 not finished yet
+#%patch4 -p1
 
 %build
 %{__libtoolize}
@@ -299,6 +301,8 @@ cd ..
 %{__make}
 
 # msgfmt has been built, so now we can update pl.gmos
+%{__make} pl.gmo -C gettext-runtime/po \
+	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 %{__make} pl.gmo -C gettext-tools/po \
 	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 
