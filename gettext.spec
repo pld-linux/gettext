@@ -13,7 +13,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.11.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -142,6 +142,20 @@ Este pacote provê as ferramentas para ajudar na edição de arquivos PO,
 como documentado no manual do usuário do GNU gettext. Veja este manual
 para a documentação de uso, a qual não é incluída aqui.
 
+%package autopoint
+Summary:	gettextize replacement
+Group:		Development/Tools
+Requires:	%{name}-devel >= 0.10.35
+Requires:	cvs
+
+%description autopoint
+The `autopoint' program copies standard gettext infrastructure files
+into a source package.  It extracts from a macro call of the form
+`AM_GNU_GETTEXT_VERSION(VERSION)', found in the package's
+`configure.in' or `configure.ac' file, the gettext version used by the
+package, and copies the infrastructure files belonging to this version
+into the package.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -199,6 +213,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 %attr(755,root,root) %{_bindir}/*
+%exclude  %{_bindir}/autopoint
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %attr(755,root,root) %{_libdir}/gettext
@@ -206,7 +221,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_aclocaldir}/*
 %dir %{_datadir}/gettext
 %{_datadir}/gettext/ABOUT-NLS
-%{_datadir}/gettext/archive.tar.gz
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
 %{_datadir}/gettext/gettext.h
 %dir %{_datadir}/gettext/intl
@@ -236,17 +250,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/xgettext.1*
 %{_mandir}/man3/*
 
-%{!?_without_java:%files java-devel}
-%{!?_without_java:%defattr(644,root,root,755)}
-%{!?_without_java:%doc intl-java/javadoc2}
-%{!?_without_java:%{_datadir}/gettext/gettext.jar}
-%{!?_without_java:%{_datadir}/gettext/libintl.jar}
+%if %{?_without_java:0}%{?!_without_java:1}
+%files java-devel
+%defattr(644,root,root,755)
+%doc intl-java/javadoc2
+%{_datadir}/gettext/gettext.jar
+%{_datadir}/gettext/libintl.jar
+%endif
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
 
-%{!?_without_xemacs:%files -n xemacs-po-mode-pkg}
-%{!?_without_xemacs:%defattr(644,root,root,755)}
-%{!?_without_xemacs:%dir %{_datadir}/xemacs-packages/lisp/po-mode}
-%{!?_without_xemacs:%{_datadir}/xemacs-packages/lisp/po-mode/*.elc}
+%if %{?_without_xemacs:0}%{?!_without_xemacs:1}
+%files -n xemacs-po-mode-pkg
+%defattr(644,root,root,755)
+%dir %{_datadir}/xemacs-packages/lisp/po-mode
+%{_datadir}/xemacs-packages/lisp/po-mode/*.elc
+%endif
+
+%files autopoint
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/autopoint
+%{_datadir}/gettext/archive.tar.gz
