@@ -399,6 +399,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libgettext*.a
 
+%if %{?_without_asprintf:0}%{?!_without_asprintf:1}
 %files -n libasprintf
 %defattr(644,root,root,755)
 %doc gettext-runtime/libasprintf/{AUTHORS,ChangeLog,README}
@@ -414,6 +415,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n libasprintf-static
 %defattr(644,root,root,755)
 %{_libdir}/libasprintf.a
+%endif
 
 %if %{build_java}
 %files java
