@@ -38,6 +38,46 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +@set UPDATED 21 March 1999
  @set EDITION 0.10.35
  @set VERSION 0.10.35
+diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude configure --exclude build --exclude CVS --exclude config.* --exclude genpatch --exclude .cvsignore --exclude aclocal.m4 --exclude *.po --exclude *.gmo --exclude gettext-0.10.35-hacks.patch gettext.initial/po/gettext.pot gettext.hacked/po/gettext.pot
+--- gettext.initial/po/gettext.pot	Mon Feb 22 13:40:48 1999
++++ gettext.hacked/po/gettext.pot	Thu May  6 17:32:13 1999
+@@ -6,7 +6,7 @@
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: PACKAGE VERSION\n"
+-"POT-Creation-Date: 1998-04-30 22:50-0700\n"
++"POT-Creation-Date: 1999-05-05 18:24-0400\n"
+ "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+ "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+ "Language-Team: LANGUAGE <LL@li.org>\n"
+@@ -143,23 +143,23 @@
+ msgid "Report bugs to <bug-gnu-utils@gnu.org>.\n"
+ msgstr ""
+ 
+-#: src/message.c:784
++#: src/message.c:787
+ #, c-format
+ msgid ""
+ "internationalized messages should not contain the `\\%c' escape sequence"
+ msgstr ""
+ 
+-#: src/message.c:1115
++#: src/message.c:1268 src/message.c:1586
+ #, c-format
+ msgid "cannot create output file \"%s\""
+ msgstr ""
+ 
+-#: src/message.c:1122
++#: src/message.c:1275 src/message.c:1591
+ #, no-c-format
+ msgid "standard output"
+ msgstr ""
+ 
+-#: src/message.c:1182
++#: src/message.c:1335 src/message.c:1633
+ #, c-format
+ msgid "error while writing \"%s\" file"
+ msgstr ""
 diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude configure --exclude build --exclude CVS --exclude config.* --exclude genpatch --exclude .cvsignore --exclude aclocal.m4 --exclude *.po --exclude *.gmo --exclude gettext-0.10.35-hacks.patch gettext.initial/src/Makefile.am gettext.hacked/src/Makefile.am
 --- gettext.initial/src/Makefile.am	Mon Feb 22 13:40:48 1999
 +++ gettext.hacked/src/Makefile.am	Mon Feb 22 18:43:39 1999
@@ -327,8 +367,8 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
  #endif /* message.h */
 diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude configure --exclude build --exclude CVS --exclude config.* --exclude genpatch --exclude .cvsignore --exclude aclocal.m4 --exclude *.po --exclude *.gmo --exclude gettext-0.10.35-hacks.patch gettext.initial/src/msghack.c gettext.hacked/src/msghack.c
 --- gettext.initial/src/msghack.c	Wed Dec 31 19:00:00 1969
-+++ gettext.hacked/src/msghack.c	Wed Oct  6 17:59:54 1999
-@@ -0,0 +1,1482 @@
++++ gettext.hacked/src/msghack.c	Sun Feb 27 13:30:00 2000
+@@ -0,0 +1,1606 @@
 +/* GNU gettext - internationalization aids
 +   Copyright (C) 1995, 1996, 1997, 1998, 1999  Free Software Foundation, Inc.
 +   This file was written by Cristian Gafton <gafton@redhat.com>
@@ -430,6 +470,9 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +/* should  we merge in the fuzzy messages ? */
 +static int fuzzy = 0;
 +
++/* Do we want to generate useless merges? */
++static int useless = 0;
++
 +/* Possible split operations */
 +#define SPLIT_MSGID	1
 +#define SPLIT_MSGSTR	2
@@ -444,6 +487,9 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +#define SORT_BY_FILEPOS		1
 +#define SORT_BY_MSGID		2
 +static int sort_order = 0;
++
++/* Other flags */
++static int comments = 0;
 +
 +/* Prototypes for local functions.  */
 +static void usage PARAMS ((int __status));
@@ -462,17 +508,19 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +static void merge_comment_filepos PARAMS ((po_ty *__that, const char *__name,
 +					   int __line));
 +static message_list_ty *grammar PARAMS ((const char *__filename));
-+static message_list_ty *append PARAMS ((const char *__fn1, const char *__fn2));
++static message_list_ty *append PARAMS ((const char *__fn1, const char *__fn2, int diff_only));
 +static message_list_ty *merge PARAMS ((const char *__fn1, const char *__fn2));
 +static message_list_ty *invert PARAMS ((const char *__fn));
 +static message_list_ty *missing PARAMS ((const char *__fn));
 +static message_list_ty *un_duplicate PARAMS ((message_list_ty *dup_list));
 +static message_list_ty *empty PARAMS ((const char *__fn));
++static message_list_ty *dummy PARAMS ((const char *__fn));
 +static message_list_ty *split PARAMS ((const char *__fn, int __flag));
 +static message_list_ty *explode PARAMS ((const char *__fn, int __flag));
 +static message_list_ty *master PARAMS ((message_list_ty **prev, const char *__fn,
 +					const char *__master_id));
 +static message_ty *message_join PARAMS ((message_ty *def, message_ty *ref));
++static struct message_ty *new_header PARAMS((void));
 +
 +/* What kind of actions we can make */
 +#define ACTION_DO_SPLIT		1
@@ -485,6 +533,8 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +#define ACTION_DO_APPEND	8
 +#define ACTION_DO_UNDUP		9
 +#define ACTION_DO_MISSING      10
++#define ACTION_DO_DUMMY	       11
++#define ACTION_DO_DIFF	       12
 +
 +int main (argc, argv)
 +     int argc;
@@ -509,21 +559,49 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +	{ "sort-by-id",   no_argument, &sort_order, SORT_BY_MSGID }, 
 +
 +	/* flags */
-+	{ "fuzzy", no_argument, &fuzzy, 1},
-+	{ "force-po", no_argument, &force_po, 1 },
-+	{ "width", required_argument, NULL, 'w', },
-+	{ "output-file", required_argument, NULL, 'o' },
++	{ "fuzzy", 	 no_argument, 		&fuzzy,   1 },
++	{ "force-po", 	 no_argument, 		&force_po, 1 },
++	{ "width", 	 required_argument, 	NULL,    'w', },
++	{ "output-file", required_argument, 	NULL,    'o' },
++	{ "useless",     no_argument, 		&useless, 1 }, 
 +
-+	/* ACTIONS */
++	/*
++	 *  ACTIONS
++	 */
++	/* switch the msgid and the msgstr strings in a PO file */
 +	{ "invert",      no_argument, &do_action, ACTION_DO_INVERT },
++
++	/* fill the msgstr with the contents of msgid */
++	{ "dummy", 	 no_argument, &do_action, ACTION_DO_DUMMY },
++	
++	/* merge two files based on commin msgid. The msgid is stored as a comment */
 +	{ "merge",       no_argument, &do_action, ACTION_DO_MERGE }, 
++
++	/* strip out the msgstr creating a POT form a PO file */
 +	{ "empty",       no_argument, &do_action, ACTION_DO_EMPTY }, 
++
++	/* combine sevaral PO files into a "master" catalog */
 +	{ "master",      no_argument, &do_action, ACTION_DO_MASTER },
++
++	/* append entries from ref POT that do not exist in file PO */
 +	{ "append",      no_argument, &do_action, ACTION_DO_APPEND },
++
++	/* show only stuff from ref POT that does not exist in file PO */
++	{ "diff",        no_argument, &do_action, ACTION_DO_DIFF },
++
++	/* ommit comments for the 'append' and 'diff' */
++	{ "comments",    no_argument, 	&comments, 1 }, 
++
++	/* remove duplicates */
 +	{ "unduplicate", no_argument, &do_action, ACTION_DO_UNDUP },
++
++	/* output strings that need translation (fuzzies and untranslated */
 +	{ "missing", 	 no_argument, &do_action, ACTION_DO_MISSING },
 +
-+	/* info */
++	/* output strings that need translation (fuzzies and untranslated */
++	{ "missing", 	 no_argument, &do_action, ACTION_DO_MISSING },
++	
++	/* INFO */
 +	{ "help", no_argument, NULL, 'h' },
 +	{ "version", no_argument, NULL, 'V' },
 +
@@ -621,6 +699,10 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +	    /* we are asked to delete the msgstr text in a .po file */
 +	    result = empty (argv[optind]);
 +	    break;
++	case ACTION_DO_DUMMY:
++	    /* dummy out a POT file in a PO file (msgstr = msgid) */
++	    result = dummy (argv[optind]);
++	    break;
 +	case ACTION_DO_SPLIT:
 +	    /* we are asked to split the file into corresponding meta po files */
 +	    result = split(argv[optind], split_flag);
@@ -638,6 +720,7 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +	    }      
 +	    result = merge (argv[optind], argv[optind+1]);
 +	    break;
++	case ACTION_DO_DIFF:
 +	case ACTION_DO_APPEND:
 +	    /* append all (id2,str2) entries from second file to the first one
 +	    * provided that a id2 msgid is not already present there */
@@ -645,7 +728,7 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +		error (EXIT_SUCCESS, 0, _("exactly 2 input files required for append"));
 +		usage (EXIT_FAILURE);
 +	    }      
-+	    result = append (argv[optind], argv[optind+1]);
++	    result = append (argv[optind], argv[optind+1], do_action == ACTION_DO_DIFF);
 +	    break;
 +	case ACTION_DO_UNDUP:
 +	    /* read in the message catalog and try to colapse
@@ -741,10 +824,14 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +      --split-id	      split msgid from message catalg into meta catalog\n\
 +      --split-str	      split msgstr from message catalg into meta catalog\n\
 +      --merge		      merge file.po and ref.po based on the common msgid\n\
++      + --useless             also generate entries for unmatched pairs.\n\
 +      --master		      join any number of files in a master-formatted catalog\n\
 +      + --fuzzy               use the fuzzy entries when merging in PO files.\n\
 +      --empty		      empty the contents of the .po file, creating a .pot\n\
++      --dummy		      create a .po file from a .pot by doing msgstr = msgid\n\
 +      --append		      append entries from ref.po that don't exist in file.po\n\
++      --diff                  show what entries from ref.po don't exist in file.po\n\
++      + --comments            add comments from ref.po for existing entries. in file.po.\n\
 +      --explode-id	      generate a single meta msgid entry for each xref in file.po\n\
 +      --explode-str	      generate a single meta msgstr entry for each xref in file.po\n\
 +      --unduplicate	      colapse together duplicate message ids. (not working currently)\n\
@@ -1110,14 +1197,15 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +	       this merged entry to the output message list.  */
 +	    message_ty *mp = message_join (defmsg, refmsg);
 +
-+	    message_list_append (result, mp);
++	    if (mp != NULL)
++		message_list_append (result, mp);
 +
 +	    /* Remember that this message has been used, when we scan
 +	       later to see if anything was omitted.  */
 +	    defmsg->used = 1;
 +	    ++merged;
 +	    continue;
-+	} else {
++	} else if (useless) {
 +	    message_ty *mp;
 +	    const char *tmp;
 +	    if (verbosity_level > 1)
@@ -1138,18 +1226,19 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +    /* Look for messages in the definition file, which are not present
 +       in the reference file, indicating messages which defined but not
 +       used in the program.  */
-+    for (k = 0; k < def->nitems; ++k) {
-+	defmsg = def->item[k];
-+	if (defmsg->used)
-+	    continue;
++    if (useless)
++	for (k = 0; k < def->nitems; ++k) {
++	    defmsg = def->item[k];
++	    if (defmsg->used)
++		continue;
 +
-+	/* Remember the old translation although it is not used anymore.
-+	   But we mark it as obsolete.  */
-+	defmsg->obsolete = 1;
++	    /* Remember the old translation although it is not used anymore.
++	       But we mark it as obsolete.  */
++	    defmsg->obsolete = 1;
 +
-+	message_list_append (result, defmsg);
-+	++obsolete;
-+    }
++	    message_list_append (result, defmsg);
++	    ++obsolete;
++	}
 +
 +    /* Report some statistics.  */
 +    if (verbosity_level > 0)
@@ -1170,12 +1259,14 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 + * try to locate it in f1; if it is not there already we add it.
 + */
 +static message_list_ty *
-+append (fn1, fn2)
++append (fn1, fn2, diff_only)
 +     const char *fn1;			/* base file */
 +     const char *fn2;			/* more stuff found in here */
++     int diff_only;			/* do we want only the diffs? */
 +{
 +    message_list_ty *ml1;
 +    message_list_ty *ml2;
++    message_list_ty *result;
 +    size_t j;
 +    size_t added = 0;
 +    int initial;
@@ -1188,6 +1279,8 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +     * the xgettext program. */
 +    ml2 = grammar (fn2);
 +
++    result = message_list_alloc();
++    
 +    /* Every reference must be matched with its definition. */
 +    for (j = 0; j < ml2->nitems; ++j) {
 +	message_ty *oldmsg;
@@ -1205,24 +1298,27 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +	/* See if it is in the other file.  */
 +	oldmsg = message_list_search (ml1, newmsg->msgid);
 +	if (oldmsg == NULL) { /* not found, stick it in */
-+	    message_list_append (ml1, newmsg);
++	    message_list_append (result, newmsg);
 +	    newmsg->used = 1;
 +	    ++added;
 +	    continue;
 +	} 	
-+	/* else, if it is found, add the coments from it */
-+	if (newmsg->comment)
-+	    for (i = 0; i < newmsg->comment->nitems; ++i)
-+		message_comment_append (oldmsg, newmsg->comment->item[i]);
++
++	/* else, if it is found, add the coments from it if we want them */
++	if (comments != 0) {
++	    if (newmsg->comment)
++		for (i = 0; i < newmsg->comment->nitems; ++i)
++		    message_comment_append (oldmsg, newmsg->comment->item[i]);
 +	
-+	if (newmsg->comment_dot)
-+	    for (i = 0; i < newmsg->comment_dot->nitems; ++i)
-+		message_comment_dot_append (oldmsg, newmsg->comment_dot->item[i]);
++	    if (newmsg->comment_dot)
++		for (i = 0; i < newmsg->comment_dot->nitems; ++i)
++		    message_comment_dot_append (oldmsg, newmsg->comment_dot->item[i]);
 +	
-+	/* file position comments */
-+	for (i = 0; i < newmsg->filepos_count; ++i) {
-+	    lex_pos_ty *pp = &newmsg->filepos[i];
-+	    message_comment_filepos (oldmsg, pp->file_name, pp->line_number);
++	    /* file position comments */
++	    for (i = 0; i < newmsg->filepos_count; ++i) {
++		lex_pos_ty *pp = &newmsg->filepos[i];
++		message_comment_filepos (oldmsg, pp->file_name, pp->line_number);
++	    }
 +	}
 +	newmsg->used++;
 +    }
@@ -1236,7 +1332,17 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +    else if (verbosity_level > 0)
 +	fputs (_(" done.\n"), stderr);
 +
-+    /* get rid of the duplicate message ids */
++    /* do we want only the diffs? */
++    if (diff_only) {
++	return result;
++    }
++    
++    /* append the result to ml1 */
++    for (j = 0; j < result->nitems; ++j)
++	message_list_append(ml1, result->item[j]);
++
++    /* No need to free the result since message_list_alloc copies only the
++       references over */
 +    return ml1;
 +}
 +
@@ -1500,6 +1606,16 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +    /* here we should be looping over all domains */
 +    result->msgid = ref->variant[0].msgstr;
 +    
++    if (!useless) {
++	/* Trim down on crap translations */    
++	if (result->variant[0].msgstr == NULL)
++	    return NULL;
++	if (strlen(result->variant[0].msgstr) == 0)
++	    return NULL;
++	if (strcmp(result->msgid, result->variant[0].msgstr) == 0)
++	    return NULL;
++    }
++    	    
 +    /* Take the comments from the definition file.  There will be none at
 +     * all in the reference file, as it was generated by xgettext.
 +     */
@@ -1734,8 +1850,6 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +    return result;
 +}
 +
-+#define TM_YEAR_ORIGIN 1900
-+
 +static message_list_ty *
 +empty (fn)
 +    const char *fn; /* file name */
@@ -1759,7 +1873,71 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +    }
 +
 +    /* If we don't have a header, we should try to add one */
-+    if (!had_header) {
++    if (!had_header)
++	message_list_append (result, new_header());
++
++    /* time to add the rest */
++    for (j = 0; j < list->nitems; ++j) {
++	message_ty *crtmsg;
++    
++	crtmsg = list->item[j];
++	if (crtmsg->msgid[0] != '\0') {
++	    /* empty the translations */
++	    crtmsg->variant_count = 1;
++	    crtmsg->variant[0].msgstr = "";
++	}
++	crtmsg->used = 1;
++	message_list_append (result, crtmsg);
++    }
++    return result;
++}
++
++static message_list_ty *
++dummy (fn)
++    const char *fn; /* file name */
++{
++    message_list_ty *list;
++    size_t j;
++    int had_header = 0;
++    message_list_ty *result;
++
++    /* Read in the file */
++    list = grammar (fn);
++
++    result = message_list_alloc ();
++
++    /* Every reference must be matched with its definition. */
++    for (j = 0; j < list->nitems; ++j) {
++	if (list->item[j]->msgid[0] == '\0') {
++	    had_header++;
++	    break;
++	}
++    }
++
++    /* If we don't have a header, we should try to add one */
++    if (!had_header)
++	message_list_append (result, new_header());
++
++    /* time to add the rest */
++    for (j = 0; j < list->nitems; ++j) {
++	message_ty *crtmsg;
++    
++	crtmsg = list->item[j];
++	if (crtmsg->msgid[0] != '\0') {
++	    /* dummy translation */
++	    crtmsg->variant_count = 1;
++	    crtmsg->variant[0].msgstr = crtmsg->msgid;
++	}
++	crtmsg->used = 1;
++	message_list_append (result, crtmsg);
++    }
++    return result;
++}
++
++#define TM_YEAR_ORIGIN 1900
++static struct message_ty *
++new_header(void)
++{    
 +	time_t now;
 +	struct tm local_time;
 +	message_ty *mp;
@@ -1767,7 +1945,9 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +	static lex_pos_ty pos = { __FILE__, __LINE__, };
 +	
 +	mp = message_alloc ("");
-+
++	if (mp == NULL)
++	    return NULL;
++	
 +	message_comment_append (mp, "\
 +SOME DESCRIPTIVE TITLE.\n\
 +FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n");
@@ -1793,21 +1973,5 @@ diff -urN --exclude Makefile.in --exclude ltconfig --exclude ltmain.sh --exclude
 +	if (msgstr == NULL)
 +	    error(EXIT_FAILURE, errno, _("while preparing output"));
 +	message_variant_append (mp, MESSAGE_DOMAIN_DEFAULT, msgstr, &pos);
-+	message_list_append (result, mp);
-+    }
-+
-+    /* time to add the rest */
-+    for (j = 0; j < list->nitems; ++j) {
-+	message_ty *crtmsg;
-+    
-+	crtmsg = list->item[j];
-+	if (crtmsg->msgid[0] != '\0') {
-+	    /* empty the translations */
-+	    crtmsg->variant_count = 1;
-+	    crtmsg->variant[0].msgstr = "";
-+	}
-+	crtmsg->used = 1;
-+	message_list_append (result, crtmsg);
-+    }
-+    return result;
++	return mp;
 +}
