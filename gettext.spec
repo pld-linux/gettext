@@ -334,9 +334,6 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 install gettext-tools/lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
-# not supported by glibc up to 2.3.3
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@boldquot,en@quot}
-
 %find_lang %{name}-runtime
 %find_lang %{name}-tools
 
