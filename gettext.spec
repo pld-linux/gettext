@@ -125,8 +125,8 @@ License:	GPL
 Group:		Development/Tools
 Requires(post,postun):	/sbin/ldconfig
 Requires:	%{name} = %{version}-%{release}
-Requires:	autoconf >= 2.50
 Requires:	iconv
+Conflicts:	autoconf < 2.50
 
 %description devel
 The gettext library provides an easy to use library and tools for
