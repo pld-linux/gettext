@@ -13,7 +13,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.11.5
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -252,7 +252,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/projects/TP/teams.*
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
-%{_mandir}/man1/autopoint.1*
 %{_mandir}/man1/gettextize.1*
 %{_mandir}/man1/msg*.1*
 %{_mandir}/man1/xgettext.1*
@@ -281,3 +280,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/autopoint
 %{_datadir}/gettext/archive.tar.gz
+%{_mandir}/man1/autopoint.1*
