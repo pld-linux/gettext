@@ -55,7 +55,7 @@ uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
 %build
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
+./configure %{_target_platform} \
 	--enable-shared \
 	--with-included-gettext \
 	--prefix=%{_prefix}
