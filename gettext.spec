@@ -20,30 +20,32 @@ Patch6:		gettext-hacks.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The gettext library provides an easy to use library and tools for creating,
-using, and modifying natural language catalogs. It is a powerfull and
-simple method for internationalizing programs.
+The gettext library provides an easy to use library and tools for
+creating, using, and modifying natural language catalogs. It is a
+powerfull and simple method for internationalizing programs.
 
 %description -l de
-Die gettext-Library enthält eine einfach anzuwendende Library und Tools zum
-Erstellen, Verwenden und Ändern von natürlichsprachigen-Kataloge. Es ist
-ein einfaches und leistungsfähiges Verfahren zum Lokalisieren von
-Programmen.
+Die gettext-Library enthält eine einfach anzuwendende Library und
+Tools zum Erstellen, Verwenden und Ändern von
+natürlichsprachigen-Kataloge. Es ist ein einfaches und
+leistungsfähiges Verfahren zum Lokalisieren von Programmen.
 
 %description -l fr
-La librarie gettext fournit des outils et une librairie simple à utiliser
-pour manipuler, créer, et modifier des catalogues de langage naturel. C'est
-une méthode simple et puissante pour internationnaliser les programmes.
+La librarie gettext fournit des outils et une librairie simple à
+utiliser pour manipuler, créer, et modifier des catalogues de langage
+naturel. C'est une méthode simple et puissante pour internationnaliser
+les programmes.
 
 %description -l pl
 Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
-katalogów jêzyków narodowych. To jest prosta i wydajna metoda lokalizacji
-(internationalizacji) programów.
+katalogów jêzyków narodowych. To jest prosta i wydajna metoda
+lokalizacji (internationalizacji) programów.
 
 %description -l tr
-gettext, yerel dil desteðinde kullanýlan kataloglarý deðiþtirebilmek için,
-kolayca kullanýlabilen kitaplýk ve araçlarý saðlar. Bu, programlarý
-uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
+gettext, yerel dil desteðinde kullanýlan kataloglarý deðiþtirebilmek
+için, kolayca kullanýlabilen kitaplýk ve araçlarý saðlar. Bu,
+programlarý uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir
+yöntemdir.
 
 %package devel
 Summary:	Utilties for program national language support
@@ -60,9 +62,9 @@ Requires:	autoconf
 Requires:	%{name} = %{version}
 
 %description devel
-The gettext library provides an easy to use library and tools for creating,
-using, and modifying natural language catalogs. It is a powerfull and
-simple method for internationalizing programs.
+The gettext library provides an easy to use library and tools for
+creating, using, and modifying natural language catalogs. It is a
+powerfull and simple method for internationalizing programs.
 
 %prep
 %setup -q
