@@ -1,6 +1,6 @@
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes.
+Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
@@ -55,7 +55,7 @@ yöntemdir.
 %package devel
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes.
+Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
