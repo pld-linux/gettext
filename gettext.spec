@@ -122,8 +122,8 @@ rm -f m4/libtool.m4 aclocal.m4 missing
 libtoolize --copy --force
 #aclocal --acdir=m4 -I $(aclocal --print-ac-dir)
 aclocal -I m4
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 %configure \
 	%{?!_without_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
