@@ -1,4 +1,6 @@
 #
+# TODO: C# (pnet or mono must be chosen)
+#
 # Conditional build:
 %bcond_without	asprintf	# without libasprintf C++ library
 %bcond_without	xemacs		# without po-mode for xemacs
@@ -20,17 +22,15 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.13.1
+Version:	0.14
 Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	b3477289185e7781527345c14a4565de
+# Source0-md5:	e715be150bbe32439ae68fab32df0299
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
-Patch2:		%{name}-pl.po-update.patch
-Patch3:		%{name}-am18.patch
-Patch4:		%{name}-no_docs.patch
+Patch2:		%{name}-no_docs.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1.7.5
@@ -273,24 +273,25 @@ wersji.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-# patch4 not finished yet
-#%patch4 -p1
+# patch2 not finished yet
+#%patch2 -p1
 
 %build
+# it's m4_included somewhere
 install %{_datadir}/aclocal/libtool.m4 config/m4/libtool.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-cd gettext-runtime
-%{__libtoolize}
+cd autoconf-lib-link
+%{__aclocal} -I m4 -I ../config/m4
+%{__autoconf}
+%{__automake}
+cd ../gettext-runtime
 %{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4 -I ../config/m4
 %{__autoconf}
 %{__automake}
 cd ../gettext-tools
-%{__libtoolize}
 %{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../config/m4
 %{__autoconf}
 %{__automake}
@@ -298,6 +299,7 @@ cd ..
 %configure \
 	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
+	--disable-csharp \
 	--without-included-gettext
 %{__make}
 
@@ -325,7 +327,7 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 install gettext-tools/lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
-# not supported by glibc 2.3.1
+# not supported by glibc up to 2.3.3
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@boldquot,en@quot}
 
 %find_lang %{name}-runtime
