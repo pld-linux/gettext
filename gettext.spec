@@ -1,14 +1,14 @@
 #
 # Conditional build:
-# _without_libasprintf	without libasprintf C++ library
-# _without_xemacs	without po-mode for xemacs
-# _with_gcj		with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
-# _with_javac		with Java support by some javac
+%bcond_without	asprintf	# without libasprintf C++ library
+%bcond_without	xemacs		# without po-mode for xemacs
+%bcond_with	gcj		# with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
+%bcond_with	javac		# with Java support by some javac
 #
 
-%define _without_xemacs yes
+%undefine with_xemacs
 
-%define build_java	%{?_with_gcj:1}%{!?_with_gcj:%{?_with_javac:1}%{!?_with_javac:0}}
+%define build_java	%{?with_gcj:1}%{!?with_gcj:%{?with_javac:1}%{!?with_javac:0}}
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(es):	Utilitarios para el programa de soporte a lenguas locales
@@ -20,26 +20,26 @@ Summary(ru):	âÉÂÌÉÏÔÅËÉ É ÕÔÉÌÉÔÙ ÄÌÑ ÐÏÄÄÅÒÖËÉ ÎÁÃÉÏÎÁÌØÎÙÈ ÑÚÙËÏ×
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
-Version:	0.12.1
-Release:	1
+Version:	0.13
+Release:	0.1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
-# Source0-md5:	5d4bddd300072315e668247e5b7d5bdb
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
+# Source0-md5:	318e266ca3a5d26946ce3684db5bf2cf
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-aclocal.patch
-Patch2:		%{name}-killkillkill.patch
-Patch3:		%{name}-pl.po-update.patch
-Patch4:		%{name}-no_docs.patch
+#Patch1:		%{name}-aclocal.patch
+Patch1:		%{name}-killkillkill.patch
+Patch2:		%{name}-pl.po-update.patch
+Patch3:		%{name}-no_docs.patch
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1.7.5
-%{?_with_gcj:BuildRequires:	gcj >= 3.0}
-%{?_with_gcj:BuildRequires:	gcj < 3.0.4}
-%{?_with_javac:BuildRequires:	jdk >= 1.1}
-%{!?_without_libasprintf:BuildRequires:	libstdc++-devel}
+%{?with_gcj:BuildRequires:	gcj >= 3.0}
+%{?with_gcj:BuildRequires:	gcj < 3.0.4}
+%{?with_javac:BuildRequires:	jdk >= 1.1}
+%{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	texinfo
-%{?!_without_xemacs:BuildRequires:	xemacs}
+%{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -272,49 +272,46 @@ wersji.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-# patch4 not finished yet
-%patch4 -p1
+# patch3 not finished yet
+#%patch3 -p1
 
 %build
-rm -f aclocal.m4 missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
 cd gettext-runtime
-rm -f aclocal.m4 missing
 %{__libtoolize}
-%{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4
+%{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4 -I ../config/m4
 %{__autoconf}
 %{__automake}
 cd ../gettext-tools
-rm -f aclocal.m4 missing
 %{__libtoolize}
-%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4
+%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../config/m4
 %{__autoconf}
 %{__automake}
 cd ..
 %configure \
-	%{?!_without_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
+	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
 	--without-included-gettext
 %{__make}
 
 # msgfmt has been built, so now we can update pl.gmos
-%{__make} pl.gmo -C gettext-runtime/po \
-	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 %{__make} pl.gmo -C gettext-tools/po \
 	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 
-%{?!_without_xemacs:cd gettext-tools/misc}
-%{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}
+%if %{with xemacs}
+cd gettext-tools/misc
+EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/bin
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
@@ -351,6 +348,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) /bin/*
+%attr(755,root,root) %{_bindir}/envsubst
+%{_mandir}/man1/envsubst.1*
 %{_mandir}/man1/gettext.1*
 %{_mandir}/man1/ngettext.1*
 %dir %{_datadir}/gettext
@@ -360,6 +359,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README THANKS
 %attr(755,root,root) %{_bindir}/*
 %exclude %{_bindir}/autopoint
+%exclude %{_bindir}/envsubst
 %attr(755,root,root) %{_libdir}/libgettext*.so
 %{_libdir}/libgettext*.la
 # libgettextpo is for other programs, not used by gettext tools themselves
@@ -403,7 +403,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libgettext*.a
 
-%if %{?_without_asprintf:0}%{?!_without_asprintf:1}
+%if %{with asprintf}
 %files -n libasprintf
 %defattr(644,root,root,755)
 %doc gettext-runtime/libasprintf/{AUTHORS,ChangeLog,README}
@@ -432,7 +432,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/gettext.jar
 %endif
 
-%if %{?_without_xemacs:0}%{?!_without_xemacs:1}
+%if %{with xemacs}
 %files -n xemacs-po-mode-pkg
 %defattr(644,root,root,755)
 %dir %{_datadir}/xemacs-packages/lisp/po-mode
