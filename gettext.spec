@@ -16,18 +16,16 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.11.5
-Release:	6
+Version:	0.12
+Release:	0.1
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
-Patch0:		%{name}-jbj.patch
-Patch1:		%{name}-info.patch
-Patch2:		%{name}-aclocal.patch
-Patch3:		%{name}-killkillkill.patch
-Patch4:		%{name}-pl.po-update.patch
-Patch5:		%{name}-gettextize-fix.patch
-Patch6:		%{name}-no_docs.patch
+Patch0:		%{name}-info.patch
+Patch1:		%{name}-aclocal.patch
+Patch2:		%{name}-killkillkill.patch
+Patch3:		%{name}-pl.po-update.patch
+Patch4:		%{name}-no_docs.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.7.5
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
@@ -205,27 +203,39 @@ wersji.
 
 %prep
 %setup -q
-%patch0 -p1
+#%%patch0 -p1  - needs update
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%%patch3 -p1  - needs update
+# patch4 not finished yet
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
-rm -f m4/libtool.m4 aclocal.m4 missing
+rm -f aclocal.m4 missing
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+cd gettext-tools
+rm -f aclocal.m4 missing
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
+cd ../gettext-tools
+rm -f aclocal.m4 missing
+%{__libtoolize}
+%{__aclocal} -I m4 -I ../gettext-runtime/m4
+%{__autoconf}
+%{__automake}
+cd ..
 %configure \
 	%{?!_without_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
 	--without-included-gettext
 %{__make}
 
-%{?!_without_xemacs:cd misc}
+%{?!_without_xemacs:cd gettext-tools/misc}
 %{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}
 
 %install
@@ -237,15 +247,16 @@ install -d $RPM_BUILD_ROOT/bin
 mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
 # static libs are removed in install-exec-clean
-install lib/.libs/lib*.a src/.libs/lib*.a $RPM_BUILD_ROOT%{_libdir}
+install gettext-tools/lib/.libs/lib*.a gettext-tools/src/.libs/lib*.a $RPM_BUILD_ROOT%{_libdir}
 
 # needed by uintmax.m4 (maybe automake is too old?)
-install m4/ulonglong.m4 $RPM_BUILD_ROOT%{_aclocaldir}
+#install m4/ulonglong.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
 # not supported by glibc 2.3.1
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/{en@boldquot,en@quot}
 
-%find_lang %{name}
+%find_lang %{name}-runtime
+%find_lang %{name}-tools
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -256,15 +267,15 @@ rm -rf $RPM_BUILD_ROOT
 %postun devel
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%files -f %{name}.lang
+%files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) /bin/*
 %{_mandir}/man1/gettext.1*
 %{_mandir}/man1/ngettext.1*
 
-%files devel
+%files devel -f %{name}-tools.lang
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
+%doc AUTHORS ChangeLog NEWS README* THANKS
 %attr(755,root,root) %{_bindir}/*
 %exclude  %{_bindir}/autopoint
 %attr(755,root,root) %{_libdir}/lib*.so
