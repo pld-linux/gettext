@@ -34,7 +34,7 @@ Patch2:		%{name}-no_docs.patch
 Patch3:		%{name}-tempfile.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
-BuildRequires:	automake >= 1.7.5
+BuildRequires:	automake >= 1:1.7.5
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{?with_gcj:BuildRequires:	gcj < 3.0.4}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
