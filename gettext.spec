@@ -14,6 +14,7 @@ Patch0:		gettext-jbj.patch
 Patch1:		gettext-info.patch
 Patch2:		gettext-arm.patch
 Patch4:		gettext-Makefile.in.in.patach
+Patch5:		gettext-DESTDIR.patch
 Prereq:		/sbin/install-info
 Requires:	m4
 Requires:	automake
@@ -51,20 +52,19 @@ uluslararasýlaþtýrmak için sýkça baþvurulan, kuvvetli bir yöntemdir.
 %patch1 -p1
 %patch2 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 autoconf
 %configure \
 	--enable-shared \
-	--with-included-gettext \
-	--prefix=%{_prefix}
+	--with-included-gettext 
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	SUBDIRS="doc lib src po m4 misc"
+	DESTDIR=$RPM_BUILD_ROOT 
 
 strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
