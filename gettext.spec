@@ -279,6 +279,7 @@ wersji.
 #%patch4 -p1
 
 %build
+install %{_datadir}/aclocal/libtool.m4 config/m4/libtool.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
