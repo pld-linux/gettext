@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	10
+Release:	11
 Copyright:	GPL
 Group:		Development/Tools
 Group(pl):	Programowanie/Narzêdzia
@@ -63,10 +63,15 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
+install -d $RPM_BUILD_ROOT/bin
+
 make install \
 	DESTDIR=$RPM_BUILD_ROOT 
 
 strip $RPM_BUILD_ROOT%{_bindir}/* || :
+
+mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
 
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/* \
 	ABOUT-NLS AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
@@ -88,6 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) /bin/*
 %{_infodir}/*info*.gz
 %{_datadir}/aclocal/*
 %{_datadir}/gettext
