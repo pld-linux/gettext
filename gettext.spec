@@ -51,7 +51,6 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
 Group(pl):	Programowanie/Narzêdzia
-Prereq:		/usr/sbin/fix-info-dir
 Requires:	m4
 Requires:	automake
 Requires:	autoconf
@@ -96,10 +95,10 @@ gzip -9nf $RPM_BUILD_ROOT%{_infodir}/* \
 %find_lang %{name}
 
 %post devel
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun devel
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
