@@ -32,6 +32,7 @@ BuildRequires:	automake >= 1.7.5
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
 %{?_with_gcj:BuildRequires:	gcj < 3.0.4}
 %{?_with_javac:BuildRequires:	jdk >= 1.1}
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
@@ -132,6 +133,62 @@ Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
 lokalizacji (internationalizacji) programów.
 
+%package static
+Summary:	Static gettext utility libraries
+Summary(pl):	Statyczne biblioteki narzêdziowe gettext
+License:	GPL
+Group:		Development/Libraries
+
+%description static
+This package contains static versions of gettext utility libraries
+(libgettextlib, libgettextsrc and libgettextpo).
+
+%description static -l pl
+Ten pakiet zawiera statyczne wersje bibliotek narzêdziowych gettext
+(libgettextlib, libgettextsrc i libgettextpo).
+
+%package -n libasprintf
+Summary:	GNU libasprintf - automatic formatted output to strings in C++
+Summary(pl):	GNU libasprintf - automatyczne formatowanie wyj¶cia do ³añcuchów w C++
+License:	LGPL
+Group:		Libraries
+
+%description -n libasprintf
+This package makes the C formatted output routines (`fprintf' et al.)
+usable in C++ programs, for use with the `<string>' strings and the
+`<iostream>' streams.
+
+%description -n libasprintf -l pl
+Ten pakiet czyni funkcje C formatuj±ce wyj¶cie (fprintf i inne)
+u¿ywalnymi w programach w C++, z ³añcuchami <string> i strumieniami
+<iostream>.
+
+%package -n libasprintf-devel
+Summary:	Header file and documentation for libasprintf
+Summary(pl):	Plik nag³ówkowy i dokumentacja dla libasprintf
+License:	LGPL
+Group:		Development/Libraries
+Requires:	libasprintf = %{version}
+
+%description -n libasprintf-devel
+Header file and documentation for libasprintf.
+
+%description -n libasprintf-devel -l pl
+Plik nag³ówkowy i dokumentacja dla libasprintf.
+
+%package -n libasprintf-static
+Summary:	Static libasprintf library
+Summary(pl):	Statyczna biblioteka libasprintf
+License:	LGPL
+Group:		Development/Libraries
+Requires:	libasprintf-devel = %{version}
+
+%description -n libasprintf-static
+Static libasprintf library.
+
+%description -n libasprintf-static -l pl
+Statyczna biblioteka libasprintf.
+
 %package java
 Summary:	Runtime classes for Java programs internationalization
 Summary(pl):	Klasy do uruchamiania umiêdzynarodowionych programów w Javie
@@ -157,20 +214,6 @@ Development classes for Java programs internationalization.
 
 %description java-devel -l pl
 Klasy do umiêdzynarodowiania programów w Javie dla programistów.
-
-%package static
-Summary:	Static gettext utility libraries
-Summary(pl):	Statyczne biblioteki narzêdziowe gettext
-License:	GPL
-Group:		Development/Libraries
-
-%description static
-This package contains static versions of gettext utility libraries
-(libgettextlib and libgettextsrc).
-
-%description static -l pl
-Ten pakiet zawiera statyczne wersje bibliotek narzêdziowych gettext
-(libgettextlib i libgettextsrc).
 
 %package -n xemacs-po-mode-pkg
 Summary:	Xemacs PO-mode
@@ -287,6 +330,15 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
+%post	-n libasprintf -p /sbin/ldconfig
+%postun	-n libasprintf -p /sbin/ldconfig
+
+%post -n libasprintf-devel
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+
+%postun -n libasprintf-devel
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+
 %files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) /bin/*
@@ -301,14 +353,18 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_bindir}/autopoint
 %attr(755,root,root) %{_libdir}/libgettext*.so
 %{_libdir}/libgettext*.la
-# not used by gettext tools themselves
+# libgettextpo is for other programs, not used by gettext tools themselves
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
-# to be separated (C++)
-%attr(755,root,root) %{_libdir}/libasprintf.so.*.*.*
-%{_libdir}/libasprintf.la
+%attr(755,root,root) %{_libdir}/preloadable_libintl.so
 %attr(755,root,root) %{_libdir}/gettext
-%{_infodir}/gettext*.info*
+%{_includedir}/gettext-po.h
 %{_aclocaldir}/*
+%{_infodir}/gettext*.info*
+%{_mandir}/man1/gettextize.1*
+%{_mandir}/man1/msg*.1*
+%{_mandir}/man1/xgettext.1*
+%{_mandir}/man3/*
+
 %{_datadir}/gettext/ABOUT-NLS
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
 %{_datadir}/gettext/gettext.h
@@ -333,10 +389,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/projects/TP/teams.*
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
-%{_mandir}/man1/gettextize.1*
-%{_mandir}/man1/msg*.1*
-%{_mandir}/man1/xgettext.1*
-%{_mandir}/man3/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libgettext*.a
+
+%files -n libasprintf
+%defattr(644,root,root,755)
+%doc gettext-runtime/libasprintf/{AUTHORS,ChangeLog,README}
+%attr(755,root,root) %{_libdir}/libasprintf.so.*.*.*
+
+%files -n libasprintf-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libasprintf.so
+%{_libdir}/libasprintf.la
+%{_includedir}/autosprintf.h
+%{_infodir}/autosprintf.info*
+
+%files -n libasprintf-static
+%defattr(644,root,root,755)
+%{_libdir}/libasprintf.a
 
 %if %{build_java}
 %files java
@@ -348,12 +420,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc gettext-runtime/intl-java/javadoc2
 %{_datadir}/gettext/gettext.jar
 %endif
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/libgettext*.a
-# to be separated (C++)
-%{_libdir}/libasprintf.a
 
 %if %{?_without_xemacs:0}%{?!_without_xemacs:1}
 %files -n xemacs-po-mode-pkg
