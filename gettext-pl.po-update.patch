@@ -1,6 +1,6 @@
---- gettext-0.13/gettext-tools/po/pl.po.orig	Fri Nov 28 20:31:52 2003
-+++ gettext-0.13/gettext-tools/po/pl.po	Mon Dec  1 16:01:17 2003
-@@ -6,7 +6,7 @@
+--- gettext-0.13/gettext-tools/po/pl.po.orig	2003-11-28 20:31:52.000000000 +0100
++++ gettext-0.13/gettext-tools/po/pl.po	2003-12-01 19:51:05.531274648 +0100
+@@ -6,10 +6,10 @@
  #
  msgid ""
  msgstr ""
@@ -8,8 +8,17 @@
 +"Project-Id-Version: GNU gettext-tools 0.13\n"
  "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
  "POT-Creation-Date: 2003-11-28 20:31+0100\n"
- "PO-Revision-Date: 2003-11-22 20:05+0100\n"
-@@ -383,7 +383,7 @@
+-"PO-Revision-Date: 2003-11-22 20:05+0100\n"
++"PO-Revision-Date: 2003-12-01 18:15+0100\n"
+ "Last-Translator: Rafa³ Maszkowski <rzm@icm.edu.pl>\n"
+ "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+ "MIME-Version: 1.0\n"
+@@ -379,11 +379,11 @@
+ "In the directive number %u, parameter %u is of type '%s' but a parameter of "
+ "type '%s' is expected."
+ msgstr ""
+-"W dyrektywie numer %u parametr %u jest typu '%s' zamiast oczekiwanego '%s'"
++"W dyrektywie numer %u parametr %u jest typu '%s' zamiast oczekiwanego '%s'."
  
  # plural
  #: src/format-lisp.c:2389
@@ -18,15 +27,21 @@
  msgid ""
  "In the directive number %u, too many parameters are given; expected at most %"
  "u parameter."
-@@ -391,7 +391,7 @@
+@@ -391,11 +391,11 @@
  "In the directive number %u, too many parameters are given; expected at most %"
  "u parameters."
  msgstr[0] ""
 -"Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametrów"
-+"Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametru"
++"Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametru."
  msgstr[1] ""
- "Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametrów"
+-"Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametrów"
++"Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametrów."
  msgstr[2] ""
+-"Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametrów"
++"Za du¿o parametrów w dyrektywie numer %u, oczekiwano najwy¿ej %u parametrów."
+ 
+ #: src/format-lisp.c:2504
+ #, c-format
 @@ -3452,26 +3452,3 @@
  #: src/user-email.sh.in:397
  msgid "Please enter your email address."
