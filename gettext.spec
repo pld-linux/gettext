@@ -58,13 +58,13 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--enable-shared \
 	--with-included-gettext \
-	--prefix=/usr
+	--prefix=%{_prefix}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install \
-	prefix=$RPM_BUILD_ROOT/usr
+	prefix=$RPM_BUILD_ROOT%{_prefix}
 
 strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
@@ -93,48 +93,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext
 
 %changelog
-* Mon Apr 12 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [0.10.35-9]
-- standarized {un}registering info pages (added gettext-info.patch),
-- removed emacs-po_mode subpackage (it would be beter add po mode macros
-  directly in [x]emacs packages).
-
-* Sat Sep 26 1998 Arkadiusz Mi鄂iewicz <misiek@misiek.eu.org>
-- corrected pl translation.
-
-* Sun Sep 13 1998 Cristian Gafton <gafton@redhat.com>
-- include the aclocal support files.
-
-* Fri Sep  3 1998 Bill Nottingham <notting@redhat.com>
-- remove devel package (functionality is in glibc).
-
-* Sat Aug 22 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [0.10.35-1]
-- added missing %attr in %files for emacs-po_mode.
-
-* Fri May 15 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [0.10.35-1]
-- %%{version} macro instead %%{PACKAGE_VERSION},
-- added -q %setup parameter,
-- added using %%{name} and %%{version} macro in Buildroot,
-- removed Packager field from spec (if you want recompile package and
-  redistribute this package later put this in your private .rpmrc). 
-- added making emacsc-po_mode subpackage with emac extension for editing .po
-  files,
-- added %lang macros for %{_datadir}/locale/*/LC_MESSAGES/gettext.mo files,
-- added %defattr macro in %files (require rpm >= 2.4.99).
-
-* Mon Apr 27 1998 Prospector System <bugs@redhat.com>
-  [0.10-5]
-- translations modified for de, fr, tr
-
-* Sun Nov 02 1997 Cristian Gafton <gafton@redhat.com>
-- added info handling
-- added misc-patch (skip emacs-lisp modofications)
-
-* Sat Nov 01 1997 Erik Troan <ewt@redhat.com>
-- removed locale.aliases as we get it from glibc now
-- uses a buildroot
-
-* Mon Jun 02 1997 Erik Troan <ewt@redhat.com>
-- Built against glibc
+* Tue May 25 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [0.10.35-10]
+- based on RH spec,
+- rewrited by PLD team,
+- pl translation by Arkadiusz Mi鄂iewicz <misiek@misiek.eu.org>.
