@@ -6,10 +6,10 @@
 #
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(es):	Utilitarios para el programa de soporte a lenguas locales.
+Summary(es):	Utilitarios para el programa de soporte a lenguas locales
 Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
-Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
+Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.11.5
