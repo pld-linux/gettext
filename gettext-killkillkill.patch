@@ -1,5 +1,6 @@
---- gettext-0.11.4/misc/gettextize.in.orig	Tue Jul 23 19:35:14 2002
-+++ gettext-0.11.4/misc/gettextize.in	Wed Jul 31 19:49:46 2002
+diff -ruN gettext-0.11.5dupa/misc/gettextize.in gettext-0.11.5/misc/gettextize.in
+--- gettext-0.11.5dupa/misc/gettextize.in	Thu Aug 15 22:27:23 2002
++++ gettext-0.11.5/misc/gettextize.in	Thu Aug 15 22:29:31 2002
 @@ -965,10 +965,6 @@
      5) count="five paragraphs";;
      *) count="$count paragraphs";;
@@ -7,7 +8,7 @@
 -  echo "Press Return to acknowledge the previous $count."
 -  # Read from /dev/tty, not stdin, so that gettextize cannot be abused by
 -  # non-interactive tools.
--  read < /dev/tty
+-  read dummy < /dev/tty
  fi
  
  exit 0
