@@ -1,4 +1,9 @@
-# _without_xemacs (--without xemacs)
+#
+# Conditional build:
+# _without_xemacs	without po-mode for xemacs
+# _without_java		without Java support (which requires gcj 3.x or javac)
+# _with_javac		use some javac instead of gcj 3.x
+#
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(es):	Utilitarios para el programa de soporte a lenguas locales.
@@ -7,8 +12,8 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
-Version:	0.10.40
-Release:	2
+Version:	0.11.2
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -19,6 +24,8 @@ Patch3:		%{name}-aclocal.patch
 Obsoletes:	gettext-base
 BuildRequires:	automake
 BuildRequires:	autoconf >= 2.50
+%{!?_without_java:%{!?_with_javac:BuildRequires: gcj >= 3.0}}
+%{!?_without_java:%{?_with_javac:BuildRequires: jdk >= 1.1}}
 BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
@@ -71,7 +78,7 @@ Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programm
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{version}
 Requires:	autoconf >= 2.50
 Requires:	iconv
 
@@ -84,6 +91,31 @@ powerfull and simple method for internationalizing programs.
 Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
 lokalizacji (internationalizacji) programów.
+
+%package java-devel
+Summary:	Classes for Java programs internationalization
+Summary(pl):	Klasy do umiêdzynarodowiania programów w Javie
+Group:		Development/Tools
+Requires:	%{name}-devel = %{version}
+
+%description java-devel
+Classes for Java programs internationalization.
+
+%description java-devel -l pl
+Klasy do umiêdzynarodowiania programów w Javie.
+
+%package static
+Summary:	Static gettext utility libraries
+Summary(pl):	Statyczne biblioteki narzêdziowe gettext
+Group:		Development/Libraries
+
+%description static
+This package contains static versions of gettext utility libraries
+(libgettextlib and libgettextsrc).
+
+%description static -l pl
+Ten pakiet zawiera statyczne wersje bibliotek narzêdziowych gettext
+(libgettextlib i libgettextsrc).
 
 %package -n xemacs-po-mode-pkg
 Summary:	Xemacs PO-mode
@@ -114,13 +146,12 @@ para a documentação de uso, a qual não é incluída aqui.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1	needs to be updated!
 %patch3 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
-libtoolize --copy --force
-#aclocal --acdir=m4 -I $(aclocal --print-ac-dir)
+%{__libtoolize}
 aclocal -I m4
 %{__autoconf}
 %{__automake}
@@ -129,6 +160,9 @@ aclocal -I m4
 	--enable-nls \
 	--without-included-gettext
 %{__make}
+
+sed -e '/relink_command.*/d' src/libgettextsrc.la > src/libgettextsrc.la.tmp
+mv -f src/libgettextsrc.la.tmp src/libgettextsrc.la
 
 %{?!_without_xemacs:cd misc}
 %{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}
@@ -139,9 +173,7 @@ install -d $RPM_BUILD_ROOT/bin
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
-
-gzip -9nf AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
+mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
 %find_lang %{name}
 
@@ -157,17 +189,57 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) /bin/*
+%{_mandir}/man1/gettext.1*
+%{_mandir}/man1/ngettext.1*
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS BUGS ChangeLog DISCLAIM NEWS README* THANKS TODO
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/gettext
 %{_infodir}/*info*
 %{_aclocaldir}/*
-%{_datadir}/gettext
+%dir %{_datadir}/gettext
+%{_datadir}/gettext/ABOUT-NLS
+%{_datadir}/gettext/gettext.h
+%{_datadir}/gettext/msgunfmt.tcl
+%attr(755,root,root) %{_datadir}/gettext/config.rpath
+%dir %{_datadir}/gettext/intl
+%{_datadir}/gettext/intl/[^c]*
+%attr(755,root,root) %{_datadir}/gettext/intl/config.charset
+%{_datadir}/gettext/po
+%dir %{_datadir}/gettext/projects
+%{_datadir}/gettext/projects/index
+%attr(755,root,root) %{_datadir}/gettext/projects/team-address
+%dir %{_datadir}/gettext/projects/GNOME
+%{_datadir}/gettext/projects/GNOME/teams.*
+%attr(755,root,root) %{_datadir}/gettext/projects/GNOME/team-address
+%attr(755,root,root) %{_datadir}/gettext/projects/GNOME/trigger
+%dir %{_datadir}/gettext/projects/KDE
+%{_datadir}/gettext/projects/KDE/teams.*
+%attr(755,root,root) %{_datadir}/gettext/projects/KDE/team-address
+%attr(755,root,root) %{_datadir}/gettext/projects/KDE/trigger
+%dir %{_datadir}/gettext/projects/TP
+%{_datadir}/gettext/projects/TP/teams.*
+%attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
+%attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
+%{_mandir}/man1/msg*.1*
+%{_mandir}/man1/xgettext.1*
 %{_mandir}/man3/*
 
-%{?!_without_xemacs:%files -n xemacs-po-mode-pkg}
-%{?!_without_xemacs:%defattr(644,root,root,755)}
-%{?!_without_xemacs:%dir %{_datadir}/xemacs-packages/lisp/po-mode}
-%{?!_without_xemacs:%{_datadir}/xemacs-packages/lisp/po-mode/*.elc}
+%{!?_without_java:%files java-devel}
+%{!?_without_java:%defattr(644,root,root,755)}
+%{!?_without_java:%doc intl-java/javadoc2}
+%{!?_without_java:%{_datadir}/gettext/gettext.jar}
+%{!?_without_java:%{_datadir}/gettext/libintl.jar}
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
+
+%{!?_without_xemacs:%files -n xemacs-po-mode-pkg}
+%{!?_without_xemacs:%defattr(644,root,root,755)}
+%{!?_without_xemacs:%dir %{_datadir}/xemacs-packages/lisp/po-mode}
+%{!?_without_xemacs:%{_datadir}/xemacs-packages/lisp/po-mode/*.elc}
