@@ -1,0 +1,49 @@
+diff -Nru gettext-0.10.35/po/Makefile.in.in gettext-0.10.35.new/po/Makefile.in.in
+--- gettext-0.10.35/po/Makefile.in.in	Wed Apr 29 03:53:09 1998
++++ gettext-0.10.35.new/po/Makefile.in.in	Fri Apr  9 20:51:20 1999
+@@ -47,7 +47,7 @@
+ POFILES = @POFILES@
+ GMOFILES = @GMOFILES@
+ DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(PACKAGE).pot \
+-stamp-cat-id $(POFILES) $(GMOFILES) $(SOURCES)
++stamp-cat-id $(POFILES) $(SOURCES)
+ 
+ POTFILES = \
+ 
+@@ -111,9 +111,9 @@
+ install-data-no: all
+ install-data-yes: all
+ 	if test -r "$(MKINSTALLDIRS)"; then \
+-	  $(MKINSTALLDIRS) $(datadir); \
++	  $(MKINSTALLDIRS) $(DESTDIR)$(datadir); \
+ 	else \
+-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(datadir); \
++	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(datadir); \
+ 	fi
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+@@ -123,7 +123,7 @@
+ 	    *)     destdir=$(localedir);; \
+ 	  esac; \
+ 	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
+-	  dir=$$destdir/$$lang/LC_MESSAGES; \
++	  dir=$(DESTDIR)$$destdir/$$lang/LC_MESSAGES; \
+ 	  if test -r "$(MKINSTALLDIRS)"; then \
+ 	    $(MKINSTALLDIRS) $$dir; \
+ 	  else \
+@@ -153,12 +153,12 @@
+ 	done
+ 	if test "$(PACKAGE)" = "gettext"; then \
+ 	  if test -r "$(MKINSTALLDIRS)"; then \
+-	    $(MKINSTALLDIRS) $(gettextsrcdir); \
++	    $(MKINSTALLDIRS) $(DESTDIR)$(gettextsrcdir); \
+ 	  else \
+-	    $(SHELL) $(top_srcdir)/mkinstalldirs $(gettextsrcdir); \
++	    $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(gettextsrcdir); \
+ 	  fi; \
+ 	  $(INSTALL_DATA) $(srcdir)/Makefile.in.in \
+-			  $(gettextsrcdir)/Makefile.in.in; \
++			  $(DESTDIR)$(gettextsrcdir)/Makefile.in.in; \
+ 	else \
+ 	  : ; \
+ 	fi
