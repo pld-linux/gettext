@@ -84,7 +84,7 @@ LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared \
 	--with-included-gettext 
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
