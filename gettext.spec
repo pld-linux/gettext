@@ -136,7 +136,7 @@ powerfull and simple method for internationalizing programs.
 %description devel -l pl
 Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
 katalogów jêzyków narodowych. To jest prosta i wydajna metoda
-lokalizacji (internationalizacji) programów.
+lokalizacji (internacjonalizacji) programów.
 
 %package static
 Summary:	Static gettext utility libraries
