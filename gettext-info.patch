@@ -1,7 +1,7 @@
-diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
---- gettext-0.10.36/doc/gettext.texi	Thu Mar 29 17:51:51 2001
-+++ gettext-0.10.36.new/doc/gettext.texi	Wed Apr  4 01:11:29 2001
-@@ -7,13 +7,13 @@
+diff -Nur gettext-0.11.2.orig/doc/gettext.texi gettext-0.11.2/doc/gettext.texi
+--- gettext-0.11.2.orig/doc/gettext.texi	Mon Apr 22 20:26:53 2002
++++ gettext-0.11.2/doc/gettext.texi	Thu May 16 19:53:42 2002
+@@ -31,13 +31,13 @@
  
  @include version.texi
  
@@ -13,47 +13,78 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
 -* msgfmt: (gettext)msgfmt Invocation.           Make MO files out of PO files.
 -* msgmerge: (gettext)msgmerge Invocation.       Update two PO files into one.
 -* xgettext: (gettext)xgettext Invocation.       Extract strings into a PO file.
-+* Gettext: (gettext).			GNU gettext utilities
-+* gettextize: (gettext)gettextize.	Prepare a package for gettext
-+* msgfmt: (gettext)msgfmt.		Make MO files out of PO files
-+* msgmerge: (gettext)msgmerge.		Update two PO files into one
-+* xgettext: (gettext)xgettext.		Extract strings into a PO file
++* Gettext: (gettext).			GNU gettext utilities.
++* gettextize: (gettext)gettextize.	Prepare a package for gettext.
++* msgfmt: (gettext)msgfmt.		Make MO files out of PO files.
++* msgmerge: (gettext)msgmerge.		Update two PO files into one.
++* xgettext: (gettext)xgettext.		Extract strings into a PO file.
  @end direntry
  
  @ifinfo
-@@ -120,11 +120,11 @@
+@@ -156,16 +156,16 @@
  
  Making the PO Template File
  
 -* xgettext Invocation::         Invoking the @code{xgettext} Program
-+* xgettext::			Invoking the @code{xgettext} Program
++* xgettext::                    Invoking the @code{xgettext} Program
+ 
+ Creating a New PO File
+ 
+-* msginit Invocation::          Invoking the @code{msginit} Program
++* msginit::                     Invoking the @code{msginit} Program
+ * Header Entry::                Filling in the Header Entry
  
  Updating Existing PO Files
  
 -* msgmerge Invocation::         Invoking the @code{msgmerge} Program
-+* msgmerge::			Invoking the @code{msgmerge} Program
++* msgmerge::                    Invoking the @code{msgmerge} Program
  * Translated Entries::          Translated Entries
  * Fuzzy Entries::               Fuzzy Entries
  * Untranslated Entries::        Untranslated Entries
-@@ -138,7 +138,7 @@
+@@ -184,21 +184,21 @@
+ 
+ Manipulating PO Files
+ 
+-* msgcat Invocation::           Invoking the @code{msgcat} Program
+-* msgconv Invocation::          Invoking the @code{msgconv} Program
+-* msggrep Invocation::          Invoking the @code{msggrep} Program
+-* msgfilter Invocation::        Invoking the @code{msgfilter} Program
+-* msguniq Invocation::          Invoking the @code{msguniq} Program
+-* msgcomm Invocation::          Invoking the @code{msgcomm} Program
+-* msgcmp Invocation::           Invoking the @code{msgcmp} Program
+-* msgattrib Invocation::        Invoking the @code{msgattrib} Program
+-* msgen Invocation::            Invoking the @code{msgen} Program
+-* msgexec Invocation::          Invoking the @code{msgexec} Program
++* msgcat::                      Invoking the @code{msgcat} Program
++* msgconv::                     Invoking the @code{msgconv} Program
++* msggrep::                     Invoking the @code{msggrep} Program
++* msgfilter::                   Invoking the @code{msgfilter} Program
++* msguniq::                     Invoking the @code{msguniq} Program
++* msgcomm::                     Invoking the @code{msgcomm} Program
++* msgcmp::                      Invoking the @code{msgcmp} Program
++* msgattrib::                   Invoking the @code{msgattrib} Program
++* msgen::                       Invoking the @code{msgen} Program
++* msgexec::                     Invoking the @code{msgexec} Program
  
  Producing Binary MO Files
  
 -* msgfmt Invocation::           Invoking the @code{msgfmt} Program
-+* msgfmt::			Invoking the @code{msgfmt} Program
+-* msgunfmt Invocation::         Invoking the @code{msgunfmt} Program
++* msgfmt::                      Invoking the @code{msgfmt} Program
++* msgunfmt::                    Invoking the @code{msgunfmt} Program
  * MO Files::                    The Format of GNU MO Files
  
  The User's View
-@@ -201,7 +201,7 @@
+@@ -261,7 +261,7 @@
  
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
 -* gettextize Invocation::       Invoking the @code{gettextize} Program
-+* gettextize::			Invoking the @code{gettextize} Program
++* gettextize::                  Invoking the @code{gettextize} Program
  * Adjusting Files::             Files You Must Create or Alter
+ * autoconf macros::             Autoconf macros for use in @file{configure.in}
  
- Files You Must Create or Alter
-@@ -649,7 +649,7 @@
+@@ -809,7 +809,7 @@
  exactly where in C sources each string is used.  All translations
  are set to empty.  The letter @kbd{t} in @file{.pot} marks this as
  a Template PO file, not yet oriented towards any particular language.
@@ -62,7 +93,7 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
  @code{xgettext} program.  If you are @emph{really} lazy, you might
  be interested at working a lot more right away, and preparing the
  whole distribution setup (@pxref{Maintainers}).  By doing so, you
-@@ -725,7 +725,7 @@
+@@ -886,7 +886,7 @@
  which are no longer used in the program sources (@pxref{Obsolete
  Entries}).  It finally discovers new strings and inserts them in
  the resulting PO file as untranslated entries (@pxref{Untranslated
@@ -71,20 +102,18 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
  @code{msgmerge} really does.
  
  Whatever route or means taken, the goal is to obtain an updated
-@@ -751,9 +751,9 @@
+@@ -910,8 +910,8 @@
  Once the PO file is complete and dependable, the @code{msgfmt} program
  is used for turning the PO file into a machine-oriented format, which
  may yield efficient retrieval of translations by the programs of the
 -package, whenever needed at runtime (@pxref{MO Files}).  @xref{msgfmt
--Invocation}, for more information about all modalities of execution
--for the @code{msgfmt} program.
+-Invocation}, for more information about all modes of execution
 +package, whenever needed at runtime (@pxref{MO Files}).  @xref{msgfmt},
-+for more information about all modalities of execution for the @code{msgfmt}
-+program.
++for more information about all modes of execution
+ for the @code{msgfmt} program.
  
  Finally, the modified and marked C sources are compiled and linked
- with the GNU @code{gettext} library, usually through the operation of
-@@ -908,7 +908,7 @@
+@@ -1078,7 +1078,7 @@
  
  In case the @kbd{c-format} flag is given for a string the @code{msgfmt}
  does some more tests to check to validity of the translation.
@@ -93,7 +122,7 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
  
  @end table
  
-@@ -1726,7 +1726,7 @@
+@@ -2208,7 +2208,7 @@
  
  If a string is marked with @kbd{c-format} and this is not correct the
  user can find out who is responsible for the decision.  See
@@ -102,7 +131,7 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
  used for solving this problem.
  
  @node Special cases,  , c-format, Sources
-@@ -1757,7 +1757,7 @@
+@@ -2240,7 +2240,7 @@
  While it is no problem to mark the string @code{"a default message"} it
  is not possible to mark the string initializers for @code{messages}.
  What is to be done?  We have to fulfill two tasks.  First we have to mark the
@@ -111,7 +140,7 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
  can find them, and second we have to translate the string at runtime
  before printing them.
  
-@@ -1787,8 +1787,7 @@
+@@ -2270,8 +2270,7 @@
  
  Please convince yourself that the string which is written by
  @code{fputs} is translated in any case.  How to get @code{xgettext} know
@@ -121,88 +150,195 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
  
  The above is of course not the only solution.  You could also come along
  with the following one:
-@@ -1833,10 +1832,10 @@
+@@ -2315,10 +2314,10 @@
  @c FIXME: Rewrite.
  
  @menu
 -* xgettext Invocation::         Invoking the @code{xgettext} Program
-+* xgettext::			Invoking the @code{xgettext} Program
++* xgettext::                    Invoking the @code{xgettext} Program
  @end menu
  
 -@node xgettext Invocation,  , Template, Template
 +@node xgettext,  , Template, Template
  @section Invoking the @code{xgettext} Program
  
- @c FIXME: Rewrite.
-@@ -2119,7 +2118,7 @@
+ @include xgettext.texi
+@@ -2347,16 +2346,16 @@
+ the header entry of this file.
+ 
+ @menu
+-* msginit Invocation::          Invoking the @code{msginit} Program
++* msginit::                     Invoking the @code{msginit} Program
+ * Header Entry::                Filling in the Header Entry
+ @end menu
+ 
+-@node msginit Invocation, Header Entry, Creating, Creating
++@node msginit, Header Entry, Creating, Creating
+ @section Invoking the @code{msginit} Program
+ 
+ @include msginit.texi
+ 
+-@node Header Entry,  , msginit Invocation, Creating
++@node Header Entry,  , msginit, Creating
+ @section Filling in the Header Entry
+ @cindex header entry of a PO file
+ 
+@@ -2507,7 +2506,7 @@
  @c FIXME: Rewrite.
  
  @menu
 -* msgmerge Invocation::         Invoking the @code{msgmerge} Program
-+* msgmerge::			Invoking the @code{msgmerge} Program
++* msgmerge::                    Invoking the @code{msgmerge} Program
  * Translated Entries::          Translated Entries
  * Fuzzy Entries::               Fuzzy Entries
  * Untranslated Entries::        Untranslated Entries
-@@ -2132,7 +2131,7 @@
- * Compendium::                  Using Translation Compendiums
+@@ -2520,12 +2519,12 @@
+ * Compendium::                  Using Translation Compendia
  @end menu
  
 -@node msgmerge Invocation, Translated Entries, Updating, Updating
 +@node msgmerge, Translated Entries, Updating, Updating
  @section Invoking the @code{msgmerge} Program
  
- @c FIXME: Rewrite.
-@@ -2156,7 +2155,7 @@
- @c so marking the entry as obsolete, and giving the modified string with
- @c an empty translation, that is, marking the entry as untranslated.
+ @include msgmerge.texi
  
 -@node Translated Entries, Fuzzy Entries, msgmerge Invocation, Updating
 +@node Translated Entries, Fuzzy Entries, msgmerge, Updating
  @section Translated Entries
+ @cindex translated entries
  
- Each PO file entry for which the @code{msgstr} field has been filled with
-@@ -2874,11 +2873,11 @@
+@@ -3563,64 +3562,64 @@
+ catalogs.  It copies each message's msgid to its msgstr.
+ 
+ @menu
+-* msgcat Invocation::           Invoking the @code{msgcat} Program
+-* msgconv Invocation::          Invoking the @code{msgconv} Program
+-* msggrep Invocation::          Invoking the @code{msggrep} Program
+-* msgfilter Invocation::        Invoking the @code{msgfilter} Program
+-* msguniq Invocation::          Invoking the @code{msguniq} Program
+-* msgcomm Invocation::          Invoking the @code{msgcomm} Program
+-* msgcmp Invocation::           Invoking the @code{msgcmp} Program
+-* msgattrib Invocation::        Invoking the @code{msgattrib} Program
+-* msgen Invocation::            Invoking the @code{msgen} Program
+-* msgexec Invocation::          Invoking the @code{msgexec} Program
++* msgcat::                      Invoking the @code{msgcat} Program
++* msgconv::                     Invoking the @code{msgconv} Program
++* msggrep::                     Invoking the @code{msggrep} Program
++* msgfilter::                   Invoking the @code{msgfilter} Program
++* msguniq::                     Invoking the @code{msguniq} Program
++* msgcomm::                     Invoking the @code{msgcomm} Program
++* msgcmp::                      Invoking the @code{msgcmp} Program
++* msgattrib::                   Invoking the @code{msgattrib} Program
++* msgen::                       Invoking the @code{msgen} Program
++* msgexec::                     Invoking the @code{msgexec} Program
+ @end menu
+ 
+-@node msgcat Invocation, msgconv Invocation, Manipulating, Manipulating
++@node msgcat, msgconv, Manipulating, Manipulating
+ @section Invoking the @code{msgcat} Program
+ 
+ @include msgcat.texi
+ 
+-@node msgconv Invocation, msggrep Invocation, msgcat Invocation, Manipulating
++@node msgconv, msggrep, msgcat, Manipulating
+ @section Invoking the @code{msgconv} Program
+ 
+ @include msgconv.texi
+ 
+-@node msggrep Invocation, msgfilter Invocation, msgconv Invocation, Manipulating
++@node msggrep, msgfilter, msgconv, Manipulating
+ @section Invoking the @code{msggrep} Program
+ 
+ @include msggrep.texi
+ 
+-@node msgfilter Invocation, msguniq Invocation, msggrep Invocation, Manipulating
++@node msgfilter, msguniq, msggrep, Manipulating
+ @section Invoking the @code{msgfilter} Program
+ 
+ @include msgfilter.texi
+ 
+-@node msguniq Invocation, msgcomm Invocation, msgfilter Invocation, Manipulating
++@node msguniq, msgcomm, msgfilter, Manipulating
+ @section Invoking the @code{msguniq} Program
+ 
+ @include msguniq.texi
+ 
+-@node msgcomm Invocation, msgcmp Invocation, msguniq Invocation, Manipulating
++@node msgcomm, msgcmp, msguniq, Manipulating
+ @section Invoking the @code{msgcomm} Program
+ 
+ @include msgcomm.texi
+ 
+-@node msgcmp Invocation, msgattrib Invocation, msgcomm Invocation, Manipulating
++@node msgcmp, msgattrib, msgcomm, Manipulating
+ @section Invoking the @code{msgcmp} Program
+ 
+ @include msgcmp.texi
+ 
+-@node msgattrib Invocation, msgen Invocation, msgcmp Invocation, Manipulating
++@node msgattrib, msgen, msgcmp, Manipulating
+ @section Invoking the @code{msgattrib} Program
+ 
+ @include msgattrib.texi
+ 
+-@node msgen Invocation, msgexec Invocation, msgattrib Invocation, Manipulating
++@node msgen, msgexec, msgattrib, Manipulating
+ @section Invoking the @code{msgen} Program
+ 
+ @include msgen.texi
+ 
+-@node msgexec Invocation,  , msgen Invocation, Manipulating
++@node msgexec,  , msgen, Manipulating
+ @section Invoking the @code{msgexec} Program
+ 
+ @include msgexec.texi
+@@ -3631,22 +3630,22 @@
  @c FIXME: Rewrite.
  
  @menu
 -* msgfmt Invocation::           Invoking the @code{msgfmt} Program
-+* msgfmt::			Invoking the @code{msgfmt} Program
+-* msgunfmt Invocation::         Invoking the @code{msgunfmt} Program
++* msgfmt::                      Invoking the @code{msgfmt} Program
++* msgunfmt::                    Invoking the @code{msgunfmt} Program
  * MO Files::                    The Format of GNU MO Files
  @end menu
  
--@node msgfmt Invocation, MO Files, Binaries, Binaries
-+@node msgfmt, MO Files, Binaries, Binaries
+-@node msgfmt Invocation, msgunfmt Invocation, Binaries, Binaries
++@node msgfmt, msgunfmt, Binaries, Binaries
  @section Invoking the @code{msgfmt} Program
  
- @c FIXME: Rewrite.
-@@ -2954,7 +2953,7 @@
- If input file is @samp{-}, standard input is read.  If output file
- is @samp{-}, output is written to standard output.
+ @include msgfmt.texi
  
--@node MO Files,  , msgfmt Invocation, Binaries
-+@node MO Files,  , msgfmt, Binaries
+-@node msgunfmt Invocation, MO Files, msgfmt Invocation, Binaries
++@node msgunfmt, MO Files, msgfmt, Binaries
+ @section Invoking the @code{msgunfmt} Program
+ 
+ @include msgunfmt.texi
+ 
+-@node MO Files,  , msgunfmt Invocation, Binaries
++@node MO Files,  , msgunfmt, Binaries
  @section The Format of GNU MO Files
- 
- The format of the generated MO files is best described by a picture,
-@@ -4752,7 +4751,7 @@
+ @cindex MO file's format
+ @cindex file format, @file{.mo}
+@@ -5531,7 +5530,7 @@
  @menu
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
 -* gettextize Invocation::       Invoking the @code{gettextize} Program
-+* gettextize::			Invoking the @code{gettextize} Program
++* gettextize::                  Invoking the @code{gettextize} Program
  * Adjusting Files::             Files You Must Create or Alter
+ * autoconf macros::             Autoconf macros for use in @file{configure.in}
  @end menu
- 
-@@ -4782,7 +4781,7 @@
+@@ -5562,7 +5561,7 @@
  described in the remaining of this chapter.  Some maintainers might
  use this as an opportunity to unflatten their package structure.
  
 -@node Prerequisites, gettextize Invocation, Flat and Non-Flat, Maintainers
 +@node Prerequisites, gettextize, Flat and Non-Flat, Maintainers
  @section Prerequisite Works
- 
- There are some works which are required for using GNU @code{gettext}
-@@ -4862,7 +4861,7 @@
+ @cindex converting a package to use @code{gettext}
+ @cindex migration from earlier versions of @code{gettext}
+@@ -5647,7 +5646,7 @@
  a maintainer, ever think there is a real problem with a team, please
  never try to @emph{solve} a team's problem on your own.
  
@@ -211,12 +347,12 @@ diff -Nru gettext-0.10.36/doc/gettext.texi gettext-0.10.36.new/doc/gettext.texi
  @section Invoking the @code{gettextize} Program
  
  Some files are consistently and identically needed in every package
-@@ -4954,7 +4953,7 @@
+@@ -5768,7 +5767,7 @@
  directory needs its own @file{Makefile}, and it has been designed so
  it can be identical in all packages.
  
--@node Adjusting Files,  , gettextize Invocation, Maintainers
-+@node Adjusting Files,  , gettextize, Maintainers
+-@node Adjusting Files, autoconf macros, gettextize Invocation, Maintainers
++@node Adjusting Files, autoconf macros, gettextize, Maintainers
  @section Files You Must Create or Alter
+ @cindex @code{gettext} files
  
- Besides files which are automatically added through @code{gettextize},

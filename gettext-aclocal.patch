@@ -1,11 +1,91 @@
---- gettext-0.10.36.orig/configure.in	Fri Mar 16 15:33:53 2001
-+++ gettext-0.10.36/configure.in	Mon Apr  2 10:33:38 2001
-@@ -52,7 +52,7 @@
- AC_CHECK_FUNCS([getcwd mblen memcpy strchr strerror uname])
- AC_REPLACE_FUNCS([memmove memset stpcpy stpncpy strcspn \
- strcasecmp strncasecmp strstr strtoul vasprintf])
+--- gettext-0.11.4/configure.in.orig	Thu May 16 19:59:15 2002
++++ gettext-0.11.4/configure.in	Thu May 16 20:02:24 2002
+@@ -10,7 +10,7 @@
+ AC_PROG_CC
+ AC_PROG_INSTALL
+ AC_PROG_YACC
+-gt_PROG_LEX
++gt_AM_PROG_LEX
+ 
+ gt_GCJ
+ if test -n "$HAVE_GCJ"; then
+@@ -70,7 +70,6 @@
+ strerror strtoul uname utime utimes])
+ AC_REPLACE_FUNCS([memset stpcpy strcspn \
+ strcasecmp strncasecmp strpbrk strstr vasprintf])
 -AM_FUNC_GETLINE
-+
  if test $am_cv_func_working_getline != yes; then
    AC_CHECK_FUNCS(getdelim)
  fi
+@@ -158,16 +158,6 @@
+ 
+ EOF
+ 
+-dnl These ought to go away some day.
+-changequote(,)dnl
+-LTLIBOBJS=`echo "$LIBOBJS" | sed 's/\.[^.]* /.lo /g;s/\.[^.]*$/.lo/'`
+-changequote([, ])dnl
+-AC_SUBST(LTLIBOBJS)
+-changequote(,)dnl
+-LTALLOCA=`echo "$ALLOCA" | sed 's/\.[^.]* /.lo /g;s/\.[^.]*$/.lo/'`
+-changequote([, ])dnl
+-AC_SUBST(LTALLOCA)
+-
+ AC_OUTPUT([Makefile \
+            lib/Makefile lib/javacomp.sh lib/javaexec.sh \
+            intl/Makefile intl-java/Makefile \
+--- gettext-0.11.2/m4/lib-link.m4.orig	Tue Apr  9 15:07:04 2002
++++ gettext-0.11.2/m4/lib-link.m4	Thu May 16 20:29:17 2002
+@@ -64,7 +64,7 @@
+   ac_save_CPPFLAGS="$CPPFLAGS"
+   AC_LIB_APPENDTOVAR([CPPFLAGS], [$INC]NAME)
+ 
+-  AC_CACHE_CHECK([for lib[]$1], [ac_cv_lib[]Name], [
++  AC_CACHE_CHECK([for lib[]$1], ac_cv_lib[]Name, [
+     ac_save_LIBS="$LIBS"
+     LIBS="$LIBS $LIB[]NAME"
+     AC_TRY_LINK([$3], [$4], [ac_cv_lib[]Name=yes], [ac_cv_lib[]Name=no])
+--- gettext-0.11.2/m4/fnmatch.m4.orig	Mon Feb  4 14:32:49 2002
++++ gettext-0.11.2/m4/fnmatch.m4	Thu May 16 20:30:48 2002
+@@ -44,7 +44,6 @@
+     dnl libgettextlib.so.
+     AC_DEFINE([fnmatch], [posix_fnmatch],
+       [Define to a replacement function name for fnmatch().])
+-    LIBOBJS="$LIBOBJS pfnmatch.${ac_objext}"
+-    AC_SUBST(LIBOBJS)
++    AC_LIBOBJ([pfnmatch])
+   fi
+ ])
+--- gettext-0.11.2/m4/getline.m4.orig	Wed Jan 16 13:19:34 2002
++++ gettext-0.11.2/m4/getline.m4	Thu May 16 20:31:00 2002
+@@ -47,7 +47,6 @@
+     dnl libgettextlib.so.
+     AC_DEFINE([getline], [gnu_getline],
+       [Define to a replacement function name for getline().])
+-    LIBOBJS="$LIBOBJS getline.${ac_objext}"
+-    AC_SUBST(LIBOBJS)
++    AC_LIBOBJ([getline])
+   fi
+ ])
+--- gettext-0.11.2/lib/Makefile.am.orig	Mon Mar 11 13:19:23 2002
++++ gettext-0.11.2/lib/Makefile.am	Thu May 16 20:37:13 2002
+@@ -87,8 +87,6 @@
+ 
+ # How to build libgettextlib.la.
+ 
+-libgettextlib_la_LIBADD = @LTALLOCA@ @LTLIBOBJS@
+-
+ # Need @LTLIBINTL@ because many source files use gettext().
+ # Need @LTLIBICONV@ because linebreak.c uses iconv().
+ libgettextlib_la_LDFLAGS = \
+--- gettext-0.11.4/m4/flex.m4.orig	Wed Jan 16 13:19:34 2002
++++ gettext-0.11.4/m4/flex.m4	Sun Jul 28 23:25:51 2002
+@@ -8,7 +8,7 @@
+ 
+ # Check for flex.
+ 
+-AC_DEFUN([gt_PROG_LEX],
++AC_DEFUN([gt_AM_PROG_LEX],
+ [
+   dnl Don't use AC_PROG_LEX or AM_PROG_LEX; we insist on flex.
+   dnl Thus we don't need LEXLIB.
