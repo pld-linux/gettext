@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.35
-Release:	13
+Release:	15
 Copyright:	GPL
 Group:		Development/Tools
 Group(pl):	Programowanie/Narzêdzia
@@ -15,6 +15,7 @@ Patch1:		gettext-info.patch
 Patch2:		gettext-arm.patch
 Patch4:		gettext-Makefile.in.in.patach
 Patch5:		gettext-DESTDIR.patch
+Patch6:		gettext-hacks.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -68,8 +69,12 @@ method for internationalizing programs.
 %patch2 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
+aclocal
+libtoolize --copy --force
+automake
 autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure \
@@ -79,11 +84,9 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/bin
 
-make install \
-	DESTDIR=$RPM_BUILD_ROOT 
+make install DESTDIR=$RPM_BUILD_ROOT 
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
 
@@ -109,6 +112,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
-%{_infodir}/*info*.gz
+%{_infodir}/*info*
 %{_datadir}/aclocal/*
 %{_datadir}/gettext
