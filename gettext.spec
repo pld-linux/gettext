@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.36
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Tools
 Group(de):	Entwicklung/Werkzeuge
@@ -14,7 +14,7 @@ Group(pl):	Programowanie/Narzêdzia
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
-Patch2:		%{name}-hacks.patch
+Patch2:		%{name}-gettext.m4-fix.patch
 Patch3:		%{name}-dml.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
@@ -69,8 +69,8 @@ powerfull and simple method for internationalizing programs.
 %prep
 %setup -q
 %patch0 -p1
-#%patch1 -p1
-#%patch2 -p1
+%patch1 -p1
+%patch2 -p1
 %patch3 -p1
 
 %build
