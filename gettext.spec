@@ -30,7 +30,7 @@ Patch5:		%{name}-gettextize-fix.patch
 Patch6:		%{name}-missing-top_builddir.patch
 Patch7:		%{name}-no_docs.patch
 BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake
+BuildRequires:	automake >= 1.7.5
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
 %{?_with_gcj:BuildRequires:	gcj < 3.0.4}
 %{?_with_javac:BuildRequires:	jdk >= 1.1}
