@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.10.38
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Tools
 Group(de):	Entwicklung/Werkzeuge
@@ -16,9 +16,11 @@ Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
 Patch2:		%{name}-dml.patch
+Patch3:		%{name}-ac250.patch
+Patch4:		%{name}-aclocal.patch
 BuildRequires:	automake
-BuildRequires:	autoconf
-BuildRequires:	libtool
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,6 +64,7 @@ Group(de):	Entwicklung/Werkzeuge
 Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
 Requires:	%{name} = %{version}
+Requires:	autoconf >= 2.50
 
 %description devel
 The gettext library provides an easy to use library and tools for
@@ -92,10 +95,13 @@ Tryb edycji PO dla emacsa.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
-rm m4/libtool.m4
+rm m4/libtool.m4 aclocal.m4
 libtoolize --copy --force
+#aclocal --acdir=m4 -I $(aclocal --print-ac-dir)
 aclocal -I m4
 autoconf
 automake -a -c
