@@ -27,8 +27,7 @@ Patch2:		%{name}-aclocal.patch
 Patch3:		%{name}-killkillkill.patch
 Patch4:		%{name}-pl.po-update.patch
 Patch5:		%{name}-gettextize-fix.patch
-Patch6:		%{name}-missing-top_builddir.patch
-Patch7:		%{name}-no_docs.patch
+Patch6:		%{name}-no_docs.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.7.5
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
@@ -213,7 +212,6 @@ wersji.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
