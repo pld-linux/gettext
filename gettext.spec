@@ -90,7 +90,7 @@ make
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/bin
 
-make install DESTDIR=$RPM_BUILD_ROOT 
+%{__make} install DESTDIR=$RPM_BUILD_ROOT 
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/gettext $RPM_BUILD_ROOT/bin/gettext
 
