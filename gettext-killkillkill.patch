@@ -1,14 +1,14 @@
-diff -Nru gettext-0.12.orig/gettext-tools/misc/gettextize.in gettext-0.12/gettext-tools/misc/gettextize.in
---- gettext-0.12.orig/gettext-tools/misc/gettextize.in	2003-05-20 14:30:03.000000000 +0200
-+++ gettext-0.12/gettext-tools/misc/gettextize.in	2003-05-08 22:41:15.000000000 +0200
-@@ -1052,6 +1052,10 @@
+diff -Nru gettext-0.12/gettext-tools/misc/gettextize.in gettext-0.12.orig/gettext-tools/misc/gettextize.in
+--- gettext-0.12.orig/gettext-tools/misc/gettextize.in	2003-05-08 22:41:15.000000000 +0200
++++ gettext-0.12/gettext-tools/misc/gettextize.in	2003-05-20 14:30:03.000000000 +0200
+@@ -1052,10 +1052,6 @@
      5) count="five paragraphs";;
      *) count="$count paragraphs";;
    esac
-+  echo "Press Return to acknowledge the previous $count."
-+  # Read from /dev/tty, not stdin, so that gettextize cannot be abused by
-+  # non-interactive tools.
-+  read dummy < /dev/tty
+-  echo "Press Return to acknowledge the previous $count."
+-  # Read from /dev/tty, not stdin, so that gettextize cannot be abused by
+-  # non-interactive tools.
+-  read dummy < /dev/tty
  fi
  
  exit 0
