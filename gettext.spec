@@ -104,7 +104,7 @@ incluye aquí.
 %description -n xemacs-po-mode-pkg -l pl
 Tryb edycji PO dla emacsa.
 
-%description -n xemacs-po-mode -l pt_BR
+%description -n xemacs-po-mode-pkg -l pt_BR
 Este pacote provê as ferramentas para ajudar na edição de arquivos PO,
 como documentado no manual do usuário do GNU gettext. Veja este manual
 para a documentação de uso, a qual não é incluída aqui.
