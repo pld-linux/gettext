@@ -1,91 +1,53 @@
---- gettext-0.11.4/configure.in.orig	Thu May 16 19:59:15 2002
-+++ gettext-0.11.4/configure.in	Thu May 16 20:02:24 2002
-@@ -10,7 +10,7 @@
- AC_PROG_CC
- AC_PROG_INSTALL
- AC_PROG_YACC
--gt_PROG_LEX
-+gt_AM_PROG_LEX
+diff -Nru gettext-0.12.orig/gettext-tools/configure.ac gettext-0.12/gettext-tools/configure.ac
+--- gettext-0.12.orig/gettext-tools/configure.ac	2003-05-12 21:47:48.000000000 +0200
++++ gettext-0.12/gettext-tools/configure.ac	2003-05-20 15:24:37.000000000 +0200
+@@ -230,10 +230,7 @@
  
- gt_GCJ
- if test -n "$HAVE_GCJ"; then
-@@ -70,7 +70,6 @@
- strerror strtoul uname utime utimes])
- AC_REPLACE_FUNCS([memset stpcpy strcspn \
- strcasecmp strncasecmp strpbrk strstr vasprintf])
--AM_FUNC_GETLINE
- if test $am_cv_func_working_getline != yes; then
-   AC_CHECK_FUNCS(getdelim)
- fi
-@@ -158,16 +158,6 @@
+ AC_CONFIG_FILES([Makefile])
  
- EOF
+-AC_CONFIG_FILES([doc/Makefile],
+-                [FIX_MAKEFILE_COMPILE([doc/Makefile])
+-                 FIX_MAKEFILE_DISTRIB([doc/Makefile])
+-                 FIX_MAKEFILE_INFO([doc/Makefile])])
++AC_CONFIG_FILES([doc/Makefile])
  
--dnl These ought to go away some day.
--changequote(,)dnl
--LTLIBOBJS=`echo "$LIBOBJS" | sed 's/\.[^.]* /.lo /g;s/\.[^.]*$/.lo/'`
--changequote([, ])dnl
--AC_SUBST(LTLIBOBJS)
--changequote(,)dnl
--LTALLOCA=`echo "$ALLOCA" | sed 's/\.[^.]* /.lo /g;s/\.[^.]*$/.lo/'`
--changequote([, ])dnl
--AC_SUBST(LTALLOCA)
--
- AC_OUTPUT([Makefile \
-            lib/Makefile lib/javacomp.sh lib/javaexec.sh \
-            intl/Makefile intl-java/Makefile \
---- gettext-0.11.2/m4/lib-link.m4.orig	Tue Apr  9 15:07:04 2002
-+++ gettext-0.11.2/m4/lib-link.m4	Thu May 16 20:29:17 2002
-@@ -64,7 +64,7 @@
-   ac_save_CPPFLAGS="$CPPFLAGS"
-   AC_LIB_APPENDTOVAR([CPPFLAGS], [$INC]NAME)
+ AC_CONFIG_FILES([intl/Makefile:../gettext-runtime/intl/Makefile.in], [
+   # Change srcdir variable so that it points to ../gettext-runtime/intl.
+@@ -242,15 +239,12 @@
+   mv intl/Makefile.tmp intl/Makefile
+   ])
  
--  AC_CACHE_CHECK([for lib[]$1], [ac_cv_lib[]Name], [
-+  AC_CACHE_CHECK([for lib[]$1], ac_cv_lib[]Name, [
-     ac_save_LIBS="$LIBS"
-     LIBS="$LIBS $LIB[]NAME"
-     AC_TRY_LINK([$3], [$4], [ac_cv_lib[]Name=yes], [ac_cv_lib[]Name=no])
---- gettext-0.11.2/m4/fnmatch.m4.orig	Mon Feb  4 14:32:49 2002
-+++ gettext-0.11.2/m4/fnmatch.m4	Thu May 16 20:30:48 2002
-@@ -44,7 +44,6 @@
-     dnl libgettextlib.so.
-     AC_DEFINE([fnmatch], [posix_fnmatch],
-       [Define to a replacement function name for fnmatch().])
--    LIBOBJS="$LIBOBJS pfnmatch.${ac_objext}"
--    AC_SUBST(LIBOBJS)
-+    AC_LIBOBJ([pfnmatch])
-   fi
- ])
---- gettext-0.11.2/m4/getline.m4.orig	Wed Jan 16 13:19:34 2002
-+++ gettext-0.11.2/m4/getline.m4	Thu May 16 20:31:00 2002
-@@ -47,7 +47,6 @@
-     dnl libgettextlib.so.
-     AC_DEFINE([getline], [gnu_getline],
-       [Define to a replacement function name for getline().])
--    LIBOBJS="$LIBOBJS getline.${ac_objext}"
--    AC_SUBST(LIBOBJS)
-+    AC_LIBOBJ([getline])
-   fi
- ])
---- gettext-0.11.2/lib/Makefile.am.orig	Mon Mar 11 13:19:23 2002
-+++ gettext-0.11.2/lib/Makefile.am	Thu May 16 20:37:13 2002
-@@ -87,8 +87,6 @@
+-AC_CONFIG_FILES([lib/Makefile],
+-                [FIX_MAKEFILE_COMPILE([lib/Makefile])])
++AC_CONFIG_FILES([lib/Makefile])
+ AC_CONFIG_FILES([lib/javacomp.sh lib/javaexec.sh])
  
- # How to build libgettextlib.la.
+-AC_CONFIG_FILES([libuniname/Makefile],
+-                [FIX_MAKEFILE_COMPILE([libuniname/Makefile])])
++AC_CONFIG_FILES([libuniname/Makefile])
  
--libgettextlib_la_LIBADD = @LTALLOCA@ @LTLIBOBJS@
--
- # Need @LTLIBINTL@ because many source files use gettext().
- # Need @LTLIBICONV@ because linebreak.c uses iconv().
- libgettextlib_la_LDFLAGS = \
---- gettext-0.11.4/m4/flex.m4.orig	Wed Jan 16 13:19:34 2002
-+++ gettext-0.11.4/m4/flex.m4	Sun Jul 28 23:25:51 2002
-@@ -8,7 +8,7 @@
+-AC_CONFIG_FILES([src/Makefile],
+-                [FIX_MAKEFILE_COMPILE([src/Makefile])])
++AC_CONFIG_FILES([src/Makefile])
+ AC_CONFIG_FILES([src/user-email])
  
- # Check for flex.
+ AC_CONFIG_FILES([po/Makefile.in])
+@@ -258,15 +252,14 @@
+ AC_CONFIG_FILES([projects/Makefile])
  
--AC_DEFUN([gt_PROG_LEX],
-+AC_DEFUN([gt_AM_PROG_LEX],
- [
-   dnl Don't use AC_PROG_LEX or AM_PROG_LEX; we insist on flex.
-   dnl Thus we don't need LEXLIB.
+ AC_CONFIG_FILES([misc/Makefile])
+-AC_CONFIG_FILES([misc/gettextize], [chmod a+x misc/gettextize])
+-AC_CONFIG_FILES([misc/autopoint], [chmod a+x misc/autopoint])
++AC_CONFIG_FILES([misc/gettextize])
++AC_CONFIG_FILES([misc/autopoint])
+ 
+ AC_CONFIG_FILES([man/Makefile])
+ AC_CONFIG_FILES([man/x-to-1])
+ 
+ AC_CONFIG_FILES([m4/Makefile])
+ 
+-AC_CONFIG_FILES([tests/Makefile],
+-                [FIX_MAKEFILE_COMPILE([tests/Makefile])])
++AC_CONFIG_FILES([tests/Makefile])
+ 
+ AC_OUTPUT
