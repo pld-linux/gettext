@@ -16,7 +16,7 @@ Patch2:		gettext-arm.patch
 Patch4:		gettext-Makefile.in.in.patach
 Patch5:		gettext-DESTDIR.patch
 Patch6:		gettext-hacks.patch
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The gettext library provides an easy to use library and tools for creating,
