@@ -63,7 +63,7 @@ Group:		Development/Tools
 Group(de):	Entwicklung/Werkzeuge
 Group(fr):	Development/Outils
 Group(pl):	Programowanie/Narzêdzia
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	autoconf >= 2.50
 
 %description devel
