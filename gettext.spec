@@ -13,7 +13,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.11.5
-Release:	3
+Release:	4
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -22,6 +22,7 @@ Patch1:		%{name}-info.patch
 Patch2:		%{name}-aclocal.patch
 Patch3:		%{name}-killkillkill.patch
 Patch4:		%{name}-pl.po-update.patch
+Patch5:		%{name}-gettextize-fix.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{!?_without_java:%{!?_with_javac:BuildRequires: gcj >= 3.0}}
@@ -172,6 +173,7 @@ wersji.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
