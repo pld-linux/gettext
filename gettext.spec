@@ -14,7 +14,7 @@ Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
 Version:	0.11.5
-Release:	4
+Release:	5
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -32,6 +32,7 @@ BuildRequires:	automake
 BuildRequires:	libtool >= 1.4
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
+BuildRequires:  gettext-devel
 Obsoletes:	gettext-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
