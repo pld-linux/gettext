@@ -5,6 +5,9 @@
 # _with_gcj		with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
 # _with_javac		with Java support by some javac
 #
+
+%define _without_xemacs yes
+
 %define build_java	%{?_with_gcj:1}%{!?_with_gcj:%{?_with_javac:1}%{!?_with_javac:0}}
 Summary:	Utilties for program national language support
 Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
@@ -18,7 +21,7 @@ Summary(tr):	Desteği için kitaplık ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ğ¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.12.1
-Release:	0.2
+Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 # Source0-md5:	5d4bddd300072315e668247e5b7d5bdb
