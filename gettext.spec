@@ -12,7 +12,7 @@ Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais.
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
-Version:	0.11.2
+Version:	0.11.4
 Release:	1
 License:	GPL
 Group:		Development/Tools
@@ -23,7 +23,7 @@ Patch2:		%{name}-dml.patch
 Patch3:		%{name}-aclocal.patch
 Obsoletes:	gettext-base
 BuildRequires:	automake
-BuildRequires:	autoconf >= 2.50
+BuildRequires:	autoconf >= 2.52
 %{!?_without_java:%{!?_with_javac:BuildRequires: gcj >= 3.0}}
 %{!?_without_java:%{?_with_javac:BuildRequires: jdk >= 1.1}}
 BuildRequires:	libtool >= 1.4
@@ -161,9 +161,6 @@ aclocal -I m4
 	--without-included-gettext
 %{__make}
 
-sed -e '/relink_command.*/d' src/libgettextsrc.la > src/libgettextsrc.la.tmp
-mv -f src/libgettextsrc.la.tmp src/libgettextsrc.la
-
 %{?!_without_xemacs:cd misc}
 %{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}
 
@@ -174,6 +171,9 @@ install -d $RPM_BUILD_ROOT/bin
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
+
+# static libs are removed in install-exec-clean
+install lib/.libs/lib*.a src/.libs/lib*.a $RPM_BUILD_ROOT%{_libdir}
 
 %find_lang %{name}
 
@@ -203,12 +203,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_aclocaldir}/*
 %dir %{_datadir}/gettext
 %{_datadir}/gettext/ABOUT-NLS
-%{_datadir}/gettext/gettext.h
-%{_datadir}/gettext/msgunfmt.tcl
+%{_datadir}/gettext/archive.tar.gz
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
+%{_datadir}/gettext/gettext.h
 %dir %{_datadir}/gettext/intl
 %{_datadir}/gettext/intl/[^c]*
 %attr(755,root,root) %{_datadir}/gettext/intl/config.charset
+%{_datadir}/gettext/msgunfmt.tcl
+%attr(755,root,root) %{_datadir}/gettext/mkinstalldirs
 %{_datadir}/gettext/po
 %dir %{_datadir}/gettext/projects
 %{_datadir}/gettext/projects/index
@@ -225,6 +227,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/projects/TP/teams.*
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
+%{_mandir}/man1/autopoint.1*
+%{_mandir}/man1/gettextize.1*
 %{_mandir}/man1/msg*.1*
 %{_mandir}/man1/xgettext.1*
 %{_mandir}/man3/*
