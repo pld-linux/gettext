@@ -27,10 +27,10 @@ Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 # Source0-md5:	318e266ca3a5d26946ce3684db5bf2cf
 Patch0:		%{name}-info.patch
-#Patch1:		%{name}-aclocal.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
 Patch3:		%{name}-no_docs.patch
+URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1.7.5
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
