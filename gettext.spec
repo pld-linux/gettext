@@ -17,7 +17,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.11.5
-Release:	5
+Release:	6
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
@@ -26,7 +26,9 @@ Patch1:		%{name}-info.patch
 Patch2:		%{name}-aclocal.patch
 Patch3:		%{name}-killkillkill.patch
 Patch4:		%{name}-pl.po-update.patch
-Patch5:		%{name}-%{name}ize-fix.patch
+Patch5:		%{name}-gettextize-fix.patch
+Patch6:		%{name}-missing-top_builddir.patch
+Patch7:		%{name}-no_docs.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 %{?_with_gcj:BuildRequires:	gcj >= 3.0}
@@ -210,6 +212,8 @@ wersji.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
