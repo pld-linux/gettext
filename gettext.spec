@@ -278,7 +278,7 @@ wersji.
 
 %build
 # it's m4_included somewhere
-install %{_datadir}/aclocal/libtool.m4 config/m4/libtool.m4
+install %{_aclocaldir}/libtool.m4 config/m4/libtool.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
