@@ -4,7 +4,7 @@ Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programm
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Name:		gettext
-Version:	0.10.37
+Version:	0.10.38
 Release:	1
 License:	GPL
 Group:		Development/Tools
@@ -14,11 +14,12 @@ Group(pl):	Programowanie/Narzêdzia
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
-Patch2:		%{name}-gettext.m4-fix.patch
-Patch3:		%{name}-dml.patch
+Patch2:		%{name}-dml.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
+BuildRequires:	texinfo
+BuildRequires:	xemacs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -66,24 +67,45 @@ The gettext library provides an easy to use library and tools for
 creating, using, and modifying natural language catalogs. It is a
 powerfull and simple method for internationalizing programs.
 
+%description -l pl devel
+Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
+katalogów jêzyków narodowych. To jest prosta i wydajna metoda
+lokalizacji (internationalizacji) programów.
+
+%package -n xemacs-po-mode-pkg
+Summary:	Xemacs PO-mode
+Summary(pl):	Tryb PO dla Xemacsa
+Group:		Applications/Editors/Emacs
+Group(de):	Applikationen/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	xemacs
+
+%description -n xemacs-po-mode-pkg
+Emacs PO-mode.
+
+%description -l pl -n xemacs-po-mode-pkg
+Tryb edycji PO dla emacsa.
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
+rm m4/libtool.m4
 libtoolize --copy --force
-automake -a -c
 aclocal -I m4
 autoconf
-# we don't want shared libintl library. --misiek
+automake -a -c
 %configure \
-	--disable-shared \
-	--enable-static \
-	--with-included-gettext 
+	--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode \
+	--enable-nls \
+	--without-included-gettext 
 %{__make}
+
+cd misc
+EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -117,3 +139,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_infodir}/*info*
 %{_aclocaldir}/*
 %{_datadir}/gettext
+%{_mandir}/man3/*
+
+%files -n xemacs-po-mode-pkg
+%defattr(644,root,root,755)
+%dir %{_datadir}/xemacs-packages/lisp/po-mode
+%{_datadir}/xemacs-packages/lisp/po-mode/*.elc
