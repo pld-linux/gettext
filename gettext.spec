@@ -9,9 +9,6 @@ Version:	0.10.40
 Release:	1
 License:	GPL
 Group:		Development/Tools
-Group(de):	Entwicklung/Werkzeuge
-Group(fr):	Development/Outils
-Group(pl):	Programowanie/Narzêdzia
 Source0:	ftp://ftp.gnu.org/pub/gnu/gettext/%{name}-%{version}.tar.gz
 Patch0:		%{name}-jbj.patch
 Patch1:		%{name}-info.patch
@@ -59,9 +56,6 @@ Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programm
 Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
 Summary(tr):	Desteði için kitaplýk ve araçlar
 Group:		Development/Tools
-Group(de):	Entwicklung/Werkzeuge
-Group(fr):	Development/Outils
-Group(pl):	Programowanie/Narzêdzia
 Requires:	%{name} = %{version}-%{release}
 Requires:	autoconf >= 2.50
 
@@ -79,8 +73,6 @@ lokalizacji (internationalizacji) programów.
 Summary:	Xemacs PO-mode
 Summary(pl):	Tryb PO dla Xemacsa
 Group:		Applications/Editors/Emacs
-Group(de):	Applikationen/Editors/Emacs
-Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	xemacs
 
 %description -n xemacs-po-mode-pkg
