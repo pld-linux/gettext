@@ -17,7 +17,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.12.1
-Release:	0.1
+Release:	0.2
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 # Source0-md5:	5d4bddd300072315e668247e5b7d5bdb
@@ -33,10 +33,9 @@ BuildRequires:	automake >= 1.7.5
 %{?_with_gcj:BuildRequires:	gcj < 3.0.4}
 %{?_with_javac:BuildRequires:	jdk >= 1.1}
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 1.4
+BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	texinfo
 %{?!_without_xemacs:BuildRequires:	xemacs}
-BuildRequires:	gettext-devel
 Obsoletes:	gettext-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -269,7 +268,7 @@ wersji.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%%patch3 -p1  - needs update
+%patch3 -p1
 # patch4 not finished yet
 %patch4 -p1
 
@@ -279,16 +278,16 @@ rm -f aclocal.m4 missing
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-cd gettext-tools
+cd gettext-runtime
 rm -f aclocal.m4 missing
 %{__libtoolize}
-%{__aclocal} -I m4
+%{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4
 %{__autoconf}
 %{__automake}
 cd ../gettext-tools
 rm -f aclocal.m4 missing
 %{__libtoolize}
-%{__aclocal} -I m4 -I ../gettext-runtime/m4
+%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4
 %{__autoconf}
 %{__automake}
 cd ..
@@ -297,6 +296,12 @@ cd ..
 	--enable-nls \
 	--without-included-gettext
 %{__make}
+
+# msgfmt has been built, so now we can update pl.gmos
+%{__make} pl.gmo -C gettext-runtime/po \
+	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
+%{__make} pl.gmo -C gettext-tools/po \
+	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 
 %{?!_without_xemacs:cd gettext-tools/misc}
 %{?!_without_xemacs:EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el}

@@ -51,3 +51,20 @@ diff -Nru gettext-0.12.orig/gettext-tools/configure.ac gettext-0.12/gettext-tool
 +AC_CONFIG_FILES([tests/Makefile])
  
  AC_OUTPUT
+--- gettext-0.12.1/gettext-runtime/configure.ac.orig	2003-05-12 21:47:05.000000000 +0200
++++ gettext-0.12.1/gettext-runtime/configure.ac	2003-06-08 11:57:32.000000000 +0200
+@@ -125,12 +125,10 @@
+ 
+ AC_CONFIG_FILES([intl-java/Makefile])
+ 
+-AC_CONFIG_FILES([lib/Makefile],
+-                [FIX_MAKEFILE_COMPILE([lib/Makefile])])
++AC_CONFIG_FILES([lib/Makefile])
+ AC_CONFIG_FILES([lib/javacomp.sh:../gettext-tools/lib/javacomp.sh.in])
+ 
+-AC_CONFIG_FILES([src/Makefile],
+-                [FIX_MAKEFILE_COMPILE([src/Makefile])])
++AC_CONFIG_FILES([src/Makefile])
+ 
+ AC_CONFIG_FILES([po/Makefile.in])
+ 
