@@ -1,0 +1,98 @@
+--- gettext-0.10.35/src/msgmerge.c.orig	Mon Feb 12 19:38:15 2001
++++ gettext-0.10.35/src/msgmerge.c	Mon Feb 12 19:40:46 2001
+@@ -47,6 +47,7 @@
+ 
+ #define _(str) gettext (str)
+ 
++extern void setmblocale(char* filename);
+ 
+ /* This structure defines a derived class of the po_ty class.  (See
+    po.h for an explanation.)  */
+@@ -278,6 +279,9 @@
+ 
+   /* merge the two files */
+   result = merge (argv[optind], argv[optind + 1]);
++
++  /* multibyte handling */
++  setmblocale(argv[optind]);
+ 
+   /* Sort the results.  */
+   if (sort_by_filepos)
+--- gettext-0.10.35/src/message.c.oka	Mon Feb 12 20:13:59 2001
++++ gettext-0.10.35/src/message.c	Mon Feb 12 20:15:15 2001
+@@ -81,7 +81,49 @@
+ static const char *make_c_width_description_string PARAMS ((enum is_c_format));
+ static int significant_c_format_p PARAMS ((enum is_c_format __is_c_format));
+ 
++static int mblocale_flag = 0; /* OFF */
+ 
++void setmblocale(char* filename) {
++  int i;
++  FILE *fp;
++  char tmpbuf[1024];
++  static const char* contstr =
++    "\"Content-Type: text/plain; charset=";
++
++  static const char *mblocale[] =
++    {
++      "EUC-JP",
++      "EUC-KR"
++    };
++
++  if ( filename == NULL || *filename == '\0' )
++    return;
++
++  if ( (fp = fopen(filename, "r")) == NULL )
++    return;
++
++  while( fgets(tmpbuf, sizeof(tmpbuf), fp) > 0 ) {
++    if( !strcmp(tmpbuf, "\n") )
++      break;
++
++    if( !strncmp(tmpbuf, contstr, strlen(contstr)) ) {
++      if( strlen(tmpbuf) > strlen(contstr) ) {
++        for(i=0; i<sizeof(mblocale)/sizeof(mblocale[0]); i++) {
++          if( !strncasecmp(tmpbuf + strlen(contstr),
++                       mblocale[i], strlen(mblocale[i])) ) {
++            mblocale_flag = 1;
++            break;
++          }
++        }
++      }
++    }
++  };
++  fclose(fp);
++}
++
++static int ismblocale() {
++  return mblocale_flag;
++}
+ 
+ message_ty *
+ message_alloc (msgid)
+@@ -703,6 +745,15 @@
+ 	  /* Allow 1 character for the closing quote.  */
+ 	  if (ocol + cw >= (do_wrap == no ? INT_MAX : page_width))
+ 	    break;
++          else if (ismblocale() && c >= 0xa1 && c <= 0xfe) { /* UJIS */
++            ++ep;
++            ++cw;
++            c = (unsigned char) *ep;
++            if (ocol + cw >= (do_wrap == no ? INT_MAX : page_width - 1 )) {
++              ++ep;
++              break;
++            }
++          }
+ 	  ocol += cw;
+ 	  if (c == '\n')
+ 	    {
+@@ -718,7 +769,8 @@
+ 	  const char *bp;
+ 
+ 	  for (bp = ep; bp > s; --bp)
+-	    if (bp[-1] == ' ' || bp[-1] == '\n')
++	    if (bp[-1] == ' ' || bp[-1] == '\n' ||
++                (ismblocale() && bp[-1] >= 0xa1 && bp[-1] <= 0xfe) ) /* UJIS */
+ 	      {
+ 		ep = bp;
+ 		break;
