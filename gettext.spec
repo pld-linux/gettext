@@ -17,6 +17,7 @@ Patch4:		gettext-Makefile.in.in.patach
 Prereq:		/sbin/install-info
 Requires:	m4
 Requires:	automake
+Requires:	autoconf
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
