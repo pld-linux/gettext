@@ -22,8 +22,8 @@ Patch1:		%{name}-info.patch
 Patch2:		%{name}-aclocal.patch
 Patch3:		%{name}-killkillkill.patch
 Obsoletes:	gettext-base
-BuildRequires:	automake
 BuildRequires:	autoconf >= 2.52
+BuildRequires:	automake
 %{!?_without_java:%{!?_with_javac:BuildRequires: gcj >= 3.0}}
 %{!?_without_java:%{?_with_javac:BuildRequires: jdk >= 1.1}}
 BuildRequires:	libtool >= 1.4
@@ -144,6 +144,7 @@ para a documentação de uso, a qual não é incluída aqui.
 
 %package autopoint
 Summary:	gettextize replacement
+Summary(pl):	Zamiennik gettextize
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
 Requires:	cvs
@@ -156,6 +157,13 @@ into a source package.  It extracts from a macro call of the form
 package, and copies the infrastructure files belonging to this version
 into the package.
 
+%description autopoint -l pl
+Program autopoint kopiuje standardowe pliki infrastruktury gettexta do
+pakietu ¼ród³owego. Wyci±ga u¿yt± wersjê gettexta z wywo³ania makra w
+postaci AM_GNU_GETTEXT_VERSION(VERSION) w pliku configure.in lub
+configure.ac i kopiuje do pakietu pliki infrastruktury nale¿±ce do tej
+wersji.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -166,7 +174,7 @@ into the package.
 %build
 rm -f m4/libtool.m4 aclocal.m4 missing
 %{__libtoolize}
-aclocal -I m4
+%{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
 %configure \
