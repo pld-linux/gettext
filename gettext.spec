@@ -22,12 +22,12 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.14.3
+Version:	0.14.4
 Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	14c2644c2f3b0eb67d5db7ee389547de
+# Source0-md5:	7580b2d77ef26cafa248f525dcb960c3
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-no_docs.patch
@@ -285,27 +285,27 @@ mv -f gettext-tools/po/{no,nb}.gmo
 
 %build
 # it's m4_included somewhere
-install %{_aclocaldir}/libtool.m4 config/m4/libtool.m4
+install %{_aclocaldir}/libtool.m4 m4/libtool.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
 cd autoconf-lib-link
-%{__aclocal} -I m4 -I ../config/m4
+%{__aclocal} -I m4 -I ../m4
 %{__autoconf}
 %{__automake}
 cd ../gettext-runtime
-%{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4 -I ../config/m4
+%{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4 -I ../m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 cd libasprintf
-%{__aclocal} -I ../m4 -I ../../config/m4
+%{__aclocal} -I ../m4 -I ../../m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 cd ../../gettext-tools
-%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../config/m4
+%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
