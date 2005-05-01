@@ -23,7 +23,7 @@ Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
 Version:	0.14.4
-Release:	1
+Release:	2
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
