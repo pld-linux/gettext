@@ -22,12 +22,12 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.14.4
-Release:	2
+Version:	0.14.5
+Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	7580b2d77ef26cafa248f525dcb960c3
+# Source0-md5:	e2f6581626a22a0de66dce1d81d00de3
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-no_docs.patch
@@ -454,7 +454,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc gettext-runtime/intl-java/javadoc2
 %attr(755,root,root) %{_libdir}/gettext/gnu.gettext.DumpResource
 %attr(755,root,root) %{_libdir}/gettext/gnu.gettext.GetURL
-%{_datadir}/gettext/gettext.jar
 %endif
 
 %if %{with xemacs}
