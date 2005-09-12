@@ -487,8 +487,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/archive.tar.gz
 %{_mandir}/man1/autopoint.1*
 
+%if %{with dotnet}
 %files -n dotnet-gettext
 %defattr(644,root,root,755)
 %{_libdir}/GNU.Gettext.dll
 %{_libdir}/gettext/msgfmt.net.exe
 %{_libdir}/gettext/msgunfmt.net.exe
+%endif
