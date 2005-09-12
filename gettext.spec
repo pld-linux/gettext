@@ -1,12 +1,17 @@
 #
-# TODO: C# (pnet or mono must be chosen)
-#
 # Conditional build:
 %bcond_without	asprintf	# without libasprintf C++ library
 %bcond_without	xemacs		# without po-mode for xemacs
 %bcond_with	gcj		# with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
 %bcond_with	javac		# with Java support by some javac
+%bcond_without	dotnet		# without .NET support
 #
+
+%include	/usr/lib/rpm/macros.mono
+
+%ifnarch %{ix86} %{x8664} arm hppa ppc s390 s390x
+%undefine with_dotnet
+%endif
 
 %undefine with_xemacs
 
@@ -23,7 +28,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.14.5
-Release:	1
+Release:	2
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -39,6 +44,7 @@ BuildRequires:	automake >= 1:1.7.5
 %{?with_javac:BuildRequires:	jdk >= 1.1}
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
+%{?with_dotnet:BuildRequires:	mono}
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
@@ -270,6 +276,17 @@ postaci AM_GNU_GETTEXT_VERSION(VERSION) w pliku configure.in lub
 configure.ac i kopiuje do pakietu pliki infrastruktury nale¿±ce do tej
 wersji.
 
+%package -n dotnet-gettext
+Summary:	GNU gettext for C#
+Summary(pl):	GNU gettext dla C#
+Group:		Development/Tools
+
+%description -n dotnet-gettext
+GNU gettext for C#.
+
+%description -n dotnet-gettext -l pl
+GNU gettext dla C#.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -313,7 +330,8 @@ cd ..
 %configure \
 	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
-	--disable-csharp \
+	%{!?with_dotnet:--disable-csharp} \
+	%{?with_dotnet:--enable-csharp=mono} \
 	--without-included-gettext
 %{__make}
 
@@ -371,6 +389,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/envsubst.1*
 %{_mandir}/man1/gettext.1*
 %{_mandir}/man1/ngettext.1*
+%dir %{_libdir}/gettext
 %dir %{_datadir}/gettext
 
 %files devel -f %{name}-tools.lang
@@ -384,7 +403,6 @@ rm -rf $RPM_BUILD_ROOT
 # libgettextpo is for other programs, not used by gettext tools themselves
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
 %attr(755,root,root) %{_libdir}/preloadable_libintl.so
-%dir %{_libdir}/gettext
 %attr(755,root,root) %{_libdir}/gettext/hostname
 %attr(755,root,root) %{_libdir}/gettext/project-id
 %attr(755,root,root) %{_libdir}/gettext/urlget
@@ -468,3 +486,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/autopoint
 %{_datadir}/gettext/archive.tar.gz
 %{_mandir}/man1/autopoint.1*
+
+%files -n dotnet-gettext
+%defattr(644,root,root,755)
+%{_libdir}/GNU.Gettext.dll
+%{_libdir}/gettext/msgfmt.net.exe
+%{_libdir}/gettext/msgunfmt.net.exe
