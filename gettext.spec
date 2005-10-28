@@ -44,7 +44,7 @@ BuildRequires:	automake >= 1:1.7.5
 %{?with_javac:BuildRequires:	jdk >= 1.1}
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
-%{?with_dotnet:BuildRequires:	mono}
+%{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
