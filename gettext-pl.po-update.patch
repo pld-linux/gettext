@@ -1,0 +1,104 @@
+--- gettext-0.14.6/gettext-tools/po/pl.po.orig	2006-06-21 15:49:05.000000000 +0200
++++ gettext-0.14.6/gettext-tools/po/pl.po	2006-06-22 16:39:28.074440000 +0200
+@@ -6,10 +6,10 @@
+ #
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: GNU gettext-tools 0.14.3\n"
++"Project-Id-Version: GNU gettext-tools 0.14.6\n"
+ "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
+ "POT-Creation-Date: 2006-06-21 15:48+0200\n"
+-"PO-Revision-Date: 2005-04-18 17:30+0100\n"
++"PO-Revision-Date: 2006-06-22 16:40+0200\n"
+ "Last-Translator: Rafa³ Maszkowski <rzm@icm.edu.pl>\n"
+ "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+ "MIME-Version: 1.0\n"
+@@ -294,27 +294,27 @@
+ msgstr "£añcuch zawiera samotny '}' po numerze dyrektywy %u."
+ 
+ #: src/format-gcc-internal.c:245
+-#, fuzzy, c-format
++#, c-format
+ msgid "In the directive number %u, the flags combination is invalid."
+-msgstr "W dyrektywie numer %u argument %d jest ujemny."
++msgstr "W dyrektywie numer %u wystêpuje nieprawid³owa kombinacja flag."
+ 
+ #: src/format-gcc-internal.c:276 src/format-gcc-internal.c:370
+-#, fuzzy, c-format
++#, c-format
+ msgid "In the directive number %u, a precision is not allowed before '%c'."
+-msgstr "W dyrektywie numer %u flagi nie s± dozwolone przed '%c'."
++msgstr "W dyrektywie numer %u precyzja nie jest dozwolona przed '%c'."
+ 
+ #: src/format-gcc-internal.c:314
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "In the directive number %u, the argument number for the precision must be "
+ "equal to %u."
+ msgstr ""
+-"W dyrektywie numer %u numer argumentu 0 nie jest dodatni± liczb± ca³kowit±."
++"W dyrektywie numer %u numer argumentu dla precyzji musi byæ równy %u."
+ 
+ #: src/format-gcc-internal.c:376
+-#, fuzzy, c-format
++#, c-format
+ msgid "In the directive number %u, the precision specification is invalid."
+-msgstr "W dyrektywie numer %u argument %d jest ujemny."
++msgstr "W dyrektywie numer %u okre¶lenie precyzji jest nieprawid³owe."
+ 
+ #: src/format-gcc-internal.c:424
+ #, c-format
+@@ -324,12 +324,12 @@
+ #: src/format-gcc-internal.c:630
+ #, c-format
+ msgid "'msgid' uses %%m but '%s' doesn't"
+-msgstr ""
++msgstr "'msgid' wykorzystuje %%m, ale '%s' nie"
+ 
+ #: src/format-gcc-internal.c:633
+ #, c-format
+ msgid "'msgid' does not use %%m but '%s' uses %%m"
+-msgstr ""
++msgstr "'msgid' nie wykorzystuje %%m, ale '%s' wykorzystuje %%m"
+ 
+ #: src/format-invalid.h:23
+ msgid "The string ends in the middle of a directive."
+@@ -3636,37 +3636,3 @@
+ #, c-format
+ msgid "language `%s' unknown"
+ msgstr "nieznany jêzyk `%s'"
+-
+-#~ msgid "Which is your email address?"
+-#~ msgstr "Jaki jest twój adres e-mail?"
+-
+-#~ msgid "Please choose the number, or enter your email address."
+-#~ msgstr "Proszê wybraæ liczbê albo podaæ swój adres e-mail."
+-
+-#~ msgid "Invalid email address: invalid character."
+-#~ msgstr "B³êdny adres e-mail: b³êdny znak."
+-
+-#~ msgid ""
+-#~ "Invalid email address: need a fully qualified host name or domain name."
+-#~ msgstr ""
+-#~ "B³êdny adres e-mail: nale¿y podaæ pe³n± nazwê komputera albo nazwê domeny."
+-
+-#~ msgid "Invalid email address: missing @"
+-#~ msgstr "B³êdny adres e-mail: brakuj±cy @"
+-
+-#~ msgid "Is the following your email address?"
+-#~ msgstr "Czy to jest adres e-mail?"
+-
+-#~ msgid "Please confirm by pressing Return, or enter your email address."
+-#~ msgstr ""
+-#~ "Proszê potwierdziæ przez naci¶niêcie Enter albo wprowadziæ swój adres e-"
+-#~ "mail."
+-
+-#~ msgid "Couldn't find out about your email address."
+-#~ msgstr "Nie uda³o siê znale¼æ twojego adresu e-mail."
+-
+-#~ msgid "Please enter your email address."
+-#~ msgstr "Prosze podaæ swój adres e-mail."
+-
+-#~ msgid "write to grep subprocess failed"
+-#~ msgstr "pisanie do podprocesu grep nie powiod³o siê"
