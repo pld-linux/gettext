@@ -27,15 +27,16 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.14.5
-Release:	2
+Version:	0.14.6
+Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	e2f6581626a22a0de66dce1d81d00de3
+# Source0-md5:	c26fc7f0a493c5c7c39bbc4e7ed42790
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
-Patch2:		%{name}-no_docs.patch
+Patch2:		%{name}-pl.po-update.patch
+Patch3:		%{name}-no_docs.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7.5
@@ -291,14 +292,16 @@ GNU gettext dla C#.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-# patch2 not finished yet
-#%patch2 -p1
+%patch2 -p1
+# patch not finished yet
+#%patch3 -p1
 
 %{__perl} -pi -e 's/ no / nb /' gettext-runtime/po/LINGUAS gettext-tools/po/LINGUAS
 mv -f gettext-runtime/po/{no,nb}.po
 mv -f gettext-runtime/po/{no,nb}.gmo
 mv -f gettext-tools/po/{no,nb}.po
 mv -f gettext-tools/po/{no,nb}.gmo
+rm -f gettext-tools/po/stamp-po
 
 %build
 # it's m4_included somewhere
