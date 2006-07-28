@@ -45,6 +45,7 @@ BuildRequires:	automake >= 1:1.7.5
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_dotnet:BuildRequires:	mono-csharp}
+BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
@@ -294,6 +295,7 @@ GNU gettext dla C#.
 %patch2 -p1
 # patch not finished yet
 #%patch3 -p1
+sed -i '/docdir/a\AC_SUBST(docdir)' gettext-tools/configure.ac
 
 %{__perl} -pi -e 's/ no / nb /' gettext-runtime/po/LINGUAS gettext-tools/po/LINGUAS
 mv -f gettext-runtime/po/{no,nb}.po
