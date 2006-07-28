@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	asprintf	# without libasprintf C++ library
 %bcond_without	xemacs		# without po-mode for xemacs
-%bcond_with	gcj		# with Java support by gcj requires gcj 3.x, but not 3.0.4+ (broken for now))
+%bcond_without	gcj		# with Java support by gcj (preferred over javac)
 %bcond_with	javac		# with Java support by some javac
 %bcond_without	dotnet		# without .NET support
 #
@@ -27,12 +27,12 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.14.6
+Version:	0.15
 Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	c26fc7f0a493c5c7c39bbc4e7ed42790
+# Source0-md5:	16bc6e4d37ac3d07495f737a2349a22b
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
@@ -41,7 +41,6 @@ URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7.5
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
-%{?with_gcj:BuildRequires:	gcj < 3.0.4}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
@@ -362,6 +361,8 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 install gettext-tools/lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
+rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
+
 %find_lang %{name}-runtime
 %find_lang %{name}-tools
 
@@ -425,7 +426,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/intl/[!c]*
 %attr(755,root,root) %{_datadir}/gettext/intl/config.charset
 %{_datadir}/gettext/msgunfmt.tcl
-%attr(755,root,root) %{_datadir}/gettext/mkinstalldirs
 %{_datadir}/gettext/po
 %dir %{_datadir}/gettext/projects
 %{_datadir}/gettext/projects/index
