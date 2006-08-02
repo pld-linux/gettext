@@ -1,0 +1,11 @@
+diff -Nur gettext-0.15/gettext-tools/configure.ac gettext-0.15.ac/gettext-tools/configure.ac
+--- gettext-0.15/gettext-tools/configure.ac	2006-07-20 22:21:22.000000000 +0200
++++ gettext-0.15.ac/gettext-tools/configure.ac	2006-08-02 02:19:21.000000000 +0200
+@@ -27,6 +27,7 @@
+ 
+ dnl Installation directories.
+ test "$docdir" != '${datarootdir}/doc/${PACKAGE}' || docdir='${datarootdir}/doc/gettext'
++AC_SUBST(docdir)
+ 
+ dnl Checks for programs.
+ AC_PROG_CC
