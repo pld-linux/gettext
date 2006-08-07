@@ -40,6 +40,8 @@ Patch3:		%{name}-no_docs.patch
 Patch4:		%{name}-ac.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.57
+# after dropping -ac.patch:
+#BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.7.5
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
