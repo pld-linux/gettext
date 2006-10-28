@@ -27,19 +27,19 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.15
+Version:	0.16
 Release:	1
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	16bc6e4d37ac3d07495f737a2349a22b
+# Source0-md5:	1560a460c2c4e05b6ff53acb12860750
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
 Patch3:		%{name}-no_docs.patch
 Patch4:		%{name}-ac.patch
 URL:		http://www.gnu.org/software/gettext/
-BuildRequires:	autoconf >= 2.57
+BuildRequires:	autoconf >= 2.59
 # after dropping -ac.patch:
 #BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.7.5
@@ -135,7 +135,7 @@ Group:		Development/Tools
 Requires(post,postun):	/sbin/ldconfig
 Requires:	%{name} = %{version}-%{release}
 Requires:	iconv
-Conflicts:	autoconf < 2.50
+Conflicts:	autoconf < 2.52
 
 %description devel
 The gettext library provides an easy to use library and tools for
@@ -307,8 +307,6 @@ mv -f gettext-tools/po/{no,nb}.gmo
 rm -f gettext-tools/po/stamp-po
 
 %build
-# it's m4_included somewhere
-install %{_aclocaldir}/libtool.m4 m4/libtool.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -318,7 +316,7 @@ cd autoconf-lib-link
 %{__autoconf}
 %{__automake}
 cd ../gettext-runtime
-%{__aclocal} -I m4 -I ../autoconf-lib-link/m4 -I ../gettext-tools/m4 -I ../m4
+%{__aclocal} -I m4 -I gnulib-m4 -I ../autoconf-lib-link/m4 -I ../m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -328,7 +326,7 @@ cd libasprintf
 %{__autoheader}
 %{__automake}
 cd ../../gettext-tools
-%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../m4
+%{__aclocal} -I m4 -I gnulib-m4 -I libgettextpo/gnulib-m4 -I ../autoconf-lib-link/m4 -I ../gettext-runtime/m4 -I ../m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -362,7 +360,7 @@ install -d $RPM_BUILD_ROOT/bin
 mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
 # these static libs are removed in install-exec-clean
-install gettext-tools/lib/.libs/libgettextlib.a \
+install gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
