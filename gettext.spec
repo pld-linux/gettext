@@ -42,7 +42,7 @@ URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.59
 # after dropping -ac.patch:
 #BuildRequires:	autoconf >= 2.60
-BuildRequires:	automake >= 1:1.7.5
+BuildRequires:	automake >= 1:1.10
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
