@@ -28,7 +28,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.16
-Release:	1
+Release:	2
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -38,6 +38,7 @@ Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
 Patch3:		%{name}-no_docs.patch
 Patch4:		%{name}-ac.patch
+Patch5:		%{name}-gettext.m4-fix.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.59
 # after dropping -ac.patch:
@@ -298,6 +299,7 @@ GNU gettext dla C#.
 # patch not finished yet
 #%patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %{__perl} -pi -e 's/ no / nb /' gettext-runtime/po/LINGUAS gettext-tools/po/LINGUAS
 mv -f gettext-runtime/po/{no,nb}.po
