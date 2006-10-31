@@ -7,7 +7,7 @@
 %bcond_without	dotnet		# without .NET support
 #
 
-%include	/usr/lib/rpm/macros.mono
+%{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
 
 %ifnarch %{ix86} %{x8664} arm hppa ppc s390 s390x
 %undefine with_dotnet
