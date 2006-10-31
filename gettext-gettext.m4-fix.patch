@@ -1,0 +1,19 @@
+diff -Nur gettext-0.16.orig/gettext-runtime/m4/gettext.m4 gettext-0.16.gettext.m4-fix/gettext-runtime/m4/gettext.m4
+--- gettext-0.16.orig/gettext-runtime/m4/gettext.m4	2006-10-24 20:56:52.000000000 +0000
++++ gettext-0.16.gettext.m4-fix/gettext-runtime/m4/gettext.m4	2006-10-31 21:05:10.000000000 +0000
+@@ -137,12 +137,12 @@
+         dnl to fall back to GNU NLS library.
+ 
+         if test $gt_api_version -ge 3; then
+-          gt_revision_test_code='[[
++          gt_revision_test_code='
+ #ifndef __GNU_GETTEXT_SUPPORTED_REVISION
+ #define __GNU_GETTEXT_SUPPORTED_REVISION(major) ((major) == 0 ? 0 : -1)
+ #endif
+-typedef int array [2 * (__GNU_GETTEXT_SUPPORTED_REVISION(0) >= 1) - 1];
+-]]'
++typedef int array [[2 * (__GNU_GETTEXT_SUPPORTED_REVISION(0) >= 1) - 1]];
++'
+         else
+           gt_revision_test_code=
+         fi
