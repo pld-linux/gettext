@@ -310,9 +310,6 @@ rm -f gettext-tools/po/stamp-po
 
 %build
 %{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
 cd autoconf-lib-link
 %{__aclocal} -I m4 -I ../m4
 %{__autoconf}
@@ -333,6 +330,9 @@ cd ../../gettext-tools
 %{__autoheader}
 %{__automake}
 cd ..
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 %configure \
 	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	--enable-nls \
