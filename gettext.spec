@@ -12,6 +12,10 @@
 %ifnarch %{ix86} %{x8664} arm hppa ppc s390 s390x
 %undefine with_dotnet
 %endif
+%ifarch i386
+# plain i386 is not supported; mono uses cmpxchg/xadd which require i486
+%undefine with_dotnet
+%endif
 
 %undefine with_xemacs
 
@@ -28,7 +32,7 @@ Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
 Version:	0.16.1
-Release:	1
+Release:	2
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
