@@ -32,7 +32,7 @@ Summary(tr):	Desteði için kitaplýk ve araçlar
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ð¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
 Name:		gettext
 Version:	0.16.1
-Release:	2
+Release:	3
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -49,6 +49,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.10
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
+BuildRequires:	libgomp-devel
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_dotnet:BuildRequires:	mono-csharp}
