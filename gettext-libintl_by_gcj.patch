@@ -1,0 +1,11 @@
+--- gettext-0.16.1/gettext-runtime/configure.ac.orig	2007-01-06 23:57:05.000000000 +0000
++++ gettext-0.16.1/gettext-runtime/configure.ac	2007-01-06 23:57:11.000000000 +0000
+@@ -35,7 +35,7 @@
+ 
+ gt_JAVA_CHOICE
+ 
+-gt_JAVACOMP([1.3], [1.1])
++gt_JAVACOMP([1.3], [1.4])
+ AC_CHECK_PROG(JAR, jar, jar)
+ if test -n "$HAVE_JAVACOMP" && test -n "$JAR" && test "$JAVA_CHOICE" != no; then
+   BUILDJAVA=yes
