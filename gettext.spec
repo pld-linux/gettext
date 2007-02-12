@@ -21,15 +21,15 @@
 
 %define build_java	%{?with_gcj:1}%{!?with_gcj:%{?with_javac:1}%{!?with_javac:0}}
 Summary:	Utilties for program national language support
-Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(es):	Utilitarios para el programa de soporte a lenguas locales
-Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
-Summary(ja):	¥Ş¥ë¥Á¥ê¥ó¥¬¥ë¥á¥Ã¥»¡¼¥¸¤òÀ¸À®¤¹¤ë¤¿¤á¤ÎGNU ¥é¥¤¥Ö¥é¥ê/¥æ¡¼¥Æ¥£¥ê¥Æ¥£
-Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
-Summary(pt_BR):	Utilitários para o programa de suporte de línguas locais
-Summary(ru):	âÉÂÌÉÏÔÅËÉ É ÕÔÉÌÉÔÙ ÄÌÑ ĞÏÄÄÅÒÖËÉ ÎÁÃÉÏÎÁÌØÎÙÈ ÑÚÙËÏ×
-Summary(tr):	Desteği için kitaplık ve araçlar
-Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÔÁ ÕÔÉÌ¦ÔÉ ÄÌÑ Ğ¦ÄÔÒÉÍËÉ ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×
+Summary(de.UTF-8):   Utilities zum Programmieren von nationaler SprachunterstÃ¼tzung
+Summary(es.UTF-8):   Utilitarios para el programa de soporte a lenguas locales
+Summary(fr.UTF-8):   Utilitaires pour le support de la langue nationnalepar les programmes
+Summary(ja.UTF-8):   ãƒãƒ«ãƒãƒªãƒ³ã‚¬ãƒ«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ç”Ÿæˆã™ã‚‹ãŸã‚ã®GNU ãƒ©ã‚¤ãƒ–ãƒ©ãƒª/ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£
+Summary(pl.UTF-8):   NarzÄ™dzia dla programÃ³w ze wsparciem dla jÄ™zykÃ³w narodowych
+Summary(pt_BR.UTF-8):   UtilitÃ¡rios para o programa de suporte de lÃ­nguas locais
+Summary(ru.UTF-8):   Ğ‘Ğ¸Ğ±Ğ»Ğ¸Ğ¾Ñ‚ĞµĞºĞ¸ Ğ¸ ÑƒÑ‚Ğ¸Ğ»Ğ¸Ñ‚Ñ‹ Ğ´Ğ»Ñ Ğ¿Ğ¾Ğ´Ğ´ĞµÑ€Ğ¶ĞºĞ¸ Ğ½Ğ°Ñ†Ğ¸Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ñ‹Ñ… ÑĞ·Ñ‹ĞºĞ¾Ğ²
+Summary(tr.UTF-8):   DesteÄŸi iÃ§in kitaplÄ±k ve araÃ§lar
+Summary(uk.UTF-8):   Ğ‘Ñ–Ğ±Ğ»Ñ–Ğ¾Ñ‚ĞµĞºĞ¸ Ñ‚Ğ° ÑƒÑ‚Ğ¸Ğ»Ñ–Ñ‚Ğ¸ Ğ´Ğ»Ñ Ğ¿Ñ–Ğ´Ñ‚Ñ€Ğ¸Ğ¼ĞºĞ¸ Ğ½Ğ°Ñ†Ñ–Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ğ¸Ñ… Ğ¼Ğ¾Ğ²
 Name:		gettext
 Version:	0.16.1
 Release:	4
@@ -72,70 +72,70 @@ library and tools for creating, using, and modifying natural language
 catalogs and is a powerful and simple method for internationalizing
 programs.
 
-%description -l de
-Die gettext-Library enthält eine einfach anzuwendende Library und
-Tools zum Erstellen, Verwenden und Ändern von
-natürlichsprachigen-Kataloge. Es ist ein einfaches und
-leistungsfähiges Verfahren zum Lokalisieren von Programmen.
+%description -l de.UTF-8
+Die gettext-Library enthÃ¤lt eine einfach anzuwendende Library und
+Tools zum Erstellen, Verwenden und Ã„ndern von
+natÃ¼rlichsprachigen-Kataloge. Es ist ein einfaches und
+leistungsfÃ¤higes Verfahren zum Lokalisieren von Programmen.
 
-%description -l es
-La biblioteca gettext nos ofrece una biblioteca fácil de usar y
-herramientas para creación, uso y modificación de catálogos de
-lenguaje natural. Es un potente y sencillo método de
-internacionalización de programas.
+%description -l es.UTF-8
+La biblioteca gettext nos ofrece una biblioteca fÃ¡cil de usar y
+herramientas para creaciÃ³n, uso y modificaciÃ³n de catÃ¡logos de
+lenguaje natural. Es un potente y sencillo mÃ©todo de
+internacionalizaciÃ³n de programas.
 
-%description -l fr
-La librarie gettext fournit des outils et une librairie simple à
-utiliser pour manipuler, créer, et modifier des catalogues de langage
-naturel. C'est une méthode simple et puissante pour internationnaliser
+%description -l fr.UTF-8
+La librarie gettext fournit des outils et une librairie simple Ã 
+utiliser pour manipuler, crÃ©er, et modifier des catalogues de langage
+naturel. C'est une mÃ©thode simple et puissante pour internationnaliser
 les programmes.
 
-%description -l ja
+%description -l ja.UTF-8
 GNU gettext
-¥Ñ¥Ã¥±¡¼¥¸¤Ï¥×¥í¥°¥é¥àÃæ¤Ç¥Ş¥ë¥Á¥ê¥ó¥¬¥ë¥á¥Ã¥»¡¼¥¸¤òÀ¸À®¤¹¤ë
-¤¿¤á¤Î¥Ä¡¼¥ë¤ÈÊ¸½ñ¤ò¶¡µë¤¹¤ë¡£¥Ä¡¼¥ë¤Ï¥á¥Ã¥»¡¼¥¸¥«¥¿¥í¥°¤ò¥µ¥İ¡¼¥È¤¹¤ë¤¿¤á¤Ë
-¥×¥í¥°¥é¥à¤¬¤É¤Î¤è¤¦¤Ë½ñ¤«¤ì¤ë¤Ù¤­¤«¤Î¿½¤·¹ç¤ï¤»¤È¡¢¥á¥Ã¥»¡¼¥¸¥«¥¿¥í¥°¤Î¤¿¤á¤Î
-¥Ç¥£¥ì¥¯¥È¥ê¤È¥Õ¥¡¥¤¥ëÌ¾¤ÎÁÈ¿¥²½¤È¡¢ËİÌõ¤µ¤ì¤¿¥á¥Ã¥»¡¼¥¸¤ÎËä¤á¹ç¤ï¤»¤ò
-¥µ¥İ¡¼¥È¤¹¤ë¤¿¤á¤Î¥é¥ó¥¿¥¤¥à¥é¥¤¥Ö¥é¥ê¤È¡¢ËİÌõ²ÄÇ½¤Ç¤«¤Ä¤¹¤Ç¤ËËİÌõ¤µ¤ì¤¿Ê¸»úÎó
-¤ò¼è¤ê°·¤¦ÆÈÎ©¤·¤¿¥×¥í¥°¥é¥à¤ò´Ş¤ó¤Ç¤¤¤ë¡£gettext
-¤Ï´ÊÃ±¤Ë»È¤¨¤ë¥é¥¤¥Ö¥é¥ê
-¤È¼«Á³¸À¸ì¤Î¥«¥¿¥í¥°¤òÀ¸À®¡¢»ÈÍÑ¡¢½¤Àµ¤¹¤ë¥Ä¡¼¥ë¤È¡¢¹ñºİ²½¥×¥í¥°¥é¥à
-¤Î¤¿¤á¤Î¶¯ÎÏ¤«¤Ä¥·¥ó¥×¥ë¤ÊÊıË¡¤ò¶¡µë¤¹¤ë¡£
+ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã¯ãƒ—ãƒ­ã‚°ãƒ©ãƒ ä¸­ã§ãƒãƒ«ãƒãƒªãƒ³ã‚¬ãƒ«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ç”Ÿæˆã™ã‚‹
+ãŸã‚ã®ãƒ„ãƒ¼ãƒ«ã¨æ–‡æ›¸ã‚’ä¾›çµ¦ã™ã‚‹ã€‚ãƒ„ãƒ¼ãƒ«ã¯ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚«ã‚¿ãƒ­ã‚°ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ãŸã‚ã«
+ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒã©ã®ã‚ˆã†ã«æ›¸ã‹ã‚Œã‚‹ã¹ãã‹ã®ç”³ã—åˆã‚ã›ã¨ã€ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚«ã‚¿ãƒ­ã‚°ã®ãŸã‚ã®
+ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¨ãƒ•ã‚¡ã‚¤ãƒ«åã®çµ„ç¹”åŒ–ã¨ã€ç¿»è¨³ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®åŸ‹ã‚åˆã‚ã›ã‚’
+ã‚µãƒãƒ¼ãƒˆã™ã‚‹ãŸã‚ã®ãƒ©ãƒ³ã‚¿ã‚¤ãƒ ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã¨ã€ç¿»è¨³å¯èƒ½ã§ã‹ã¤ã™ã§ã«ç¿»è¨³ã•ã‚ŒãŸæ–‡å­—åˆ—
+ã‚’å–ã‚Šæ‰±ã†ç‹¬ç«‹ã—ãŸãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’å«ã‚“ã§ã„ã‚‹ã€‚gettext
+ã¯ç°¡å˜ã«ä½¿ãˆã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+ã¨è‡ªç„¶è¨€èªã®ã‚«ã‚¿ãƒ­ã‚°ã‚’ç”Ÿæˆã€ä½¿ç”¨ã€ä¿®æ­£ã™ã‚‹ãƒ„ãƒ¼ãƒ«ã¨ã€å›½éš›åŒ–ãƒ—ãƒ­ã‚°ãƒ©ãƒ 
+ã®ãŸã‚ã®å¼·åŠ›ã‹ã¤ã‚·ãƒ³ãƒ—ãƒ«ãªæ–¹æ³•ã‚’ä¾›çµ¦ã™ã‚‹ã€‚
 
-%description -l pl
-Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
-katalogów jêzyków narodowych. To jest prosta i wydajna metoda
-lokalizacji (internacjonalizacji) programów.
+%description -l pl.UTF-8
+Pakiet gettext dostarcza narzÄ™dzi do tworzenia, uÅ¼ywania i modyfikacji
+katalogÃ³w jÄ™zykÃ³w narodowych. To jest prosta i wydajna metoda
+lokalizacji (internacjonalizacji) programÃ³w.
 
-%description -l pt_BR
-A biblioteca gettext oferece uma biblioteca fácil de usar e
-ferramentas para criação, uso e modificação de catálogos de linguagem
-natural. Ele é um poderoso e simples método de internacionalização de
+%description -l pt_BR.UTF-8
+A biblioteca gettext oferece uma biblioteca fÃ¡cil de usar e
+ferramentas para criaÃ§Ã£o, uso e modificaÃ§Ã£o de catÃ¡logos de linguagem
+natural. Ele Ã© um poderoso e simples mÃ©todo de internacionalizaÃ§Ã£o de
 programas.
 
-%description -l ru
-ğÁËÅÔ gettext ÓÏÄÅÒÖÉÔ ÂÉÂÌÉÏÔÅËÕ É ĞÒÏÓÔÙÅ × ÉÓĞÏÌØÚÏ×ÁÎÉÉ
-ÉÎÓÔÒÕÍÅÎÔÙ ÄÌÑ ÓÏÚÄÁÎÉÑ, ÉÓĞÏÌØÚÏ×ÁÎÉÑ É ÍÏÄÉÆÉËÁÃÉÉ ËÁÔÁÌÏÇÏ×
-ÎÁÃÉÏÎÁÌØÎÙÈ ÑÚÙËÏ×. üÔÏ ĞÒÏÓÔÏÊ É ÍÏİÎÙÊ ÍÅÔÏÄ ÄÌÑ
-ÉÎÔÅÒÎÁÃÉÏÎÁÌÉÚÁÃÉÉ ĞÒÏÇÒÁÍÍ.
+%description -l ru.UTF-8
+ĞŸĞ°ĞºĞµÑ‚ gettext ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ¸Ñ‚ Ğ±Ğ¸Ğ±Ğ»Ğ¸Ğ¾Ñ‚ĞµĞºÑƒ Ğ¸ Ğ¿Ñ€Ğ¾ÑÑ‚Ñ‹Ğµ Ğ² Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğ¸
+Ğ¸Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ñ‹ Ğ´Ğ»Ñ ÑĞ¾Ğ·Ğ´Ğ°Ğ½Ğ¸Ñ, Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸Ñ Ğ¸ Ğ¼Ğ¾Ğ´Ğ¸Ñ„Ğ¸ĞºĞ°Ñ†Ğ¸Ğ¸ ĞºĞ°Ñ‚Ğ°Ğ»Ğ¾Ğ³Ğ¾Ğ²
+Ğ½Ğ°Ñ†Ğ¸Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ñ‹Ñ… ÑĞ·Ñ‹ĞºĞ¾Ğ². Ğ­Ñ‚Ğ¾ Ğ¿Ñ€Ğ¾ÑÑ‚Ğ¾Ğ¹ Ğ¸ Ğ¼Ğ¾Ñ‰Ğ½Ñ‹Ğ¹ Ğ¼ĞµÑ‚Ğ¾Ğ´ Ğ´Ğ»Ñ
+Ğ¸Ğ½Ñ‚ĞµÑ€Ğ½Ğ°Ñ†Ğ¸Ğ¾Ğ½Ğ°Ğ»Ğ¸Ğ·Ğ°Ñ†Ğ¸Ğ¸ Ğ¿Ñ€Ğ¾Ğ³Ñ€Ğ°Ğ¼Ğ¼.
 
-%description -l tr
-gettext, yerel dil desteğinde kullanılan katalogları değiştirebilmek
-için, kolayca kullanılabilen kitaplık ve araçları sağlar. Bu,
-programları uluslararasılaştırmak için sıkça başvurulan, kuvvetli bir
-yöntemdir.
+%description -l tr.UTF-8
+gettext, yerel dil desteÄŸinde kullanÄ±lan kataloglarÄ± deÄŸiÅŸtirebilmek
+iÃ§in, kolayca kullanÄ±labilen kitaplÄ±k ve araÃ§larÄ± saÄŸlar. Bu,
+programlarÄ± uluslararasÄ±laÅŸtÄ±rmak iÃ§in sÄ±kÃ§a baÅŸvurulan, kuvvetli bir
+yÃ¶ntemdir.
 
-%description -l uk
-ğÁËÅÔ gettext Í¦ÓÔÉÔØ Â¦ÂÌ¦ÏÔÅËÕ ÔÁ ĞÒÏÓÔ¦ Õ ×ÉËÏÒÉÓÔÁÎÎ¦ ¦ÎÓÔÒÕÍÅÎÔÉ
-ÄÌÑ ÓÔ×ÏÒÅÎÎÑ, ×ÉËÏÒÉÓÔÁÎÎÑ ÔÁ ÍÏÄÉÆ¦ËÁÃ¦§ ËÁÔÁÌÏÇ¦× ÎÁÃ¦ÏÎÁÌØÎÉÈ ÍÏ×.
-ãÅ ĞÒÏÓÔÉÊ ÔÁ ĞÏÔÕÖÎÉÊ ÍÅÔÏÄ ÄÌÑ ¦ÎÔÅÒÎÁÃ¦ÏÎÁÌ¦ÚÁÃ¦§ ĞÒÏÇÒÁÍ.
+%description -l uk.UTF-8
+ĞŸĞ°ĞºĞµÑ‚ gettext Ğ¼Ñ–ÑÑ‚Ğ¸Ñ‚ÑŒ Ğ±Ñ–Ğ±Ğ»Ñ–Ğ¾Ñ‚ĞµĞºÑƒ Ñ‚Ğ° Ğ¿Ñ€Ğ¾ÑÑ‚Ñ– Ñƒ Ğ²Ğ¸ĞºĞ¾Ñ€Ğ¸ÑÑ‚Ğ°Ğ½Ğ½Ñ– Ñ–Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ğ¸
+Ğ´Ğ»Ñ ÑÑ‚Ğ²Ğ¾Ñ€ĞµĞ½Ğ½Ñ, Ğ²Ğ¸ĞºĞ¾Ñ€Ğ¸ÑÑ‚Ğ°Ğ½Ğ½Ñ Ñ‚Ğ° Ğ¼Ğ¾Ğ´Ğ¸Ñ„Ñ–ĞºĞ°Ñ†Ñ–Ñ— ĞºĞ°Ñ‚Ğ°Ğ»Ğ¾Ğ³Ñ–Ğ² Ğ½Ğ°Ñ†Ñ–Ğ¾Ğ½Ğ°Ğ»ÑŒĞ½Ğ¸Ñ… Ğ¼Ğ¾Ğ².
+Ğ¦Ğµ Ğ¿Ñ€Ğ¾ÑÑ‚Ğ¸Ğ¹ Ñ‚Ğ° Ğ¿Ğ¾Ñ‚ÑƒĞ¶Ğ½Ğ¸Ğ¹ Ğ¼ĞµÑ‚Ğ¾Ğ´ Ğ´Ğ»Ñ Ñ–Ğ½Ñ‚ĞµÑ€Ğ½Ğ°Ñ†Ñ–Ğ¾Ğ½Ğ°Ğ»Ñ–Ğ·Ğ°Ñ†Ñ–Ñ— Ğ¿Ñ€Ğ¾Ğ³Ñ€Ğ°Ğ¼.
 
 %package devel
 Summary:	Utilties for program national language support
-Summary(de):	Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(fr):	Utilitaires pour le support de la langue nationnalepar les programmes
-Summary(pl):	Narzêdzia dla programów ze wsparciem dla jêzyków narodowych
-Summary(tr):	Desteği için kitaplık ve araçlar
+Summary(de.UTF-8):   Utilities zum Programmieren von nationaler SprachunterstÃ¼tzung
+Summary(fr.UTF-8):   Utilitaires pour le support de la langue nationnalepar les programmes
+Summary(pl.UTF-8):   NarzÄ™dzia dla programÃ³w ze wsparciem dla jÄ™zykÃ³w narodowych
+Summary(tr.UTF-8):   DesteÄŸi iÃ§in kitaplÄ±k ve araÃ§lar
 License:	GPL
 Group:		Development/Tools
 Requires(post,postun):	/sbin/ldconfig
@@ -148,14 +148,14 @@ The gettext library provides an easy to use library and tools for
 creating, using, and modifying natural language catalogs. It is a
 powerfull and simple method for internationalizing programs.
 
-%description devel -l pl
-Pakiet gettext dostarcza narzêdzi do tworzenia, u¿ywania i modyfikacji
-katalogów jêzyków narodowych. To jest prosta i wydajna metoda
-lokalizacji (internacjonalizacji) programów.
+%description devel -l pl.UTF-8
+Pakiet gettext dostarcza narzÄ™dzi do tworzenia, uÅ¼ywania i modyfikacji
+katalogÃ³w jÄ™zykÃ³w narodowych. To jest prosta i wydajna metoda
+lokalizacji (internacjonalizacji) programÃ³w.
 
 %package static
 Summary:	Static gettext utility libraries
-Summary(pl):	Statyczne biblioteki narzêdziowe gettext
+Summary(pl.UTF-8):   Statyczne biblioteki narzÄ™dziowe gettext
 License:	GPL
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
@@ -164,13 +164,13 @@ Requires:	%{name}-devel = %{version}-%{release}
 This package contains static versions of gettext utility libraries
 (libgettextlib, libgettextsrc and libgettextpo).
 
-%description static -l pl
-Ten pakiet zawiera statyczne wersje bibliotek narzêdziowych gettext
+%description static -l pl.UTF-8
+Ten pakiet zawiera statyczne wersje bibliotek narzÄ™dziowych gettext
 (libgettextlib, libgettextsrc i libgettextpo).
 
 %package -n libasprintf
 Summary:	GNU libasprintf - automatic formatted output to strings in C++
-Summary(pl):	GNU libasprintf - automatyczne formatowanie wyj¶cia do ³añcuchów w C++
+Summary(pl.UTF-8):   GNU libasprintf - automatyczne formatowanie wyjÅ›cia do Å‚aÅ„cuchÃ³w w C++
 License:	LGPL
 Group:		Libraries
 
@@ -179,14 +179,14 @@ This package makes the C formatted output routines (`fprintf' et al.)
 usable in C++ programs, for use with the `<string>' strings and the
 `<iostream>' streams.
 
-%description -n libasprintf -l pl
-Ten pakiet czyni funkcje C formatuj±ce wyj¶cie (fprintf i inne)
-u¿ywalnymi w programach w C++, z ³añcuchami <string> i strumieniami
+%description -n libasprintf -l pl.UTF-8
+Ten pakiet czyni funkcje C formatujÄ…ce wyjÅ›cie (fprintf i inne)
+uÅ¼ywalnymi w programach w C++, z Å‚aÅ„cuchami <string> i strumieniami
 <iostream>.
 
 %package -n libasprintf-devel
 Summary:	Header file and documentation for libasprintf
-Summary(pl):	Plik nag³ówkowy i dokumentacja dla libasprintf
+Summary(pl.UTF-8):   Plik nagÅ‚Ã³wkowy i dokumentacja dla libasprintf
 License:	LGPL
 Group:		Development/Libraries
 Requires:	libasprintf = %{version}-%{release}
@@ -194,12 +194,12 @@ Requires:	libasprintf = %{version}-%{release}
 %description -n libasprintf-devel
 Header file and documentation for libasprintf.
 
-%description -n libasprintf-devel -l pl
-Plik nag³ówkowy i dokumentacja dla libasprintf.
+%description -n libasprintf-devel -l pl.UTF-8
+Plik nagÅ‚Ã³wkowy i dokumentacja dla libasprintf.
 
 %package -n libasprintf-static
 Summary:	Static libasprintf library
-Summary(pl):	Statyczna biblioteka libasprintf
+Summary(pl.UTF-8):   Statyczna biblioteka libasprintf
 License:	LGPL
 Group:		Development/Libraries
 Requires:	libasprintf-devel = %{version}-%{release}
@@ -207,12 +207,12 @@ Requires:	libasprintf-devel = %{version}-%{release}
 %description -n libasprintf-static
 Static libasprintf library.
 
-%description -n libasprintf-static -l pl
+%description -n libasprintf-static -l pl.UTF-8
 Statyczna biblioteka libasprintf.
 
 %package java
 Summary:	Runtime classes for Java programs internationalization
-Summary(pl):	Klasy do uruchamiania umiêdzynarodowionych programów w Javie
+Summary(pl.UTF-8):   Klasy do uruchamiania umiÄ™dzynarodowionych programÃ³w w Javie
 License:	LGPL
 Group:		Development/Languages/Java
 Requires:	%{name} = %{version}-%{release}
@@ -220,12 +220,12 @@ Requires:	%{name} = %{version}-%{release}
 %description java
 Runtime classes for Java programs internationalization.
 
-%description java -l pl
-Klasy do uruchamiania umiêdzynarodowionych programów w Javie.
+%description java -l pl.UTF-8
+Klasy do uruchamiania umiÄ™dzynarodowionych programÃ³w w Javie.
 
 %package java-devel
 Summary:	Development classes for Java programs internationalization
-Summary(pl):	Klasy do umiêdzynarodowiania programów w Javie dla programistów
+Summary(pl.UTF-8):   Klasy do umiÄ™dzynarodowiania programÃ³w w Javie dla programistÃ³w
 License:	GPL
 Group:		Development/Tools
 Requires:	%{name}-devel = %{version}-%{release}
@@ -233,14 +233,14 @@ Requires:	%{name}-devel = %{version}-%{release}
 %description java-devel
 Development classes for Java programs internationalization.
 
-%description java-devel -l pl
-Klasy do umiêdzynarodowiania programów w Javie dla programistów.
+%description java-devel -l pl.UTF-8
+Klasy do umiÄ™dzynarodowiania programÃ³w w Javie dla programistÃ³w.
 
 %package -n xemacs-po-mode-pkg
 Summary:	Xemacs PO-mode
-Summary(es):	Facilita la edición de archivos PO (internacionalización) con emacs
-Summary(pl):	Tryb PO dla Xemacsa
-Summary(pt_BR):	Facilita a edição de arquivos PO (internacionalização) com o emacs
+Summary(es.UTF-8):   Facilita la ediciÃ³n de archivos PO (internacionalizaciÃ³n) con emacs
+Summary(pl.UTF-8):   Tryb PO dla Xemacsa
+Summary(pt_BR.UTF-8):   Facilita a ediÃ§Ã£o de arquivos PO (internacionalizaÃ§Ã£o) com o emacs
 License:	GPL
 Group:		Applications/Editors/Emacs
 Requires:	xemacs
@@ -248,23 +248,23 @@ Requires:	xemacs
 %description -n xemacs-po-mode-pkg
 Emacs PO-mode.
 
-%description -n xemacs-po-mode-pkg -l es
-Este paquete suministra las herramientas para ayudar en la edición de
+%description -n xemacs-po-mode-pkg -l es.UTF-8
+Este paquete suministra las herramientas para ayudar en la ediciÃ³n de
 archivos PO, como documentado en el manual del usuario del GNU
-gettext. Mira este manual para la documentación de uso, que no se
-incluye aquí.
+gettext. Mira este manual para la documentaciÃ³n de uso, que no se
+incluye aquÃ­.
 
-%description -n xemacs-po-mode-pkg -l pl
+%description -n xemacs-po-mode-pkg -l pl.UTF-8
 Tryb edycji PO dla emacsa.
 
-%description -n xemacs-po-mode-pkg -l pt_BR
-Este pacote provê as ferramentas para ajudar na edição de arquivos PO,
-como documentado no manual do usuário do GNU gettext. Veja este manual
-para a documentação de uso, a qual não é incluída aqui.
+%description -n xemacs-po-mode-pkg -l pt_BR.UTF-8
+Este pacote provÃª as ferramentas para ajudar na ediÃ§Ã£o de arquivos PO,
+como documentado no manual do usuÃ¡rio do GNU gettext. Veja este manual
+para a documentaÃ§Ã£o de uso, a qual nÃ£o Ã© incluÃ­da aqui.
 
 %package autopoint
 Summary:	gettextize replacement
-Summary(pl):	Zamiennik gettextize
+Summary(pl.UTF-8):   Zamiennik gettextize
 License:	GPL
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
@@ -278,22 +278,22 @@ into a source package. It extracts from a macro call of the form
 package, and copies the infrastructure files belonging to this version
 into the package.
 
-%description autopoint -l pl
+%description autopoint -l pl.UTF-8
 Program autopoint kopiuje standardowe pliki infrastruktury gettexta do
-pakietu ¼ród³owego. Wyci±ga u¿yt± wersjê gettexta z wywo³ania makra w
+pakietu ÅºrÃ³dÅ‚owego. WyciÄ…ga uÅ¼ytÄ… wersjÄ™ gettexta z wywoÅ‚ania makra w
 postaci AM_GNU_GETTEXT_VERSION(VERSION) w pliku configure.in lub
-configure.ac i kopiuje do pakietu pliki infrastruktury nale¿±ce do tej
+configure.ac i kopiuje do pakietu pliki infrastruktury naleÅ¼Ä…ce do tej
 wersji.
 
 %package -n dotnet-gettext
 Summary:	GNU gettext for C#
-Summary(pl):	GNU gettext dla C#
+Summary(pl.UTF-8):   GNU gettext dla C#
 Group:		Development/Tools
 
 %description -n dotnet-gettext
 GNU gettext for C#.
 
-%description -n dotnet-gettext -l pl
+%description -n dotnet-gettext -l pl.UTF-8
 GNU gettext dla C#.
 
 %prep
