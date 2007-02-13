@@ -21,15 +21,15 @@
 
 %define build_java	%{?with_gcj:1}%{!?with_gcj:%{?with_javac:1}%{!?with_javac:0}}
 Summary:	Utilties for program national language support
-Summary(de.UTF-8):   Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(es.UTF-8):   Utilitarios para el programa de soporte a lenguas locales
-Summary(fr.UTF-8):   Utilitaires pour le support de la langue nationnalepar les programmes
-Summary(ja.UTF-8):   マルチリンガルメッセージを生成するためのGNU ライブラリ/ユーティリティ
-Summary(pl.UTF-8):   Narzędzia dla programów ze wsparciem dla języków narodowych
-Summary(pt_BR.UTF-8):   Utilitários para o programa de suporte de línguas locais
-Summary(ru.UTF-8):   Библиотеки и утилиты для поддержки национальных языков
-Summary(tr.UTF-8):   Desteği için kitaplık ve araçlar
-Summary(uk.UTF-8):   Бібліотеки та утиліти для підтримки національних мов
+Summary(de.UTF-8):	Utilities zum Programmieren von nationaler Sprachunterstützung
+Summary(es.UTF-8):	Utilitarios para el programa de soporte a lenguas locales
+Summary(fr.UTF-8):	Utilitaires pour le support de la langue nationnalepar les programmes
+Summary(ja.UTF-8):	マルチリンガルメッセージを生成するためのGNU ライブラリ/ユーティリティ
+Summary(pl.UTF-8):	Narzędzia dla programów ze wsparciem dla języków narodowych
+Summary(pt_BR.UTF-8):	Utilitários para o programa de suporte de línguas locais
+Summary(ru.UTF-8):	Библиотеки и утилиты для поддержки национальных языков
+Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
+Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.16.1
 Release:	4
@@ -132,10 +132,10 @@ yöntemdir.
 
 %package devel
 Summary:	Utilties for program national language support
-Summary(de.UTF-8):   Utilities zum Programmieren von nationaler Sprachunterstützung
-Summary(fr.UTF-8):   Utilitaires pour le support de la langue nationnalepar les programmes
-Summary(pl.UTF-8):   Narzędzia dla programów ze wsparciem dla języków narodowych
-Summary(tr.UTF-8):   Desteği için kitaplık ve araçlar
+Summary(de.UTF-8):	Utilities zum Programmieren von nationaler Sprachunterstützung
+Summary(fr.UTF-8):	Utilitaires pour le support de la langue nationnalepar les programmes
+Summary(pl.UTF-8):	Narzędzia dla programów ze wsparciem dla języków narodowych
+Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 License:	GPL
 Group:		Development/Tools
 Requires(post,postun):	/sbin/ldconfig
@@ -155,7 +155,7 @@ lokalizacji (internacjonalizacji) programów.
 
 %package static
 Summary:	Static gettext utility libraries
-Summary(pl.UTF-8):   Statyczne biblioteki narzędziowe gettext
+Summary(pl.UTF-8):	Statyczne biblioteki narzędziowe gettext
 License:	GPL
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
@@ -170,7 +170,7 @@ Ten pakiet zawiera statyczne wersje bibliotek narzędziowych gettext
 
 %package -n libasprintf
 Summary:	GNU libasprintf - automatic formatted output to strings in C++
-Summary(pl.UTF-8):   GNU libasprintf - automatyczne formatowanie wyjścia do łańcuchów w C++
+Summary(pl.UTF-8):	GNU libasprintf - automatyczne formatowanie wyjścia do łańcuchów w C++
 License:	LGPL
 Group:		Libraries
 
@@ -186,7 +186,7 @@ używalnymi w programach w C++, z łańcuchami <string> i strumieniami
 
 %package -n libasprintf-devel
 Summary:	Header file and documentation for libasprintf
-Summary(pl.UTF-8):   Plik nagłówkowy i dokumentacja dla libasprintf
+Summary(pl.UTF-8):	Plik nagłówkowy i dokumentacja dla libasprintf
 License:	LGPL
 Group:		Development/Libraries
 Requires:	libasprintf = %{version}-%{release}
@@ -199,7 +199,7 @@ Plik nagłówkowy i dokumentacja dla libasprintf.
 
 %package -n libasprintf-static
 Summary:	Static libasprintf library
-Summary(pl.UTF-8):   Statyczna biblioteka libasprintf
+Summary(pl.UTF-8):	Statyczna biblioteka libasprintf
 License:	LGPL
 Group:		Development/Libraries
 Requires:	libasprintf-devel = %{version}-%{release}
@@ -212,7 +212,7 @@ Statyczna biblioteka libasprintf.
 
 %package java
 Summary:	Runtime classes for Java programs internationalization
-Summary(pl.UTF-8):   Klasy do uruchamiania umiędzynarodowionych programów w Javie
+Summary(pl.UTF-8):	Klasy do uruchamiania umiędzynarodowionych programów w Javie
 License:	LGPL
 Group:		Development/Languages/Java
 Requires:	%{name} = %{version}-%{release}
@@ -225,7 +225,7 @@ Klasy do uruchamiania umiędzynarodowionych programów w Javie.
 
 %package java-devel
 Summary:	Development classes for Java programs internationalization
-Summary(pl.UTF-8):   Klasy do umiędzynarodowiania programów w Javie dla programistów
+Summary(pl.UTF-8):	Klasy do umiędzynarodowiania programów w Javie dla programistów
 License:	GPL
 Group:		Development/Tools
 Requires:	%{name}-devel = %{version}-%{release}
@@ -238,9 +238,9 @@ Klasy do umiędzynarodowiania programów w Javie dla programistów.
 
 %package -n xemacs-po-mode-pkg
 Summary:	Xemacs PO-mode
-Summary(es.UTF-8):   Facilita la edición de archivos PO (internacionalización) con emacs
-Summary(pl.UTF-8):   Tryb PO dla Xemacsa
-Summary(pt_BR.UTF-8):   Facilita a edição de arquivos PO (internacionalização) com o emacs
+Summary(es.UTF-8):	Facilita la edición de archivos PO (internacionalización) con emacs
+Summary(pl.UTF-8):	Tryb PO dla Xemacsa
+Summary(pt_BR.UTF-8):	Facilita a edição de arquivos PO (internacionalização) com o emacs
 License:	GPL
 Group:		Applications/Editors/Emacs
 Requires:	xemacs
@@ -264,7 +264,7 @@ para a documentação de uso, a qual não é incluída aqui.
 
 %package autopoint
 Summary:	gettextize replacement
-Summary(pl.UTF-8):   Zamiennik gettextize
+Summary(pl.UTF-8):	Zamiennik gettextize
 License:	GPL
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
@@ -287,7 +287,7 @@ wersji.
 
 %package -n dotnet-gettext
 Summary:	GNU gettext for C#
-Summary(pl.UTF-8):   GNU gettext dla C#
+Summary(pl.UTF-8):	GNU gettext dla C#
 Group:		Development/Tools
 
 %description -n dotnet-gettext
