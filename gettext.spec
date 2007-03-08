@@ -12,6 +12,10 @@
 %ifnarch %{ix86} %{x8664} arm hppa ppc s390 s390x
 %undefine with_dotnet
 %endif
+%ifarch i386
+# plain i386 is not supported; mono uses cmpxchg/xadd which require i486
+%undefine with_dotnet
+%endif
 
 %undefine with_xemacs
 
@@ -27,18 +31,17 @@ Summary(ru):	Библиотеки и утилиты для поддержки национальных языков
 Summary(tr):	DesteПi iГin kitaplЩk ve araГlar
 Summary(uk):	Б╕бл╕отеки та утил╕ти для п╕дтримки нац╕ональних мов
 Name:		gettext
-Version:	0.16
-Release:	2
+Version:	0.16.1
+Release:	3
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	1560a460c2c4e05b6ff53acb12860750
+# Source0-md5:	3d9ad24301c6d6b17ec30704a13fe127
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
 Patch3:		%{name}-no_docs.patch
 Patch4:		%{name}-ac.patch
-Patch5:		%{name}-gettext.m4-fix.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.59
 # after dropping -ac.patch:
@@ -299,7 +302,6 @@ GNU gettext dla C#.
 # patch not finished yet
 #%patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %{__perl} -pi -e 's/ no / nb /' gettext-runtime/po/LINGUAS gettext-tools/po/LINGUAS
 mv -f gettext-runtime/po/{no,nb}.po
