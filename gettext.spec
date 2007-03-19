@@ -5,6 +5,7 @@
 %bcond_without	gcj		# with Java support by gcj (preferred over javac)
 %bcond_with	javac		# with Java support by some javac
 %bcond_without	dotnet		# without .NET support
+%bcond_with	bootstrap
 #
 
 %{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
@@ -32,7 +33,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.16.1
-Release:	7
+Release:	8
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -344,7 +345,8 @@ cd ..
 	%{!?with_dotnet:--disable-csharp} \
 	%{?with_dotnet:--enable-csharp=mono} \
 	--without-included-gettext
-%{__make}
+%{__make} \
+	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 
 # msgfmt has been built, so now we can update pl.gmos
 %{__make} pl.gmo -C gettext-runtime/po \
