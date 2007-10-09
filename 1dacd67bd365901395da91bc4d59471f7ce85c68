@@ -1,0 +1,2 @@
+- pass LDFLAGS="-s" to ./configure environment instead strip in %install
+  binaries.
