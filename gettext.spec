@@ -32,12 +32,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.16.1
-Release:	8
-License:	LGPL (runtime), GPL (tools)
+Version:	0.17
+Release:	0.1
+License:	LGPL (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	3d9ad24301c6d6b17ec30704a13fe127
+# Source0-md5:	58a2bc6d39c0ba57823034d55d65d606
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
@@ -299,20 +299,15 @@ GNU gettext dla C#.
 
 %prep
 %setup -q
-%patch0 -p1
+# FIXME
+#%patch0 -p1
 %patch1 -p1
-%patch2 -p1
+# FIXME
+#%patch2 -p1
 # patch not finished yet
 #%patch3 -p1
 %patch4 -p1
 %patch5 -p1
-
-%{__perl} -pi -e 's/ no / nb /' gettext-runtime/po/LINGUAS gettext-tools/po/LINGUAS
-mv -f gettext-runtime/po/{no,nb}.po
-mv -f gettext-runtime/po/{no,nb}.gmo
-mv -f gettext-tools/po/{no,nb}.po
-mv -f gettext-tools/po/{no,nb}.gmo
-rm -f gettext-tools/po/stamp-po
 
 %build
 %{__libtoolize}
