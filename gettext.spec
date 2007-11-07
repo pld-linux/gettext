@@ -34,7 +34,7 @@ Summary(uk.UTF-8):	Бібліотеки та утиліти для підтри�
 Name:		gettext
 Version:	0.17
 Release:	0.1
-License:	LGPL (libintl), GPL v3+ (tools)
+License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
 # Source0-md5:	58a2bc6d39c0ba57823034d55d65d606
@@ -42,16 +42,15 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
 Patch3:		%{name}-no_docs.patch
-Patch4:		%{name}-ac.patch
-Patch5:		%{name}-libintl_by_gcj.patch
+Patch4:		%{name}-libintl_by_gcj.patch
 URL:		http://www.gnu.org/software/gettext/
-BuildRequires:	autoconf >= 2.59
-# after dropping -ac.patch:
-#BuildRequires:	autoconf >= 2.60
+BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
+%if "%(%{__cc} -dumpversion | grep -q '^4.[2-9]' ; echo $?)" == "0"
 BuildRequires:	libgomp-devel
+%endif
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_dotnet:BuildRequires:	mono-csharp}
@@ -137,7 +136,7 @@ Summary(de.UTF-8):	Utilities zum Programmieren von nationaler Sprachunterstützu
 Summary(fr.UTF-8):	Utilitaires pour le support de la langue nationnalepar les programmes
 Summary(pl.UTF-8):	Narzędzia dla programów ze wsparciem dla języków narodowych
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
-License:	GPL
+License:	GPL v3+
 Group:		Development/Tools
 Requires(post,postun):	/sbin/ldconfig
 Requires:	%{name} = %{version}-%{release}
@@ -157,7 +156,7 @@ lokalizacji (internacjonalizacji) programów.
 %package static
 Summary:	Static gettext utility libraries
 Summary(pl.UTF-8):	Statyczne biblioteki narzędziowe gettext
-License:	GPL
+License:	GPL v3+
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -172,7 +171,7 @@ Ten pakiet zawiera statyczne wersje bibliotek narzędziowych gettext
 %package -n libasprintf
 Summary:	GNU libasprintf - automatic formatted output to strings in C++
 Summary(pl.UTF-8):	GNU libasprintf - automatyczne formatowanie wyjścia do łańcuchów w C++
-License:	LGPL
+License:	LGPL v2+
 Group:		Libraries
 
 %description -n libasprintf
@@ -188,7 +187,7 @@ używalnymi w programach w C++, z łańcuchami <string> i strumieniami
 %package -n libasprintf-devel
 Summary:	Header file and documentation for libasprintf
 Summary(pl.UTF-8):	Plik nagłówkowy i dokumentacja dla libasprintf
-License:	LGPL
+License:	LGPL v2+
 Group:		Development/Libraries
 Requires:	libasprintf = %{version}-%{release}
 
@@ -201,7 +200,7 @@ Plik nagłówkowy i dokumentacja dla libasprintf.
 %package -n libasprintf-static
 Summary:	Static libasprintf library
 Summary(pl.UTF-8):	Statyczna biblioteka libasprintf
-License:	LGPL
+License:	LGPL v2+
 Group:		Development/Libraries
 Requires:	libasprintf-devel = %{version}-%{release}
 
@@ -214,7 +213,7 @@ Statyczna biblioteka libasprintf.
 %package java
 Summary:	Runtime classes for Java programs internationalization
 Summary(pl.UTF-8):	Klasy do uruchamiania umiędzynarodowionych programów w Javie
-License:	LGPL
+License:	LGPL v2+
 Group:		Development/Languages/Java
 Requires:	%{name} = %{version}-%{release}
 
@@ -227,7 +226,7 @@ Klasy do uruchamiania umiędzynarodowionych programów w Javie.
 %package java-devel
 Summary:	Development classes for Java programs internationalization
 Summary(pl.UTF-8):	Klasy do umiędzynarodowiania programów w Javie dla programistów
-License:	GPL
+License:	GPL v3+
 Group:		Development/Tools
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -242,7 +241,7 @@ Summary:	Xemacs PO-mode
 Summary(es.UTF-8):	Facilita la edición de archivos PO (internacionalización) con emacs
 Summary(pl.UTF-8):	Tryb PO dla Xemacsa
 Summary(pt_BR.UTF-8):	Facilita a edição de arquivos PO (internacionalização) com o emacs
-License:	GPL
+License:	GPL v2+
 Group:		Applications/Editors/Emacs
 Requires:	xemacs
 
@@ -266,7 +265,7 @@ para a documentação de uso, a qual não é incluída aqui.
 %package autopoint
 Summary:	gettextize replacement
 Summary(pl.UTF-8):	Zamiennik gettextize
-License:	GPL
+License:	GPL v3+
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
 Requires:	cvs
@@ -289,6 +288,7 @@ wersji.
 %package -n dotnet-gettext
 Summary:	GNU gettext for C#
 Summary(pl.UTF-8):	GNU gettext dla C#
+License:	LGPL v2+ (GNU.Gettext library), GPL v3+ (tools)
 Group:		Development/Tools
 
 %description -n dotnet-gettext
@@ -299,11 +299,9 @@ GNU gettext dla C#.
 
 %prep
 %setup -q
-# FIXME
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
-# FIXME
-#%patch2 -p1
+%patch2 -p1
 # patch not finished yet
 #%patch3 -p1
 %patch4 -p1
