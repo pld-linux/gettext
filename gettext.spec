@@ -305,7 +305,6 @@ GNU gettext dla C#.
 # patch not finished yet
 #%patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -420,6 +419,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_infodir}/gettext*.info*
 %{_mandir}/man1/gettextize.1*
 %{_mandir}/man1/msg*.1*
+%{_mandir}/man1/recode-sr-latin.1*
 %{_mandir}/man1/xgettext.1*
 %{_mandir}/man3/*
 
@@ -446,6 +446,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/projects/TP/teams.*
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
+%{_datadir}/gettext/styles
 
 %files static
 %defattr(644,root,root,755)
@@ -479,6 +480,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc gettext-runtime/intl-java/javadoc2
 %attr(755,root,root) %{_libdir}/gettext/gnu.gettext.DumpResource
 %attr(755,root,root) %{_libdir}/gettext/gnu.gettext.GetURL
+%{_datadir}/gettext/javaversion.class
 %endif
 
 %if %{with xemacs}
