@@ -1,6 +1,6 @@
---- gettext-0.15/gettext-tools/doc/gettext.texi.orig	2006-06-30 16:25:39.000000000 +0200
-+++ gettext-0.15/gettext-tools/doc/gettext.texi	2006-07-27 19:02:53.450167750 +0200
-@@ -36,30 +36,30 @@
+--- gettext-0.17/gettext-tools/doc/gettext.texi.orig	2007-10-31 13:34:45.000000000 +0100
++++ gettext-0.17/gettext-tools/doc/gettext.texi	2007-11-07 22:18:00.237953165 +0100
+@@ -47,30 +47,30 @@
  @include version.texi
  
  @ifinfo
@@ -54,7 +54,7 @@
  @end direntry
  @end ifinfo
  
-@@ -196,16 +196,16 @@
+@@ -216,16 +216,16 @@
  
  Making the PO Template File
  
@@ -74,7 +74,7 @@
  
  Editing PO Files
  
-@@ -237,22 +237,22 @@
+@@ -257,16 +257,16 @@
  
  Manipulating PO Files
  
@@ -98,7 +98,10 @@
 +* msgattrib::                   Invoking the @code{msgattrib} Program
 +* msgen::                       Invoking the @code{msgen} Program
 +* msgexec::                     Invoking the @code{msgexec} Program
+ * Colorizing::                  Highlighting parts of PO files
  * libgettextpo::                Writing your own programs that process PO files
+ 
+@@ -280,8 +280,8 @@
  
  Producing Binary MO Files
  
@@ -109,16 +112,16 @@
  * MO Files::                    The Format of GNU MO Files
  
  The Programmer's View
-@@ -310,7 +310,7 @@
+@@ -339,7 +339,7 @@
  
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
 -* gettextize Invocation::       Invoking the @code{gettextize} Program
 +* gettextize::                  Invoking the @code{gettextize} Program
  * Adjusting Files::             Files You Must Create or Alter
- * autoconf macros::             Autoconf macros for use in @file{configure.in}
+ * autoconf macros::             Autoconf macros for use in @file{configure.ac}
  * CVS Issues::                  Integrating with CVS
-@@ -343,7 +343,7 @@
+@@ -374,7 +374,7 @@
  
  * Distributed CVS::             Avoiding version mismatch in distributed development
  * Files under CVS::             Files to put under CVS version control
@@ -127,7 +130,7 @@
  
  Other Programming Languages
  
-@@ -406,10 +406,10 @@
+@@ -438,10 +438,10 @@
  * Preparing Shell Scripts::     Preparing Shell Scripts for Internationalization
  * gettext.sh::                  Contents of @code{gettext.sh}
  * gettext Invocation::          Invoking the @code{gettext} program
@@ -142,7 +145,7 @@
  
  Perl
  
-@@ -936,7 +936,7 @@
+@@ -987,7 +987,7 @@
  exactly where in C sources each string is used.  All translations
  are set to empty.  The letter @code{t} in @file{.pot} marks this as
  a Template PO file, not yet oriented towards any particular language.
@@ -151,7 +154,7 @@
  @code{xgettext} program.  If you are @emph{really} lazy, you might
  be interested at working a lot more right away, and preparing the
  whole distribution setup (@pxref{Maintainers}).  By doing so, you
-@@ -1011,7 +1011,7 @@
+@@ -1062,7 +1062,7 @@
  which are no longer used in the program sources (@pxref{Obsolete
  Entries}).  It finally discovers new strings and inserts them in
  the resulting PO file as untranslated entries (@pxref{Untranslated
@@ -160,7 +163,7 @@
  @code{msgmerge} really does.
  
  Whatever route or means taken, the goal is to obtain an updated
-@@ -1035,8 +1035,8 @@
+@@ -1086,8 +1086,8 @@
  Once the PO file is complete and dependable, the @code{msgfmt} program
  is used for turning the PO file into a machine-oriented format, which
  may yield efficient retrieval of translations by the programs of the
@@ -171,7 +174,7 @@
  for the @code{msgfmt} program.
  
  Finally, the modified and marked C sources are compiled and linked
-@@ -1235,7 +1235,7 @@
+@@ -1482,7 +1482,7 @@
  
  In case the @code{c-format} flag is given for a string the @code{msgfmt}
  does some more tests to check to validity of the translation.
@@ -180,7 +183,7 @@
  
  @item objc-format
  @kwindex objc-format@r{ flag}
-@@ -2164,7 +2164,7 @@
+@@ -2474,7 +2474,7 @@
  
  If a string is marked with @code{c-format} and this is not correct the
  user can find out who is responsible for the decision.  See
@@ -188,8 +191,8 @@
 +@ref{xgettext} to see how the @code{--debug} option can be
  used for solving this problem.
  
- @node Special cases, Names, c-format Flag, Sources
-@@ -2196,7 +2196,7 @@
+ @node Special cases, Bug Report Address, c-format Flag, Sources
+@@ -2506,7 +2506,7 @@
  While it is no problem to mark the string @code{"a default message"} it
  is not possible to mark the string initializers for @code{messages}.
  What is to be done?  We have to fulfill two tasks.  First we have to mark the
@@ -198,7 +201,7 @@
  can find them, and second we have to translate the string at runtime
  before printing them.
  
-@@ -2226,8 +2226,7 @@
+@@ -2536,8 +2536,7 @@
  
  Please convince yourself that the string which is written by
  @code{fputs} is translated in any case.  How to get @code{xgettext} know
@@ -208,7 +211,7 @@
  
  The above is of course not the only solution.  You could also come along
  with the following one:
-@@ -2449,10 +2448,10 @@
+@@ -2813,10 +2812,10 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -221,7 +224,7 @@
  @section Invoking the @code{xgettext} Program
  
  @include xgettext.texi
-@@ -2481,16 +2480,16 @@
+@@ -2845,16 +2844,16 @@
  the header entry of this file.
  
  @menu
@@ -241,7 +244,7 @@
  @section Filling in the Header Entry
  @cindex header entry of a PO file
  
-@@ -2663,10 +2662,10 @@
+@@ -3028,10 +3027,10 @@
  @chapter Updating Existing PO Files
  
  @menu
@@ -254,7 +257,7 @@
  @section Invoking the @code{msgmerge} Program
  
  @include msgmerge.texi
-@@ -4206,70 +4205,70 @@
+@@ -4571,71 +4570,71 @@
  write other specialized programs that process PO files.
  
  @menu
@@ -278,6 +281,7 @@
 +* msgattrib::                   Invoking the @code{msgattrib} Program
 +* msgen::                       Invoking the @code{msgen} Program
 +* msgexec::                     Invoking the @code{msgexec} Program
+ * Colorizing::                  Highlighting parts of PO files
  * libgettextpo::                Writing your own programs that process PO files
  @end menu
  
@@ -335,18 +339,18 @@
  
  @include msgen.texi
  
--@node msgexec Invocation, libgettextpo, msgen Invocation, Manipulating
-+@node msgexec, libgettextpo, msgen, Manipulating
+-@node msgexec Invocation, Colorizing, msgen Invocation, Manipulating
++@node msgexec, Colorizing, msgen, Manipulating
  @section Invoking the @code{msgexec} Program
  
  @include msgexec.texi
  
--@node libgettextpo,  , msgexec Invocation, Manipulating
-+@node libgettextpo,  , msgexec, Manipulating
- @section Writing your own programs that process PO files
+-@node Colorizing, libgettextpo, msgexec Invocation, Manipulating
++@node Colorizing, libgettextpo, msgexec, Manipulating
+ @section Highlighting parts of PO files
  
- For the tasks for which a combination of @samp{msgattrib}, @samp{msgcat} etc.
-@@ -4403,22 +4402,22 @@
+ Translators are usually only interested in seeing the untranslated and
+@@ -5165,22 +5164,22 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -374,16 +378,16 @@
  @section The Format of GNU MO Files
  @cindex MO file's format
  @cindex file format, @file{.mo}
-@@ -6407,7 +6406,7 @@
+@@ -7250,7 +7249,7 @@
  @menu
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
 -* gettextize Invocation::       Invoking the @code{gettextize} Program
 +* gettextize::                  Invoking the @code{gettextize} Program
  * Adjusting Files::             Files You Must Create or Alter
- * autoconf macros::             Autoconf macros for use in @file{configure.in}
+ * autoconf macros::             Autoconf macros for use in @file{configure.ac}
  * CVS Issues::                  Integrating with CVS
-@@ -6440,7 +6439,7 @@
+@@ -7283,7 +7282,7 @@
  described in the remaining of this chapter.  Some maintainers might
  use this as an opportunity to unflatten their package structure.
  
@@ -392,7 +396,7 @@
  @section Prerequisite Works
  @cindex converting a package to use @code{gettext}
  @cindex migration from earlier versions of @code{gettext}
-@@ -6525,12 +6524,12 @@
+@@ -7368,12 +7367,12 @@
  a maintainer, ever think there is a real problem with a team, please
  never try to @emph{solve} a team's problem on your own.
  
@@ -407,16 +411,25 @@
  @section Files You Must Create or Alter
  @cindex @code{gettext} files
  
-@@ -6689,7 +6688,7 @@
+@@ -7536,7 +7535,7 @@
  Similarly, you can create rules for building message catalogs for the
  @file{sr@@latin} locale -- Serbian written with the Latin alphabet --
  from those for the @file{sr} locale -- Serbian written with Cyrillic
 -letters.  See @ref{msgfilter Invocation}.
 +letters.  See @ref{msgfilter}.
  
- @node configure.in, config.guess, po/Rules-*, Adjusting Files
- @subsection @file{configure.in} at top level
-@@ -7406,7 +7405,7 @@
+ @node configure.ac, config.guess, po/Rules-*, Adjusting Files
+ @subsection @file{configure.ac} at top level
+@@ -8258,7 +8257,7 @@
+ to instruct @code{xgettext} to mark all translatable strings in @samp{gettext}
+ invocations that occur as fifth argument to this function as @samp{c-format}.
+ 
+-See @ref{xgettext Invocation} for the list of options that @code{xgettext}
++See @ref{xgettext} for the list of options that @code{xgettext}
+ accepts.
+ 
+ The use of this macro is an alternative to the use of the
+@@ -8326,7 +8325,7 @@
  @menu
  * Distributed CVS::             Avoiding version mismatch in distributed development
  * Files under CVS::             Files to put under CVS version control
@@ -425,7 +438,7 @@
  @end menu
  
  @node Distributed CVS, Files under CVS, CVS Issues, CVS Issues
-@@ -7448,7 +7447,7 @@
+@@ -8368,7 +8367,7 @@
  undiscovered due to this constellation.
  @end itemize
  
@@ -434,7 +447,7 @@
  @subsection Files to put under CVS version control
  
  There are basically three ways to deal with generated files in the
-@@ -7527,7 +7526,7 @@
+@@ -8447,7 +8446,7 @@
  use the CVS will henceforth need to have GNU @code{gettext} 0.12.1 or newer
  installed.
  
@@ -443,7 +456,7 @@
  @subsection Invoking the @code{autopoint} Program
  
  @include autopoint.texi
-@@ -8193,10 +8192,10 @@
+@@ -9122,10 +9121,10 @@
  * Preparing Shell Scripts::     Preparing Shell Scripts for Internationalization
  * gettext.sh::                  Contents of @code{gettext.sh}
  * gettext Invocation::          Invoking the @code{gettext} program
@@ -458,7 +471,7 @@
  @end menu
  
  @node Preparing Shell Scripts, gettext.sh, sh, sh
-@@ -8217,8 +8216,8 @@
+@@ -9146,8 +9145,8 @@
  
  near the top of the script.  @code{gettext.sh} is a shell function library
  that provides the functions
@@ -469,7 +482,7 @@
  You have to ensure that @code{gettext.sh} can be found in the @code{PATH}.
  
  @item
-@@ -8328,28 +8327,28 @@
+@@ -9257,28 +9256,28 @@
  and a newline, without interpreting backslashes in the argument string.
  
  @item eval_gettext
@@ -504,7 +517,7 @@
  @subsubsection Invoking the @code{eval_gettext} function
  
  @cindex @code{eval_gettext} function, usage
-@@ -8362,7 +8361,7 @@
+@@ -9291,7 +9290,7 @@
  performing dollar-substitution on the result.  Note that only shell variables
  mentioned in @var{msgid} will be dollar-substituted in the result.
  
@@ -521,17 +534,17 @@
  responsibilities of a package maintainer.  For the latter purpose, a
 -separate tool is provided, see @ref{autopoint Invocation}.
 +separate tool is provided, see @ref{autopoint}.
---- gettext-0.13/gettext-runtime/libasprintf/autosprintf.texi.orig	Fri May 30 16:30:21 2003
-+++ gettext-0.13/gettext-runtime/libasprintf/autosprintf.texi	Mon Dec  1 15:52:12 2003
-@@ -15,9 +15,9 @@
- @c %**end of header
+--- gettext-0.17/gettext-runtime/libasprintf/autosprintf.texi.orig	2007-09-01 11:15:56.000000000 +0200
++++ gettext-0.17/gettext-runtime/libasprintf/autosprintf.texi	2007-11-07 22:19:42.123759307 +0100
+@@ -23,9 +23,9 @@
  @set VERSION 1.0
  
+ @ifinfo
 -@dircategory C++ libraries
 +@dircategory Libraries:
  @direntry
 -* autosprintf: (autosprintf).   Support for printf format strings in C++.
 +* autosprintf: (autosprintf).		Support for printf format strings in C++
  @end direntry
+ @end ifinfo
  
- @ifinfo
