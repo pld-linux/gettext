@@ -48,7 +48,9 @@ URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
+%{!?with_bootstrap:BuildRequires:	glib2-devel}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
+%{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%(%{__cc} -dumpversion | grep -q '^4.[2-9]' ; echo $?)" == "0"
 BuildRequires:	libgomp-devel
 %endif
@@ -292,6 +294,7 @@ Summary(pl.UTF-8):	GNU gettext dla C#
 License:	LGPL v2+ (GNU.Gettext library), GPL v3+ (tools)
 Group:		Development/Tools
 
+
 %description -n dotnet-gettext
 GNU gettext for C#.
 
@@ -338,7 +341,9 @@ cd ..
 	--enable-nls \
 	%{!?with_dotnet:--disable-csharp} \
 	%{?with_dotnet:--enable-csharp=mono} \
-	--without-included-gettext
+	--without-included-gettext \
+	%{?with_bootstrap:--with-included-glib} \
+	%{?with_bootstrap:--with-included-libcroco}
 %{__make} \
 	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 
