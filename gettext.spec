@@ -43,6 +43,7 @@ Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
 Patch3:		%{name}-no_docs.patch
 Patch4:		%{name}-libintl_by_gcj.patch
+Patch5:		%{name}-removed_macros.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
@@ -305,6 +306,7 @@ GNU gettext dla C#.
 # patch not finished yet
 #%patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
