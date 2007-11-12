@@ -5,7 +5,7 @@
 %bcond_without	gcj		# with Java support by gcj (preferred over javac)
 %bcond_with	javac		# with Java support by some javac
 %bcond_without	dotnet		# without .NET support
-%bcond_with	bootstrap
+%bcond_with	bootstrap	# use system GLib and libcroco
 #
 
 %{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
@@ -48,7 +48,7 @@ URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
-%{!?with_bootstrap:BuildRequires:	glib2-devel}
+%{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%(%{__cc} -dumpversion | grep -q '^4.[2-9]' ; echo $?)" == "0"
@@ -293,7 +293,6 @@ Summary:	GNU gettext for C#
 Summary(pl.UTF-8):	GNU gettext dla C#
 License:	LGPL v2+ (GNU.Gettext library), GPL v3+ (tools)
 Group:		Development/Tools
-
 
 %description -n dotnet-gettext
 GNU gettext for C#.
