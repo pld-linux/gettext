@@ -271,7 +271,7 @@ Summary(pl.UTF-8):	Zamiennik gettextize
 License:	GPL v3+
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
-Requires:	cvs
+Requires:	cvs-client
 
 %description autopoint
 The `autopoint' program copies standard gettext infrastructure files
