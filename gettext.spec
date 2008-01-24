@@ -389,11 +389,11 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n libasprintf -p /sbin/ldconfig
 %postun	-n libasprintf -p /sbin/ldconfig
 
-%post -n libasprintf-devel
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+%post -n libasprintf-devel	-p	/sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun -n libasprintf-devel
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+%postun -n libasprintf-devel	-p	/sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
