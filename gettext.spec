@@ -317,6 +317,7 @@ cd autoconf-lib-link
 %{__autoconf}
 %{__automake}
 cd ../gettext-runtime
+%{__libtoolize}
 %{__aclocal} -I m4 -I gnulib-m4 -I ../autoconf-lib-link/m4 -I ../m4
 %{__autoconf}
 %{__autoheader}
