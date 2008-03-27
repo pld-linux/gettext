@@ -32,7 +32,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.16.1
-Release:	3
+Release:	4
 License:	LGPL (runtime), GPL (tools)
 Group:		Development/Tools
 Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -266,7 +266,7 @@ Summary(pl.UTF-8):	Zamiennik gettextize
 License:	GPL
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
-Requires:	cvs
+Requires:	cvs-client
 
 %description autopoint
 The `autopoint' program copies standard gettext infrastructure files
@@ -386,11 +386,11 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n libasprintf -p /sbin/ldconfig
 %postun	-n libasprintf -p /sbin/ldconfig
 
-%post -n libasprintf-devel
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+%post -n libasprintf-devel	-p	/sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun -n libasprintf-devel
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+%postun -n libasprintf-devel	-p	/sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
