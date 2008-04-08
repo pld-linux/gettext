@@ -36,7 +36,7 @@ Version:	0.17
 Release:	2
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
-Source0:	ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
+Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
 # Source0-md5:	58a2bc6d39c0ba57823034d55d65d606
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
