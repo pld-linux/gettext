@@ -9,13 +9,11 @@
 #
 # Conditional build:
 %bcond_without	asprintf	# without libasprintf C++ library
-%bcond_without	xemacs		# without po-mode for xemacs
+%bcond_with		xemacs		# without po-mode for xemacs
 %bcond_without	gcj		# with Java support by gcj (preferred over javac)
-%bcond_with	javac		# with Java support by some javac
+%bcond_with		javac		# with Java support by some javac
 %bcond_without	dotnet		# without .NET support
 %bcond_with	bootstrap	# use system GLib and libcroco
-
-%{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
 
 %ifnarch %{ix86} %{x8664} arm hppa ppc s390 s390x
 %undefine with_dotnet
@@ -25,7 +23,7 @@
 %undefine with_dotnet
 %endif
 
-%undefine with_xemacs
+%{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
 
 %define build_java	%{?with_gcj:1}%{!?with_gcj:%{?with_javac:1}%{!?with_javac:0}}
 Summary:	Utilties for program national language support
