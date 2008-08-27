@@ -1,0 +1,4 @@
+- started updating to 0.12
+- fixed %files
+- updated patches (killkillkill, aclocal)
+- removed outdated patches (jbk, gettextize_fix)
