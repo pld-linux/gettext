@@ -51,12 +51,13 @@ BuildRequires:	automake >= 1:1.10
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %{?with_javac:BuildRequires:	jdk >= 1.1}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
-%if "%(%{__cc} -dumpversion | grep -q '^4.[2-9]' ; echo $?)" == "0"
+%if "%(echo %{cc_version} | grep -q '^4.[2-9]'; echo $?)" == "0"
 BuildRequires:	libgomp-devel
 %endif
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_dotnet:BuildRequires:	mono-csharp}
+BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
