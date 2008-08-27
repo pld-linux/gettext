@@ -1,3 +1,11 @@
+# TODO
+# - unpackaged:
+#   /usr/share/emacs/site-lisp/po-compat.el
+#   /usr/share/emacs/site-lisp/po-compat.elc
+#   /usr/share/emacs/site-lisp/po-mode.el
+#   /usr/share/emacs/site-lisp/po-mode.elc
+#   /usr/share/emacs/site-lisp/start-po.el
+#   /usr/share/emacs/site-lisp/start-po.elc
 #
 # Conditional build:
 %bcond_without	asprintf	# without libasprintf C++ library
@@ -6,7 +14,6 @@
 %bcond_with	javac		# with Java support by some javac
 %bcond_without	dotnet		# without .NET support
 %bcond_with	bootstrap	# use system GLib and libcroco
-#
 
 %{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
 
@@ -373,6 +380,8 @@ install gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
+rm -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
+rm -f $RPM_BUILD_ROOT%{_infodir}/dir
 
 %find_lang %{name}-runtime
 %find_lang %{name}-tools
@@ -417,6 +426,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgettext*.la
 # libgettextpo is for other programs, not used by gettext tools themselves
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
 %attr(755,root,root) %{_libdir}/preloadable_libintl.so
 %attr(755,root,root) %{_libdir}/gettext/hostname
 %attr(755,root,root) %{_libdir}/gettext/project-id
@@ -465,6 +475,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc gettext-runtime/libasprintf/{AUTHORS,ChangeLog,README}
 %attr(755,root,root) %{_libdir}/libasprintf.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libasprintf.so.0
 
 %files -n libasprintf-devel
 %defattr(644,root,root,755)
