@@ -1,0 +1,16 @@
+--- gettext-0.17/./gettext-tools/misc/autopoint.in.org	2008-11-10 00:39:01.489132060 +0100
++++ gettext-0.17/./gettext-tools/misc/autopoint.in	2008-11-10 00:41:40.679933768 +0100
+@@ -415,9 +415,12 @@
+ unset CVSUMASK
+ unset CVSWRAPPERS
+ 
++cvsoptinit=""
++cvs --version 2> /dev/null | grep -q "CVSNT" && cvsoptinit="-n"
++
+ # Need to pass -d "$CVSROOT", because there may be a CVS directory in the
+ # current directory.
+-cvs -d "$CVSROOT" init
++cvs -d "$CVSROOT" init $cvsoptinit
+ gzip -d -c < "$gettext_dir/archive.tar.gz" | (cd "$cvs_dir" && tar xf -)
+ 
+ cd "$work_dir"
