@@ -38,7 +38,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.17
-Release:	4
+Release:	5
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -50,6 +50,7 @@ Patch3:		%{name}-no_docs.patch
 Patch4:		%{name}-libintl_by_gcj.patch
 Patch5:		%{name}-removed_macros.patch
 Patch6:		%{name}-creat_mode.patch
+Patch7:		%{name}-cvs.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
@@ -317,6 +318,7 @@ GNU gettext dla C#.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 %{__libtoolize}
