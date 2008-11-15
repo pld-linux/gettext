@@ -38,7 +38,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.17
-Release:	5
+Release:	6
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -56,7 +56,10 @@ BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
-%{?with_javac:BuildRequires:	jdk >= 1.1}
+%if %{with javac}
+BuildRequires:	jdk >= 1.1
+BuildRequires:	jar
+%endif
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%(echo %{cc_version} | grep -q '^4.[2-9]'; echo $?)" == "0"
 BuildRequires:	libgomp-devel
