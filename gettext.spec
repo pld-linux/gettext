@@ -400,7 +400,7 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 install gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
-install archive-cvs/archive-*.tar.gz $RPM_BUILD_ROOT%{_datadir}/gettext/archive
+install archive-cvs/archive-*.tar.gz $RPM_BUILD_ROOT%{_datadir}/gettext
 rm $RPM_BUILD_ROOT%{_datadir}/gettext/archive.tar.gz
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
@@ -536,7 +536,7 @@ rm -rf $RPM_BUILD_ROOT
 %files autopoint
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/autopoint
-%{_datadir}/gettext/archive
+%{_datadir}/gettext/archive*.tar.gz
 %{_mandir}/man1/autopoint.1*
 
 %if %{with dotnet}
