@@ -51,6 +51,7 @@ Patch4:		%{name}-libintl_by_gcj.patch
 Patch5:		%{name}-removed_macros.patch
 Patch6:		%{name}-creat_mode.patch
 Patch7:		%{name}-cvs.patch
+Patch8:		%{name}-m4.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
@@ -322,6 +323,7 @@ GNU gettext dla C#.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 # make autopoint to use tar.gz archives instead of cvs repository
