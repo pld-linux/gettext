@@ -38,7 +38,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.17
-Release:	7
+Release:	8
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -54,6 +54,7 @@ Patch7:		%{name}-cvs.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
+BuildRequires:	cvs-gnu-client
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %if %{with javac}
@@ -282,7 +283,6 @@ Summary(pl.UTF-8):	Zamiennik gettextize
 License:	GPL v3+
 Group:		Development/Tools
 Requires:	%{name}-devel >= 0.10.35
-Requires:	cvs-client
 
 %description autopoint
 The `autopoint' program copies standard gettext infrastructure files
@@ -324,6 +324,20 @@ GNU gettext dla C#.
 %patch7 -p1
 
 %build
+# make autopoint to use tar.gz archives instead of cvs repository
+install -d archive-cvs/{prepare,archive}
+tar xzf gettext-tools/misc/archive.tar.gz -C archive-cvs/prepare
+cvs -d$(pwd)/archive-cvs/prepare/archive init
+cd archive-cvs/archive
+cvs -Q -d$(pwd)/../prepare/archive -q co .
+for rev in $(cvs status -v | grep '(revision:' | awk ' { print $1 } ' | sort -u); do
+	cvs -Q up -d -r $rev
+	cd ..
+	tar czf archive-${rev}.tar.gz archive --exclude=CVS
+	cd archive
+done
+cd ../..
+
 %{__libtoolize}
 cd autoconf-lib-link
 %{__aclocal} -I m4 -I ../m4
@@ -383,6 +397,9 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 # these static libs are removed in install-exec-clean
 install gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
+
+install archive-cvs/archive-*.tar.gz $RPM_BUILD_ROOT%{_datadir}/gettext/archive
+rm $RPM_BUILD_ROOT%{_datadir}/gettext/archive.tar.gz
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
 rm -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
@@ -517,7 +534,7 @@ rm -rf $RPM_BUILD_ROOT
 %files autopoint
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/autopoint
-%{_datadir}/gettext/archive.tar.gz
+%{_datadir}/gettext/archive
 %{_mandir}/man1/autopoint.1*
 
 %if %{with dotnet}
