@@ -51,13 +51,11 @@ Patch4:		%{name}-libintl_by_gcj.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	cvs
+BuildRequires:	cvs-client
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
-%if %{with javac}
-BuildRequires:	jdk >= 1.1
-BuildRequires:	jar
-%endif
+%{?build_java:BuildRequires:	jar}
+%{?with_javac:BuildRequires:	jdk >= 1.1}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%(echo %{cc_version} | grep -q '^4.[2-9]'; echo $?)" == "0"
 BuildRequires:	libgomp-devel
