@@ -1,112 +1,676 @@
---- gettext-0.17/gettext-tools/po/pl.po.orig	2007-11-02 03:23:56.000000000 +0100
-+++ gettext-0.17/gettext-tools/po/pl.po	2007-11-07 22:09:41.173513104 +0100
-@@ -51,7 +51,7 @@
- #: gnulib-lib/clean-temp.c:458
- #, c-format
- msgid "cannot remove temporary directory %s"
--msgstr "nie mo�na usun�� katalogu tymczasowego przy %s"
-+msgstr "nie mo�na usun�� katalogu tymczasowego %s"
+--- gettext-0.18/gettext-runtime/po/pl.po.orig	2010-05-16 10:10:31.578937584 +0200
++++ gettext-0.18/gettext-runtime/po/pl.po	2010-05-16 10:11:18.078933394 +0200
+@@ -1,20 +1,21 @@
+ # Polish translations for the GNU gettext messages, gettext-runtime domain
+-# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001, 2003, 2006 Free Software Foundation, Inc.
+-# Rafał Maszkowski <rzm@icm.edu.pl>, 1995-1999, 2001, 2003, 2006
++# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001, 2003, 2006, 2007, 2010 Free Software Foundation, Inc.
++# This file is distributed under the same license as the gettext package.
++# Rafał Maszkowski <rzm@icm.edu.pl>, 1995-1999, 2001, 2003, 2006, 2007, 2010
+ # Piotr Pogorzelski <ppogorze@ippt.gov.pl>, 1995
+-#
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: GNU gettext-runtime 0.16.2-pre5\n"
++"Project-Id-Version: GNU gettext-runtime 0.18\n"
+ "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
+ "POT-Creation-Date: 2010-05-09 13:18+0200\n"
+-"PO-Revision-Date: 2007-10-16 16:00+0200\n"
++"PO-Revision-Date: 2010-05-13 22:00+0200\n"
+ "Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
+ "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+-"Language: pl\n"
+ "MIME-Version: 1.0\n"
+-"Content-Type: text/plain; charset=ISO-8859-2\n"
++"Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8-bit\n"
++"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
++"|| n%100>=20) ? 1 : 2);\n"
  
  #: gnulib-lib/closeout.c:66
  msgid "write error"
-@@ -384,7 +384,7 @@
- #: src/format-gcc-internal.c:253
- #, c-format
- msgid "In the directive number %u, the flags combination is invalid."
--msgstr "B��dny po��czenie flag w dyrektywie numer %u."
-+msgstr "B��dne po��czenie flag w dyrektywie numer %u."
+@@ -25,60 +26,60 @@ msgid "Unknown system error"
+ msgstr "Nieznany błąd systemu"
  
- #: src/format-gcc-internal.c:290
+ #: gnulib-lib/getopt.c:527 gnulib-lib/getopt.c:543
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '%s' is ambiguous\n"
+-msgstr "%s: opcja: `%s' jest niejednoznaczna\n"
++msgstr "%s: opcja '%s' jest niejednoznaczna\n"
+ 
+ #: gnulib-lib/getopt.c:576 gnulib-lib/getopt.c:580
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '--%s' doesn't allow an argument\n"
+-msgstr "%s: opcja `--%s' nie może mieć argumentu\n"
++msgstr "%s: opcja '--%s' nie może mieć argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:589 gnulib-lib/getopt.c:594
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '%c%s' doesn't allow an argument\n"
+-msgstr "%s: opcja `%c%s' nie może mieć argumentu\n"
++msgstr "%s: opcja '%c%s' nie może mieć argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:637 gnulib-lib/getopt.c:656
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '--%s' requires an argument\n"
+-msgstr "%s: opcja `%s' wymaga argumentu\n"
++msgstr "%s: opcja '--%s' wymaga argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:694 gnulib-lib/getopt.c:697
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: unrecognized option '--%s'\n"
+-msgstr "%s: nierozpoznana opcja `--%s'\n"
++msgstr "%s: nierozpoznana opcja '--%s'\n"
+ 
+ #: gnulib-lib/getopt.c:705 gnulib-lib/getopt.c:708
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: unrecognized option '%c%s'\n"
+-msgstr "%s: nierozpoznana opcja `%c%s'\n"
++msgstr "%s: nierozpoznana opcja '%c%s'\n"
+ 
+ #: gnulib-lib/getopt.c:757 gnulib-lib/getopt.c:760
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: invalid option -- '%c'\n"
+-msgstr "%s: błędna opcja -- %c\n"
++msgstr "%s: błędna opcja -- '%c'\n"
+ 
+ #: gnulib-lib/getopt.c:810 gnulib-lib/getopt.c:827 gnulib-lib/getopt.c:1035
+ #: gnulib-lib/getopt.c:1053
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option requires an argument -- '%c'\n"
+-msgstr "%s: opcja wymaga argumentu -- %c\n"
++msgstr "%s: opcja wymaga argumentu -- '%c'\n"
+ 
+ #: gnulib-lib/getopt.c:883 gnulib-lib/getopt.c:899
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '-W %s' is ambiguous\n"
+-msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
++msgstr "%s: opcja '-W %s' jest niejednoznaczna\n"
+ 
+ #: gnulib-lib/getopt.c:923 gnulib-lib/getopt.c:941
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '-W %s' doesn't allow an argument\n"
+-msgstr "%s: opcja `-W %s' nie może mieć argumentu\n"
++msgstr "%s: opcja '-W %s' nie może mieć argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:962 gnulib-lib/getopt.c:980
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '-W %s' requires an argument\n"
+-msgstr "%s: opcja `%s' wymaga argumentu\n"
++msgstr "%s: opcja '-W %s' wymaga argumentu\n"
+ 
+ #: gnulib-lib/xmalloc.c:37
  #, c-format
-@@ -1052,7 +1052,7 @@
- "      --clear-previous        remove the \"previous msgid\" from all "
- "messages\n"
+@@ -310,6 +311,3 @@ msgstr ""
+ "znaleziony w domyślnym katalogu, inna lokalizacja może być podana przez\n"
+ "zmienną środowiskową TEXTDOMAINDIR.\n"
+ "Domyślnie przeszukiwany katalog: %s\n"
+-
+-#~ msgid "%s: illegal option -- %c\n"
+-#~ msgstr "%s: niedozwolona opcja -- %c\n"
+--- gettext-0.18/gettext-tools/po/pl.po.orig	2010-05-16 10:10:31.598942613 +0200
++++ gettext-0.18/gettext-tools/po/pl.po	2010-05-16 10:11:22.042935070 +0200
+@@ -1,20 +1,20 @@
+ # Polish translations for the GNU gettext messages, tools domain
+-# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+-# Rafał Maszkowski <rzm@icm.edu.pl>, 1995-1999, 2001, 2003-2007
++# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001, 2003, 2004, 2005, 2006, 2007, 2010 Free Software Foundation, Inc.
++# This file is distributed under the same license as the gettext package.
++# Rafał Maszkowski <rzm@icm.edu.pl>, 1995-1999, 2001, 2003-2007, 2010
+ # Piotr Pogorzelski <ppogorze@ippt.gov.pl>, 1995
+ # Jakub Bogusz <qboosh@pld.org.pl>, 2002, 2003
+ #
+ msgid ""
  msgstr ""
--"      --clear-previous        usuni�cie \"previous msgid\" z wszystkich "
-+"      --clear-previous        usuni�cie \"poprzednich msgid\" z wszystkich "
- "komunikat�w\n"
+-"Project-Id-Version: GNU gettext-tools 0.16.2-pre5\n"
++"Project-Id-Version: GNU gettext-tools 0.18\n"
+ "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
+ "POT-Creation-Date: 2010-05-09 13:18+0200\n"
+-"PO-Revision-Date: 2007-10-17 13:50+0200\n"
++"PO-Revision-Date: 2010-05-10 13:30+0200\n"
+ "Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
+ "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+-"Language: pl\n"
+ "MIME-Version: 1.0\n"
+-"Content-Type: text/plain; charset=ISO-8859-2\n"
++"Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8-bit\n"
+ "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+ "|| n%100>=20) ? 1 : 2);\n"
+@@ -117,60 +117,60 @@ msgid "%s subprocess failed"
+ msgstr "niepowodzenie podprocesu %s"
  
- #: src/msgattrib.c:451
-@@ -1436,7 +1436,7 @@
- #: src/msgcmp.c:309
+ #: gnulib-lib/getopt.c:527 gnulib-lib/getopt.c:543
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '%s' is ambiguous\n"
+-msgstr "%s: opcja: `%s' jest niejednoznaczna\n"
++msgstr "%s: opcja: '%s' jest niejednoznaczna\n"
+ 
+ #: gnulib-lib/getopt.c:576 gnulib-lib/getopt.c:580
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '--%s' doesn't allow an argument\n"
+-msgstr "%s: opcja `--%s' nie może mieć argumentu\n"
++msgstr "%s: opcja '--%s' nie może mieć argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:589 gnulib-lib/getopt.c:594
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '%c%s' doesn't allow an argument\n"
+-msgstr "%s: opcja `%c%s' nie może mieć argumentu\n"
++msgstr "%s: opcja '%c%s' nie może mieć argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:637 gnulib-lib/getopt.c:656
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '--%s' requires an argument\n"
+-msgstr "%s: opcja `%s' wymaga argumentu\n"
++msgstr "%s: opcja '--%s' wymaga argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:694 gnulib-lib/getopt.c:697
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: unrecognized option '--%s'\n"
+-msgstr "%s: nierozpoznana opcja `--%s'\n"
++msgstr "%s: nierozpoznana opcja '--%s'\n"
+ 
+ #: gnulib-lib/getopt.c:705 gnulib-lib/getopt.c:708
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: unrecognized option '%c%s'\n"
+-msgstr "%s: nierozpoznana opcja `%c%s'\n"
++msgstr "%s: nierozpoznana opcja '%c%s'\n"
+ 
+ #: gnulib-lib/getopt.c:757 gnulib-lib/getopt.c:760
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: invalid option -- '%c'\n"
+-msgstr "%s: błędna opcja -- %c\n"
++msgstr "%s: błędna opcja -- '%c'\n"
+ 
+ #: gnulib-lib/getopt.c:810 gnulib-lib/getopt.c:827 gnulib-lib/getopt.c:1035
+ #: gnulib-lib/getopt.c:1053
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option requires an argument -- '%c'\n"
+-msgstr "%s: opcja wymaga argumentu -- %c\n"
++msgstr "%s: opcja wymaga argumentu -- '%c'\n"
+ 
+ #: gnulib-lib/getopt.c:883 gnulib-lib/getopt.c:899
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '-W %s' is ambiguous\n"
+-msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
++msgstr "%s: opcja '-W %s' jest niejednoznaczna\n"
+ 
+ #: gnulib-lib/getopt.c:923 gnulib-lib/getopt.c:941
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '-W %s' doesn't allow an argument\n"
+-msgstr "%s: opcja `-W %s' nie może mieć argumentu\n"
++msgstr "%s: opcja '-W %s' nie może mieć argumentu\n"
+ 
+ #: gnulib-lib/getopt.c:962 gnulib-lib/getopt.c:980
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option '-W %s' requires an argument\n"
+-msgstr "%s: opcja `%s' wymaga argumentu\n"
++msgstr "%s: opcja '-W %s' wymaga argumentu\n"
+ 
+ #: gnulib-lib/javacomp.c:126 gnulib-lib/javacomp.c:140
+ #: gnulib-lib/javacomp.c:156
+@@ -261,9 +261,9 @@ msgid "_open_osfhandle failed"
+ msgstr "błąd _open_osfhandle"
+ 
+ #: gnulib-lib/w32spawn.h:81
+-#, fuzzy, c-format
++#, c-format
+ msgid "cannot restore fd %d: dup2 failed"
+-msgstr "nie można utworzyć pliku wyjściowego \"%s\""
++msgstr "nie można odtworzyć deskryptora pliku nr %d: niepowodzenie dup2()"
+ 
+ #: gnulib-lib/wait-process.c:223 gnulib-lib/wait-process.c:255
+ #: gnulib-lib/wait-process.c:317
+@@ -277,21 +277,21 @@ msgid "%s subprocess got fatal signal %d
+ msgstr "podproces %s otrzymał krytyczny sygnał %d"
+ 
+ #: src/format.c:148
+-#, fuzzy, c-format
++#, c-format
+ msgid "'%s' is not a valid %s format string, unlike '%s'. Reason: %s"
+ msgstr ""
+-"'%s' nie jest poprawnym formatem %s w przeciwieństwie do 'msgid'.\n"
++"'%s' nie jest poprawnym formatem %s w przeciwieństwie do '%s'.\n"
+ "Powód: %s"
+ 
+ #: src/format-awk.c:509 src/format-boost.c:617 src/format-elisp.c:348
+ #: src/format-gcc-internal.c:627 src/format-librep.c:312
+ #: src/format-pascal.c:397 src/format-perl.c:584 src/format-php.c:350
+ #: src/format-qt.c:173 src/format-tcl.c:390 src/format-ycp.c:147
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "a format specification for argument %u, as in '%s', doesn't exist in '%s'"
+ msgstr ""
+-"specyfikacja formatu dla argumentu %u, obecna w '%s', nie istnieje w 'msgid'"
++"specyfikacja formatu dla argumentu %u, obecna w '%s', nie istnieje w '%s'"
+ 
+ #: src/format-awk.c:520 src/format-boost.c:628 src/format-elisp.c:359
+ #: src/format-gcc-internal.c:638 src/format-librep.c:323
+@@ -305,9 +305,9 @@ msgstr "specyfikacja formatu dla argumen
+ #: src/format-elisp.c:379 src/format-gcc-internal.c:658
+ #: src/format-librep.c:343 src/format-pascal.c:428 src/format-perl.c:615
+ #: src/format-php.c:381 src/format-python.c:527 src/format-tcl.c:421
+-#, fuzzy, c-format
++#, c-format
+ msgid "format specifications in '%s' and '%s' for argument %u are not the same"
+-msgstr "różniące się specyfikacje formatu w 'msgid' i '%s' dla argumentu %u"
++msgstr "różniące się specyfikacje formatu w '%s' i '%s' dla argumentu %u"
+ 
+ #: src/format-boost.c:449
  #, c-format
- msgid "this message is untranslated"
--msgstr "uwaga: ten komunikat nie jest przet�umaczony"
-+msgstr "ten komunikat nie jest przet�umaczony"
+@@ -335,9 +335,9 @@ msgstr ""
+ "Napis odwołuje się do argumentu numer %u, ale ignoruje argument numer %u."
  
- #: src/msgcmp.c:315
+ #: src/format-c.c:901 src/format-csharp.c:206 src/format-python.c:515
+-#, fuzzy, c-format
++#, c-format
+ msgid "number of format specifications in '%s' and '%s' does not match"
+-msgstr "nie zgadza się liczba specyfikacji formatu w 'msgid' i w '%s'"
++msgstr "nie zgadza się liczba specyfikacji formatu w '%s' i w '%s'"
+ 
+ #: src/format-csharp.c:88 src/format-java.c:205
  #, c-format
-@@ -2191,7 +2191,7 @@
- "  [-C WZORZEC-KOMENTARZA] [-X WZORZEC-WYDOB-KOMENTARZA]\n"
- "Komunikat jest wybierany je�li pochodzi z jednego z podanych plik�w\n"
- "�r�d�owych lub pochodzi z jednej z podanych domen,\n"
--"lub, je�li podano -J i kontekst (msgctxt) pasuje do WZORCA-KONTEKST\n"
-+"lub, je�li podano -J i kontekst (msgctxt) pasuje do WZORCA-KONTEKST,\n"
- "lub, je�li podano -K i klucz (msgid lub msgid_plural), pasuje do WZORCA-MSGID,\n"
- "lub, je�li podano -T i to t�umaczenie (msgstr) pasuje do WZORCA-MSGSTR,\n"
- "lub, je�li podano -C i komentarz t�umacza pasuje do WZORCA-KOMENTARZA.\n"
-@@ -2208,7 +2208,7 @@
- "\n"
- "  -N, --location=PLIK-�R�D�   wybranie komunikat�w wydobytych z PLIKU-�R�D�\n"
- "  -M, --domain=DOMENA         wybranie komunikat�w nale��cych do DOMENY\n"
--"  -J, --msgctxt               pocz�tek wzorc�w msgctxt\n"
-+"  -J, --msgctxt               pocz�tek wzorc�w dla msgctxt\n"
- "  -K, --msgid                 pocz�tek wzorc�w dla msgid\n"
- "  -T, --msgstr                pocz�tek wzorc�w dla msgstr\n"
- "  -C, --comment               pocz�tek wzorc�w dla komentarza t�umacza\n"
-@@ -3164,7 +3164,7 @@
+@@ -419,14 +419,14 @@ msgid "In the directive number %u, flags
+ msgstr "W dyrektywie numer %u flagi nie są dozwolone przed '%c'."
  
- #: src/read-stringtable.c:948
- msgid "warning: syntax error, expected '=' or ';' after string"
--msgstr "uwaga: b��d sk��dniowy, oczekiwano '=' albo ';' po napisie"
-+msgstr "uwaga: b��d sk�adniowy, oczekiwano '=' albo ';' po napisie"
+ #: src/format-gcc-internal.c:677
+-#, fuzzy, c-format
++#, c-format
+ msgid "'%s' uses %%m but '%s' doesn't"
+-msgstr "'msgid' zawiera %%m, a '%s' nie"
++msgstr "'%s' zawiera %%m, a '%s' nie"
  
- #: src/recode-sr-latin.c:116
+ #: src/format-gcc-internal.c:680
+-#, fuzzy, c-format
++#, c-format
+ msgid "'%s' does not use %%m but '%s' uses %%m"
+-msgstr "'msgid' nie zawiera %%m, a '%s' zawiera"
++msgstr "'%s' nie zawiera %%m, a '%s' zawiera %%m"
+ 
+ #: src/format-invalid.h:22
+ msgid "The string ends in the middle of a directive."
+@@ -529,12 +529,11 @@ msgstr ""
+ "ani '%s'."
+ 
+ #: src/format-java.c:745
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "a format specification for argument {%u}, as in '%s', doesn't exist in '%s'"
+ msgstr ""
+-"specyfikacja formatu dla argumentu {%u}, obecna w '%s', nie istnieje w "
+-"'msgid'"
++"specyfikacja formatu dla argumentu {%u} obecna w '%s' nie istnieje w '%s'"
+ 
+ #: src/format-java.c:756
  #, c-format
-@@ -3177,7 +3177,7 @@
+@@ -542,11 +541,11 @@ msgid "a format specification for argume
+ msgstr "specyfikacja formatu dla argumentu {%u} nie istnieje w '%s'"
+ 
+ #: src/format-java.c:776
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "format specifications in '%s' and '%s' for argument {%u} are not the same"
+ msgstr ""
+-"specyfikacje formatu w 'msgid' i w '%s' dla argumentu {%u} nie są takie same"
++"specyfikacje formatu w '%s' i w '%s' dla argumentu {%u} nie są takie same"
+ 
+ #: src/format-lisp.c:2337 src/format-lisp.c:2349 src/format-scheme.c:2363
+ #: src/format-scheme.c:2375
+@@ -561,11 +560,11 @@ msgstr ""
+ #: src/format-lisp.c:2372 src/format-scheme.c:2398
+ #, c-format
+ msgid ""
+-"In the directive number %u, too many parameters are given; expected at most "
+-"%u parameter."
++"In the directive number %u, too many parameters are given; expected at most %"
++"u parameter."
+ msgid_plural ""
+-"In the directive number %u, too many parameters are given; expected at most "
+-"%u parameters."
++"In the directive number %u, too many parameters are given; expected at most %"
++"u parameters."
+ msgstr[0] ""
+ "Za dużo parametrów w dyrektywie numer %u, oczekiwano najwyżej %u parametru."
+ msgstr[1] ""
+@@ -618,14 +617,14 @@ msgid "The string refers to some argumen
+ msgstr "Łańcuch odwołuje się do argumentu na niekompatybilne sposoby."
+ 
+ #: src/format-lisp.c:3474 src/format-scheme.c:3397
+-#, fuzzy, c-format
++#, c-format
+ msgid "format specifications in '%s' and '%s' are not equivalent"
+-msgstr "specyfikacje formatu w 'msgid' i w '%s' nie są równoważne"
++msgstr "specyfikacje formatu w '%s' i w '%s' nie są równoważne"
+ 
+ #: src/format-lisp.c:3490 src/format-scheme.c:3413
+-#, fuzzy, c-format
++#, c-format
+ msgid "format specifications in '%s' are not a subset of those in '%s'"
+-msgstr "specyfikacje formatu w '%s' nie są podzbiorem tych z 'msgid'"
++msgstr "specyfikacje formatu w '%s' nie są podzbiorem tych z '%s'"
+ 
+ #: src/format-perl.c:433
+ #, c-format
+@@ -656,43 +655,42 @@ msgstr ""
+ "Łańcuch odwołuje się do argumentu o nazwie '%s' na niekompatybilne sposoby."
+ 
+ #: src/format-python.c:430
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "format specifications in '%s' expect a mapping, those in '%s' expect a tuple"
+ msgstr ""
+-"specyfikacje formatu w 'msgid' oczekują mapowania, a te w '%s' oczekują "
++"specyfikacje formatu w '%s' potrzebują mapowania, a te w '%s' potrzebują "
+ "krotki"
+ 
+ #: src/format-python.c:437
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "format specifications in '%s' expect a tuple, those in '%s' expect a mapping"
+ msgstr ""
+-"specyfikacje formatu w 'msgid' oczekują krotki, a te w '%s' oczekują "
++"specyfikacje formatu w '%s' potrzebują krotki, a te w '%s' potrzebują "
+ "mapowania"
+ 
+ #: src/format-python.c:460 src/format-sh.c:297
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "a format specification for argument '%s', as in '%s', doesn't exist in '%s'"
+ msgstr ""
+-"specyfikacja formatu dla argumentu '%s', obecna w '%s', nie istnieje w "
+-"'msgid'"
++"specyfikacja formatu dla argumentu '%s', obecna w '%s', nie istnieje w '%s'"
+ 
+ #: src/format-python.c:494
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "format specifications in '%s' and '%s' for argument '%s' are not the same"
+ msgstr ""
+-"specyfikacje formatu w 'msgid' i w '%s' dla argumentu '%s' nie są takie same"
++"specyfikacje formatu w '%s' i w '%s' dla argumentu '%s' nie są takie same"
+ 
+ #: src/format-qt.c:152
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "'%s' is a simple format string, but '%s' is not: it contains an 'L' flag or "
+ "a double-digit argument number"
+ msgstr ""
+-"'msgid' jest w prostym formacie, a '%s' nie jest: zawiera flagę 'L' albo "
++"'%s' jest w prostym formacie, a '%s' nie jest: zawiera flagę 'L' albo "
+ "dwucyfrową liczbę argumentów"
+ 
+ #: src/format-sh.c:79
+@@ -1361,7 +1359,7 @@ msgstr ""
+ #, c-format
+ msgid ""
+ "      --lang=CATALOGNAME      set 'Language' field in the header entry\n"
+-msgstr ""
++msgstr "      --lang=NAZWA_KATALOGU   ustawienie pola 'Language' w nagłówku\n"
+ 
  #. This is a proper name. See the gettext manual, section Names.
- #: src/recode-sr-latin.c:120
- msgid "Danilo Segan"
--msgstr "Danilo Segana"
-+msgstr "Danilo �egana"
- 
- #: src/recode-sr-latin.c:153
- #, c-format, no-wrap
-@@ -3248,8 +3248,8 @@
- "message catalog has context dependent translations, but the output format "
- "does not support them."
- msgstr ""
--"katalog komunikat�w ma formy mnogie, ale nie mog� by� zapisane w podanym "
--"formacie wyj�ciowym."
-+"katalog komunikat�w ma t�umaczenia zale�ne od kontekstu, ale nie mog� by� "
-+"zapisane w podanym formacie wyj�ciowym."
- 
- #: src/write-catalog.c:197
- msgid ""
-@@ -3393,7 +3393,7 @@
- "but the C# .resources format doesn't support plural handling\n"
- msgstr ""
- "katalog komunikat�w ma formy mnogie,\n"
--"ale katalog komunikat�w C# nie pozwala ich u�ywa�\n"
-+"ale format C# .resources nie pozwala ich u�ywa�\n"
- 
- #: src/write-tcl.c:157
- msgid ""
-@@ -3401,7 +3401,7 @@
- "but the Tcl message catalog format doesn't support contexts\n"
- msgstr ""
- "katalog komunikat�w zawiera t�umaczenia zale�ne od kontekstu,\n"
--"ale format katalogu komunikat�w Tcl-a nie pozwala zmienia� kontekst�w\n"
-+"ale format katalogu komunikat�w Tcl-a nie pozwala u�ywa� kontekst�w\n"
- 
- #: src/write-tcl.c:176
- msgid ""
-@@ -4006,7 +4006,7 @@
- #: src/xgettext.c:2737
+ #: src/msgcmp.c:178 src/msgcomm.c:286 src/msgmerge.c:350
+@@ -1768,7 +1766,7 @@ msgstr "%s jest prawidłowe tylko z %s,
+ #: src/msgfmt.c:616
  #, c-format
- msgid "context mismatch between singular and plural form"
--msgstr "pomieszanie kontekst�w mi�dzy form� pojedy�cz� i mnog�"
-+msgstr "pomieszanie kontekst�w mi�dzy form� pojedyncz� i mnog�"
+ msgid "%s: "
+-msgstr ""
++msgstr "%s: "
  
- #: src/xgettext.c:2828
+ #: src/msgfmt.c:620
+ #, c-format
+@@ -2609,9 +2607,9 @@ msgid "msgstr has too many keyboard acce
+ msgstr "msgstr zawiera zbyt dużo oznaczeń skrótów klawiszowych '%c'"
+ 
+ #: src/msgl-check.c:776
+-#, fuzzy, c-format
++#, c-format
+ msgid "header field `%s' missing in header\n"
+-msgstr "w nagłówku brakuje pola `%s'\n"
++msgstr "w nagłówku brakuje pola '%s'\n"
+ 
+ #: src/msgl-check.c:784
+ #, c-format
+@@ -2623,9 +2621,9 @@ msgid "some header fields still have the
+ msgstr "niektóre pola nagłówka nadal zawierają początkowe wartości domyślne\n"
+ 
+ #: src/msgl-check.c:826
+-#, fuzzy, c-format
++#, c-format
+ msgid "header field `%s' still has the initial default value\n"
+-msgstr "niektóre pola nagłówka nadal zawierają początkowe wartości domyślne\n"
++msgstr "pole nagłówka `%s' nadal zawiera początkową wartość domyślną\n"
+ 
+ #: src/msgl-iconv.c:65
+ #, c-format
+@@ -3219,17 +3217,17 @@ msgstr "błąd podczas pisania na standa
+ #: src/urlget.c:264
+ #, c-format
+ msgid "Retrieving %s..."
+-msgstr ""
++msgstr "Ściąganie %s..."
+ 
+ #: src/urlget.c:307
+ #, c-format
+ msgid " timed out.\n"
+-msgstr ""
++msgstr " czas minął.\n"
+ 
+ #: src/urlget.c:443
+ #, c-format
+ msgid " failed.\n"
+-msgstr ""
++msgstr " niepowodzenie.\n"
+ 
+ #: src/write-catalog.c:126
  msgid ""
+@@ -3359,8 +3357,8 @@ msgstr ""
+ 
+ #: src/write-qt.c:693
+ msgid ""
+-"message catalog has msgctxt strings containing characters outside "
+-"ISO-8859-1\n"
++"message catalog has msgctxt strings containing characters outside ISO-8859-"
++"1\n"
+ "but the Qt message catalog format supports Unicode only in the translated\n"
+ "strings, not in the context strings\n"
+ msgstr ""
+@@ -3436,11 +3434,8 @@ msgid "%s:%d: warning: unterminated stri
+ msgstr "%s:%d: uwaga: niezakończona stała łańcuchowa"
+ 
+ #: src/x-csharp.c:224 src/xgettext.c:2020
+-#, fuzzy
+ msgid "Please specify the source encoding through --from-code."
+-msgstr ""
+-"Łańcuch nie-ASCII w %s%s.\n"
+-"Proszę podać kodowanie źródła przy pomocy --from-code .\n"
++msgstr "Proszę podać kodowanie źródła przy pomocy --from-code ."
+ 
+ #: src/x-csharp.c:269
+ #, c-format
+@@ -3567,12 +3562,10 @@ msgid "%s:%d: invalid interpolation (\"\
+ msgstr "%s:%d: błędna interpolacja (\"\\U\") 8-bitowego znaku \"%c\""
+ 
+ #: src/x-python.c:236
+-#, fuzzy
+ msgid ""
+ "Please specify the source encoding through --from-code or through a comment\n"
+ "as specified in http://www.python.org/peps/pep-0263.html.\n"
+ msgstr ""
+-"Łańcuch nie-ASCII w %s%s.\n"
+ "Proszę podać kodowanie źródła przy pomocy --from-code albo przez komentarz\n"
+ "wg specyfikacji w http://www.python.org/peps/pep-0263.html.\n"
+ 
+@@ -3768,7 +3761,7 @@ msgid "  -x, --exclude-file=FILE.po  ent
+ msgstr "  -x, --exclude-file=PLIK.po  pominięcie wpisów z PLIKU.po\n"
+ 
+ #: src/xgettext.c:879
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "  -cTAG, --add-comments=TAG   place comment blocks starting with TAG and\n"
+ "                                preceding keyword lines in output file\n"
+@@ -3776,6 +3769,11 @@ msgid ""
+ "lines\n"
+ "                                in output file\n"
+ msgstr ""
++"  -cZNACZNIK, --add-comments=ZNACZNIK  w pliku wyjściowym będą umieszczone\n"
++"                                bloki komentarzy zaczynające się od "
++"ZNACZNIKA\n"
++"                                i poprzedzające je linie ze słowami "
++"kluczowymi\n"
+ "  -c, --add-comments[=ZNACZNIK]  umieszczenie bloków komentarza ze "
+ "ZNACZNIKIEM\n"
+ "                                (lub poprzedzających linie ze słowem "
+@@ -3806,13 +3804,13 @@ msgstr ""
+ "                                C#, awk, Tcl, Perl, PHP, GCC-source, Glade)\n"
+ 
+ #: src/xgettext.c:893
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "  -kWORD, --keyword=WORD      look for WORD as an additional keyword\n"
+ "  -k, --keyword               do not to use default keywords\n"
+ msgstr ""
+-"  -k, --keyword[=SŁOWO]       dodatkowe słowo kluczowe do poszukiwania\n"
+-"                                (bez SŁOWA oznacza nie używanie domyślnych)\n"
++"  -kSŁOWO, --keyword=SŁOWO    dodatkowe słowo kluczowe do poszukiwania\n"
++"  -k, --keyword               bez używania domyślnych słów kluczowych\n"
+ 
+ #: src/xgettext.c:900
+ #, c-format
+@@ -3914,32 +3912,31 @@ msgstr ""
+ "      --msgid-bugs-address=ADRES@EMAIL  adres do zgłaszania błędów w msgid\n"
+ 
+ #: src/xgettext.c:973
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "  -m[STRING], --msgstr-prefix[=STRING]  use STRING or \"\" as prefix for "
+ "msgstr\n"
+ "                                values\n"
+ msgstr ""
+-"  -m, --msgstr-prefix[=NAPIS]    użycie NAPISU lub \"\" jako przedrostka "
+-"wpisów\n"
+-"                                   msgstr\n"
++"  -m[NAPIS], --msgstr-prefix[=NAPIS]    użycie NAPISU lub \"\" jako\n"
++"                                przedrostka wpisów msgstr\n"
+ 
+ #: src/xgettext.c:976
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "  -M[STRING], --msgstr-suffix[=STRING]  use STRING or \"\" as suffix for "
+ "msgstr\n"
+ "                                values\n"
+ msgstr ""
+-"  -M, --msgstr-suffix[=NAPIS]    użycie NAPISU lub \"\" jako przyrostka "
+-"wpisów\n"
+-"                                   msgstr\n"
++"  -M[NAPIS], --msgstr-suffix[=NAPIS]    użycie NAPISU lub \"\" jako "
++"przyrostka\n"
++"                                wpisów msgstr\n"
+ 
+ #: src/xgettext.c:1782
+ #, c-format
+ msgid ""
+-"A --flag argument doesn't have the <keyword>:<argnum>:[pass-]<flag> syntax: "
+-"%s"
++"A --flag argument doesn't have the <keyword>:<argnum>:[pass-]<flag> syntax: %"
++"s"
+ msgstr ""
+ "Argument opcji --flag nie ma składni <keyword>:<argnum>:[pass-]<flag>: %s"
+ 
+@@ -3950,17 +3947,17 @@ msgstr "standardowe wejście"
+ #: src/xgettext.c:1985
+ #, c-format
+ msgid "Non-ASCII character at %s%s."
+-msgstr ""
++msgstr "Znak nie-ASCII w %s%s."
+ 
+ #: src/xgettext.c:1989
+ #, c-format
+ msgid "Non-ASCII comment at or before %s%s."
+-msgstr ""
++msgstr "Komentarz ze znakami nie-ASCII przy albo przez %s%s."
+ 
+ #: src/xgettext.c:1994
+ #, c-format
+ msgid "Non-ASCII string at %s%s."
+-msgstr ""
++msgstr "Napis nie-ASCII przy %s%s."
+ 
+ #: src/xgettext.c:2100 src/xgettext.c:2133 src/xgettext.c:2195
+ #, c-format
+@@ -3979,8 +3976,8 @@ msgstr ""
+ #: src/xgettext.c:2104
+ #, c-format
+ msgid ""
+-"Although declared as such, the %s is not a valid %s format string. Reason: "
+-"%s\n"
++"Although declared as such, the %s is not a valid %s format string. Reason: %"
++"s\n"
+ msgstr ""
+ "%s nie jest prawidłowym formatem napisu %s, mimo że jest tak zadeklarowany. "
+ "Powód: %s\n"
+--- gettext-0.18/gettext-tools/examples/po/pl.po.orig	2010-05-16 10:10:31.610942613 +0200
++++ gettext-0.18/gettext-tools/examples/po/pl.po	2010-05-16 10:11:27.630940098 +0200
+@@ -1,20 +1,21 @@
+ # Polish translations for the GNU gettext messages, gettext-examples domain
+-# Copyright (C) 2003 Free Software Foundation, Inc.
++# Copyright (C) 2010 Yoyodyne, Inc. (msgids)
+ # This file is distributed under the same license as the gettext package.
+-# Rafał Maszkowski <rzm@icm.edu.pl>, 2003
+-#
++# This file is distributed under the same license as the gettext package.
++# Rafał Maszkowski <rzm@icm.edu.pl>, 2003, 2010
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: gettext-examples-0.13.1\n"
++"Project-Id-Version: gettext-examples-0.18\n"
+ "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
+ "POT-Creation-Date: 2009-08-16 12:22+0200\n"
+-"PO-Revision-Date: 2003-12-18 12:00+0100\n"
++"PO-Revision-Date: 2010-05-10 13:30+0200\n"
+ "Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
+ "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+-"Language: pl\n"
+ "MIME-Version: 1.0\n"
+-"Content-Type: text/plain; charset=ISO-8859-2\n"
+-"Content-Transfer-Encoding: 8bit\n"
++"Content-Type: text/plain; charset=UTF-8\n"
++"Content-Transfer-Encoding: 8-bit\n"
++"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
++"|| n%100>=20) ? 1 : 2);\n"
+ 
+ #: hello-c/hello.c:30 hello-c-gnome/hello.c:46 hello-c++/hello.cc:39
+ #: hello-c++-qt/hello.cc:45 hello-c++-kde/hellowindow.cc:42
