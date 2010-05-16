@@ -1,0 +1,112 @@
+--- gettext-0.17/gettext-tools/po/pl.po.orig	2007-11-02 03:23:56.000000000 +0100
++++ gettext-0.17/gettext-tools/po/pl.po	2007-11-07 22:09:41.173513104 +0100
+@@ -51,7 +51,7 @@
+ #: gnulib-lib/clean-temp.c:458
+ #, c-format
+ msgid "cannot remove temporary directory %s"
+-msgstr "nie można usunąć katalogu tymczasowego przy %s"
++msgstr "nie można usunąć katalogu tymczasowego %s"
+ 
+ #: gnulib-lib/closeout.c:66
+ msgid "write error"
+@@ -384,7 +384,7 @@
+ #: src/format-gcc-internal.c:253
+ #, c-format
+ msgid "In the directive number %u, the flags combination is invalid."
+-msgstr "Błędny połączenie flag w dyrektywie numer %u."
++msgstr "Błędne połączenie flag w dyrektywie numer %u."
+ 
+ #: src/format-gcc-internal.c:290
+ #, c-format
+@@ -1052,7 +1052,7 @@
+ "      --clear-previous        remove the \"previous msgid\" from all "
+ "messages\n"
+ msgstr ""
+-"      --clear-previous        usunięcie \"previous msgid\" z wszystkich "
++"      --clear-previous        usunięcie \"poprzednich msgid\" z wszystkich "
+ "komunikatów\n"
+ 
+ #: src/msgattrib.c:451
+@@ -1436,7 +1436,7 @@
+ #: src/msgcmp.c:309
+ #, c-format
+ msgid "this message is untranslated"
+-msgstr "uwaga: ten komunikat nie jest przetłumaczony"
++msgstr "ten komunikat nie jest przetłumaczony"
+ 
+ #: src/msgcmp.c:315
+ #, c-format
+@@ -2191,7 +2191,7 @@
+ "  [-C WZORZEC-KOMENTARZA] [-X WZORZEC-WYDOB-KOMENTARZA]\n"
+ "Komunikat jest wybierany jeśli pochodzi z jednego z podanych plików\n"
+ "źródłowych lub pochodzi z jednej z podanych domen,\n"
+-"lub, jeśli podano -J i kontekst (msgctxt) pasuje do WZORCA-KONTEKST\n"
++"lub, jeśli podano -J i kontekst (msgctxt) pasuje do WZORCA-KONTEKST,\n"
+ "lub, jeśli podano -K i klucz (msgid lub msgid_plural), pasuje do WZORCA-MSGID,\n"
+ "lub, jeśli podano -T i to tłumaczenie (msgstr) pasuje do WZORCA-MSGSTR,\n"
+ "lub, jeśli podano -C i komentarz tłumacza pasuje do WZORCA-KOMENTARZA.\n"
+@@ -2208,7 +2208,7 @@
+ "\n"
+ "  -N, --location=PLIK-ŹRÓDŁ   wybranie komunikatów wydobytych z PLIKU-ŹRÓDŁ\n"
+ "  -M, --domain=DOMENA         wybranie komunikatów należących do DOMENY\n"
+-"  -J, --msgctxt               początek wzorców msgctxt\n"
++"  -J, --msgctxt               początek wzorców dla msgctxt\n"
+ "  -K, --msgid                 początek wzorców dla msgid\n"
+ "  -T, --msgstr                początek wzorców dla msgstr\n"
+ "  -C, --comment               początek wzorców dla komentarza tłumacza\n"
+@@ -3164,7 +3164,7 @@
+ 
+ #: src/read-stringtable.c:948
+ msgid "warning: syntax error, expected '=' or ';' after string"
+-msgstr "uwaga: błąd skłądniowy, oczekiwano '=' albo ';' po napisie"
++msgstr "uwaga: błąd składniowy, oczekiwano '=' albo ';' po napisie"
+ 
+ #: src/recode-sr-latin.c:116
+ #, c-format
+@@ -3177,7 +3177,7 @@
+ #. This is a proper name. See the gettext manual, section Names.
+ #: src/recode-sr-latin.c:120
+ msgid "Danilo Segan"
+-msgstr "Danilo Segana"
++msgstr "Danilo Šegana"
+ 
+ #: src/recode-sr-latin.c:153
+ #, c-format, no-wrap
+@@ -3248,8 +3248,8 @@
+ "message catalog has context dependent translations, but the output format "
+ "does not support them."
+ msgstr ""
+-"katalog komunikatów ma formy mnogie, ale nie mogą być zapisane w podanym "
+-"formacie wyjściowym."
++"katalog komunikatów ma tłumaczenia zależne od kontekstu, ale nie mogą być "
++"zapisane w podanym formacie wyjściowym."
+ 
+ #: src/write-catalog.c:197
+ msgid ""
+@@ -3393,7 +3393,7 @@
+ "but the C# .resources format doesn't support plural handling\n"
+ msgstr ""
+ "katalog komunikatów ma formy mnogie,\n"
+-"ale katalog komunikatów C# nie pozwala ich używać\n"
++"ale format C# .resources nie pozwala ich używać\n"
+ 
+ #: src/write-tcl.c:157
+ msgid ""
+@@ -3401,7 +3401,7 @@
+ "but the Tcl message catalog format doesn't support contexts\n"
+ msgstr ""
+ "katalog komunikatów zawiera tłumaczenia zależne od kontekstu,\n"
+-"ale format katalogu komunikatów Tcl-a nie pozwala zmieniać kontekstów\n"
++"ale format katalogu komunikatów Tcl-a nie pozwala używać kontekstów\n"
+ 
+ #: src/write-tcl.c:176
+ msgid ""
+@@ -4006,7 +4006,7 @@
+ #: src/xgettext.c:2737
+ #, c-format
+ msgid "context mismatch between singular and plural form"
+-msgstr "pomieszanie kontekstów między formą pojedyńczą i mnogą"
++msgstr "pomieszanie kontekstów między formą pojedynczą i mnogą"
+ 
+ #: src/xgettext.c:2828
+ msgid ""
