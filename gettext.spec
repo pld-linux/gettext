@@ -9,9 +9,9 @@
 #
 # Conditional build:
 %bcond_without	asprintf	# without libasprintf C++ library
-%bcond_with		xemacs		# without po-mode for xemacs
+%bcond_with	xemacs		# without po-mode for xemacs
 %bcond_without	gcj		# with Java support by gcj (preferred over javac)
-%bcond_with		javac		# with Java support by some javac
+%bcond_with	javac		# with Java support by some javac
 %bcond_without	dotnet		# without .NET support
 %bcond_with	bootstrap	# use system GLib and libcroco
 
@@ -37,25 +37,21 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.17
-Release:	10
+Version:	0.18
+Release:	0.1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	58a2bc6d39c0ba57823034d55d65d606
+# Source0-md5:	d52a3e061032a1ed13856d42fc86f0fd
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-update.patch
-Patch3:		%{name}-no_docs.patch
+Patch3:		%{name}-pl.po-fixes.patch
 Patch4:		%{name}-libintl_by_gcj.patch
-Patch5:		%{name}-removed_macros.patch
-Patch6:		%{name}-creat_mode.patch
-Patch7:		%{name}-cvs.patch
-Patch8:		%{name}-m4.patch
 URL:		http://www.gnu.org/software/gettext/
-BuildRequires:	autoconf >= 2.60
-BuildRequires:	automake >= 1:1.10
-BuildRequires:	cvs-gnu-client
+BuildRequires:	autoconf >= 2.62
+BuildRequires:	automake >= 1:1.11
+BuildRequires:	cvs
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %if %{with javac}
@@ -69,6 +65,8 @@ BuildRequires:	libgomp-devel
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_dotnet:BuildRequires:	mono-csharp}
+# rlog needed to generate archive.dir.tar.gz properly
+BuildRequires:	rcs
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
@@ -316,53 +314,48 @@ GNU gettext dla C#.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+for d in gettext-runtime gettext-tools gettext-tools/examples ; do
+	iconv -f iso-8859-2 -t utf-8 ${d}/po/pl.po > ${d}/po/pl.po.utf-8
+	mv -f ${d}/po/pl.po.utf-8 ${d}/po/pl.po
+done
 %patch2 -p1
-# patch not finished yet
-#%patch3 -p1
+%patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
 
 %build
-# make autopoint to use tar.gz archives instead of cvs repository
-install -d archive-cvs/{prepare,archive}
-tar xzf gettext-tools/misc/archive.tar.gz -C archive-cvs/prepare
-cvs -d$(pwd)/archive-cvs/prepare/archive init
-cd archive-cvs/archive
-cvs -Q -d$(pwd)/../prepare/archive -q co .
-for rev in $(cvs status -v | grep '(revision:' | awk ' { print $1 } ' | sort -u); do
-	cvs -Q up -d -r $rev
-	cd ..
-	tar czf archive-${rev}.tar.gz archive --exclude=CVS
-	cd archive
-done
-cd ../..
+## make autopoint to use tar.gz archives instead of cvs repository
+#install -d archive-cvs/{prepare,archive}
+#tar xzf gettext-tools/misc/archive.tar.gz -C archive-cvs/prepare
+#cvs -d$(pwd)/archive-cvs/prepare/archive init
+#cd archive-cvs/archive
+#cvs -Q -d$(pwd)/../prepare/archive -q co .
+#for rev in $(cvs status -v | grep '(revision:' | awk ' { print $1 } ' | sort -u); do
+#	cvs -Q up -d -r $rev
+#	cd ..
+#	tar czf archive-${rev}.tar.gz archive --exclude=CVS
+#	cd archive
+#done
+#cd ../..
 
 %{__libtoolize}
-cd autoconf-lib-link
-%{__aclocal} -I m4 -I ../m4
-%{__autoconf}
-%{__automake}
-cd ../gettext-runtime
+cd gettext-runtime
 %{__libtoolize}
-%{__aclocal} -I m4 -I gnulib-m4 -I ../autoconf-lib-link/m4 -I ../m4
+%{__aclocal} -I m4 -I ../m4 -I gnulib-m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 cd libasprintf
-%{__aclocal} -I ../m4 -I ../../m4
+%{__aclocal} -I ../../m4 -I ../m4 -I gnulib-m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 cd ../../gettext-tools
-%{__aclocal} -I m4 -I gnulib-m4 -I libgettextpo/gnulib-m4 -I ../autoconf-lib-link/m4 -I ../gettext-runtime/m4 -I ../m4
+%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../m4 -I gnulib-m4 -I libgettextpo/gnulib-m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 cd ..
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
 %configure \
@@ -370,6 +363,7 @@ cd ..
 	--enable-nls \
 	%{!?with_dotnet:--disable-csharp} \
 	%{?with_dotnet:--enable-csharp=mono} \
+	--without-cvs \
 	--without-included-gettext \
 	%{?with_bootstrap:--with-included-glib} \
 	%{?with_bootstrap:--with-included-libcroco}
@@ -400,8 +394,8 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 install gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
-install archive-cvs/archive-*.tar.gz $RPM_BUILD_ROOT%{_datadir}/gettext
-rm $RPM_BUILD_ROOT%{_datadir}/gettext/archive.tar.gz
+#install archive-cvs/archive-*.tar.gz $RPM_BUILD_ROOT%{_datadir}/gettext
+#rm $RPM_BUILD_ROOT%{_datadir}/gettext/archive.tar.gz
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
 rm -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
@@ -424,15 +418,16 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n libasprintf -p /sbin/ldconfig
 %postun	-n libasprintf -p /sbin/ldconfig
 
-%post -n libasprintf-devel	-p	/sbin/postshell
+%post	-n libasprintf-devel -p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun -n libasprintf-devel	-p	/sbin/postshell
+%postun	-n libasprintf-devel -p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) /bin/*
+%attr(755,root,root) /bin/gettext
+%attr(755,root,root) /bin/ngettext
 %attr(755,root,root) %{_bindir}/envsubst
 %{_mandir}/man1/envsubst.1*
 %{_mandir}/man1/gettext.1*
@@ -443,9 +438,11 @@ rm -rf $RPM_BUILD_ROOT
 %files devel -f %{name}-tools.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS
-%attr(755,root,root) %{_bindir}/*
-%exclude %{_bindir}/autopoint
-%exclude %{_bindir}/envsubst
+%attr(755,root,root) %{_bindir}/gettext.sh
+%attr(755,root,root) %{_bindir}/gettextize
+%attr(755,root,root) %{_bindir}/msg*
+%attr(755,root,root) %{_bindir}/recode-sr-latin
+%attr(755,root,root) %{_bindir}/xgettext
 %attr(755,root,root) %{_libdir}/libgettext*.so
 %{_libdir}/libgettext*.la
 # libgettextpo is for other programs, not used by gettext tools themselves
@@ -457,7 +454,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gettext/urlget
 %attr(755,root,root) %{_libdir}/gettext/user-email
 %{_includedir}/gettext-po.h
-%{_aclocaldir}/*
+%{_aclocaldir}/*.m4
 %{_infodir}/gettext*.info*
 %{_mandir}/man1/gettextize.1*
 %{_mandir}/man1/msg*.1*
@@ -536,7 +533,7 @@ rm -rf $RPM_BUILD_ROOT
 %files autopoint
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/autopoint
-%{_datadir}/gettext/archive*.tar.gz
+%{_datadir}/gettext/archive.dir.tar.gz
 %{_mandir}/man1/autopoint.1*
 
 %if %{with dotnet}
