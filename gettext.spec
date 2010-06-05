@@ -54,7 +54,9 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	cvs-client
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
-%{?build_java:BuildRequires:	jar}
+%if %{build_java}
+BuildRequires:	jar
+%endif
 %{?with_javac:BuildRequires:	jdk >= 1.1}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%(echo %{cc_version} | grep -q '^4.[2-9]'; echo $?)" == "0"
