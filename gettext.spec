@@ -37,21 +37,19 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.18
+Version:	0.18.1.1
 Release:	0.1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	d52a3e061032a1ed13856d42fc86f0fd
+# Source0-md5:	3dd55b952826d2b32f51308f2f91aa89
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
-Patch2:		%{name}-pl.po-update.patch
-Patch3:		%{name}-pl.po-fixes.patch
-Patch4:		%{name}-libintl_by_gcj.patch
+Patch2:		%{name}-pl.po-fixes.patch
+Patch3:		%{name}-libintl_by_gcj.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	cvs-client
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %if %{build_java}
@@ -314,29 +312,14 @@ GNU gettext dla C#.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-for d in gettext-runtime gettext-tools gettext-tools/examples ; do
-	iconv -f iso-8859-2 -t utf-8 ${d}/po/pl.po > ${d}/po/pl.po.utf-8
-	mv -f ${d}/po/pl.po.utf-8 ${d}/po/pl.po
-done
+#for d in gettext-runtime gettext-tools gettext-tools/examples ; do
+#	iconv -f iso-8859-2 -t utf-8 ${d}/po/pl.po > ${d}/po/pl.po.utf-8
+#	mv -f ${d}/po/pl.po.utf-8 ${d}/po/pl.po
+#done
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
-## make autopoint to use tar.gz archives instead of cvs repository
-#install -d archive-cvs/{prepare,archive}
-#tar xzf gettext-tools/misc/archive.tar.gz -C archive-cvs/prepare
-#cvs -d$(pwd)/archive-cvs/prepare/archive init
-#cd archive-cvs/archive
-#cvs -Q -d$(pwd)/../prepare/archive -q co .
-#for rev in $(cvs status -v | grep '(revision:' | awk ' { print $1 } ' | sort -u); do
-#	cvs -Q up -d -r $rev
-#	cd ..
-#	tar czf archive-${rev}.tar.gz archive --exclude=CVS
-#	cd archive
-#done
-#cd ../..
-
 %{__libtoolize}
 cd gettext-runtime
 %{__libtoolize}
@@ -350,7 +333,7 @@ cd libasprintf
 %{__autoheader}
 %{__automake}
 cd ../../gettext-tools
-%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../m4 -I gnulib-m4 -I libgettextpo/gnulib-m4
+%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../m4 -I gnulib-m4 -I libgrep/gnulib-m4 -I libgettextpo/gnulib-m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -363,7 +346,7 @@ cd ..
 	--enable-nls \
 	%{!?with_dotnet:--disable-csharp} \
 	%{?with_dotnet:--enable-csharp=mono} \
-	--without-cvs \
+	--without-git \
 	--without-included-gettext \
 	%{?with_bootstrap:--with-included-glib} \
 	%{?with_bootstrap:--with-included-libcroco}
@@ -393,9 +376,6 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 # these static libs are removed in install-exec-clean
 install gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
-
-#install archive-cvs/archive-*.tar.gz $RPM_BUILD_ROOT%{_datadir}/gettext
-#rm $RPM_BUILD_ROOT%{_datadir}/gettext/archive.tar.gz
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
 rm -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
