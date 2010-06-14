@@ -48,6 +48,7 @@ Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-fixes.patch
 Patch3:		%{name}-libintl_by_gcj.patch
 URL:		http://www.gnu.org/software/gettext/
+BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
@@ -62,6 +63,8 @@ BuildRequires:	libgomp-devel
 %endif
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 1:1.4.2-9
+BuildRequires:	libunistring-devel
+BuildRequires:	libxml2-devel
 %{?with_dotnet:BuildRequires:	mono-csharp}
 # rlog needed to generate archive.dir.tar.gz properly
 BuildRequires:	rcs
