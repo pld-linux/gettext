@@ -145,6 +145,18 @@ yöntemdir.
 для створення, використання та модифікації каталогів національних мов.
 Це простий та потужний метод для інтернаціоналізації програм.
 
+%package demo
+Summary:	Demo for gettext
+Summary(pl.UTF-8):	Pliki demonstracyjne dla pakietu gettext
+Group:		Documentation
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description demo
+Demonstrations and samples for gettext
+
+%description demo -l pl.UTF-8
+Pliki demonstracyjne i przykłady dla pakietu gettext.
+
 %package devel
 Summary:	Utilties for program national language support
 Summary(de.UTF-8):	Utilities zum Programmieren von nationaler Sprachunterstützung
@@ -372,12 +384,14 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/bin
 
 %{__make} install \
+	examplesdir=%{_examplesdir}/%{name}-%{version} \
+	examplesbuildauxdir=%{_examplesdir}/%{name}-%{version}/build-aux \
 	DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
 # these static libs are removed in install-exec-clean
-install gettext-tools/gnulib-lib/.libs/libgettextlib.a \
+cp -a gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
 rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
@@ -417,6 +431,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/ngettext.1*
 %dir %{_libdir}/gettext
 %dir %{_datadir}/gettext
+
+%files demo
+%defattr(644,root,root,755)
+%{_examplesdir}/%{name}-%{version}
 
 %files devel -f %{name}-tools.lang
 %defattr(644,root,root,755)
