@@ -66,8 +66,6 @@ BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	libunistring-devel
 BuildRequires:	libxml2-devel
 %{?with_dotnet:BuildRequires:	mono-csharp}
-# rlog needed to generate archive.dir.tar.gz properly
-BuildRequires:	rcs
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
