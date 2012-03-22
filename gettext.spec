@@ -38,7 +38,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.18.1.1
-Release:	5
+Release:	6
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -424,6 +424,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /bin/gettext
 %attr(755,root,root) /bin/ngettext
 %attr(755,root,root) %{_bindir}/envsubst
+%attr(755,root,root) %{_bindir}/gettext.sh
 %{_mandir}/man1/envsubst.1*
 %{_mandir}/man1/gettext.1*
 %{_mandir}/man1/ngettext.1*
@@ -437,7 +438,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel -f %{name}-tools.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS
-%attr(755,root,root) %{_bindir}/gettext.sh
 %attr(755,root,root) %{_bindir}/gettextize
 %attr(755,root,root) %{_bindir}/msg*
 %attr(755,root,root) %{_bindir}/recode-sr-latin
