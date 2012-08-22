@@ -38,7 +38,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.18.1.1
-Release:	8
+Release:	9
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -47,6 +47,7 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-fixes.patch
 Patch3:		%{name}-libintl_by_gcj.patch
+Patch4:		stdio-gets.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
@@ -331,6 +332,7 @@ GNU gettext dla C#.
 #done
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
@@ -392,9 +394,11 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 cp -a gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 	gettext-tools/src/.libs/libgettextsrc.a $RPM_BUILD_ROOT%{_libdir}
 
-rm -r $RPM_BUILD_ROOT%{_docdir}/gettext
-rm -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
-rm -f $RPM_BUILD_ROOT%{_infodir}/dir
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/gettext
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
+%{__rm} -f $RPM_BUILD_ROOT%{_infodir}/dir
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
 %find_lang %{name}-runtime
 %find_lang %{name}-tools
@@ -443,7 +447,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/recode-sr-latin
 %attr(755,root,root) %{_bindir}/xgettext
 %attr(755,root,root) %{_libdir}/libgettext*.so
-%{_libdir}/libgettext*.la
 # libgettextpo is for other programs, not used by gettext tools themselves
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
@@ -500,7 +503,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n libasprintf-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libasprintf.so
-%{_libdir}/libasprintf.la
 %{_includedir}/autosprintf.h
 %{_infodir}/autosprintf.info*
 
