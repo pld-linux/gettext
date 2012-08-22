@@ -398,8 +398,6 @@ cp -a gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
 %{__rm} -f $RPM_BUILD_ROOT%{_infodir}/dir
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
-
 %find_lang %{name}-runtime
 %find_lang %{name}-tools
 
@@ -447,6 +445,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/recode-sr-latin
 %attr(755,root,root) %{_bindir}/xgettext
 %attr(755,root,root) %{_libdir}/libgettext*.so
+%{_libdir}/libgettext*.la
 # libgettextpo is for other programs, not used by gettext tools themselves
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
@@ -503,6 +502,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n libasprintf-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libasprintf.so
+%{_libdir}/libasprintf.la
 %{_includedir}/autosprintf.h
 %{_infodir}/autosprintf.info*
 
