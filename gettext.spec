@@ -38,7 +38,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.18.1.1
-Release:	9
+Release:	10
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -48,6 +48,7 @@ Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-fixes.patch
 Patch3:		%{name}-libintl_by_gcj.patch
 Patch4:		stdio-gets.patch
+Patch5:		format-security.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
@@ -333,6 +334,7 @@ GNU gettext dla C#.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
