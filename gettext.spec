@@ -22,7 +22,9 @@
 # plain i386 is not supported; mono uses cmpxchg/xadd which require i486
 %undefine with_dotnet
 %endif
-
+%if %{with javac}
+%undefine with_gcj
+%endif
 %{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
 
 %define build_java	%{?with_gcj:1}%{!?with_gcj:%{?with_javac:1}%{!?with_javac:0}}
@@ -37,18 +39,17 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.18.1.1
-Release:	10
+Version:	0.18.2
+Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	3dd55b952826d2b32f51308f2f91aa89
+# Source0-md5:	0c86e5af70c195ab8bd651d17d783928
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-fixes.patch
 Patch3:		%{name}-libintl_by_gcj.patch
-Patch4:		stdio-gets.patch
-Patch5:		format-security.patch
+Patch4:		format-security.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
@@ -58,7 +59,7 @@ BuildRequires:	automake >= 1:1.11
 %if %{build_java}
 BuildRequires:	jar
 %endif
-%{?with_javac:BuildRequires:	jdk >= 1.1}
+%{?with_javac:BuildRequires:	jdk >= 1.3}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%(echo %{cc_version} | grep -q '^4.[2-9]'; echo $?)" == "0"
 BuildRequires:	libgomp-devel
@@ -70,6 +71,7 @@ BuildRequires:	libxml2-devel
 %{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	texinfo
+BuildRequires:	xz
 %{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
 Conflicts:	intltool < 0.28
@@ -334,7 +336,6 @@ GNU gettext dla C#.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -363,10 +364,12 @@ cd ..
 	--enable-nls \
 	%{!?with_dotnet:--disable-csharp} \
 	%{?with_dotnet:--enable-csharp=mono} \
+	--without-bzip2 \
 	--without-git \
 	--without-included-gettext \
 	%{?with_bootstrap:--with-included-glib} \
-	%{?with_bootstrap:--with-included-libcroco}
+	%{?with_bootstrap:--with-included-libcroco} \
+	--with-xz
 %{__make} \
 	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
 
@@ -457,14 +460,51 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gettext/urlget
 %attr(755,root,root) %{_libdir}/gettext/user-email
 %{_includedir}/gettext-po.h
-%{_aclocaldir}/*.m4
+%{_aclocaldir}/codeset.m4
+%{_aclocaldir}/fcntl-o.m4
+%{_aclocaldir}/gettext.m4
+%{_aclocaldir}/glibc2.m4
+%{_aclocaldir}/glibc21.m4
+%{_aclocaldir}/iconv.m4
+%{_aclocaldir}/intdiv0.m4
+%{_aclocaldir}/intl.m4
+%{_aclocaldir}/intldir.m4
+%{_aclocaldir}/intlmacosx.m4
+%{_aclocaldir}/intmax.m4
+%{_aclocaldir}/inttypes-pri.m4
+%{_aclocaldir}/inttypes_h.m4
+%{_aclocaldir}/lcmessage.m4
+%{_aclocaldir}/lib-ld.m4
+%{_aclocaldir}/lib-link.m4
+%{_aclocaldir}/lib-prefix.m4
+%{_aclocaldir}/lock.m4
+%{_aclocaldir}/longlong.m4
+%{_aclocaldir}/nls.m4
+%{_aclocaldir}/po.m4
+%{_aclocaldir}/printf-posix.m4
+%{_aclocaldir}/progtest.m4
+%{_aclocaldir}/size_max.m4
+%{_aclocaldir}/stdint_h.m4
+%{_aclocaldir}/threadlib.m4
+%{_aclocaldir}/uintmax_t.m4
+%{_aclocaldir}/visibility.m4
+%{_aclocaldir}/wchar_t.m4
+%{_aclocaldir}/wint_t.m4
+%{_aclocaldir}/xsize.m4
 %{_infodir}/gettext*.info*
 %{_mandir}/man1/gettextize.1*
 %{_mandir}/man1/msg*.1*
 %{_mandir}/man1/recode-sr-latin.1*
 %{_mandir}/man1/xgettext.1*
-%{_mandir}/man3/*
-
+%{_mandir}/man3/bind_textdomain_codeset.3*
+%{_mandir}/man3/bindtextdomain.3*
+%{_mandir}/man3/dcgettext.3*
+%{_mandir}/man3/dcngettext.3*
+%{_mandir}/man3/dgettext.3*
+%{_mandir}/man3/dngettext.3*
+%{_mandir}/man3/gettext.3*
+%{_mandir}/man3/ngettext.3*
+%{_mandir}/man3/textdomain.3*
 %{_datadir}/gettext/ABOUT-NLS
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
 %{_datadir}/gettext/gettext.h
@@ -521,8 +561,12 @@ rm -rf $RPM_BUILD_ROOT
 %files java-devel
 %defattr(644,root,root,755)
 %doc gettext-runtime/intl-java/javadoc2
+%if %{with gcj}
 %attr(755,root,root) %{_libdir}/gettext/gnu.gettext.DumpResource
 %attr(755,root,root) %{_libdir}/gettext/gnu.gettext.GetURL
+%else
+%{_datadir}/gettext/gettext.jar
+%endif
 %{_datadir}/gettext/javaversion.class
 %endif
 
@@ -536,7 +580,7 @@ rm -rf $RPM_BUILD_ROOT
 %files autopoint
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/autopoint
-%{_datadir}/gettext/archive.dir.tar.gz
+%{_datadir}/gettext/archive.dir.tar.xz
 %{_mandir}/man1/autopoint.1*
 
 %if %{with dotnet}
