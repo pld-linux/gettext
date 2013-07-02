@@ -40,7 +40,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.18.2.1
-Release:	2
+Release:	3
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
@@ -147,19 +147,7 @@ yöntemdir.
 для створення, використання та модифікації каталогів національних мов.
 Це простий та потужний метод для інтернаціоналізації програм.
 
-%package demo
-Summary:	Demo for gettext
-Summary(pl.UTF-8):	Pliki demonstracyjne dla pakietu gettext
-Group:		Documentation
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description demo
-Demonstrations and samples for gettext
-
-%description demo -l pl.UTF-8
-Pliki demonstracyjne i przykłady dla pakietu gettext.
-
-%package devel
+%package tools
 Summary:	Utilties for program national language support
 Summary(de.UTF-8):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(fr.UTF-8):	Utilitaires pour le support de la langue nationnalepar les programmes
@@ -168,19 +156,58 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 License:	GPL v3+
 Group:		Development/Tools
 Requires(post,postun):	/sbin/ldconfig
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 Requires:	iconv
 Conflicts:	autoconf < 2.52
 
+%description tools
+This package contains tools for creating and modifying natural
+language catalogs.
+
+%description tools -l pl.UTF-8
+Ten pakiet zawiera narzędzia do tworzenia i modyfikowania katalogów
+z obsługą języków naturalnych.
+
+%package demo
+Summary:	Demo for gettext
+Summary(pl.UTF-8):	Pliki demonstracyjne dla pakietu gettext
+Group:		Documentation
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description demo
+Demonstrations and samples for gettext.
+
+%description demo -l pl.UTF-8
+Pliki demonstracyjne i przykłady dla pakietu gettext.
+
+%package libs
+Summary:	Shared gettext utility libraries
+Summary(pl.UTF-8):	Współdzielone biblioteki narzędziowe gettexta
+License:	GPL v3+
+Group:		Development/Libraries
+
+%description libs
+This package contains shared versions of gettext utility libraries
+(libgettextlib, libgettextsrc and libgettextpo).
+
+%description libs -l pl.UTF-8
+Ten pakiet zawiera współdzielone wersje bibliotek narzędziowych
+gettext (libgettextlib, libgettextsrc i libgettextpo).
+
+%package devel
+Summary:	Development files for gettext libraries
+Summary(pl.UTF-8):	Pliki programistyczne bibliotek gettexta
+License:	GPL v3+
+Group:		Development/Libraries
+Requires:	%{name}-libs = %{version}-%{release}
+# for transition period (until BR =~ s/gettext-devel/gettext-tools/ in *.spec)
+Requires:	%{name}-tools = %{version}-%{release}
+
 %description devel
-The gettext library provides an easy to use library and tools for
-creating, using, and modifying natural language catalogs. It is a
-powerfull and simple method for internationalizing programs.
+Development files for gettext libraries.
 
 %description devel -l pl.UTF-8
-Pakiet gettext dostarcza narzędzi do tworzenia, używania i modyfikacji
-katalogów języków narodowych. To jest prosta i wydajna metoda
-lokalizacji (internacjonalizacji) programów.
+Pliki programistyczne bibliotek gettexta.
 
 %package static
 Summary:	Static gettext utility libraries
@@ -411,12 +438,13 @@ cp -a gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 rm -rf $RPM_BUILD_ROOT
 
 %post devel
-/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun devel
-/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %post	-n libasprintf -p /sbin/ldconfig
 %postun	-n libasprintf -p /sbin/ldconfig
@@ -439,28 +467,18 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gettext
 %dir %{_datadir}/gettext
 
-%files demo
-%defattr(644,root,root,755)
-%{_examplesdir}/%{name}-%{version}
-
-%files devel -f %{name}-tools.lang
+%files tools -f %{name}-tools.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS
 %attr(755,root,root) %{_bindir}/gettextize
 %attr(755,root,root) %{_bindir}/msg*
 %attr(755,root,root) %{_bindir}/recode-sr-latin
 %attr(755,root,root) %{_bindir}/xgettext
-%attr(755,root,root) %{_libdir}/libgettext*.so
-%{_libdir}/libgettext*.la
-# libgettextpo is for other programs, not used by gettext tools themselves
-%attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
 %attr(755,root,root) %{_libdir}/preloadable_libintl.so
 %attr(755,root,root) %{_libdir}/gettext/hostname
 %attr(755,root,root) %{_libdir}/gettext/project-id
 %attr(755,root,root) %{_libdir}/gettext/urlget
 %attr(755,root,root) %{_libdir}/gettext/user-email
-%{_includedir}/gettext-po.h
 %{_aclocaldir}/codeset.m4
 %{_aclocaldir}/fcntl-o.m4
 %{_aclocaldir}/gettext.m4
@@ -531,9 +549,32 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
 %{_datadir}/gettext/styles
 
+%files demo
+%defattr(644,root,root,755)
+%{_examplesdir}/%{name}-%{version}
+
+%files libs -f %{name}-tools.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgettextlib-0.18.2.so
+%attr(755,root,root) %{_libdir}/libgettextsrc-0.18.2.so
+%attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
+
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgettextlib.so
+%attr(755,root,root) %{_libdir}/libgettextsrc.so
+%attr(755,root,root) %{_libdir}/libgettextpo.so
+%{_libdir}/libgettextlib.la
+%{_libdir}/libgettextsrc.la
+%{_libdir}/libgettextpo.la
+%{_includedir}/gettext-po.h
+
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libgettext*.a
+%{_libdir}/libgettextlib.a
+%{_libdir}/libgettextsrc.a
+%{_libdir}/libgettextpo.a
 
 %if %{with asprintf}
 %files -n libasprintf
