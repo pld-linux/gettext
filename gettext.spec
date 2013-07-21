@@ -467,7 +467,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gettext
 %dir %{_datadir}/gettext
 
-%files tools -f %{name}-tools.lang
+%files tools
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS
 %attr(755,root,root) %{_bindir}/gettextize
