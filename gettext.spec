@@ -39,12 +39,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.18.3
+Version:	0.18.3.1
 Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	3fa4236c41b7e837355de144210207ec
+# Source0-md5:	3fc808f7d25487fc72b5759df7419e02
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-fixes.patch
@@ -76,6 +76,8 @@ BuildRequires:	xz
 Obsoletes:	gettext-base
 Conflicts:	intltool < 0.28
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		intabi	%(echo %{version} | cut -d. -f1-3)
 
 %description
 The GNU gettext package provides a set of tools and documentation for
@@ -555,8 +557,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs -f %{name}-tools.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgettextlib-%{version}.so
-%attr(755,root,root) %{_libdir}/libgettextsrc-%{version}.so
+%attr(755,root,root) %{_libdir}/libgettextlib-%{intabi}.so
+%attr(755,root,root) %{_libdir}/libgettextsrc-%{intabi}.so
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
 
