@@ -39,17 +39,16 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.18.3.1
+Version:	0.18.3.2
 Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	3fc808f7d25487fc72b5759df7419e02
+# Source0-md5:	241aba309d07aa428252c74b40a818ef
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-pl.po-fixes.patch
 Patch3:		%{name}-libintl_by_gcj.patch
-Patch4:		format-security.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
@@ -359,13 +358,8 @@ GNU gettext dla C#.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#for d in gettext-runtime gettext-tools gettext-tools/examples ; do
-#	iconv -f iso-8859-2 -t utf-8 ${d}/po/pl.po > ${d}/po/pl.po.utf-8
-#	mv -f ${d}/po/pl.po.utf-8 ${d}/po/pl.po
-#done
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 %{__libtoolize}
@@ -482,6 +476,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gettext/urlget
 %attr(755,root,root) %{_libdir}/gettext/user-email
 %{_aclocaldir}/codeset.m4
+%{_aclocaldir}/extern-inline.m4
 %{_aclocaldir}/fcntl-o.m4
 %{_aclocaldir}/gettext.m4
 %{_aclocaldir}/glibc2.m4
