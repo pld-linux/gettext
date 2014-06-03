@@ -39,20 +39,21 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.18.3.2
+Version:	0.19
 Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	241aba309d07aa428252c74b40a818ef
+# Source0-md5:	eae24a623e02b33e3e1024adff9a5a08
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
-Patch2:		%{name}-pl.po-fixes.patch
-Patch3:		%{name}-libintl_by_gcj.patch
+Patch2:		%{name}-pl.po-update.patch
+Patch3:		%{name}-pl.po-fixes.patch
+Patch4:		%{name}-libintl_by_gcj.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
-BuildRequires:	automake >= 1:1.11
+BuildRequires:	automake >= 1:1.13
 %{?with_gcj:BuildRequires:	gcj >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %if %{build_java}
@@ -64,7 +65,7 @@ BuildRequires:	jar
 BuildRequires:	libgomp-devel
 %endif
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
-BuildRequires:	libtool >= 1:1.4.2-9
+BuildRequires:	libtool >= 2:2
 BuildRequires:	libunistring-devel
 BuildRequires:	libxml2-devel
 %{?with_dotnet:BuildRequires:	mono-csharp}
@@ -360,6 +361,15 @@ GNU gettext dla C#.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+
+%{__sed} -i \
+	-e 's@m4_esyscmd(\[build-aux/git-version-gen \.tarball-version\])@[%{version}]@' \
+	configure.ac
+%{__sed} -i \
+	-e 's@m4_esyscmd(\[\.\./build-aux/git-version-gen \.\./\.tarball-version\])@[%{version}]@' \
+	gettext-runtime/configure.ac \
+	gettext-tools/configure.ac
 
 %build
 %{__libtoolize}

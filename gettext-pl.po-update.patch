@@ -1,0 +1,223 @@
+--- gettext-0.19/gettext-runtime/po/pl.po	2014-06-02 01:07:29.000000000 +0200
++++ gettext-0.19/gettext-runtime/po/pl.po.new	2014-06-03 17:10:35.221409874 +0200
+@@ -1,14 +1,14 @@
+ # Polish translations for the GNU gettext messages, gettext-runtime domain
+-# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001, 2003, 2006, 2007, 2010, 2013 Free Software Foundation, Inc.
++# Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001, 2003, 2006, 2007, 2010, 2013, 2014 Free Software Foundation, Inc.
+ # This file is distributed under the same license as the gettext package.
+-# Rafał Maszkowski <rzm@icm.edu.pl>, 1995-1999, 2001, 2003, 2006, 2007, 2010, 2013
++# Rafał Maszkowski <rzm@icm.edu.pl>, 1995-1999, 2001, 2003, 2006, 2007, 2010, 2013, 2014
+ # Piotr Pogorzelski <ppogorze@ippt.gov.pl>, 1995
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: GNU gettext-runtime 0.18.2\n"
++"Project-Id-Version: GNU gettext-runtime 0.19-rc1\n"
+ "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
+-"POT-Creation-Date: 2014-06-01 11:19+0900\n"
+-"PO-Revision-Date: 2013-03-08 15:40+0100\n"
++"POT-Creation-Date: 2014-05-10 13:36+0900\n"
++"PO-Revision-Date: 2014-06-03 13:00+0100\n"
+ "Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
+ "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+ "Language: pl\n"
+@@ -143,7 +143,7 @@
+ #: src/envsubst.c:188
+ #, c-format, no-wrap
+ msgid "  -v, --variables             output the variables occurring in SHELL-FORMAT\n"
+-msgstr "  -v, --variables             wypisanie zmiennich z FORMATU-POWŁOKI\n"
++msgstr "  -v, --variables             wypisanie zmiennych z FORMATU-POWŁOKI\n"
+ 
+ #: src/envsubst.c:192
+ #, c-format, no-wrap
+--- gettext-0.19/gettext-tools/po/pl.po.orig	2014-06-02 02:45:58.000000000 +0200
++++ gettext-0.19/gettext-tools/po/pl.po	2014-06-03 17:18:30.558066633 +0200
+@@ -10,7 +10,7 @@
+ "Project-Id-Version: GNU gettext-tools 0.19-rc1\n"
+ "Report-Msgid-Bugs-To: bug-gnu-gettext@gnu.org\n"
+ "POT-Creation-Date: 2014-06-02 09:45+0900\n"
+-"PO-Revision-Date: 2014-05-10 18:15+0200\n"
++"PO-Revision-Date: 2014-06-02 20:40+0200\n"
+ "Last-Translator: Rafał Maszkowski <rzm@icm.edu.pl>\n"
+ "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+ "Language: pl\n"
+@@ -988,7 +988,7 @@
+ msgid ""
+ "Mandatory arguments to long options are mandatory for short options too.\n"
+ msgstr ""
+-"Argumenty obowiązkowe dla opcji długich są obowiązkowe także dla krótkich.\n"
++"Argumenty obowiązkowe opcji długich są obowiązkowe także dla krótkich.\n"
+ 
+ #: src/msgattrib.c:433 src/msgcat.c:387 src/msgcmp.c:230 src/msgcomm.c:378
+ #: src/msgconv.c:318 src/msgen.c:319 src/msgexec.c:279 src/msgfilter.c:418
+@@ -1058,15 +1058,15 @@
+ msgid ""
+ "      --translated            keep translated, remove untranslated messages\n"
+ msgstr ""
+-"      --translated            zachowanie przetłumaczonych, usunięcie nie\n"
+-"                                przetłumaczonych\n"
++"      --translated            zachowanie przetłumaczonych, usunięcie\n"
++"                                nieprzetłumaczonych\n"
+ 
+ #: src/msgattrib.c:454
+ #, c-format
+ msgid ""
+ "      --untranslated          keep untranslated, remove translated messages\n"
+ msgstr ""
+-"      --untranslated          zachowanie nie przetłumaczonych, usunięcie\n"
++"      --untranslated          zachowanie nieprzetłumaczonych, usunięcie\n"
+ "                                przetłumaczonych\n"
+ 
+ #: src/msgattrib.c:456
+@@ -1166,7 +1166,7 @@
+ msgid ""
+ "      --ignore-file=FILE.po   manipulate only entries not listed in FILE.po\n"
+ msgstr ""
+-"      --ignore-file=PLIK.po   modyfikacja tylko wpisów nie obecnych w PLIKU."
++"      --ignore-file=PLIK.po   modyfikacja tylko wpisów nieobecnych w PLIKU."
+ "po\n"
+ 
+ #: src/msgattrib.c:486
+@@ -1457,7 +1457,7 @@
+ "      --use-first             use first available translation for each\n"
+ "                              message, don't merge several translations\n"
+ msgstr ""
+-"      --use-first             użycie pierwszego dostępnego tłumaczenia dla\n"
++"      --use-first             użycie pierwszego dostępnego tłumaczenia\n"
+ "                                każdego komunikatu zamiast łączenia wielu\n"
+ 
+ #: src/msgcat.c:433 src/msgen.c:345 src/msgmerge.c:570
+@@ -1543,13 +1543,12 @@
+ #: src/msgcmp.c:247
+ #, c-format
+ msgid "      --use-untranslated      consider untranslated entries\n"
+-msgstr ""
+-"      --use-untranslated      użycie nie przetłumaczonych komunikatów\n"
++msgstr "      --use-untranslated      użycie nieprzetłumaczonych komunikatów\n"
+ 
+ #: src/msgcmp.c:324
+ #, c-format
+ msgid "this message is untranslated"
+-msgstr "uwaga: ten komunikat nie jest przetłumaczony"
++msgstr "uwaga: ten komunikat jest nieprzetłumaczony"
+ 
+ #: src/msgcmp.c:330
+ #, c-format
+@@ -1559,7 +1558,7 @@
+ #: src/msgcmp.c:369 src/msgmerge.c:1505
+ #, c-format
+ msgid "this message is used but not defined..."
+-msgstr "ten komunikat jest użyty, ale nie zdefiniowany..."
++msgstr "ten komunikat jest użyty, ale nie jest zdefiniowany..."
+ 
+ #: src/msgcmp.c:372 src/msgmerge.c:1508
+ #, c-format
+@@ -1569,12 +1568,12 @@
+ #: src/msgcmp.c:377 src/msgmerge.c:1536
+ #, c-format
+ msgid "this message is used but not defined in %s"
+-msgstr "ten komunikat jest użyty, ale nie zdefiniowany w %s"
++msgstr "ten komunikat jest użyty, ale nie jest zdefiniowany w %s"
+ 
+ #: src/msgcmp.c:546
+ #, c-format
+ msgid "warning: this message is not used"
+-msgstr "uwaga: ten komunikat nie jest użyty"
++msgstr "uwaga: ten komunikat nie został użyty"
+ 
+ #: src/msgcmp.c:553 src/msgfmt.c:652 src/msgfmt.c:1437
+ #, c-format
+@@ -1694,7 +1693,7 @@
+ msgstr ""
+ "Tworzy plik tłumaczeń angielskich. Plikiem wejściowym jest ostatnio\n"
+ "tworzony angielski plik PO lub plik PO Template (zazwyczaj stworzony przez\n"
+-"xgettext). Nie przetłumaczonym wpisom są przypisywane tłumaczenia identyczne\n"
++"xgettext). Nieprzetłumaczonym wpisom są przypisywane tłumaczenia identyczne\n"
+ "z msgid.\n"
+ 
+ #: src/msgen.c:321
+@@ -1828,7 +1827,7 @@
+ #: src/msgfmt.c:345
+ #, c-format
+ msgid "the argument to %s should be a single punctuation character"
+-msgstr "argument dla %s powinien być pojedynczym znakiem przestankowym"
++msgstr "argument %s powinien być pojedynczym znakiem przestankowym"
+ 
+ #: src/msgfmt.c:392
+ #, c-format
+@@ -1909,9 +1908,9 @@
+ #, c-format
+ msgid ", %d untranslated message"
+ msgid_plural ", %d untranslated messages"
+-msgstr[0] ", %d nie przetłumaczony komunikat"
+-msgstr[1] ", %d nie przetłumaczone komunikaty"
+-msgstr[2] ", %d nie przetłumaczonych komunikatów"
++msgstr[0] ", %d nieprzetłumaczony komunikat"
++msgstr[1] ", %d nieprzetłumaczone komunikaty"
++msgstr[2] ", %d nieprzetłumaczonych komunikatów"
+ 
+ #: src/msgfmt.c:774
+ #, c-format
+@@ -1930,7 +1929,7 @@
+ "Mandatory arguments to long options are mandatory for short options too.\n"
+ "Similarly for optional arguments.\n"
+ msgstr ""
+-"Argumenty obowiązkowe dla długich opcji są obowiązkowe także dla krótkich.\n"
++"Argumenty obowiązkowe opcji długich są obowiązkowe także dla krótkich.\n"
+ "Podobnie dla argumentów opcjonalnych.\n"
+ 
+ #: src/msgfmt.c:790
+@@ -2300,7 +2299,7 @@
+ #: src/msgfmt.c:1328
+ #, c-format
+ msgid "%s exists but cannot read"
+-msgstr "%s istnieje, ale nie może zostać przeczytane"
++msgstr "%s istnieje, ale nie może zostać przeczytany"
+ 
+ #: src/msggrep.c:258 src/po-lex.c:657 src/read-mo.c:86
+ #: src/read-properties.c:89 src/read-stringtable.c:98 src/x-awk.c:139
+@@ -2652,7 +2651,7 @@
+ "  then convert back to %s using 'msgconv'.\n"
+ msgstr ""
+ "- Przekonwertowanie katalogu tłumaczeń do %s przy użyciu „msgconv”,\n"
+-"  a następnie wykonanie „%s”,\n"
++"  potem wykonanie „%s”,\n"
+ "  a następnie przekonwertowanie z powrotem do %s przy użyciu „msgconv”.\n"
+ 
+ #: src/msgl-charset.c:114
+@@ -2665,7 +2664,7 @@
+ msgstr ""
+ "- Ustawienie LC_ALL na lokalizację z kodowaniem %s,\n"
+ "  przekonwertowanie katalogu tłumaczeń do %s przy użyciu „msgconv”,\n"
+-"  a następnie wykonanie „%s”,\n"
++"  potem wykonanie „%s”,\n"
+ "  a następnie przekonwertowanie z powrotem do %s przy użyciu „msgconv”.\n"
+ 
+ #: src/msgl-charset.c:128
+@@ -2884,7 +2883,7 @@
+ "ostatnio utworzonym plikiem PO Template (zwykle tworzonym przez xgettext),\n"
+ "tłumaczenia i komentarze w nim zawarte będą zignorowane, ale komentarze z\n"
+ "kropką i pozycje w plikach będą zachowane. Tam, gdzie nie można dopasować\n"
+-"dokładnie, używane jest dopasowanie rozmyte, dla lepszych wyników.\n"
++"dokładnie, używane jest dopasowanie rozmyte dla lepszych wyników.\n"
+ 
+ #: src/msgmerge.c:507
+ #, c-format
+@@ -3313,7 +3312,7 @@
+ #: src/read-mo.c:178
+ #, c-format
+ msgid "file \"%s\" contains a not NUL terminated string, at %s"
+-msgstr "plik \"%s\" zawiera napis nie zakończony znakiem NUL pod %s"
++msgstr "plik \"%s\" zawiera napis niezakończony znakiem NUL pod %s"
+ 
+ #: src/read-properties.c:227
+ msgid "warning: invalid \\uxxxx syntax for Unicode character"
+@@ -4188,7 +4187,8 @@
+ msgid ""
+ "      --foreign-user          omit FSF copyright in output for foreign user\n"
+ msgstr ""
+-"      --foreign-user          pominięcie na wyjściu copyrightu FSF dla\n"
++"      --foreign-user          pominięcie na wyjściu informacji o prawach FSF "
++"dla\n"
+ "                                zewnętrznych projektów\n"
+ 
+ #: src/xgettext.c:1010
