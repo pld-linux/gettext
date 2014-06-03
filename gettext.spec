@@ -70,6 +70,7 @@ BuildRequires:	libunistring-devel
 BuildRequires:	libxml2-devel
 %{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	rpmbuild(macros) >= 1.453
+BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
 BuildRequires:	xz
 %{?with_xemacs:BuildRequires:	xemacs}
