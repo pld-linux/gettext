@@ -39,17 +39,15 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.19
+Version:	0.19.1
 Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	eae24a623e02b33e3e1024adff9a5a08
+# Source0-md5:	8949a57e82abe88274a93174ade515e4
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
-Patch2:		%{name}-pl.po-update.patch
-Patch3:		%{name}-pl.po-fixes.patch
-Patch4:		%{name}-libintl_by_gcj.patch
+Patch2:		%{name}-libintl_by_gcj.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
@@ -361,8 +359,6 @@ GNU gettext dla C#.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 %{__sed} -i \
 	-e 's@m4_esyscmd(\[build-aux/git-version-gen \.tarball-version\])@[%{version}]@' \
