@@ -39,12 +39,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.19.1
+Version:	0.19.2
 Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
-Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
-# Source0-md5:	8949a57e82abe88274a93174ade515e4
+Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
+# Source0-md5:	1e6a827f5fbd98b3d40bd16b803acc44
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-libintl_by_gcj.patch
@@ -69,6 +69,7 @@ BuildRequires:	libxml2-devel
 %{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	sed >= 4.0
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
 BuildRequires:	xz
 %{?with_xemacs:BuildRequires:	xemacs}
