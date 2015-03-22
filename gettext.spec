@@ -40,7 +40,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.19.4
-Release:	2
+Release:	3
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
@@ -441,11 +441,11 @@ cp -a gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post devel
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+%post	tools -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun devel
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+%postun	tools -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
