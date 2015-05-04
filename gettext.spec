@@ -40,7 +40,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.19.4
-Release:	4
+Release:	3
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
@@ -471,7 +471,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gettext
 %dir %{_datadir}/gettext
 
-%files tools -f %{name}-tools.lang
+%files tools
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS
 %attr(755,root,root) %{_bindir}/gettextize
@@ -558,7 +558,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}-%{version}
 
-%files libs
+%files libs -f %{name}-tools.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgettextlib-%{intabi}.so
 %attr(755,root,root) %{_libdir}/libgettextsrc-%{intabi}.so
