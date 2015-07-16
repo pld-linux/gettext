@@ -39,12 +39,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.19.4
-Release:	3
+Version:	0.19.5
+Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
-# Source0-md5:	997c9070354eff5517115feaea6038f0
+# Source0-md5:	546a8458f50e146be12c215f83b9bac2
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-libintl_by_gcj.patch
@@ -479,6 +479,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/recode-sr-latin
 %attr(755,root,root) %{_bindir}/xgettext
 %attr(755,root,root) %{_libdir}/preloadable_libintl.so
+%attr(755,root,root) %{_libdir}/gettext/cldr-plurals
 %attr(755,root,root) %{_libdir}/gettext/hostname
 %attr(755,root,root) %{_libdir}/gettext/project-id
 %attr(755,root,root) %{_libdir}/gettext/urlget
