@@ -39,12 +39,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.19.5.1
-Release:	2
+Version:	0.19.6
+Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
-Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
-# Source0-md5:	9b7c37e410df4bd1bf854e8c897cf937
+Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
+# Source0-md5:	45b2a123cdc7cef54df98152a0da3fcc
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-libintl_by_gcj.patch
@@ -66,12 +66,12 @@ BuildRequires:	libgomp-devel
 BuildRequires:	libtool >= 2:2
 BuildRequires:	libunistring-devel
 BuildRequires:	libxml2-devel
+BuildRequires:	lzip
 %{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
-BuildRequires:	xz
 %{?with_xemacs:BuildRequires:	xemacs}
 Obsoletes:	gettext-base
 Conflicts:	intltool < 0.28
