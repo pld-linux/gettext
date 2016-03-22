@@ -40,7 +40,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.19.7
-Release:	1
+Release:	2
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
@@ -419,7 +419,7 @@ EMACS=%{_bindir}/xemacs ./elisp-comp ./po-mode.el
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/bin
+install -d $RPM_BUILD_ROOT{/bin,%{_datadir}/gettext/its}
 
 %{__make} install \
 	examplesdir=%{_examplesdir}/%{name}-%{version} \
@@ -537,6 +537,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gettext/intl
 %{_datadir}/gettext/intl/[!c]*
 %attr(755,root,root) %{_datadir}/gettext/intl/config.charset
+%dir %{_datadir}/gettext/its
 %{_datadir}/gettext/msgunfmt.tcl
 %{_datadir}/gettext/po
 %dir %{_datadir}/gettext/projects
