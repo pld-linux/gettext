@@ -39,12 +39,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.19.7
-Release:	2
+Version:	0.19.8.1
+Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	0008c0ac4958eb9749362fbac4bdf750
+# Source0-md5:	d838d2c4144261d0c5fbab4a0aceb5c1
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-libintl_by_gcj.patch
@@ -77,8 +77,10 @@ Obsoletes:	gettext-base
 Conflicts:	intltool < 0.28
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# adjust -f when needed (e.g. 0.18.3.x used 0.18.3, 0.19.5.x uses full version)
+# adjust -f when needed (e.g. 0.18.3.x used ABI 0.18.3, 0.19.5.x uses full version)
 %define		intabi	%(echo %{version} | cut -d. -f1-4)
+# similarly for its data
+%define		dataver	%(echo %{version} | cut -d. -f1-3)
 
 %description
 The GNU gettext package provides a set of tools and documentation for
@@ -556,8 +558,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
 %{_datadir}/gettext/styles
-%dir %{_datadir}/gettext-%{version}
-%{_datadir}/gettext-%{version}/its
+%dir %{_datadir}/gettext-%{dataver}
+%{_datadir}/gettext-%{dataver}/its
 
 %files demo
 %defattr(644,root,root,755)
