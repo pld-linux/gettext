@@ -40,7 +40,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.19.8.1
-Release:	3
+Release:	4
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
@@ -615,12 +615,7 @@ rm -rf $RPM_BUILD_ROOT
 %files java-devel
 %defattr(644,root,root,755)
 %doc gettext-runtime/intl-java/javadoc2
-%if %{with gcj}
-%attr(755,root,root) %{_libdir}/gettext/gnu.gettext.DumpResource
-%attr(755,root,root) %{_libdir}/gettext/gnu.gettext.GetURL
-%else
 %{_datadir}/gettext/gettext.jar
-%endif
 %{_datadir}/gettext/javaversion.class
 %endif
 
