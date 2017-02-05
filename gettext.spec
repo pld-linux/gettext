@@ -8,12 +8,13 @@
 #   /usr/share/emacs/site-lisp/start-po.elc
 #
 # Conditional build:
-%bcond_without	asprintf	# without libasprintf C++ library
-%bcond_with	xemacs		# without po-mode for xemacs
-%bcond_without	gcj		# with Java support by gcj (preferred over javac)
-%bcond_with	javac		# with Java support by some javac
-%bcond_without	dotnet		# without .NET support
-%bcond_with	bootstrap	# use system GLib and libcroco
+%bcond_without	asprintf	# libasprintf C++ library
+%bcond_with	xemacs		# po-mode for xemacs
+%bcond_without	java		# convenience bcond to disable Java (any)
+%bcond_without	gcj		# Java support by gcj (preferred over javac)
+%bcond_with	javac		# Java support by some javac
+%bcond_without	dotnet		# .NET support package
+%bcond_with	bootstrap	# no system GLib and libcroco (for bootstrap)
 
 %ifnarch %{ix86} %{x8664} arm hppa ppc s390 s390x
 %undefine with_dotnet
@@ -25,9 +26,14 @@
 %if %{with javac}
 %undefine with_gcj
 %endif
-%{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
+%if %{without java}
+%undefine with_gcj
+%undefine with_javac
+%endif
 
 %define build_java	%{?with_gcj:1}%{!?with_gcj:%{?with_javac:1}%{!?with_javac:0}}
+%define	build_javaexe	%{?with_gcj:1}%{!?with_gcj:0}
+%{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
 Summary:	Utilties for program national language support
 Summary(de.UTF-8):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(es.UTF-8):	Utilitarios para el programa de soporte a lenguas locales
@@ -40,7 +46,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.19.8.1
-Release:	4
+Release:	5
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
@@ -48,11 +54,12 @@ Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-libintl_by_gcj.patch
+Patch3:		%{name}-libdir.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.13
-%{?with_gcj:BuildRequires:	gcj >= 3.0}
+%{?with_gcj:BuildRequires:	gcc-java >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %if %{build_java}
 BuildRequires:	jar
@@ -363,6 +370,7 @@ GNU gettext dla C#.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %{__sed} -i \
 	-e 's@m4_esyscmd(\[build-aux/git-version-gen \.tarball-version\])@[%{version}]@' \
@@ -395,10 +403,13 @@ cd ..
 %{__autoconf}
 %{__automake}
 %configure \
+	%{!?with_gcj:GCJ=none} \
 	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
+	--enable-csharp=%{?with_dotnet:mono}%{!?with_dotnet:no} \
+%if !%{build_java}
+	--disable-java \
+%endif
 	--enable-nls \
-	%{!?with_dotnet:--disable-csharp} \
-	%{?with_dotnet:--enable-csharp=mono} \
 	--without-bzip2 \
 	--without-git \
 	--without-included-gettext \
@@ -615,7 +626,12 @@ rm -rf $RPM_BUILD_ROOT
 %files java-devel
 %defattr(644,root,root,755)
 %doc gettext-runtime/intl-java/javadoc2
+%if %{build_javaexe}
+%attr(755,root,root) %{_libdir}/gettext/gnu.gettext.DumpResource
+%attr(755,root,root) %{_libdir}/gettext/gnu.gettext.GetURL
+%else
 %{_datadir}/gettext/gettext.jar
+%endif
 %{_datadir}/gettext/javaversion.class
 %endif
 
