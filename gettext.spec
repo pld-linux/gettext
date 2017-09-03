@@ -11,8 +11,8 @@
 %bcond_without	asprintf	# libasprintf C++ library
 %bcond_with	xemacs		# po-mode for xemacs
 %bcond_without	java		# convenience bcond to disable Java (any)
-%bcond_without	gcj		# Java support by gcj (preferred over javac)
-%bcond_with	javac		# Java support by some javac
+%bcond_with	gcj		# Java support by gcj (preferred over javac)
+%bcond_without	javac		# Java support by some javac
 %bcond_without	dotnet		# .NET support package
 %bcond_with	bootstrap	# no system GLib and libcroco (for bootstrap)
 
@@ -46,7 +46,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.19.8.1
-Release:	5
+Release:	6
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
@@ -55,6 +55,8 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch2:		%{name}-libintl_by_gcj.patch
 Patch3:		%{name}-libdir.patch
+Patch4:		perlre.patch
+Patch5:		java.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.62
@@ -371,6 +373,8 @@ GNU gettext dla C#.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %{__sed} -i \
 	-e 's@m4_esyscmd(\[build-aux/git-version-gen \.tarball-version\])@[%{version}]@' \

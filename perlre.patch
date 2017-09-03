@@ -1,0 +1,58 @@
+--- gettext-0.19.8.1/gettext-runtime/libasprintf/texi2html.orig	2015-12-08 13:50:04.000000000 +0100
++++ gettext-0.19.8.1/gettext-runtime/libasprintf/texi2html	2017-09-03 11:56:03.019241853 +0200
+@@ -879,7 +879,7 @@
+     s/\@refill\s+//g;
+     # other substitutions
+     &simple_substitutions;
+-    s/\@value{($VARRE)}/$value{$1}/eg;
++    s/\@value\{($VARRE)\}/$value{$1}/eg;
+     s/\@footnote\{/\@footnote$docu_doc\{/g; # mark footnotes, cf. pass 4
+     #
+     # analyze the tag again
+@@ -1204,7 +1204,7 @@
+     #
+     # xref
+     #
+-    while (/\@(x|px|info|)ref{($XREFRE)(}?)/o) {
++    while (/\@(x|px|info|)ref\{($XREFRE)(\}?)/o) {
+ 	# note: Texinfo may accept other characters
+ 	($type, $nodes, $full) = ($1, $2, $3);
+ 	($before, $after) = ($`, $');
+@@ -1810,7 +1810,7 @@
+     while ($changed) {
+ 	$changed = 0;
+ 	$done = '';
+-	while (/\@(\w+|"|\~|,|\^){([^\{\}]+)}/) {
++	while (/\@\(\w+|"|\~|,|\^\)\{([^\{\}]+)\}/) {
+ 	    $text = &apply_style($1, $2);
+ 	    if ($text) {
+ 		$_ = "$`$text$'";
+--- gettext-0.19.8.1/gettext-tools/doc/texi2html.orig	2017-09-03 11:56:41.053102137 +0200
++++ gettext-0.19.8.1/gettext-tools/doc/texi2html	2017-09-03 11:57:44.060639306 +0200
+@@ -879,7 +879,7 @@
+     s/\@refill\s+//g;
+     # other substitutions
+     &simple_substitutions;
+-    s/\@value{($VARRE)}/$value{$1}/eg;
++    s/\@value\{($VARRE)\}/$value{$1}/eg;
+     s/\@footnote\{/\@footnote$docu_doc\{/g; # mark footnotes, cf. pass 4
+     #
+     # analyze the tag again
+@@ -1204,7 +1204,7 @@
+     #
+     # xref
+     #
+-    while (/\@(x|px|info|)ref{($XREFRE)(}?)/o) {
++    while (/\@(x|px|info|)ref\{($XREFRE)(\}?)/o) {
+ 	# note: Texinfo may accept other characters
+ 	($type, $nodes, $full) = ($1, $2, $3);
+ 	($before, $after) = ($`, $');
+@@ -1810,7 +1810,7 @@
+     while ($changed) {
+ 	$changed = 0;
+ 	$done = '';
+-	while (/\@(\w+|"|\~|,|\^){([^\{\}]+)}/) {
++	while (/\@(\w+|"|\~|,|\^)\{([^\{\}]+)\}/) {
+ 	    $text = &apply_style($1, $2);
+ 	    if ($text) {
+ 		$_ = "$`$text$'";
