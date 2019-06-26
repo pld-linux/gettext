@@ -1,20 +1,20 @@
---- gettext-0.19.8.1/gettext-runtime/gnulib-m4/lib-prefix.m4.orig	2016-06-11 14:59:32.000000000 +0200
-+++ gettext-0.19.8.1/gettext-runtime/gnulib-m4/lib-prefix.m4	2017-02-05 14:26:12.237083553 +0100
-@@ -205,12 +205,14 @@
-         for searchdir in $searchpath; do
-           if test -d "$searchdir"; then
-             case "$searchdir" in
-+              */libx32/ | */libx32 ) acl_libdirstem=libx32 ;;
-               */lib64/ | */lib64 ) acl_libdirstem=lib64 ;;
-               */../ | */.. )
-                 # Better ignore directories of this form. They are misleading.
-                 ;;
-               *) searchdir=`cd "$searchdir" && pwd`
+--- gettext-0.20.1/gettext-runtime/gnulib-m4/lib-prefix.m4.orig	2019-06-18 17:53:08.859806346 +0200
++++ gettext-0.20.1/gettext-runtime/gnulib-m4/lib-prefix.m4	2019-06-18 18:56:16.922617983 +0200
+@@ -225,12 +225,14 @@
+                if test -d "$searchdir"; then
                   case "$searchdir" in
-+                   */libx32 ) acl_libdirstem=libx32 ;;
-                    */lib64 ) acl_libdirstem=lib64 ;;
-                  esac ;;
-             esac
+                    */lib64/ | */lib64 ) acl_libdirstem=lib64 ;;
++                   */libx32/ | */libx32 ) acl_libdirstem=libx32 ;;
+                    */../ | */.. )
+                      # Better ignore directories of this form. They are misleading.
+                      ;;
+                    *) searchdir=`cd "$searchdir" && pwd`
+                       case "$searchdir" in
+                         */lib64 ) acl_libdirstem=lib64 ;;
++                        */libx32 ) acl_libdirstem=libx32 ;;
+                       esac ;;
+                  esac
+                fi
 --- gettext-0.19.8.1/gettext-runtime/gnulib-m4/lib-link.m4.orig	2016-06-11 14:59:32.000000000 +0200
 +++ gettext-0.19.8.1/gettext-runtime/gnulib-m4/lib-link.m4	2017-02-05 14:27:31.840415976 +0100
 @@ -370,7 +370,12 @@
@@ -30,23 +30,23 @@
              if test "X$found_so" != "X"; then
                dnl Linking with a shared library. We attempt to hardcode its
                dnl directory into the executable's runpath, unless it's the
---- gettext-0.19.8.1/gettext-tools/gnulib-m4/lib-prefix.m4.orig	2016-06-11 14:59:32.000000000 +0200
-+++ gettext-0.19.8.1/gettext-tools/gnulib-m4/lib-prefix.m4	2017-02-05 14:26:12.237083553 +0100
-@@ -205,12 +205,14 @@
-         for searchdir in $searchpath; do
-           if test -d "$searchdir"; then
-             case "$searchdir" in
-+              */libx32/ | */libx32 ) acl_libdirstem=libx32 ;;
-               */lib64/ | */lib64 ) acl_libdirstem=lib64 ;;
-               */../ | */.. )
-                 # Better ignore directories of this form. They are misleading.
-                 ;;
-               *) searchdir=`cd "$searchdir" && pwd`
+--- gettext-0.20.1/gettext-tools/gnulib-m4/lib-prefix.m4.orig	2016-06-11 14:59:32.000000000 +0200
++++ gettext-0.20.1/gettext-tools/gnulib-m4/lib-prefix.m4	2017-02-05 14:26:12.237083553 +0100
+@@ -225,12 +225,14 @@
+                if test -d "$searchdir"; then
                   case "$searchdir" in
-+                   */libx32 ) acl_libdirstem=libx32 ;;
-                    */lib64 ) acl_libdirstem=lib64 ;;
-                  esac ;;
-             esac
+                    */lib64/ | */lib64 ) acl_libdirstem=lib64 ;;
++                   */libx32/ | */libx32 ) acl_libdirstem=libx32 ;;
+                    */../ | */.. )
+                      # Better ignore directories of this form. They are misleading.
+                      ;;
+                    *) searchdir=`cd "$searchdir" && pwd`
+                       case "$searchdir" in
+                         */lib64 ) acl_libdirstem=lib64 ;;
++                        */libx32 ) acl_libdirstem=libx32 ;;
+                       esac ;;
+                  esac
+                fi
 --- gettext-0.19.8.1/gettext-tools/gnulib-m4/lib-link.m4.orig	2016-06-11 14:59:32.000000000 +0200
 +++ gettext-0.19.8.1/gettext-tools/gnulib-m4/lib-link.m4	2017-02-05 14:27:31.840415976 +0100
 @@ -370,7 +370,12 @@

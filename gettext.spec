@@ -16,7 +16,7 @@
 %bcond_without	dotnet		# .NET support package
 %bcond_with	bootstrap	# no system GLib and libcroco (for bootstrap)
 
-%ifnarch %{ix86} %{x8664} arm hppa ppc s390 s390x
+%ifnarch %{ix86} %{x8664} %{arm} hppa ppc s390 s390x
 %undefine with_dotnet
 %endif
 %ifarch i386
@@ -45,51 +45,48 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.19.8.1
-Release:	7
+Version:	0.20.1
+Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
-Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	d838d2c4144261d0c5fbab4a0aceb5c1
+Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
+# Source0-md5:	9ed9e26ab613b668e0026222a9c23639
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
-Patch2:		%{name}-libintl_by_gcj.patch
 Patch3:		%{name}-libdir.patch
-Patch4:		perlre.patch
-Patch5:		java.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
-BuildRequires:	autoconf >= 2.62
+BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.13
 %{?with_gcj:BuildRequires:	gcc-java >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %if %{build_java}
 BuildRequires:	jar
 %endif
-%{?with_javac:BuildRequires:	jdk >= 1.3}
+%{?with_javac:BuildRequires:	jdk >= 1.6}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
-%if "%(echo %{cc_version} | grep -q '^4.[2-9]'; echo $?)" == "0"
+%if "%{cc_version}" >= "4.2"
 BuildRequires:	libgomp-devel
 %endif
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 2:2
 BuildRequires:	libunistring-devel
-BuildRequires:	libxml2-devel
-BuildRequires:	lzip
+%{!?with_bootstrap:BuildRequires:	libxml2-devel}
 %{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
+BuildRequires:	xz
 Obsoletes:	gettext-base
 Conflicts:	intltool < 0.28
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # adjust -f when needed (e.g. 0.18.3.x used ABI 0.18.3, 0.19.5.x uses full version)
-%define		intabi	%(echo %{version} | cut -d. -f1-4)
+%define		intabi	%(echo %{version} | cut -d. -f1-3)
 # similarly for its data
-%define		dataver	%(echo %{version} | cut -d. -f1-3)
+%define		dataver	%(echo %{version} | cut -d. -f1-2)
 
 %description
 The GNU gettext package provides a set of tools and documentation for
@@ -371,10 +368,7 @@ GNU gettext dla C#.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %{__sed} -i \
 	-e 's@m4_esyscmd(\[build-aux/git-version-gen \.tarball-version\])@[%{version}]@' \
@@ -384,8 +378,11 @@ GNU gettext dla C#.
 	gettext-runtime/configure.ac \
 	gettext-tools/configure.ac
 
+%if %{without bootstrap}
+%{__sed} -i -e '/gl_LIBCROCO\|gl_LIBGLIB\|gl_LIBXML/s/(\[yes\])//' libtextstyle/gnulib-m4/gnulib-comp.m4
+%endif
+
 %build
-%{__libtoolize}
 cd gettext-runtime
 %{__libtoolize}
 %{__aclocal} -I m4 -I ../m4 -I gnulib-m4
@@ -397,12 +394,22 @@ cd libasprintf
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-cd ../../gettext-tools
+cd ../../libtextstyle
+%{__libtoolize}
+%{__aclocal} -I m4 -I gnulib-m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd ../gettext-tools
 %{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../m4 -I gnulib-m4 -I libgrep/gnulib-m4 -I libgettextpo/gnulib-m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-cd ..
+cd examples
+%{__aclocal} -I ../../gettext-runtime/m4 -I ../../m4
+%{__autoconf}
+%{__automake}
+cd ../..
 %{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
@@ -414,11 +421,10 @@ cd ..
 	--disable-java \
 %endif
 	--enable-nls \
+	--disable-silent-rules \
 	--without-bzip2 \
 	--without-git \
 	--without-included-gettext \
-	%{?with_bootstrap:--with-included-glib} \
-	%{?with_bootstrap:--with-included-libcroco} \
 	--with-xz
 %{__make} \
 	GMSGFMT=`pwd`/gettext-tools/src/msgfmt
@@ -443,7 +449,7 @@ install -d $RPM_BUILD_ROOT{/bin,%{_datadir}/gettext/its}
 	examplesbuildauxdir=%{_examplesdir}/%{name}-%{version}/build-aux \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv -f $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/{,n}gettext $RPM_BUILD_ROOT/bin
 
 # these static libs are removed in install-exec-clean
 cp -a gettext-tools/gnulib-lib/.libs/libgettextlib.a \
@@ -451,6 +457,7 @@ cp -a gettext-tools/gnulib-lib/.libs/libgettextlib.a \
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/gettext
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libasprintf
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libtextstyle
 %{__rm} -f $RPM_BUILD_ROOT%{_infodir}/dir
 
 %find_lang %{name}-runtime
@@ -467,6 +474,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
+
+%post	devel -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
+%postun	devel -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
 %post	-n libasprintf -p /sbin/ldconfig
 %postun	-n libasprintf -p /sbin/ldconfig
@@ -502,39 +515,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gettext/project-id
 %attr(755,root,root) %{_libdir}/gettext/urlget
 %attr(755,root,root) %{_libdir}/gettext/user-email
-%{_aclocaldir}/codeset.m4
-%{_aclocaldir}/extern-inline.m4
-%{_aclocaldir}/fcntl-o.m4
 %{_aclocaldir}/gettext.m4
-%{_aclocaldir}/glibc2.m4
-%{_aclocaldir}/glibc21.m4
+%{_aclocaldir}/host-cpu-c-abi.m4
 %{_aclocaldir}/iconv.m4
-%{_aclocaldir}/intdiv0.m4
-%{_aclocaldir}/intl.m4
-%{_aclocaldir}/intldir.m4
 %{_aclocaldir}/intlmacosx.m4
-%{_aclocaldir}/intmax.m4
-%{_aclocaldir}/inttypes-pri.m4
-%{_aclocaldir}/inttypes_h.m4
-%{_aclocaldir}/lcmessage.m4
 %{_aclocaldir}/lib-ld.m4
 %{_aclocaldir}/lib-link.m4
 %{_aclocaldir}/lib-prefix.m4
-%{_aclocaldir}/lock.m4
-%{_aclocaldir}/longlong.m4
 %{_aclocaldir}/nls.m4
 %{_aclocaldir}/po.m4
-%{_aclocaldir}/printf-posix.m4
 %{_aclocaldir}/progtest.m4
-%{_aclocaldir}/size_max.m4
-%{_aclocaldir}/stdint_h.m4
-%{_aclocaldir}/threadlib.m4
-%{_aclocaldir}/uintmax_t.m4
-%{_aclocaldir}/visibility.m4
-%{_aclocaldir}/wchar_t.m4
-%{_aclocaldir}/wint_t.m4
-%{_aclocaldir}/xsize.m4
-%{_infodir}/gettext*.info*
+%{_infodir}/gettext.info*
 %{_mandir}/man1/gettextize.1*
 %{_mandir}/man1/msg*.1*
 %{_mandir}/man1/recode-sr-latin.1*
@@ -551,9 +542,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/ABOUT-NLS
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
 %{_datadir}/gettext/gettext.h
-%dir %{_datadir}/gettext/intl
-%{_datadir}/gettext/intl/[!c]*
-%attr(755,root,root) %{_datadir}/gettext/intl/config.charset
 %dir %{_datadir}/gettext/its
 %{_datadir}/gettext/msgunfmt.tcl
 %{_datadir}/gettext/po
@@ -586,22 +574,30 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgettextsrc-%{intabi}.so
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
+%attr(755,root,root) %{_libdir}/libtextstyle.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtextstyle.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgettextlib.so
 %attr(755,root,root) %{_libdir}/libgettextsrc.so
 %attr(755,root,root) %{_libdir}/libgettextpo.so
+%attr(755,root,root) %{_libdir}/libtextstyle.so
 %{_libdir}/libgettextlib.la
 %{_libdir}/libgettextsrc.la
 %{_libdir}/libgettextpo.la
+%{_libdir}/libtextstyle.la
 %{_includedir}/gettext-po.h
+%{_includedir}/textstyle.h
+%{_includedir}/textstyle
+%{_infodir}/libtextstyle.info*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgettextlib.a
 %{_libdir}/libgettextsrc.a
 %{_libdir}/libgettextpo.a
+%{_libdir}/libtextstyle.a
 
 %if %{with asprintf}
 %files -n libasprintf
