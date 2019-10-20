@@ -416,6 +416,7 @@ cd ../..
 %configure \
 	%{!?with_gcj:GCJ=none} \
 	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
+	%{!?with_xemacs:--without-emacs} \
 	--enable-csharp=%{?with_dotnet:mono}%{!?with_dotnet:no} \
 %if !%{build_java}
 	--disable-java \
