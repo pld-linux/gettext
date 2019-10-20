@@ -170,6 +170,7 @@ Requires(post,postun):	/sbin/ldconfig
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	iconv
 Conflicts:	autoconf < 2.52
+Conflicts:	rpm-build-macros < 1.744
 
 %description tools
 This package contains tools for creating and modifying natural
