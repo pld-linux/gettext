@@ -33,7 +33,6 @@
 
 %define build_java	%{?with_gcj:1}%{!?with_gcj:%{?with_javac:1}%{!?with_javac:0}}
 %define	build_javaexe	%{?with_gcj:1}%{!?with_gcj:0}
-%{?with_dotnet:%include	/usr/lib/rpm/macros.mono}
 Summary:	Utilties for program national language support
 Summary(de.UTF-8):	Utilities zum Programmieren von nationaler Sprachunterstützung
 Summary(es.UTF-8):	Utilitarios para el programa de soporte a lenguas locales
