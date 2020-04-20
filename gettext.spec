@@ -44,12 +44,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.20.1
-Release:	3
+Version:	0.20.2
+Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
-# Source0-md5:	9ed9e26ab613b668e0026222a9c23639
+# Source0-md5:	0cf5f68338d5d941bbf9ac93b847310f
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
@@ -85,7 +85,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # adjust -f when needed (e.g. 0.18.3.x used ABI 0.18.3, 0.19.5.x uses full version)
 %define		intabi	%(echo %{version} | cut -d. -f1-3)
 # similarly for its data
-%define		dataver	%(echo %{version} | cut -d. -f1-2)
+%define		dataver	%(echo %{version} | cut -d. -f1-3)
 
 %description
 The GNU gettext package provides a set of tools and documentation for
