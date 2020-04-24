@@ -48,7 +48,7 @@ Version:	0.20.2
 Release:	1
 License:	LGPL v2+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
-Source0:	http://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
+Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
 # Source0-md5:	0cf5f68338d5d941bbf9ac93b847310f
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
