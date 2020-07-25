@@ -6,7 +6,7 @@
 %bcond_with	gcj		# Java support by gcj (preferred over javac)
 %bcond_without	javac		# Java support by some javac
 %bcond_without	dotnet		# .NET support package
-%bcond_with	bootstrap	# no system GLib and libcroco (for bootstrap)
+%bcond_with	bootstrap	# no system GLib, libcroco, libxml2 (for bootstrap)
 
 %ifnarch %{ix86} %{x8664} %{arm} hppa ppc s390 s390x
 %undefine with_dotnet
@@ -64,6 +64,7 @@ BuildRequires:	libtool >= 2:2
 BuildRequires:	libunistring-devel
 %{!?with_bootstrap:BuildRequires:	libxml2-devel}
 %{?with_dotnet:BuildRequires:	mono-csharp}
+BuildRequires:	ncurses-devel
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
@@ -188,7 +189,8 @@ Summary:	Shared gettext utility libraries
 Summary(pl.UTF-8):	Współdzielone biblioteki narzędziowe gettexta
 License:	GPL v3+
 Group:		Development/Libraries
-Requires:	libtextstyle = %{version}-%{release}
+# relaxed to allow newer package from libtextstyle.spec
+Requires:	libtextstyle >= %{version}-%{release}
 
 %description libs
 This package contains shared versions of gettext utility libraries
@@ -204,7 +206,8 @@ Summary(pl.UTF-8):	Pliki programistyczne bibliotek gettexta
 License:	GPL v3+
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	libtextstyle-devel = %{version}-%{release}
+# relaxed to allow newer package from libtextstyle.spec
+Requires:	libtextstyle-devel >= %{version}-%{release}
 
 %description devel
 Development files for gettext libraries.
