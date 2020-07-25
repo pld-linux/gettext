@@ -1,11 +1,3 @@
-# TODO
-# - unpackaged:
-#   /usr/share/emacs/site-lisp/po-compat.el
-#   /usr/share/emacs/site-lisp/po-compat.elc
-#   /usr/share/emacs/site-lisp/po-mode.el
-#   /usr/share/emacs/site-lisp/po-mode.elc
-#   /usr/share/emacs/site-lisp/start-po.el
-#   /usr/share/emacs/site-lisp/start-po.elc
 #
 # Conditional build:
 %bcond_without	asprintf	# libasprintf C++ library
@@ -45,8 +37,8 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.20.2
-Release:	1
-License:	LGPL v2+ (libintl), GPL v3+ (tools)
+Release:	2
+License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
 # Source0-md5:	0cf5f68338d5d941bbf9ac93b847310f
@@ -196,6 +188,7 @@ Summary:	Shared gettext utility libraries
 Summary(pl.UTF-8):	Współdzielone biblioteki narzędziowe gettexta
 License:	GPL v3+
 Group:		Development/Libraries
+Requires:	libtextstyle = %{version}-%{release}
 
 %description libs
 This package contains shared versions of gettext utility libraries
@@ -211,8 +204,7 @@ Summary(pl.UTF-8):	Pliki programistyczne bibliotek gettexta
 License:	GPL v3+
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-# for transition period (until BR =~ s/gettext-devel/gettext-tools/ in *.spec)
-Requires:	%{name}-tools = %{version}-%{release}
+Requires:	libtextstyle-devel = %{version}-%{release}
 
 %description devel
 Development files for gettext libraries.
@@ -238,7 +230,7 @@ Ten pakiet zawiera statyczne wersje bibliotek narzędziowych gettext
 %package -n libasprintf
 Summary:	GNU libasprintf - automatic formatted output to strings in C++
 Summary(pl.UTF-8):	GNU libasprintf - automatyczne formatowanie wyjścia do łańcuchów w C++
-License:	LGPL v2+
+License:	LGPL v2.1+
 Group:		Libraries
 
 %description -n libasprintf
@@ -254,7 +246,7 @@ używalnymi w programach w C++, z łańcuchami <string> i strumieniami
 %package -n libasprintf-devel
 Summary:	Header file and documentation for libasprintf
 Summary(pl.UTF-8):	Plik nagłówkowy i dokumentacja dla libasprintf
-License:	LGPL v2+
+License:	LGPL v2.1+
 Group:		Development/Libraries
 Requires:	libasprintf = %{version}-%{release}
 
@@ -267,7 +259,7 @@ Plik nagłówkowy i dokumentacja dla libasprintf.
 %package -n libasprintf-static
 Summary:	Static libasprintf library
 Summary(pl.UTF-8):	Statyczna biblioteka libasprintf
-License:	LGPL v2+
+License:	LGPL v2.1+
 Group:		Development/Libraries
 Requires:	libasprintf-devel = %{version}-%{release}
 
@@ -277,10 +269,59 @@ Static libasprintf library.
 %description -n libasprintf-static -l pl.UTF-8
 Statyczna biblioteka libasprintf.
 
+%package -n libtextstyle
+Summary:	GNU libtextstyle - Text styling library
+Summary(pl.UTF-8):	GNU libtextstyle - biblioteka do obsługi stylu tekstu
+License:	GPL v3+
+
+%description -n libtextstyle
+This library provides an easy way to add styling to programs that
+produce output to a console or terminal emulator window.
+
+libtextstyle is for you if your application produces text that is more
+readable when it is accompanied with styling information, such as
+color, font attributes (weight, posture), or underlining.
+
+%description -n libtextstyle -l pl.UTF-8
+Ta biblioteka zapewnia łatwy sposób dodawania styli do programów
+produkujących wyjście na konsoli lub w oknie emulatora terminala.
+
+libtextstyle ma zastosowanie tam, gdzie aplikacja produkuje tekst,
+który jest bardziej czytelny, jeśli jest wzbogacony o informacje o
+stylu, takie jak kolor, atrybuty czcionek (grubość, nachylenie) lub
+podkreślenie.
+
+%package -n libtextstyle-devel
+Summary:	Header files for libtextstyle library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libtextstyle
+License:	GPL v3+
+Group:		Development/Libraries
+Requires:	libtextstyle = %{version}-%{release}
+Requires:	ncurses-devel
+
+%description -n libtextstyle-devel
+Header files for libtextstyle library.
+
+%description -n libtextstyle-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki libtextstyle.
+
+%package -n libtextstyle-static
+Summary:	Static libtextstyle library
+Summary(pl.UTF-8):	Statyczna biblioteka libtextstyle
+License:	GPL v3+
+Group:		Development/Libraries
+Requires:	libtextstyle-devel = %{version}-%{release}
+
+%description -n libtextstyle-static
+Static libtextstyle library.
+
+%description -n libtextstyle-static -l pl.UTF-8
+Statyczna biblioteka libtextstyle.
+
 %package java
 Summary:	Runtime classes for Java programs internationalization
 Summary(pl.UTF-8):	Klasy do uruchamiania umiędzynarodowionych programów w Javie
-License:	LGPL v2+
+License:	LGPL v2.1+
 Group:		Development/Languages/Java
 Requires:	%{name} = %{version}-%{release}
 
@@ -355,7 +396,7 @@ wersji.
 %package -n dotnet-gettext
 Summary:	GNU gettext for C#
 Summary(pl.UTF-8):	GNU gettext dla C#
-License:	LGPL v2+ (GNU.Gettext library), GPL v3+ (tools)
+License:	LGPL v2.1+ (GNU.Gettext library), GPL v3+ (tools)
 Group:		Development/Tools
 
 %description -n dotnet-gettext
@@ -491,6 +532,15 @@ rm -rf $RPM_BUILD_ROOT
 %postun	-n libasprintf-devel -p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
+%post	-n libtextstyle -p /sbin/ldconfig
+%postun	-n libtextstyle -p /sbin/ldconfig
+
+%post	-n libtextstyle-devel -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
+%postun	-n libtextstyle-devel -p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
 %files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) /bin/gettext
@@ -575,30 +625,22 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgettextsrc-%{intabi}.so
 %attr(755,root,root) %{_libdir}/libgettextpo.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgettextpo.so.0
-%attr(755,root,root) %{_libdir}/libtextstyle.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtextstyle.so.0
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgettextlib.so
 %attr(755,root,root) %{_libdir}/libgettextsrc.so
 %attr(755,root,root) %{_libdir}/libgettextpo.so
-%attr(755,root,root) %{_libdir}/libtextstyle.so
 %{_libdir}/libgettextlib.la
 %{_libdir}/libgettextsrc.la
 %{_libdir}/libgettextpo.la
-%{_libdir}/libtextstyle.la
 %{_includedir}/gettext-po.h
-%{_includedir}/textstyle.h
-%{_includedir}/textstyle
-%{_infodir}/libtextstyle.info*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgettextlib.a
 %{_libdir}/libgettextsrc.a
 %{_libdir}/libgettextpo.a
-%{_libdir}/libtextstyle.a
 
 %if %{with asprintf}
 %files -n libasprintf
@@ -618,6 +660,24 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libasprintf.a
 %endif
+
+%files -n libtextstyle
+%defattr(644,root,root,755)
+%doc libtextstyle/{AUTHORS,NEWS,README}
+%attr(755,root,root) %{_libdir}/libtextstyle.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtextstyle.so.0
+
+%files -n libtextstyle-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libtextstyle.so
+%{_libdir}/libtextstyle.la
+%{_includedir}/textstyle.h
+%{_includedir}/textstyle
+%{_infodir}/libtextstyle.info*
+
+%files -n libtextstyle-static
+%defattr(644,root,root,755)
+%{_libdir}/libtextstyle.a
 
 %if %{build_java}
 %files java
