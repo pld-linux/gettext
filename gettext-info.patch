@@ -1,5 +1,5 @@
---- gettext-0.20.1/gettext-tools/doc/gettext.texi.orig	2019-05-11 23:41:25.000000000 +0200
-+++ gettext-0.20.1/gettext-tools/doc/gettext.texi	2019-06-18 17:43:19.826330748 +0200
+--- gettext-0.21/gettext-tools/doc/gettext.texi.orig	2020-07-26 21:47:14.000000000 +0200
++++ gettext-0.21/gettext-tools/doc/gettext.texi	2020-10-11 19:22:15.147471076 +0200
 @@ -47,30 +47,30 @@
  @include version.texi
  
@@ -130,7 +130,7 @@
  
  Other Programming Languages
  
-@@ -446,12 +446,12 @@
+@@ -449,12 +449,12 @@
  * Preparing Shell Scripts::     Preparing Shell Scripts for Internationalization
  * gettext.sh::                  Contents of @code{gettext.sh}
  * gettext Invocation::          Invoking the @code{gettext} program
@@ -149,7 +149,7 @@
  
  Perl
  
-@@ -1027,7 +1027,7 @@
+@@ -1030,7 +1030,7 @@
  exactly where in C sources each string is used.  All translations
  are set to empty.  The letter @code{t} in @file{.pot} marks this as
  a Template PO file, not yet oriented towards any particular language.
@@ -158,7 +158,7 @@
  @code{xgettext} program.  If you are @emph{really} lazy, you might
  be interested at working a lot more right away, and preparing the
  whole distribution setup (@pxref{Maintainers}).  By doing so, you
-@@ -1102,7 +1102,7 @@
+@@ -1105,7 +1105,7 @@
  which are no longer used in the program sources (@pxref{Obsolete
  Entries}).  It finally discovers new strings and inserts them in
  the resulting PO file as untranslated entries (@pxref{Untranslated
@@ -167,7 +167,7 @@
  @code{msgmerge} really does.
  
  Whatever route or means taken, the goal is to obtain an updated
-@@ -1126,8 +1126,8 @@
+@@ -1129,8 +1129,8 @@
  Once the PO file is complete and dependable, the @code{msgfmt} program
  is used for turning the PO file into a machine-oriented format, which
  may yield efficient retrieval of translations by the programs of the
@@ -178,7 +178,7 @@
  for the @code{msgfmt} program.
  
  Finally, the modified and marked C sources are compiled and linked
-@@ -1555,7 +1555,7 @@
+@@ -1558,7 +1558,7 @@
  
  When the @code{c-format} flag is given for a string the @code{msgfmt}
  program does some more tests to check the validity of the translation.
@@ -187,7 +187,7 @@
  
  @item objc-format
  @kwindex objc-format@r{ flag}
-@@ -2641,7 +2641,7 @@
+@@ -2656,7 +2656,7 @@
  
  If a string is marked with @code{c-format} and this is not correct the
  user can find out who is responsible for the decision.  See
@@ -196,7 +196,7 @@
  used for solving this problem.
  
  @node Special cases
-@@ -2673,7 +2673,7 @@
+@@ -2688,7 +2688,7 @@
  While it is no problem to mark the string @code{"a default message"} it
  is not possible to mark the string initializers for @code{messages}.
  What is to be done?  We have to fulfill two tasks.  First we have to mark the
@@ -205,7 +205,7 @@
  can find them, and second we have to translate the string at runtime
  before printing them.
  
-@@ -2703,8 +2703,7 @@
+@@ -2718,8 +2718,7 @@
  
  Please convince yourself that the string which is written by
  @code{fputs} is translated in any case.  How to get @code{xgettext} know
@@ -215,7 +215,7 @@
  
  The above is of course not the only solution.  You could also come along
  with the following one:
-@@ -3000,10 +2999,10 @@
+@@ -3015,10 +3014,10 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -228,7 +228,7 @@
  @section Invoking the @code{xgettext} Program
  
  @include xgettext.texi
-@@ -3032,11 +3031,11 @@
+@@ -3047,11 +3046,11 @@
  the header entry of this file.
  
  @menu
@@ -242,7 +242,7 @@
  @section Invoking the @code{msginit} Program
  
  @include msginit.texi
-@@ -3268,10 +3267,10 @@
+@@ -3283,10 +3282,10 @@
  @chapter Updating Existing PO Files
  
  @menu
@@ -255,7 +255,7 @@
  @section Invoking the @code{msgmerge} Program
  
  @include msgmerge.texi
-@@ -4811,67 +4810,67 @@
+@@ -4826,67 +4825,67 @@
  write other specialized programs that process PO files.
  
  @menu
@@ -343,7 +343,7 @@
  @section Invoking the @code{msgexec} Program
  
  @include msgexec.texi
-@@ -5436,17 +5435,17 @@
+@@ -5806,17 +5805,17 @@
  @c FIXME: Rewrite.
  
  @menu
@@ -365,7 +365,7 @@
  @section Invoking the @code{msgunfmt} Program
  
  @include msgunfmt.texi
-@@ -6365,7 +6364,7 @@
+@@ -6744,7 +6743,7 @@
  The Unicode CLDR Project (@uref{http://cldr.unicode.org}) provides a
  comprehensive set of plural forms in a different format.  The
  @code{msginit} program has preliminary support for the format so you can
@@ -374,7 +374,7 @@
  
  @table @asis
  @item Only one form:
-@@ -7719,7 +7718,7 @@
+@@ -8098,7 +8097,7 @@
  @menu
  * Flat and Non-Flat::           Flat or Non-Flat Directory Structures
  * Prerequisites::               Prerequisite Works
@@ -383,7 +383,7 @@
  * Adjusting Files::             Files You Must Create or Alter
  * autoconf macros::             Autoconf macros for use in @file{configure.ac}
  * Version Control Issues::      
-@@ -7836,7 +7835,7 @@
+@@ -8215,7 +8214,7 @@
  a maintainer, ever think there is a real problem with a team, please
  never try to @emph{solve} a team's problem on your own.
  
@@ -392,7 +392,7 @@
  @section Invoking the @code{gettextize} Program
  
  @include gettextize.texi
-@@ -8002,7 +8001,7 @@
+@@ -8381,7 +8380,7 @@
  Similarly, you can create rules for building message catalogs for the
  @file{sr@@latin} locale -- Serbian written with the Latin alphabet --
  from those for the @file{sr} locale -- Serbian written with Cyrillic
@@ -401,7 +401,7 @@
  
  @node configure.ac
  @subsection @file{configure.ac} at top level
-@@ -8615,7 +8614,7 @@
+@@ -8997,7 +8996,7 @@
  to instruct @code{xgettext} to mark all translatable strings in @samp{gettext}
  invocations that occur as fifth argument to this function as @samp{c-format}.
  
@@ -410,7 +410,7 @@
  accepts.
  
  The use of this macro is an alternative to the use of the
-@@ -8685,7 +8684,7 @@
+@@ -9067,7 +9066,7 @@
  * Distributed Development::     Avoiding version mismatch in distributed development
  * Files under Version Control::  Files to put under version control
  * Translations under Version Control::  Put PO Files under Version Control
@@ -419,7 +419,7 @@
  @end menu
  
  @node Distributed Development
-@@ -8856,7 +8855,7 @@
+@@ -9238,7 +9237,7 @@
  
  @end itemize
  
@@ -428,7 +428,35 @@
  @subsection Invoking the @code{autopoint} Program
  
  @include autopoint.texi
-@@ -9592,12 +9591,12 @@
+@@ -10258,7 +10257,7 @@
+ Special Characters} data category can be used.
+ 
+ To merge the translations, the @samp{msgfmt} program can be used with
+-the option @code{--xml}.  @xref{msgfmt Invocation}, for more details
++the option @code{--xml}.  @xref{msgfmt}, for more details
+ about how one calls the @samp{msgfmt} program.  @samp{msgfmt}'s
+ @code{--xml} option doesn't perform character escaping, so translated
+ strings can have arbitrary XML constructs, such as elements for markup.
+@@ -10482,7 +10481,7 @@
+ @subsection XML files
+ 
+ See the section @ref{Preparing ITS Rules} and
+-@ref{msgfmt Invocation}, subsection ``XML mode operations''.
++@ref{msgfmt}, subsection ``XML mode operations''.
+ 
+ @node Conclusion
+ @chapter Concluding Remarks
+--- gettext-0.12.1/gettext-tools/doc/gettextize.texi.orig	2003-05-05 11:09:21.000000000 +0200
++++ gettext-0.12.1/gettext-tools/doc/gettextize.texi	2003-06-07 20:10:53.000000000 +0200
+@@ -177,4 +177,4 @@
+ of the GNU build system, in the sense that it should not be invoked
+ automatically, and not be invoked by someone who doesn't assume the
+ responsibilities of a package maintainer.  For the latter purpose, a
+-separate tool is provided, see @ref{autopoint Invocation}.
++separate tool is provided, see @ref{autopoint}.
+--- gettext-0.21/gettext-tools/doc/lang-sh.texi.orig	2020-06-06 16:03:32.000000000 +0200
++++ gettext-0.21/gettext-tools/doc/lang-sh.texi	2020-10-11 19:27:53.682303742 +0200
+@@ -65,12 +65,12 @@
  * Preparing Shell Scripts::     Preparing Shell Scripts for Internationalization
  * gettext.sh::                  Contents of @code{gettext.sh}
  * gettext Invocation::          Invoking the @code{gettext} program
@@ -447,7 +475,7 @@
  @end menu
  
  @node Preparing Shell Scripts
-@@ -9618,10 +9617,10 @@
+@@ -91,10 +91,10 @@
  
  near the top of the script.  @code{gettext.sh} is a shell function library
  that provides the functions
@@ -462,7 +490,7 @@
  You have to ensure that @code{gettext.sh} can be found in the @code{PATH}.
  
  @item
-@@ -9731,16 +9730,16 @@
+@@ -204,16 +204,16 @@
  and a newline, without interpreting backslashes in the argument string.
  
  @item eval_gettext
@@ -483,7 +511,7 @@
  @end itemize
  
  @node gettext Invocation
-@@ -9752,7 +9751,7 @@
+@@ -225,7 +225,7 @@
  @code{gettext} invocation, where no options are present and the
  @var{textdomain} is implicit, from the environment.
  
@@ -492,7 +520,7 @@
  @subsubsection Invoking the @code{ngettext} program
  
  @include rt-ngettext.texi
-@@ -9761,12 +9760,12 @@
+@@ -234,12 +234,12 @@
  @code{ngettext} invocation, where no options are present and the
  @var{textdomain} is implicit, from the environment.
  
@@ -507,7 +535,7 @@
  @subsubsection Invoking the @code{eval_gettext} function
  
  @cindex @code{eval_gettext} function, usage
-@@ -9779,7 +9778,7 @@
+@@ -252,7 +252,7 @@
  performing dollar-substitution on the result.  Note that only shell variables
  mentioned in @var{msgid} will be dollar-substituted in the result.
  
@@ -516,7 +544,7 @@
  @subsubsection Invoking the @code{eval_ngettext} function
  
  @cindex @code{eval_ngettext} function, usage
-@@ -9793,7 +9792,7 @@
+@@ -266,7 +266,7 @@
  on the result.  Note that only shell variables mentioned in @var{msgid} or
  @var{msgid-plural} will be dollar-substituted in the result.
  
@@ -525,7 +553,7 @@
  @subsubsection Invoking the @code{eval_pgettext} function
  
  @cindex @code{eval_pgettext} function, usage
-@@ -9807,7 +9806,7 @@
+@@ -280,7 +280,7 @@
  dollar-substitution on the result.  Note that only shell variables mentioned
  in @var{msgid} will be dollar-substituted in the result.
  
@@ -534,32 +562,6 @@
  @subsubsection Invoking the @code{eval_npgettext} function
  
  @cindex @code{eval_npgettext} function, usage
-@@ -12564,7 +12563,7 @@
- Special Characters} data category can be used.
- 
- To merge the translations, the @samp{msgfmt} program can be used with
--the option @code{--xml}.  @xref{msgfmt Invocation}, for more details
-+the option @code{--xml}.  @xref{msgfmt}, for more details
- about how one calls the @samp{msgfmt} program.  @samp{msgfmt}'s
- @code{--xml} option doesn't perform character escaping, so translated
- strings can have arbitrary XML constructs, such as elements for markup.
-@@ -12734,7 +12733,7 @@
- @subsection XML files
- 
- See the section @ref{Preparing ITS Rules} and
--@ref{msgfmt Invocation}, subsection ``XML mode operations''.
-+@ref{msgfmt}, subsection ``XML mode operations''.
- 
- @node Conclusion
- @chapter Concluding Remarks
---- gettext-0.12.1/gettext-tools/doc/gettextize.texi.orig	2003-05-05 11:09:21.000000000 +0200
-+++ gettext-0.12.1/gettext-tools/doc/gettextize.texi	2003-06-07 20:10:53.000000000 +0200
-@@ -177,4 +177,4 @@
- of the GNU build system, in the sense that it should not be invoked
- automatically, and not be invoked by someone who doesn't assume the
- responsibilities of a package maintainer.  For the latter purpose, a
--separate tool is provided, see @ref{autopoint Invocation}.
-+separate tool is provided, see @ref{autopoint}.
 --- gettext-0.17/gettext-runtime/libasprintf/autosprintf.texi.orig	2007-09-01 11:15:56.000000000 +0200
 +++ gettext-0.17/gettext-runtime/libasprintf/autosprintf.texi	2007-11-07 22:19:42.123759307 +0100
 @@ -23,9 +23,9 @@
