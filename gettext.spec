@@ -36,18 +36,18 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.21
+Version:	0.21.1
 Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
-# Source0-md5:	40996bbaf7d1356d3c22e33a8b255b31
+# Source0-md5:	27fcc8a42dbc8f334f23a08f1f2fe00a
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
-BuildRequires:	autoconf >= 2.63
+BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.13
 %{?with_gcj:BuildRequires:	gcc-java >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
