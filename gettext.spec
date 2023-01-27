@@ -37,7 +37,7 @@ Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
 Version:	0.21.1
-Release:	1
+Release:	2
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
