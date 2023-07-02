@@ -65,6 +65,7 @@ BuildRequires:	libunistring-devel
 %{!?with_bootstrap:BuildRequires:	libxml2-devel}
 %{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	ncurses-devel
+%{?with_java:BuildRequires:	rpm-javaprov}
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
