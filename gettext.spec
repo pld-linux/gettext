@@ -37,12 +37,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.21.1
-Release:	2
+Version:	0.22
+Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.xz
-# Source0-md5:	27fcc8a42dbc8f334f23a08f1f2fe00a
+# Source0-md5:	db2f3daf34fd5b85ab1a56f9033e42d1
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
@@ -570,6 +570,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gettext/project-id
 %attr(755,root,root) %{_libdir}/gettext/urlget
 %attr(755,root,root) %{_libdir}/gettext/user-email
+%{_aclocaldir}/build-to-host.m4
 %{_aclocaldir}/gettext.m4
 %{_aclocaldir}/host-cpu-c-abi.m4
 %{_aclocaldir}/iconv.m4
