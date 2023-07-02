@@ -17,6 +17,7 @@
 %endif
 %if %{with javac}
 %undefine with_gcj
+%{?use_default_jdk}
 %endif
 %if %{without java}
 %undefine with_gcj
@@ -51,10 +52,8 @@ BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.13
 %{?with_gcj:BuildRequires:	gcc-java >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
-%if %{build_java}
-BuildRequires:	jar
-%endif
-%{?with_javac:BuildRequires:	jdk >= 1.6}
+%{?with_gcj:BuildRequires:	jar}
+%{?with_javac:%{?use_jdk:%buildrequires_jdk}%{!?use_jdk:BuildRequires:	jdk >= 1.6}}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%{cc_version}" >= "4.2"
 BuildRequires:	libgomp-devel
@@ -66,7 +65,7 @@ BuildRequires:	libunistring-devel
 %{?with_dotnet:BuildRequires:	mono-csharp}
 BuildRequires:	ncurses-devel
 %{?with_java:BuildRequires:	rpm-javaprov}
-BuildRequires:	rpmbuild(macros) >= 1.453
+BuildRequires:	rpmbuild(macros) >= 2.021
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
@@ -460,6 +459,7 @@ cd ../..
 %{__automake}
 %configure \
 	%{!?with_gcj:GCJ=none} \
+        %{?with_javac:JAVA="%{java_home}/bin/java" JAVAC="%{java_home}/bin/javac" JAR="%{java_home}/bin/jar"} \
 	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	%{!?with_xemacs:--without-emacs} \
 	--enable-csharp=%{?with_dotnet:mono}%{!?with_dotnet:no} \
