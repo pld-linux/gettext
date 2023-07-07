@@ -53,7 +53,7 @@ BuildRequires:	automake >= 1:1.13
 %{?with_gcj:BuildRequires:	gcc-java >= 3.0}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %{?with_gcj:BuildRequires:	jar}
-%{?with_javac:%{?use_jdk:%buildrequires_jdk}%{!?use_jdk:BuildRequires:	jdk >= 1.6}}
+%{?with_javac:%buildrequires_jdk}
 %{!?with_bootstrap:BuildRequires:	libcroco-devel >= 0.6.1}
 %if "%{cc_version}" >= "4.2"
 BuildRequires:	libgomp-devel
