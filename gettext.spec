@@ -37,12 +37,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.22.5
+Version:	0.23
 Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	d82550b0c72b2bf175b682d27c7565fc
+# Source0-md5:	77320945f1d15ee5d444c863877c8367
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
@@ -410,9 +410,9 @@ GNU gettext dla C#.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch3 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P3 -p1
 
 %{__sed} -i \
 	-e 's@m4_esyscmd(\[build-aux/git-version-gen \.tarball-version\])@[%{version}]@' \
@@ -433,7 +433,13 @@ cd gettext-runtime
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-cd libasprintf
+cd intl
+%{__libtoolize}
+%{__aclocal} -I ../../m4 -I ../m4 -I gnulib-m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd ../libasprintf
 %{__aclocal} -I ../../m4 -I ../m4 -I gnulib-m4
 %{__autoconf}
 %{__autoheader}
@@ -445,7 +451,7 @@ cd ../../libtextstyle
 %{__autoheader}
 %{__automake}
 cd ../gettext-tools
-%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../m4 -I gnulib-m4 -I libgrep/gnulib-m4 -I libgettextpo/gnulib-m4
+%{__aclocal} -I m4 -I ../gettext-runtime/m4 -I ../m4 -I gnulib-m4 -I libgrep/gnulib-m4 -I libgettextpo/gnulib-m4 -I tests/gnulib-m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -565,11 +571,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/recode-sr-latin
 %attr(755,root,root) %{_bindir}/xgettext
 %attr(755,root,root) %{_libdir}/preloadable_libintl.so
-%attr(755,root,root) %{_libdir}/gettext/cldr-plurals
-%attr(755,root,root) %{_libdir}/gettext/hostname
-%attr(755,root,root) %{_libdir}/gettext/project-id
-%attr(755,root,root) %{_libdir}/gettext/urlget
-%attr(755,root,root) %{_libdir}/gettext/user-email
+%dir %{_libexecdir}/gettext
+%attr(755,root,root) %{_libexecdir}/gettext/cldr-plurals
+%attr(755,root,root) %{_libexecdir}/gettext/hostname
+%attr(755,root,root) %{_libexecdir}/gettext/project-id
+%attr(755,root,root) %{_libexecdir}/gettext/urlget
+%attr(755,root,root) %{_libexecdir}/gettext/user-email
 %{_aclocaldir}/build-to-host.m4
 %{_aclocaldir}/gettext.m4
 %{_aclocaldir}/host-cpu-c-abi.m4
@@ -597,6 +604,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/textdomain.3*
 %{_datadir}/gettext/ABOUT-NLS
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
+%{_datadir}/gettext/disclaim-translations.txt
 %{_datadir}/gettext/gettext.h
 %dir %{_datadir}/gettext/its
 %{_datadir}/gettext/msgunfmt.tcl
@@ -616,6 +624,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/projects/TP/teams.*
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/team-address
 %attr(755,root,root) %{_datadir}/gettext/projects/TP/trigger
+%{_datadir}/gettext/schema
 %{_datadir}/gettext/styles
 %dir %{_datadir}/gettext-%{dataver}
 %{_datadir}/gettext-%{dataver}/its
@@ -718,6 +727,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n dotnet-gettext
 %defattr(644,root,root,755)
 %{_libdir}/GNU.Gettext.dll
+%{_libdir}/gettext/GNU.Gettext.dll
 %{_libdir}/gettext/msgfmt.net.exe
 %{_libdir}/gettext/msgunfmt.net.exe
 %endif
