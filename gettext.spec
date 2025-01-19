@@ -37,12 +37,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.23
+Version:	0.23.1
 Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	77320945f1d15ee5d444c863877c8367
+# Source0-md5:	99317e9e1a95d6d8e06bbf287caa423a
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
