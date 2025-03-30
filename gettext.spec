@@ -17,6 +17,7 @@
 %endif
 %if %{with javac}
 %undefine with_gcj
+%define min_jdk_version 8
 %{?use_default_jdk}
 %endif
 %if %{without java}
@@ -37,12 +38,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.23.1
+Version:	0.24
 Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	99317e9e1a95d6d8e06bbf287caa423a
+# Source0-md5:	7926c9b9a3bc5aa5d5cf4d4d801e1253
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
