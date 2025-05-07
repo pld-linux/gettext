@@ -38,12 +38,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.24
+Version:	0.24.1
 Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	7926c9b9a3bc5aa5d5cf4d4d801e1253
+# Source0-md5:	3b2977dc0750b94acda565e280e7591f
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
@@ -578,17 +578,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/gettext/project-id
 %attr(755,root,root) %{_libexecdir}/gettext/urlget
 %attr(755,root,root) %{_libexecdir}/gettext/user-email
-%{_aclocaldir}/build-to-host.m4
-%{_aclocaldir}/gettext.m4
-%{_aclocaldir}/host-cpu-c-abi.m4
-%{_aclocaldir}/iconv.m4
-%{_aclocaldir}/intlmacosx.m4
-%{_aclocaldir}/lib-ld.m4
-%{_aclocaldir}/lib-link.m4
-%{_aclocaldir}/lib-prefix.m4
-%{_aclocaldir}/nls.m4
-%{_aclocaldir}/po.m4
-%{_aclocaldir}/progtest.m4
 %{_infodir}/gettext.info*
 %{_mandir}/man1/gettextize.1*
 %{_mandir}/man1/msg*.1*
@@ -608,6 +597,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/disclaim-translations.txt
 %{_datadir}/gettext/gettext.h
 %dir %{_datadir}/gettext/its
+%dir %{_datadir}/gettext/m4
+%{_datadir}/gettext/m4/build-to-host.m4
+%{_datadir}/gettext/m4/gettext.m4
+%{_datadir}/gettext/m4/host-cpu-c-abi.m4
+%{_datadir}/gettext/m4/iconv.m4
+%{_datadir}/gettext/m4/intlmacosx.m4
+%{_datadir}/gettext/m4/lib-ld.m4
+%{_datadir}/gettext/m4/lib-link.m4
+%{_datadir}/gettext/m4/lib-prefix.m4
+%{_datadir}/gettext/m4/nls.m4
+%{_datadir}/gettext/m4/po.m4
+%{_datadir}/gettext/m4/progtest.m4
 %{_datadir}/gettext/msgunfmt.tcl
 %{_datadir}/gettext/po
 %dir %{_datadir}/gettext/projects
