@@ -2,9 +2,11 @@
 # Conditional build:
 %bcond_without	asprintf	# libasprintf C++ library
 %bcond_with	xemacs		# po-mode for xemacs
+%bcond_without	d		# D support
 %bcond_without	java		# convenience bcond to disable Java (any)
 %bcond_with	gcj		# Java support by gcj (preferred over javac)
 %bcond_without	javac		# Java support by some javac
+%bcond_without	modula2		# Modula-2 support
 %bcond_without	dotnet		# .NET support package
 %bcond_with	bootstrap	# no system GLib, libcroco, libxml2 (for bootstrap)
 
@@ -38,12 +40,12 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.24.1
+Version:	0.25
 Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	3b2977dc0750b94acda565e280e7591f
+# Source0-md5:	7c1ab3685b9ec8da9b0d35f5caf75b2e
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
 Patch3:		%{name}-libdir.patch
@@ -51,7 +53,10 @@ URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.13
+# also possible ldc, dmd, egdc (but gdc suppors more platforms)
+%{?with_d:BuildRequires:	gcc-d}
 %{?with_gcj:BuildRequires:	gcc-java >= 3.0}
+%{?with_modula2:BuildRequires:	gcc-m2}
 %{!?with_bootstrap:BuildRequires:	glib2-devel >= 2.0}
 %{?with_gcj:BuildRequires:	jar}
 %{?with_javac:%buildrequires_jdk}
@@ -322,6 +327,20 @@ Static libtextstyle library.
 %description -n libtextstyle-static -l pl.UTF-8
 Statyczna biblioteka libtextstyle.
 
+%package d-devel
+Summary:	Development library for D programs internationalization
+Summary(pl.UTF-8):	Biblioteka programistyczna do umiędzynarodowiania programów w języku D
+License: 	Boost v1.0
+Group:		Development/Languages
+#Requires:	d-compiler (dmd|gcc-d|ldc)
+
+%description d-devel
+Development library for D programs internationalization.
+
+%description d-devel -l pl.UTF-8
+Biblioteka programistyczna do umiędzynarodowiania programów w języku
+D.
+
 %package java
 Summary:	Runtime classes for Java programs internationalization
 Summary(pl.UTF-8):	Klasy do uruchamiania umiędzynarodowionych programów w Javie
@@ -347,6 +366,47 @@ Development classes for Java programs internationalization.
 
 %description java-devel -l pl.UTF-8
 Klasy do umiędzynarodowiania programów w Javie dla programistów.
+
+%package m2
+Summary:	Runtime library for Modula-2 programs internationalization
+Summary(pl.UTF-8):	Biblioteka do uruchamiania umiędzynarodowionych programów w języku Modula-2
+License:	LGPL v2.1+
+Group:		Libraries
+
+%description m2
+Runtime classes for Java programs internationalization.
+
+%description m2 -l pl.UTF-8
+Klasy do uruchamiania umiędzynarodowionych programów w Javie.
+
+%package m2-devel
+Summary:	Development library for Modula-2 programs internationalization
+Summary(pl.UTF-8):	Biblioteka programistyczna do umiędzynarodowiania programów w języku Modula-2
+License:	LGPL v2.1+
+Group:		Development/Libraries
+Requires:	%{name}-m2 = %{version}-%{release}
+Requires:	gcc-m2
+
+%description m2-devel
+Development library for Modula-2 programs internationalization.
+
+%description m2-devel -l pl.UTF-8
+Biblioteka programistyczna do umiędzynarodowiania programów w języku
+Modula-2.
+
+%package m2-static
+Summary:	Static library for Modula-2 programs internationalization
+Summary(pl.UTF-8):	Biblioteka statyczna do umiędzynarodowiania programów w języku Modula-2
+License:	LGPL v2.1+
+Group:		Development/Libraries
+Requires:	%{name}-m2-devel = %{version}-%{release}
+
+%description m2-static
+Static library for Modula-2 programs internationalization.
+
+%description m2-static -l pl.UTF-8
+Biblioteka statyczna do umiędzynarodowiania programów w języku
+Modula-2.
 
 %package -n xemacs-po-mode-pkg
 Summary:	Xemacs PO-mode
@@ -470,9 +530,11 @@ cd ../..
 	%{?with_xemacs:--with-lispdir=%{_datadir}/xemacs-packages/lisp/po-mode} \
 	%{!?with_xemacs:--without-emacs} \
 	--enable-csharp=%{?with_dotnet:mono}%{!?with_dotnet:no} \
+	%{!?with_d:--disable-d} \
 %if !%{build_java}
 	--disable-java \
 %endif
+	%{!?with_modula2:--disable-modula2} \
 	--enable-nls \
 	--disable-silent-rules \
 	--without-bzip2 \
@@ -551,6 +613,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun	-n libtextstyle-devel -p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
+
+%post	m2 -p /sbin/ldconfig
+%postun	m2 -p /sbin/ldconfig
 
 %files -f %{name}-runtime.lang
 %defattr(644,root,root,755)
@@ -695,6 +760,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libtextstyle.a
 
+%if %{with d}
+%files d-devel
+%{_libdir}/libintl_d.a
+# XXX: shared (dmd, ...)
+%dir %{_includedir}/d
+%dir %{_includedir}/d/gnu
+%{_includedir}/d/gnu/libintl
+%endif
+
 %if %{build_java}
 %files java
 %defattr(644,root,root,755)
@@ -710,6 +784,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/gettext.jar
 %endif
 %{_datadir}/gettext/javaversion.class
+%endif
+
+%if %{with modula2}
+%files m2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libintl_m2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libintl_m2.so.0
+
+%files m2-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libintl_m2.so
+%{_libdir}/libintl_m2.la
+# XXX: common dir for Modula-2 headers
+%dir %{_includedir}/m2
+%{_includedir}/m2/Libintl.def
+
+%files m2-static
+%defattr(644,root,root,755)
+%{_libdir}/libintl_m2.a
 %endif
 
 %if %{with xemacs}
