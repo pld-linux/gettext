@@ -1,0 +1,11 @@
+--- gettext-0.25.1/gettext-tools/gnulib-m4/acl.m4.orig	2025-06-05 02:05:36.000000000 +0200
++++ gettext-0.25.1/gettext-tools/gnulib-m4/acl.m4	2025-07-05 17:13:56.088114135 +0200
+@@ -204,7 +204,7 @@ AC_DEFUN([gl_FILE_HAS_ACL],
+                [Define to 1 if libsmack is usable.])
+              AS_CASE([$ac_cv_search_smack_new_label_from_path],
+                ["none required"], [],
+-               [FILE_HAS_ACL_LIB=$ac_cv_search_new_label_from_path])
++               [FILE_HAS_ACL_LIB=$ac_cv_search_smack_new_label_from_path])
+              gl_file_has_acl_uses_smack=yes],
+             [AS_CASE([$with_libsmack],
+                [yes], [AC_MSG_ERROR([libsmack not found or unusable])])])

@@ -40,14 +40,15 @@ Summary(ru.UTF-8):	Библиотеки и утилиты для поддерж�
 Summary(tr.UTF-8):	Desteği için kitaplık ve araçlar
 Summary(uk.UTF-8):	Бібліотеки та утиліти для підтримки національних мов
 Name:		gettext
-Version:	0.25
+Version:	0.25.1
 Release:	1
 License:	LGPL v2.1+ (libintl), GPL v3+ (tools)
 Group:		Development/Tools
 Source0:	https://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.lz
-# Source0-md5:	7c1ab3685b9ec8da9b0d35f5caf75b2e
+# Source0-md5:	f6cf89b61cc29a1f097d4766f2342f56
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-killkillkill.patch
+Patch2:		%{name}-smack.patch
 Patch3:		%{name}-libdir.patch
 URL:		http://www.gnu.org/software/gettext/
 BuildRequires:	acl-devel
@@ -64,6 +65,7 @@ BuildRequires:	automake >= 1:1.13
 %if "%{cc_version}" >= "4.2"
 BuildRequires:	libgomp-devel
 %endif
+BuildRequires:	libselinux-devel
 %{?with_asprintf:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 2:2
 BuildRequires:	libunistring-devel
@@ -74,6 +76,7 @@ BuildRequires:	ncurses-devel
 %{?with_java:BuildRequires:	rpm-javaprov}
 BuildRequires:	rpmbuild(macros) >= 2.021
 BuildRequires:	sed >= 4.0
+BuildRequires:	smack-devel
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
 %{?with_xemacs:BuildRequires:	xemacs}
@@ -473,6 +476,7 @@ GNU gettext dla C#.
 %setup -q
 %patch -P0 -p1
 %patch -P1 -p1
+%patch -P2 -p1
 %patch -P3 -p1
 
 %{__sed} -i \
@@ -643,20 +647,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/gettext/project-id
 %attr(755,root,root) %{_libexecdir}/gettext/urlget
 %attr(755,root,root) %{_libexecdir}/gettext/user-email
-%{_infodir}/gettext.info*
-%{_mandir}/man1/gettextize.1*
-%{_mandir}/man1/msg*.1*
-%{_mandir}/man1/recode-sr-latin.1*
-%{_mandir}/man1/xgettext.1*
-%{_mandir}/man3/bind_textdomain_codeset.3*
-%{_mandir}/man3/bindtextdomain.3*
-%{_mandir}/man3/dcgettext.3*
-%{_mandir}/man3/dcngettext.3*
-%{_mandir}/man3/dgettext.3*
-%{_mandir}/man3/dngettext.3*
-%{_mandir}/man3/gettext.3*
-%{_mandir}/man3/ngettext.3*
-%{_mandir}/man3/textdomain.3*
 %{_datadir}/gettext/ABOUT-NLS
 %attr(755,root,root) %{_datadir}/gettext/config.rpath
 %{_datadir}/gettext/disclaim-translations.txt
@@ -695,6 +685,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gettext/styles
 %dir %{_datadir}/gettext-%{dataver}
 %{_datadir}/gettext-%{dataver}/its
+%{_aclocaldir}/nls.m4
+%{_infodir}/gettext.info*
+%{_mandir}/man1/gettextize.1*
+%{_mandir}/man1/msg*.1*
+%{_mandir}/man1/recode-sr-latin.1*
+%{_mandir}/man1/xgettext.1*
+%{_mandir}/man3/bind_textdomain_codeset.3*
+%{_mandir}/man3/bindtextdomain.3*
+%{_mandir}/man3/dcgettext.3*
+%{_mandir}/man3/dcngettext.3*
+%{_mandir}/man3/dgettext.3*
+%{_mandir}/man3/dngettext.3*
+%{_mandir}/man3/gettext.3*
+%{_mandir}/man3/ngettext.3*
+%{_mandir}/man3/textdomain.3*
 
 %files demo
 %defattr(644,root,root,755)
